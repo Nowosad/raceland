@@ -15,6 +15,7 @@
 #' }
 
 create_realizations = function(x, n){
+  # fork does not work on windows
   # cl = parallel::makeForkCluster(4L)
   # raster::stack(lapply(1:n, function(i) create_realization(x)))
   out = if (requireNamespace("pbapply", quietly = TRUE)){
