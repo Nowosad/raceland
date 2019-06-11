@@ -15,12 +15,16 @@
 #' }
 
 create_realizations = function(x, n){
+  # cl = parallel::makeForkCluster(4L)
   # raster::stack(lapply(1:n, function(i) create_realization(x)))
   out = if (requireNamespace("pbapply", quietly = TRUE)){
     raster::stack(pbapply::pbreplicate(n, create_realization(x)))
+                                       # , cl = cl))
   } else {
     raster::stack(replicate(n, create_realization(x)))
   }
+  # parallel::stopCluster(cl)
+  return(out)
 }
 
 #' @export
