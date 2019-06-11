@@ -20,3 +20,5 @@ LinkingTo:
 Imports:
     raster,
     Rcpp
+Suggests:
+    pbapply    

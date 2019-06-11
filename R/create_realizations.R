@@ -16,7 +16,11 @@
 
 create_realizations = function(x, n){
   # raster::stack(lapply(1:n, function(i) create_realization(x)))
-  raster::stack(replicate(n, create_realization(x)))
+  out = if (requireNamespace("pbapply", quietly = TRUE)){
+    raster::stack(pbapply::pbreplicate(n, create_realization(x)))
+  } else {
+    raster::stack(replicate(n, create_realization(x)))
+  }
 }
 
 #' @export
