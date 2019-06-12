@@ -54,12 +54,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // motifel_to_grid
-Rcpp::List motifel_to_grid(Rcpp::NumericMatrix x, Rcpp::NumericMatrix y, int size);
+Rcpp::NumericMatrix motifel_to_grid(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix y, int size);
 RcppExport SEXP _sd_motifel_to_grid(SEXP xSEXP, SEXP ySEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type y(ySEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     rcpp_result_gen = Rcpp::wrap(motifel_to_grid(x, y, size));

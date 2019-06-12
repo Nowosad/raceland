@@ -19,5 +19,6 @@ real_raster = create_realization(perc_raster)
 plot(real_raster)
 output = create_weights(real_raster, perc_raster, size = 10)
 output
+plot(output)
 }
 }
