@@ -1,11 +1,25 @@
-y = cats
-
+#' Title
+#'
+#' @param x
+#' @param y
+#' @param size
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' library(raster)
+#' real_raster = create_realization(perc_raster)
+#' plot(real_raster)
+#' b = calculate_weights(real_raster, perc_raster, size = 10)
+#' }
 calculate_weights = function(x, y, size){
   x_areas = motifel_areas(x = as.matrix(x), size = size)
 
-  y_sums = motifel_sums()
+  y_prep = lapply(as.list(y), as.matrix)
+  y_sums = do.call(cbind, lapply(y_prep, motifel_sums, size = size))
 
-  motifel_sum_area = rowSums(x_areas)
-
-
+  motifel_adjustment(x_areas, y_sums)
 }
+# y = cats
