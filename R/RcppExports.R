@@ -5,3 +5,19 @@ draw_values <- function(x, y) {
     .Call(`_sd_draw_values`, x, y)
 }
 
+motifel_areas <- function(x, size) {
+    .Call(`_sd_motifel_areas`, x, size)
+}
+
+motifel_sums <- function(x, size) {
+    .Call(`_sd_motifel_sums`, x, size)
+}
+
+motifel_adjustment <- function(x, y) {
+    .Call(`_sd_motifel_adjustment`, x, y)
+}
+
+rcpp_get_unique_values <- function(x, na_omit = TRUE) {
+    .Call(`_sd_rcpp_get_unique_values`, x, na_omit)
+}
+
