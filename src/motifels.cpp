@@ -1,9 +1,6 @@
 #include "rcpp_get_unique_values.h"
 #include "get_class_index_map.h"
-#include <RcppArmadillo.h>
 using namespace Rcpp;
-
-// [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
 IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
@@ -16,30 +13,32 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
   // NAs need an index, otherwise they are counted as neighbors of class[0]
   class_index.insert(std::make_pair(na, n_classes));
 
-  // Rcout << "The value of classes : " << classes << "\n";
-  // Rcout << "The value of class_index : " << class_index << "\n";
-  Rcout << "The value of n_classes : " << n_classes << "\n";
+  int num_r = x.nrow();
+  int num_c = x.ncol();
 
-  int num_r = x.nrow() - size;
-  int num_c = x.ncol() - size;
-
-  // Rcout << "The value of num_r : " << num_r << "\n";
-  // Rcout << "The value of num_c : " << num_c << "\n";
   int nr_of_motifels = 0;
-  for (int i = 0; i <= num_r; i = i + size) {
-    for (int j = 0; j <= num_c; j = j + size) {
+  for (int i = 0; i < num_r; i = i + size) {
+    for (int j = 0; j < num_c; j = j + size) {
       nr_of_motifels ++;
-      // Rcout << "The value of nr_of_motifels : \n" << nr_of_motifels << "\n";
     }
   }
 
   IntegerMatrix result(nr_of_motifels, n_classes);
   int nr_of_motifels2 = 0;
 
-  for (int i = 0; i <= num_r; i = i + size){
-    for (int j = 0; j <= num_c; j = j + size){
-      IntegerMatrix motifel = x(Range(i, i + (size - 1)), Range(j, j + (size - 1)));
-      // Rcout << "The value of motifel : \n" << motifel << "\n";
+  for (int i = 0; i < num_r; i = i + size){
+    for (int j = 0; j < num_c; j = j + size){
+      int i_max = i + (size - 1);
+      if (i_max >= num_r){
+        i_max = num_r - 1;
+      }
+      int j_max = j + (size - 1);
+      if (j_max >= num_c){
+        j_max = num_c - 1;
+      }
+
+      IntegerMatrix motifel = x(Range(i, i_max), Range(j, j_max));
+      Rcout << "The value of motifel : \n" << motifel << "\n";
 
       for (int k = 0; k < motifel.length(); k++){
         // Rcout << "The value of k : \n" << k << "\n";
