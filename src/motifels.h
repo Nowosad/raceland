@@ -14,6 +14,6 @@ Rcpp::IntegerMatrix motifel_sums(Rcpp::IntegerMatrix x, int size);
 Rcpp::NumericMatrix motifel_adjustment(Rcpp::NumericMatrix x, Rcpp::NumericMatrix y);
 
 // [[Rcpp::export]]
-Rcpp::List motifel_to_grid(Rcpp::NumericMatrix x, Rcpp::NumericMatrix y, int size);
+Rcpp::NumericMatrix motifel_to_grid(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix y, int size);
 
 #endif // motifels_H

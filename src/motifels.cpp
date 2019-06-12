@@ -136,40 +136,54 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
   return y;
 }
 
-List motifel_to_grid(NumericMatrix x, NumericMatrix y, int size){
-  int num_c_y = y.ncol();
+NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size){
+
+  const int na = NA_INTEGER;
+
+  std::vector<int> classes = rcpp_get_unique_values(x);
+  std::map<int, unsigned> class_index = get_class_index_map(classes);
+  unsigned n_classes = class_index.size();
+  // NAs need an index, otherwise they are counted as neighbors of class[0]
+  class_index.insert(std::make_pair(na, n_classes));
+
+  // int num_c_y = y.ncol();
   // int num_r_y = y.nrow();
 
   int num_r = x.nrow();
   int num_c = x.ncol();
 
-  // Rcout << "The value of num_r : \n" << num_r << "\n";
+  NumericMatrix result(num_r, num_c);
+  std::fill(result.begin(), result.end(), NA_REAL);
+  int m = 0;
+  for (int i = 0; i < num_r; i = i + size){
+    for (int j = 0; j < num_c; j = j + size){
+      int i_max = i + (size - 1);
+      if (i_max >= num_r){
+        i_max = num_r - 1;
+      }
+      int j_max = j + (size - 1);
+      if (j_max >= num_c){
+        j_max = num_c - 1;
+      }
 
-  List result(num_c_y);
-
-  for (int l = 0; l < num_c_y; l++) {
-    NumericMatrix r(x.nrow(), x.ncol());
-    int m = 0;
-      for (int i = 0; i < num_r; i = i + size){
-        for (int j = 0; j < num_c; j = j + size){
-          int i_max = i + (size - 1);
-          if (i_max >= num_r){
-            i_max = num_r - 1;
-          }
-          int j_max = j + (size - 1);
-          if (j_max >= num_c){
-            j_max = num_c - 1;
-          }
-          for (int ii = i; ii <= i_max; ii++){
-            for (int jj = j; jj <= j_max; jj++){
-              // Rcout << "The value of y : \n" << y << "\n";
-              r(ii, jj) = y(m, l);
-            }
-          }
-          m++;
+      for (int ii = i; ii <= i_max; ii++){
+        for (int jj = j; jj <= j_max; jj++){
+          // Rcout << "The value of ii : \n" << ii << "\n";
+          // Rcout << "The value of jj : \n" << jj << "\n";
+          const int tmp = x(ii, jj);
+          if (tmp == na)
+            continue;
+          unsigned focal_class = class_index[tmp];
+          // Rcout << "The value of tmp : \n" << tmp << "\n";
+          // Rcout << "The value of focal_class : \n" << focal_class << "\n";
+          result(ii, jj) = y(m, focal_class);
+          // Rcout << "The value of y : \n" << y << "\n";
+          // r(ii, jj) = y(m, l);
         }
+      }
+      m++;
+      // Rcout << "The value of m : \n" << m << "\n";
     }
-    result[l] = r;
   }
   return result;
 }
