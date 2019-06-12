@@ -83,7 +83,7 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
       if (j_max >= num_c){
         j_max = num_c - 1;
       }
-      IntegerMatrix motifel = x(Range(i, i + (size - 1)), Range(j, j + (size - 1)));
+      IntegerMatrix motifel = x(Range(i, i_max), Range(j, j_max));
       // Rcout << "The value of motifel : \n" << motifel << "\n";
 
       for (int k = 0; k < motifel.length(); k++){
@@ -120,9 +120,9 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
     }
   }
   // return missing_vals;
-
+  // Rcpp::Rcout << "y: " << y << std::endl;
   NumericVector row_sums_y = rowSums(y);
-  // Rcpp::Rcout << "rowSum: " << row_sums_x << std::endl;
+  // Rcpp::Rcout << "rowSum: " << row_sums_y << std::endl;
   NumericVector tmp_y(num_c);
 
   int row_sums_y_len = row_sums_y.length();
