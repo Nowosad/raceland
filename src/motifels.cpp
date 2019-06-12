@@ -1,8 +1,8 @@
 #include "rcpp_get_unique_values.h"
 #include "get_class_index_map.h"
+#include "motifels.h"
 using namespace Rcpp;
 
-// [[Rcpp::export]]
 IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
 
   const int na = NA_INTEGER;
@@ -55,7 +55,6 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
   return(result);
 }
 
-// [[Rcpp::export]]
 IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
 
   const int na = NA_INTEGER;
@@ -103,7 +102,6 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
   return(result);
 }
 
-// [[Rcpp::export]]
 NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
 
   int num_r = x.nrow();

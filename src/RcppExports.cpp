@@ -18,37 +18,37 @@ BEGIN_RCPP
 END_RCPP
 }
 // motifel_areas
-IntegerMatrix motifel_areas(IntegerMatrix x, int size);
+Rcpp::IntegerMatrix motifel_areas(Rcpp::IntegerMatrix x, int size);
 RcppExport SEXP _sd_motifel_areas(SEXP xSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     rcpp_result_gen = Rcpp::wrap(motifel_areas(x, size));
     return rcpp_result_gen;
 END_RCPP
 }
 // motifel_sums
-IntegerMatrix motifel_sums(IntegerMatrix x, int size);
+Rcpp::IntegerMatrix motifel_sums(Rcpp::IntegerMatrix x, int size);
 RcppExport SEXP _sd_motifel_sums(SEXP xSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     rcpp_result_gen = Rcpp::wrap(motifel_sums(x, size));
     return rcpp_result_gen;
 END_RCPP
 }
 // motifel_adjustment
-NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y);
+Rcpp::NumericMatrix motifel_adjustment(Rcpp::NumericMatrix x, Rcpp::NumericMatrix y);
 RcppExport SEXP _sd_motifel_adjustment(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type y(ySEXP);
     rcpp_result_gen = Rcpp::wrap(motifel_adjustment(x, y));
     return rcpp_result_gen;
 END_RCPP
