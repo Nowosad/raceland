@@ -38,7 +38,7 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
       }
 
       IntegerMatrix motifel = x(Range(i, i_max), Range(j, j_max));
-      Rcout << "The value of motifel : \n" << motifel << "\n";
+      // Rcout << "The value of motifel : \n" << motifel << "\n";
 
       for (int k = 0; k < motifel.length(); k++){
         // Rcout << "The value of k : \n" << k << "\n";
@@ -60,12 +60,12 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
 
   const int na = NA_INTEGER;
 
-  int num_r = x.nrow() - size;
-  int num_c = x.ncol() - size;
+  int num_r = x.nrow();
+  int num_c = x.ncol();
 
   int nr_of_motifels = 0;
-  for (int i = 0; i <= num_r; i = i + size) {
-    for (int j = 0; j <= num_c; j = j + size) {
+  for (int i = 0; i < num_r; i = i + size) {
+    for (int j = 0; j < num_c; j = j + size) {
       nr_of_motifels ++;
     }
   }
@@ -73,8 +73,16 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
   IntegerMatrix result(nr_of_motifels, 1);
   int nr_of_motifels2 = 0;
 
-  for (int i = 0; i <= num_r; i = i + size){
-    for (int j = 0; j <= num_c; j = j + size){
+  for (int i = 0; i < num_r; i = i + size){
+    for (int j = 0; j < num_c; j = j + size){
+      int i_max = i + (size - 1);
+      if (i_max >= num_r){
+        i_max = num_r - 1;
+      }
+      int j_max = j + (size - 1);
+      if (j_max >= num_c){
+        j_max = num_c - 1;
+      }
       IntegerMatrix motifel = x(Range(i, i + (size - 1)), Range(j, j + (size - 1)));
       // Rcout << "The value of motifel : \n" << motifel << "\n";
 
@@ -98,10 +106,13 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
 // [[Rcpp::export]]
 NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
 
-  NumericMatrix missing_vals(x.nrow(), 1);
+  int num_r = x.nrow();
+  int num_c = x.ncol();
 
-  for (int i = 0; i < x.nrow(); i++){
-    for (int j = 0; j < x.ncol(); j++){
+  NumericMatrix missing_vals(num_r, 1);
+
+  for (int i = 0; i < num_r; i++){
+    for (int j = 0; j < num_c; j++){
       if (x(i, j) == 0){
         missing_vals(i, 0) = missing_vals(i, 0) + y(i, j);
         y(i, j) = 0;
@@ -112,8 +123,11 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
 
   NumericVector row_sums_y = rowSums(y);
   // Rcpp::Rcout << "rowSum: " << row_sums_x << std::endl;
-  NumericVector tmp_y(y.ncol());
-  for (int i = 0; i < row_sums_y.length(); i++) {
+  NumericVector tmp_y(num_c);
+
+  int row_sums_y_len = row_sums_y.length();
+
+  for (int i = 0; i < row_sums_y_len; i++) {
     tmp_y = y(i,_) / row_sums_y[i];
     // Rcpp::Rcout << "y: " << tmp_y << std::endl;
     // Rcpp::Rcout << "mv: " << missing_vals << std::endl;
