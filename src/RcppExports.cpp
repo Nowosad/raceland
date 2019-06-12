@@ -17,9 +17,61 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// motifel_areas
+IntegerMatrix motifel_areas(IntegerMatrix x, int size);
+RcppExport SEXP _sd_motifel_areas(SEXP xSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(motifel_areas(x, size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// motifel_sums
+IntegerMatrix motifel_sums(IntegerMatrix x, int size);
+RcppExport SEXP _sd_motifel_sums(SEXP xSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(motifel_sums(x, size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// motifel_adjustment
+NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y);
+RcppExport SEXP _sd_motifel_adjustment(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(motifel_adjustment(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_get_unique_values
+std::vector<int> rcpp_get_unique_values(const Rcpp::IntegerVector& x, bool na_omit);
+RcppExport SEXP _sd_rcpp_get_unique_values(SEXP xSEXP, SEXP na_omitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::IntegerVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< bool >::type na_omit(na_omitSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_get_unique_values(x, na_omit));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sd_draw_values", (DL_FUNC) &_sd_draw_values, 2},
+    {"_sd_motifel_areas", (DL_FUNC) &_sd_motifel_areas, 2},
+    {"_sd_motifel_sums", (DL_FUNC) &_sd_motifel_sums, 2},
+    {"_sd_motifel_adjustment", (DL_FUNC) &_sd_motifel_adjustment, 2},
+    {"_sd_rcpp_get_unique_values", (DL_FUNC) &_sd_rcpp_get_unique_values, 2},
     {NULL, NULL, 0}
 };
 

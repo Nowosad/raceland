@@ -1,6 +1,6 @@
 #ifndef rcpp_get_unique_values_H
 #define rcpp_get_unique_values_H
-#include <RcppArmadillo.h>
+#include "Rcpp.h"
 
 // [[Rcpp::plugins(cpp11)]]
 

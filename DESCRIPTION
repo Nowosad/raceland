@@ -21,4 +21,5 @@ Imports:
     raster,
     Rcpp
 Suggests:
-    pbapply    
+    pbapply,
+    testthat (>= 2.1.0)
