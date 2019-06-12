@@ -13,6 +13,10 @@ calculate_weights(x, y, size)
 Title
 }
 \examples{
-a = create_realization(perc_raster)
-plot(a)
+\dontrun{
+library(raster)
+real_raster = create_realization(perc_raster)
+plot(real_raster)
+b = calculate_weights(real_raster, perc_raster, size = 10)
+}
 }

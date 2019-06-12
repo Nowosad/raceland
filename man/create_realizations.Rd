@@ -16,6 +16,7 @@ Title
 }
 \examples{
 \dontrun{
+library(raster)
 system.time({a = create_realization(perc_raster)})
 plot(a)
 system.time({b = create_realizations(perc_raster, 10)})
