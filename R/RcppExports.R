@@ -17,6 +17,10 @@ motifel_adjustment <- function(x, y) {
     .Call(`_sd_motifel_adjustment`, x, y)
 }
 
+motifel_to_grid <- function(x, y, size) {
+    .Call(`_sd_motifel_to_grid`, x, y, size)
+}
+
 rcpp_get_unique_values <- function(x, na_omit = TRUE) {
     .Call(`_sd_rcpp_get_unique_values`, x, na_omit)
 }

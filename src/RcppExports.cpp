@@ -53,6 +53,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// motifel_to_grid
+Rcpp::List motifel_to_grid(Rcpp::NumericMatrix x, Rcpp::NumericMatrix y, int size);
+RcppExport SEXP _sd_motifel_to_grid(SEXP xSEXP, SEXP ySEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type y(ySEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(motifel_to_grid(x, y, size));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcpp_get_unique_values
 std::vector<int> rcpp_get_unique_values(const Rcpp::IntegerVector& x, bool na_omit);
 RcppExport SEXP _sd_rcpp_get_unique_values(SEXP xSEXP, SEXP na_omitSEXP) {
@@ -71,6 +84,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sd_motifel_areas", (DL_FUNC) &_sd_motifel_areas, 2},
     {"_sd_motifel_sums", (DL_FUNC) &_sd_motifel_sums, 2},
     {"_sd_motifel_adjustment", (DL_FUNC) &_sd_motifel_adjustment, 2},
+    {"_sd_motifel_to_grid", (DL_FUNC) &_sd_motifel_to_grid, 3},
     {"_sd_rcpp_get_unique_values", (DL_FUNC) &_sd_rcpp_get_unique_values, 2},
     {NULL, NULL, 0}
 };

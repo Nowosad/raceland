@@ -3,5 +3,6 @@
 export(calculate_weights)
 export(create_realization)
 export(create_realizations)
+export(create_weights)
 importFrom(Rcpp,sourceCpp)
 useDynLib(sd, .registration = TRUE)

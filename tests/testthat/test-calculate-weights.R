@@ -38,4 +38,7 @@ cats = raster(nrows = 4, ncols = 4,
 
 plot(cats)
 
-calculate_weights(cats, s, size = 4)
+library(sd)
+library(raster)
+b = calculate_weights(cats, s, size = 2)
+w = create_weights(cats, s, size = 2)
