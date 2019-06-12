@@ -1,6 +1,7 @@
+#include "motifels.h"
 #include "rcpp_get_unique_values.h"
 #include "get_class_index_map.h"
-#include "motifels.h"
+
 using namespace Rcpp;
 
 IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
@@ -133,6 +134,44 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
   }
 
   return y;
+}
+
+List motifel_to_grid(NumericMatrix x, NumericMatrix y, int size){
+  int num_c_y = y.ncol();
+  // int num_r_y = y.nrow();
+
+  int num_r = x.nrow();
+  int num_c = x.ncol();
+
+  // Rcout << "The value of num_r : \n" << num_r << "\n";
+
+  List result(num_c_y);
+
+  for (int l = 0; l < num_c_y; l++) {
+    NumericMatrix r(x.nrow(), x.ncol());
+    int m = 0;
+      for (int i = 0; i < num_r; i = i + size){
+        for (int j = 0; j < num_c; j = j + size){
+          int i_max = i + (size - 1);
+          if (i_max >= num_r){
+            i_max = num_r - 1;
+          }
+          int j_max = j + (size - 1);
+          if (j_max >= num_c){
+            j_max = num_c - 1;
+          }
+          for (int ii = i; ii <= i_max; ii++){
+            for (int jj = j; jj <= j_max; jj++){
+              // Rcout << "The value of y : \n" << y << "\n";
+              r(ii, jj) = y(m, l);
+            }
+          }
+          m++;
+        }
+    }
+    result[l] = r;
+  }
+  return result;
 }
 
 
