@@ -5,6 +5,26 @@ draw_values <- function(x, y) {
     .Call(`_sd_draw_values`, x, y)
 }
 
+get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", base = "log2", ordered = TRUE) {
+    .Call(`_sd_get_metrics`, x, w, directions, fun, na_action, base, ordered)
+}
+
+rcpp_ent <- function(x, base = "log2") {
+    .Call(`_sd_rcpp_ent`, x, base)
+}
+
+rcpp_joinent <- function(x, base = "log2", ordered = TRUE) {
+    .Call(`_sd_rcpp_joinent`, x, base, ordered)
+}
+
+rcpp_condent <- function(x, base = "log2", ordered = TRUE) {
+    .Call(`_sd_rcpp_condent`, x, base, ordered)
+}
+
+rcpp_mutinf <- function(x, base = "log2", ordered = TRUE) {
+    .Call(`_sd_rcpp_mutinf`, x, base, ordered)
+}
+
 motifel_areas <- function(x, size) {
     .Call(`_sd_motifel_areas`, x, size)
 }

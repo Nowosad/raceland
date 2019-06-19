@@ -18,6 +18,74 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// get_metrics
+Rcpp::NumericMatrix get_metrics(const Rcpp::IntegerMatrix x, const Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered);
+RcppExport SEXP _sd_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type w(wSEXP);
+    Rcpp::traits::input_parameter< const arma::imat >::type directions(directionsSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type fun(funSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type na_action(na_actionSEXP);
+    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ent
+double rcpp_ent(const Rcpp::NumericMatrix x, std::string base);
+RcppExport SEXP _sd_rcpp_ent(SEXP xSEXP, SEXP baseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ent(x, base));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_joinent
+double rcpp_joinent(const Rcpp::NumericMatrix x, std::string base, bool ordered);
+RcppExport SEXP _sd_rcpp_joinent(SEXP xSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_joinent(x, base, ordered));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_condent
+double rcpp_condent(const Rcpp::NumericMatrix x, std::string base, bool ordered);
+RcppExport SEXP _sd_rcpp_condent(SEXP xSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_condent(x, base, ordered));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_mutinf
+double rcpp_mutinf(const Rcpp::NumericMatrix x, std::string base, bool ordered);
+RcppExport SEXP _sd_rcpp_mutinf(SEXP xSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_mutinf(x, base, ordered));
+    return rcpp_result_gen;
+END_RCPP
+}
 // motifel_areas
 Rcpp::IntegerMatrix motifel_areas(Rcpp::IntegerMatrix x, int size);
 RcppExport SEXP _sd_motifel_areas(SEXP xSEXP, SEXP sizeSEXP) {
@@ -82,6 +150,11 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sd_draw_values", (DL_FUNC) &_sd_draw_values, 2},
+    {"_sd_get_metrics", (DL_FUNC) &_sd_get_metrics, 7},
+    {"_sd_rcpp_ent", (DL_FUNC) &_sd_rcpp_ent, 2},
+    {"_sd_rcpp_joinent", (DL_FUNC) &_sd_rcpp_joinent, 3},
+    {"_sd_rcpp_condent", (DL_FUNC) &_sd_rcpp_condent, 3},
+    {"_sd_rcpp_mutinf", (DL_FUNC) &_sd_rcpp_mutinf, 3},
     {"_sd_motifel_areas", (DL_FUNC) &_sd_motifel_areas, 2},
     {"_sd_motifel_sums", (DL_FUNC) &_sd_motifel_sums, 2},
     {"_sd_motifel_adjustment", (DL_FUNC) &_sd_motifel_adjustment, 2},
