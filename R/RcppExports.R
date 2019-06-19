@@ -5,8 +5,8 @@ draw_values <- function(x, y) {
     .Call(`_sd_draw_values`, x, y)
 }
 
-get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", base = "log2", ordered = TRUE) {
-    .Call(`_sd_get_metrics`, x, w, directions, fun, na_action, base, ordered)
+get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0L) {
+    .Call(`_sd_get_metrics`, x, w, directions, fun, na_action, base, ordered, size)
 }
 
 rcpp_ent <- function(x, base = "log2") {

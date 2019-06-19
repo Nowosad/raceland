@@ -9,12 +9,13 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix get_metrics(const Rcpp::IntegerMatrix x,
-                          const Rcpp::NumericMatrix w,
+Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
+                          Rcpp::NumericMatrix w,
                           const arma::imat directions,
                           const std::string fun = "mean",
                           const std::string na_action = "replace",
                           std::string base = "log2",
-                          bool ordered = true);
+                          bool ordered = true,
+                          int size = 0);
 
 #endif // GET_METRICS_H

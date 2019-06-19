@@ -19,19 +19,20 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_metrics
-Rcpp::NumericMatrix get_metrics(const Rcpp::IntegerMatrix x, const Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered);
-RcppExport SEXP _sd_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
+Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size);
+RcppExport SEXP _sd_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::IntegerMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type w(wSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type w(wSEXP);
     Rcpp::traits::input_parameter< const arma::imat >::type directions(directionsSEXP);
     Rcpp::traits::input_parameter< const std::string >::type fun(funSEXP);
     Rcpp::traits::input_parameter< const std::string >::type na_action(na_actionSEXP);
     Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
     Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered));
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered, size));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -150,7 +151,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sd_draw_values", (DL_FUNC) &_sd_draw_values, 2},
-    {"_sd_get_metrics", (DL_FUNC) &_sd_get_metrics, 7},
+    {"_sd_get_metrics", (DL_FUNC) &_sd_get_metrics, 8},
     {"_sd_rcpp_ent", (DL_FUNC) &_sd_rcpp_ent, 2},
     {"_sd_rcpp_joinent", (DL_FUNC) &_sd_rcpp_joinent, 3},
     {"_sd_rcpp_condent", (DL_FUNC) &_sd_rcpp_condent, 3},
