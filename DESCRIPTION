@@ -16,7 +16,9 @@ RoxygenNote: 6.1.1
 Depends: 
     R (>= 3.0)
 LinkingTo: 
-    Rcpp
+    Rcpp,
+    wecoma,
+    RcppArmadillo
 Imports:
     raster,
     Rcpp
