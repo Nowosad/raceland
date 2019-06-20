@@ -13,6 +13,7 @@ create_grid(x, size)
 Title
 }
 \examples{
-y = create_grid(perc_raster, size = 100)
+x = create_realization(perc_raster)
+y = create_grid(x, size = 10)
 y
 }
