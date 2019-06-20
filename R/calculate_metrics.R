@@ -19,6 +19,10 @@
 #' w = create_weights(x, perc_raster, size = 100)
 #' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 #' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
+#' my_grid = create_grid(x, size = 100)
+#' \dontrun{
+#'  result = dplyr::left_join(my_grid, df, by = c("row", "col"))
+#' }
 calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, na_action = "replace", base = "log2", ordered = TRUE){
   if (is.null(size)){
     size = 0

@@ -80,4 +80,10 @@ cats = raster(nrows = 4, ncols = 4,
 plot(cats)
 create_motifels(as.matrix(cats), 2)
 create_motifels_ids(as.matrix(cats), 2)
+
+cats2 = raster(nrows = 8, ncols = 6,
+              xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+              crs = NA,
+              vals = sample(1:48))
+create_motifels_ids(as.matrix(cats2), 2)
 */
