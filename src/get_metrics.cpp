@@ -20,10 +20,12 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
     double condent = rcpp_condent(wecoma, base, ordered);
     double mutinf = rcpp_mutinf(wecoma, base, ordered);
 
-    result(0, 0) = ent;
-    result(0, 1) = joinent;
-    result(0, 2) = condent;
-    result(0, 3) = mutinf;
+    result(0, 0) = 1;
+    result(0, 1) = 1;
+    result(0, 2) = ent;
+    result(0, 3) = joinent;
+    result(0, 4) = condent;
+    result(0, 5) = mutinf;
 
     return result;
 
@@ -41,9 +43,14 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
     NumericMatrix result(nr_of_motifels, 6);
 
     int nr_of_motifels2 = 0;
+    int m_row = 1;
+    int m_col = 1;
 
     for (int i = 0; i < num_r; i = i + size){
       for (int j = 0; j < num_c; j = j + size){
+        result(nr_of_motifels2, 0) = m_row;
+        result(nr_of_motifels2, 1) = m_col;
+
         int i_max = i + (size - 1);
         if (i_max >= num_r){
           i_max = num_r - 1;
@@ -69,7 +76,10 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
         result(nr_of_motifels2, 5) = mutinf;
 
         nr_of_motifels2 ++;
+        m_col++;
       }
+      m_col = 1;
+      m_row++;
     }
     return result;
   }
