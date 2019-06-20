@@ -2,6 +2,7 @@
 
 export(calculate_metrics)
 export(calculate_weights)
+export(create_grid)
 export(create_realization)
 export(create_realizations)
 export(create_weights)
