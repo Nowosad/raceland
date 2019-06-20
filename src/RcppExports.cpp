@@ -6,6 +6,30 @@
 
 using namespace Rcpp;
 
+// create_motifels
+IntegerMatrix create_motifels(IntegerMatrix x, int size);
+RcppExport SEXP _sd_create_motifels(SEXP xSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(create_motifels(x, size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// create_motifels_ids
+IntegerMatrix create_motifels_ids(IntegerMatrix x, int size);
+RcppExport SEXP _sd_create_motifels_ids(SEXP xSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(create_motifels_ids(x, size));
+    return rcpp_result_gen;
+END_RCPP
+}
 // draw_values
 Rcpp::IntegerVector draw_values(Rcpp::NumericMatrix x, Rcpp::IntegerVector y);
 RcppExport SEXP _sd_draw_values(SEXP xSEXP, SEXP ySEXP) {
@@ -150,6 +174,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_sd_create_motifels", (DL_FUNC) &_sd_create_motifels, 2},
+    {"_sd_create_motifels_ids", (DL_FUNC) &_sd_create_motifels_ids, 2},
     {"_sd_draw_values", (DL_FUNC) &_sd_draw_values, 2},
     {"_sd_get_metrics", (DL_FUNC) &_sd_get_metrics, 8},
     {"_sd_rcpp_ent", (DL_FUNC) &_sd_rcpp_ent, 2},
