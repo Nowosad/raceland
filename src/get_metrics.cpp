@@ -27,6 +27,8 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
     result(0, 4) = condent;
     result(0, 5) = mutinf;
 
+    // add names
+    colnames(result) = CharacterVector::create("row", "col", "ent", "joinent", "condent", "mutinf");
     return result;
 
   } else {
@@ -81,6 +83,8 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
       m_col = 1;
       m_row++;
     }
+    // add names
+    colnames(result) = CharacterVector::create("row", "col", "ent", "joinent", "condent", "mutinf");
     return result;
   }
 }

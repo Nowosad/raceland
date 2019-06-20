@@ -23,7 +23,9 @@ calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, na_action = 
   if (is.null(size)){
     size = 0
   }
-  get_metrics(x = raster::as.matrix(x), w = raster::as.matrix(w),
+  df_metrics = get_metrics(x = raster::as.matrix(x), w = raster::as.matrix(w),
               directions = as.matrix(neighbourhood), fun = fun,
               na_action = na_action, base = base, ordered = ordered, size = size)
+  as.data.frame(df_metrics)
 }
+
