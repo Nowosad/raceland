@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(sd)
 library(raster)
+library(dplyr)
+library(sf)
 # library(tmap)
 ```
 
@@ -48,7 +50,7 @@ plot(real_raster)
 # Create weights
 
 ```{r}
-weig_raster = create_weights(real_raster, perc_raster, size = 10)
+weig_raster = create_weights(real_raster, perc_raster, size = 100)
 plot(weig_raster)
 # tm_shape(weig_raster) + 
 #   tm_raster(palette = "viridis", title = "Weights:") +
@@ -57,4 +59,20 @@ plot(weig_raster)
 
 # Calculate metrics
 
+```{r}
+metr_df = calculate_metrics(real_raster, weig_raster,
+                        neighbourhood = 4, fun = "mean", size = 100)
+head(metr_df)
+```
+
+# Connect metrics to a grid
+
+```{r}
+grid_sf = create_grid(real_raster, size = 100)
+grid_sf = dplyr::left_join(grid_sf, metr_df, by = c("row", "col"))
+plot(filter(grid_sf, realization == 1))
+# tm_shape(grid_sf) +
+#   tm_polygons("ent", style = "cont") +
+#   tm_facets(by = "realization")
+```
 
