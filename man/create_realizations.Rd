@@ -2,17 +2,20 @@
 % Please edit documentation in R/create_realizations.R
 \name{create_realizations}
 \alias{create_realizations}
-\title{Title}
+\title{Create Realizations}
 \usage{
 create_realizations(x, n)
 }
 \arguments{
-\item{x}{RasterStack/RasterBrick}
+\item{x}{RasterStack with shares}
 
-\item{n}{Number of realizations}
+\item{n}{number of realizations}
+}
+\value{
+a RasterStack
 }
 \description{
-Title
+Create Realizations
 }
 \examples{
 \dontrun{

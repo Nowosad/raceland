@@ -1,9 +1,9 @@
-#' Title
+#' Create Realizations
 #'
-#' @param x RasterStack/RasterBrick
-#' @param n Number of realizations
+#' @param x RasterStack with shares
+#' @param n number of realizations
 #'
-#' @return
+#' @return a RasterStack
 #' @export
 #'
 #' @examples
