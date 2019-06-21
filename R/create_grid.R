@@ -35,7 +35,11 @@ create_grid = function(x, size){
 
   my_grid = sf::st_sf(geom  = sf::st_sfc(ret, crs = sf::st_crs(x)))
 
-  df_ids = create_motifels_ids(raster::as.matrix(x), size)
+  if (raster::nlayers(x) == 1){
+    df_ids = create_motifels_ids(raster::as.matrix(x), size)
+  } else {
+    df_ids = create_motifels_ids(raster::as.matrix(x[[1]]), size)
+  }
 
   my_grid = cbind(df_ids, my_grid)
   colnames(my_grid) = c("row", "col", "geom")
