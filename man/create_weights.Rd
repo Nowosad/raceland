@@ -2,23 +2,36 @@
 % Please edit documentation in R/create_weights.R
 \name{create_weights}
 \alias{create_weights}
-\title{Title}
+\title{Create Weights}
 \usage{
 create_weights(x, y, size)
 }
 \arguments{
-\item{size}{}
+\item{x}{RasterStack with realizations}
+
+\item{y}{RasterStack with shares}
+
+\item{size}{size of a motifel}
+}
+\value{
+a RasterStack
 }
 \description{
-Title
+Create Weights
 }
 \examples{
 \dontrun{
 library(raster)
 real_raster = create_realization(perc_raster)
 plot(real_raster)
-output = create_weights(real_raster, perc_raster, size = 10)
+output = create_weight(real_raster, perc_raster, size = 10)
 output
 plot(output)
+
+real_rasters = create_realizations(perc_raster, n = 5)
+plot(real_rasters)
+output2 = create_weights(real_rasters, perc_raster, size = 10)
+output2
 }
+
 }
