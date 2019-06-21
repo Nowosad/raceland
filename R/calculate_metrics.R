@@ -1,15 +1,15 @@
-#' Title
+#' Calculate Metrics
 #'
-#' @param x
-#' @param w
-#' @param directions
-#' @param fun
-#' @param size
-#' @param na_action
-#' @param base
-#' @param ordered
+#' @param x RasterStack with realizations
+#' @param w RasterStack with weights
+#' @param directions 4/8
+#' @param fun "mean", "geometric_mean", or "focal"
+#' @param size size of a motifel
+#' @param na_action "replace", "omit", "keep"
+#' @param base the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used
+#' @param ordered the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE
 #'
-#' @return
+#' @return a data.frame
 #' @export
 #'
 #' @examples
@@ -17,9 +17,9 @@
 #' library(raster)
 #' x = create_realization(perc_raster)
 #' w = create_weights(x, perc_raster, size = 100)
-#' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
-#' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
-#' my_grid = create_grid(x, size = 100)
+#' #df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
+#' #df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
+#' #my_grid = create_grid(x, size = 100)
 #' \dontrun{
 #'  result = dplyr::left_join(my_grid, df, by = c("row", "col"))
 #' }

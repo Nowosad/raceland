@@ -2,25 +2,42 @@
 % Please edit documentation in R/calculate_metrics.R
 \name{calculate_metrics}
 \alias{calculate_metrics}
-\title{Title}
+\title{Calculate Metrics}
 \usage{
 calculate_metrics(x, w, neighbourhood, fun, size = NULL,
   na_action = "replace", base = "log2", ordered = TRUE)
 }
 \arguments{
-\item{ordered}{}
+\item{x}{RasterStack with realizations}
+
+\item{w}{RasterStack with weights}
+
+\item{fun}{"mean", "geometric_mean", or "focal"}
+
+\item{size}{size of a motifel}
+
+\item{na_action}{"replace", "omit", "keep"}
+
+\item{base}{the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used}
+
+\item{ordered}{the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE}
+
+\item{directions}{4/8}
+}
+\value{
+a data.frame
 }
 \description{
-Title
+Calculate Metrics
 }
 \examples{
 library(sd)
 library(raster)
 x = create_realization(perc_raster)
 w = create_weights(x, perc_raster, size = 100)
-df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
-df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
-my_grid = create_grid(x, size = 100)
+#df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
+#df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
+#my_grid = create_grid(x, size = 100)
 \dontrun{
  result = dplyr::left_join(my_grid, df, by = c("row", "col"))
 }
