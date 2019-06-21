@@ -1,10 +1,10 @@
-#' Title
+#' Calculate Weights
 #'
-#' @param x
-#' @param y
-#' @param size
+#' @param x RasterStack with realizations
+#' @param y RasterStack with shares
+#' @param size size of a motifel
 #'
-#' @return
+#' @return a list of data.frames
 #' @export
 #'
 #' @examples
@@ -12,9 +12,26 @@
 #' library(raster)
 #' real_raster = create_realization(perc_raster)
 #' plot(real_raster)
-#' b = calculate_weights(real_raster, perc_raster, size = 10)
+#' b = calculate_weight(real_raster, perc_raster, size = 10)
+#'
+#' real_rasters = create_realizations(perc_raster, n = 5)
+#' plot(real_rasters)
+#' d = calculate_weights(real_rasters, perc_raster, size = 10)
 #' }
 calculate_weights = function(x, y, size){
+  out = if (requireNamespace("pbapply", quietly = TRUE)){
+    # raster::stack(
+      pbapply::pblapply(raster::as.list(x), calculate_weight, y = y, size = size)
+      # )
+  } else {
+    # raster::stack(
+      lapply(raster::as.list(x), calculate_weight, y = y, size = size)
+      # )
+  }
+  return(out)
+}
+
+calculate_weight = function(x, y, size){
   # x = cats; y = s; size = 2
   x_areas = motifel_areas(x = raster::as.matrix(x), size = size)
 

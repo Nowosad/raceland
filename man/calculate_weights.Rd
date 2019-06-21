@@ -2,21 +2,32 @@
 % Please edit documentation in R/calculate_weights.R
 \name{calculate_weights}
 \alias{calculate_weights}
-\title{Title}
+\title{Calculate Weights}
 \usage{
 calculate_weights(x, y, size)
 }
 \arguments{
-\item{size}{}
+\item{x}{RasterStack with realizations}
+
+\item{y}{RasterStack with shares}
+
+\item{size}{size of a motifel}
+}
+\value{
+a list of data.frames
 }
 \description{
-Title
+Calculate Weights
 }
 \examples{
 \dontrun{
 library(raster)
 real_raster = create_realization(perc_raster)
 plot(real_raster)
-b = calculate_weights(real_raster, perc_raster, size = 10)
+b = calculate_weight(real_raster, perc_raster, size = 10)
+
+real_rasters = create_realizations(perc_raster, n = 5)
+plot(real_rasters)
+d = calculate_weights(real_rasters, perc_raster, size = 10)
 }
 }
