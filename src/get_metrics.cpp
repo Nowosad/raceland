@@ -99,9 +99,9 @@ w = create_weights(x, perc_raster, size = 10)
 plot(w)
 plot(x)
 
-sd:::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0)
-sd:::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = FALSE, size = 0)
-sd:::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = FALSE, size = 100)
+# sd::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0)
+# sd::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = FALSE, size = 0)
+# sd::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = FALSE, size = 100)
 
 */
 

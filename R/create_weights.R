@@ -40,5 +40,3 @@ create_weight = function(x, y, size){
   raster_template = raster::raster(x)
   raster::setValues(raster_template, values = vals)
 }
-
-
