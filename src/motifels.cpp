@@ -4,7 +4,7 @@
 
 using namespace Rcpp;
 
-IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
+IntegerMatrix motifel_areas(IntegerMatrix x, int size, int shift) {
 
   const int na = NA_INTEGER;
 
@@ -18,8 +18,8 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
   int num_c = x.ncol();
 
   int nr_of_motifels = 0;
-  for (int i = 0; i < num_r; i = i + size) {
-    for (int j = 0; j < num_c; j = j + size) {
+  for (int i = 0; i < num_r; i = i + shift) {
+    for (int j = 0; j < num_c; j = j + shift) {
       nr_of_motifels ++;
     }
   }
@@ -27,8 +27,8 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
   IntegerMatrix result(nr_of_motifels, n_classes);
   int nr_of_motifels2 = 0;
 
-  for (int i = 0; i < num_r; i = i + size){
-    for (int j = 0; j < num_c; j = j + size){
+  for (int i = 0; i < num_r; i = i + shift){
+    for (int j = 0; j < num_c; j = j + shift){
       int i_max = i + (size - 1);
       if (i_max >= num_r){
         i_max = num_r - 1;
@@ -56,7 +56,7 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
   return(result);
 }
 
-IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
+IntegerMatrix motifel_sums(IntegerMatrix x, int size, int shift) {
 
   const int na = NA_INTEGER;
 
@@ -64,8 +64,8 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
   int num_c = x.ncol();
 
   int nr_of_motifels = 0;
-  for (int i = 0; i < num_r; i = i + size) {
-    for (int j = 0; j < num_c; j = j + size) {
+  for (int i = 0; i < num_r; i = i + shift) {
+    for (int j = 0; j < num_c; j = j + shift) {
       nr_of_motifels ++;
     }
   }
@@ -73,8 +73,8 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size) {
   IntegerMatrix result(nr_of_motifels, 1);
   int nr_of_motifels2 = 0;
 
-  for (int i = 0; i < num_r; i = i + size){
-    for (int j = 0; j < num_c; j = j + size){
+  for (int i = 0; i < num_r; i = i + shift){
+    for (int j = 0; j < num_c; j = j + shift){
       int i_max = i + (size - 1);
       if (i_max >= num_r){
         i_max = num_r - 1;
@@ -136,7 +136,7 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
   return y;
 }
 
-NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size){
+NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size, int shift){
 
   const int na = NA_INTEGER;
 
@@ -155,8 +155,8 @@ NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size){
   NumericMatrix result(num_r, num_c);
   std::fill(result.begin(), result.end(), NA_REAL);
   int m = 0;
-  for (int i = 0; i < num_r; i = i + size){
-    for (int j = 0; j < num_c; j = j + size){
+  for (int i = 0; i < num_r; i = i + shift){
+    for (int j = 0; j < num_c; j = j + shift){
       int i_max = i + (size - 1);
       if (i_max >= num_r){
         i_max = num_r - 1;
@@ -197,6 +197,6 @@ cats = raster(nrows = 4, ncols = 4,
               vals = c(NA, 2, 2, 3, NA, NA, 1, 1, 3, 1, 1, 2, NA, 2, 2, 2))
 
 plot(cats)
-motifel_areas(as.matrix(cats), 2)
+motifel_areas(as.matrix(cats), 2, 2)
 motifel_sums(as.matrix(cats), 2)
 */

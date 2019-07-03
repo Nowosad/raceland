@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-IntegerMatrix create_motifels(IntegerMatrix x, int size) {
+IntegerMatrix create_motifels(IntegerMatrix x, int size, int shift) {
 
   int num_r = x.nrow();
   int num_c = x.ncol();
@@ -13,8 +13,8 @@ IntegerMatrix create_motifels(IntegerMatrix x, int size) {
   // int m_row = 1;
   // int m_col = 1;
 
-  for (int i = 0; i < num_r; i = i + size){
-    for (int j = 0; j < num_c; j = j + size){
+  for (int i = 0; i < num_r; i = i + shift){
+    for (int j = 0; j < num_c; j = j + shift){
       int i_max = i + (size - 1);
       if (i_max >= num_r){
         i_max = num_r - 1;
@@ -38,13 +38,13 @@ IntegerMatrix create_motifels(IntegerMatrix x, int size) {
 }
 
 // [[Rcpp::export]]
-IntegerMatrix create_motifels_ids(IntegerMatrix x, int size) {
+IntegerMatrix create_motifels_ids(IntegerMatrix x, int size, int shift) {
   int num_r = x.nrow();
   int num_c = x.ncol();
 
   int nr_of_motifels = 0;
-  for (int i = 0; i < num_r; i = i + size) {
-    for (int j = 0; j < num_c; j = j + size) {
+  for (int i = 0; i < num_r; i = i + shift) {
+    for (int j = 0; j < num_c; j = j + shift) {
       nr_of_motifels ++;
     }
   }
@@ -55,8 +55,8 @@ IntegerMatrix create_motifels_ids(IntegerMatrix x, int size) {
   int m_row = 1;
   int m_col = 1;
 
-  for (int i = 0; i < num_r; i = i + size){
-    for (int j = 0; j < num_c; j = j + size){
+  for (int i = 0; i < num_r; i = i + shift){
+    for (int j = 0; j < num_c; j = j + shift){
       result(m, 0) = m_row;
       result(m, 1) = m_col;
       m++;
