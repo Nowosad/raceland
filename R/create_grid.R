@@ -10,7 +10,7 @@
 #' x = create_realization(perc_raster)
 #' y = create_grid(x, size = 100)
 #' y
-create_grid = function(x, size, shift){
+create_grid = function(x, size, shift = size){
   bb = sf::st_bbox(raster::extent(x))
   offset = bb[c("xmin", "ymin")]
 
@@ -35,7 +35,7 @@ create_grid = function(x, size, shift){
     }
   }
 
-  my_grid = sf::st_sf(geom  = sf::st_sfc(ret, crs = sf::st_crs(x)))
+  my_grid = sf::st_sf(geom = sf::st_sfc(ret, crs = sf::st_crs(x)))
 
   if (raster::nlayers(x) == 1){
     df_ids = create_motifels_ids(raster::as.matrix(x), size, shift)
@@ -45,6 +45,8 @@ create_grid = function(x, size, shift){
 
   my_grid = cbind(df_ids, my_grid)
   colnames(my_grid) = c("row", "col", "geom")
+
+  # my_grid$area = sf::st_area(my_grid)
 
   return(my_grid)
 }

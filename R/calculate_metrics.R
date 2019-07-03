@@ -48,7 +48,8 @@ calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, na_action = 
   return(out)
 }
 
-calculate_metric = function(x, w, neighbourhood, fun, size = NULL, na_action = "replace", base = "log2", ordered = TRUE){
+calculate_metric = function(x, w, neighbourhood, fun, size = NULL,
+                            na_action = "replace", base = "log2", ordered = TRUE){
   if (is.null(size)){
     size = 0
   }
