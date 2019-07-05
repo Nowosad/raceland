@@ -1,3 +1,9 @@
 ^sd\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^\.travis\.yml$
+^README\.Rmd$
+^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
