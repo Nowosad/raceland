@@ -4,7 +4,7 @@
 \alias{create_weights}
 \title{Create Weights}
 \usage{
-create_weights(x, y, size)
+create_weights(x, y, size, shift = NULL)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
@@ -12,6 +12,8 @@ create_weights(x, y, size)
 \item{y}{RasterStack with shares}
 
 \item{size}{size of a motifel}
+
+\item{shift}{shift of a motifel}
 }
 \value{
 a RasterStack

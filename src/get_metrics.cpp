@@ -8,7 +8,8 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
                           const std::string na_action,
                           std::string base,
                           bool ordered,
-                          int size){
+                          int size,
+                          int shift){
 
   if (size == 0){
     NumericMatrix result(1, 6);
@@ -36,8 +37,8 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
     int num_c = x.ncol();
 
     int nr_of_motifels = 0;
-    for (int i = 0; i < num_r; i = i + size) {
-      for (int j = 0; j < num_c; j = j + size) {
+    for (int i = 0; i < num_r; i = i + shift) {
+      for (int j = 0; j < num_c; j = j + shift) {
         nr_of_motifels ++;
       }
     }
@@ -48,8 +49,8 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
     int m_row = 1;
     int m_col = 1;
 
-    for (int i = 0; i < num_r; i = i + size){
-      for (int j = 0; j < num_c; j = j + size){
+    for (int i = 0; i < num_r; i = i + shift){
+      for (int j = 0; j < num_c; j = j + shift){
         result(nr_of_motifels2, 0) = m_row;
         result(nr_of_motifels2, 1) = m_col;
 

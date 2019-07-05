@@ -16,6 +16,7 @@ Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
                           const std::string na_action = "replace",
                           std::string base = "log2",
                           bool ordered = true,
-                          int size = 0);
+                          int size = 0,
+                          int shift = 0);
 
 #endif // GET_METRICS_H

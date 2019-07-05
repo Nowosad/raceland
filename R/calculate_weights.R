@@ -3,6 +3,7 @@
 #' @param x RasterStack with realizations
 #' @param y RasterStack with shares
 #' @param size size of a motifel
+#' @param shift shift of a motifel
 #'
 #' @return a list of data.frames
 #' @export
@@ -18,26 +19,32 @@
 #' plot(real_rasters)
 #' d = calculate_weights(real_rasters, perc_raster, size = 10)
 #' }
-calculate_weights = function(x, y, size){
+calculate_weights = function(x, y, size, shift = NULL){
+  if (missing(shift)){
+    shift = size
+  }
   out = if (requireNamespace("pbapply", quietly = TRUE)){
     # raster::stack(
-      pbapply::pblapply(raster::as.list(x), calculate_weight, y = y, size = size)
+      pbapply::pblapply(raster::as.list(x), calculate_weight, y = y, size = size, shift = shift)
       # )
   } else {
     # raster::stack(
-      lapply(raster::as.list(x), calculate_weight, y = y, size = size)
+      lapply(raster::as.list(x), calculate_weight, y = y, size = size, shift = shift)
       # )
   }
   return(out)
 }
 
-calculate_weight = function(x, y, size){
+calculate_weight = function(x, y, size, shift){
+  if (missing(shift)){
+    shift = size
+  }
   # x = cats; y = s; size = 2
-  x_areas = motifel_areas(x = raster::as.matrix(x), size = size)
+  x_areas = motifel_areas(x = raster::as.matrix(x), size = size, shift = shift)
 
   y_prep = lapply(raster::as.list(y), raster::as.matrix)
 
-  y_sums = do.call(cbind, lapply(y_prep, motifel_sums, size = size))
+  y_sums = do.call(cbind, lapply(y_prep, motifel_sums, size = size, shift = shift))
 
   motifel_adjustment(x_areas, y_sums)
 }

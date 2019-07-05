@@ -2,6 +2,7 @@
 #'
 #' @param x
 #' @param size
+#' @param shift shift of a motifel
 #'
 #' @return
 #' @export
@@ -10,7 +11,10 @@
 #' x = create_realization(perc_raster)
 #' y = create_grid(x, size = 100)
 #' y
-create_grid = function(x, size, shift = size){
+create_grid = function(x, size, shift = NULL){
+  if (missing(shift)){
+    shift = size
+  }
   bb = sf::st_bbox(raster::extent(x))
   offset = bb[c("xmin", "ymin")]
 

@@ -45,8 +45,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_metrics
-Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size);
-RcppExport SEXP _sd_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP, SEXP sizeSEXP) {
+Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size, int shift);
+RcppExport SEXP _sd_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP, SEXP sizeSEXP, SEXP shiftSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -58,7 +58,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
     Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered, size));
+    Rcpp::traits::input_parameter< int >::type shift(shiftSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered, size, shift));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -182,7 +183,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sd_create_motifels", (DL_FUNC) &_sd_create_motifels, 3},
     {"_sd_create_motifels_ids", (DL_FUNC) &_sd_create_motifels_ids, 3},
     {"_sd_draw_values", (DL_FUNC) &_sd_draw_values, 2},
-    {"_sd_get_metrics", (DL_FUNC) &_sd_get_metrics, 8},
+    {"_sd_get_metrics", (DL_FUNC) &_sd_get_metrics, 9},
     {"_sd_rcpp_ent", (DL_FUNC) &_sd_rcpp_ent, 2},
     {"_sd_rcpp_joinent", (DL_FUNC) &_sd_rcpp_joinent, 3},
     {"_sd_rcpp_condent", (DL_FUNC) &_sd_rcpp_condent, 3},

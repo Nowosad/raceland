@@ -4,16 +4,16 @@
 \alias{create_grid}
 \title{Title}
 \usage{
-create_grid(x, size)
+create_grid(x, size, shift = NULL)
 }
 \arguments{
-\item{size}{}
+\item{shift}{shift of a motifel}
 }
 \description{
 Title
 }
 \examples{
 x = create_realization(perc_raster)
-y = create_grid(x, size = 10)
+y = create_grid(x, size = 100)
 y
 }

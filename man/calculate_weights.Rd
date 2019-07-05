@@ -4,7 +4,7 @@
 \alias{calculate_weights}
 \title{Calculate Weights}
 \usage{
-calculate_weights(x, y, size)
+calculate_weights(x, y, size, shift = NULL)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
@@ -12,6 +12,8 @@ calculate_weights(x, y, size)
 \item{y}{RasterStack with shares}
 
 \item{size}{size of a motifel}
+
+\item{shift}{shift of a motifel}
 }
 \value{
 a list of data.frames

@@ -4,7 +4,7 @@
 \alias{calculate_metrics}
 \title{Calculate Metrics}
 \usage{
-calculate_metrics(x, w, neighbourhood, fun, size = NULL,
+calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
   na_action = "replace", base = "log2", ordered = TRUE)
 }
 \arguments{
@@ -15,6 +15,8 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL,
 \item{fun}{"mean", "geometric_mean", or "focal"}
 
 \item{size}{size of a motifel}
+
+\item{shift}{shift of a motifel}
 
 \item{na_action}{"replace", "omit", "keep"}
 
