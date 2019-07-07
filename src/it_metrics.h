@@ -1,7 +1,7 @@
 #ifndef IT_METRICS_H
 #define IT_METRICS_H
-// [[Rcpp::depends(wecoma)]]
-#include <wecoma.h>
+// [[Rcpp::depends(comat)]]
+#include <comat.h>
 #include "Rcpp.h"
 using namespace Rcpp;
 

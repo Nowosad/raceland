@@ -14,7 +14,7 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
   if (size == 0){
     NumericMatrix result(1, 6);
 
-    NumericMatrix wecoma = wecoma::rcpp_get_wecoma(x, w, directions, fun, na_action);
+    NumericMatrix wecoma = comat::rcpp_get_wecoma(x, w, directions, fun, na_action);
 
     double ent = rcpp_ent(wecoma, base);
     double joinent = rcpp_joinent(wecoma, base, ordered);
@@ -66,7 +66,7 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
         IntegerMatrix motifel_x = x(Range(i, i_max), Range(j, j_max));
         NumericMatrix motifel_w = w(Range(i, i_max), Range(j, j_max));
 
-        NumericMatrix wecoma = wecoma::rcpp_get_wecoma(motifel_x, motifel_w, directions, fun, na_action);
+        NumericMatrix wecoma = comat::rcpp_get_wecoma(motifel_x, motifel_w, directions, fun, na_action);
 
         double ent = rcpp_ent(wecoma, base);
         double joinent = rcpp_joinent(wecoma, base, ordered);

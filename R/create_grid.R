@@ -1,14 +1,14 @@
-#' Title
+#' Create a grid of motifels
 #'
-#' @param x
-#' @param size
+#' @param x A RasterLayer
+#' @param size size of a motifel
 #' @param shift shift of a motifel
 #'
-#' @return
+#' @return An sf polygon object
 #' @export
 #'
 #' @examples
-#' x = create_realization(perc_raster)
+#' x = create_realizations(perc_raster, 1)
 #' y = create_grid(x, size = 100)
 #' y
 create_grid = function(x, size, shift = NULL){
@@ -41,11 +41,11 @@ create_grid = function(x, size, shift = NULL){
 
   my_grid = sf::st_sf(geom = sf::st_sfc(ret, crs = sf::st_crs(x)))
 
-  if (raster::nlayers(x) == 1){
-    df_ids = create_motifels_ids(raster::as.matrix(x), size, shift)
-  } else {
+  # if (raster::nlayers(x) == 1){
+  #   df_ids = create_motifels_ids(raster::as.matrix(x), size, shift)
+  # } else {
     df_ids = create_motifels_ids(raster::as.matrix(x[[1]]), size, shift)
-  }
+  # }
 
   my_grid = cbind(df_ids, my_grid)
   colnames(my_grid) = c("row", "col", "geom")

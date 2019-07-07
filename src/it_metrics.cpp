@@ -5,7 +5,7 @@ double rcpp_ent(const NumericMatrix x,
                 std::string base){
 
   NumericVector com_c = colSums(x);
-  double comp = wecoma::rcpp_get_entropy(com_c, base);
+  double comp = comat::rcpp_get_entropy(com_c, base);
   return comp;
 }
 
@@ -13,9 +13,9 @@ double rcpp_joinent(const NumericMatrix x,
                     std::string base,
                     bool ordered){
 
-  NumericVector coh = wecoma::rcpp_get_wecove(x, ordered);
+  NumericVector coh = comat::rcpp_get_wecove(x, ordered);
 
-  double cplx = wecoma::rcpp_get_entropy(coh, base);
+  double cplx = comat::rcpp_get_entropy(coh, base);
   return cplx;
 }
 
@@ -51,7 +51,7 @@ w = create_weights(x, perc_raster, size = 10)
 plot(w)
 plot(x)
 
-a = wecoma::rcpp_get_wecoma(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace")
+a = comat::rcpp_get_wecoma(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace")
 # wecoma:::rcpp_get_wecove(a, ordered = FALSE)
 
 rcpp_ent(a, base = "log2")

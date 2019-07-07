@@ -2,7 +2,7 @@
 #'
 #' @param x RasterStack with realizations
 #' @param w RasterStack with weights
-#' @param directions 4/8
+#' @param neighbourhood 4/8
 #' @param fun "mean", "geometric_mean", or "focal"
 #' @param size size of a motifel
 #' @param shift shift of a motifel

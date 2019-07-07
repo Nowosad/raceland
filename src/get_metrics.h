@@ -1,7 +1,7 @@
 #ifndef GET_METRICS_H
 #define GET_METRICS_H
-// [[Rcpp::depends(wecoma)]]
-#include <wecoma.h>
+// [[Rcpp::depends(comat)]]
+#include <comat.h>
 #include "it_metrics.h"
 #include "RcppArmadillo.h"
 using namespace Rcpp;

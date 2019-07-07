@@ -2,18 +2,25 @@
 % Please edit documentation in R/create_grid.R
 \name{create_grid}
 \alias{create_grid}
-\title{Title}
+\title{Create a grid of motifels}
 \usage{
 create_grid(x, size, shift = NULL)
 }
 \arguments{
+\item{x}{A RasterLayer}
+
+\item{size}{size of a motifel}
+
 \item{shift}{shift of a motifel}
 }
+\value{
+An sf polygon object
+}
 \description{
-Title
+Create a grid of motifels
 }
 \examples{
-x = create_realization(perc_raster)
+x = create_realizations(perc_raster, 1)
 y = create_grid(x, size = 100)
 y
 }

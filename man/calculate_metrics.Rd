@@ -12,6 +12,8 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
 
 \item{w}{RasterStack with weights}
 
+\item{neighbourhood}{4/8}
+
 \item{fun}{"mean", "geometric_mean", or "focal"}
 
 \item{size}{size of a motifel}
@@ -23,8 +25,6 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
 \item{base}{the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used}
 
 \item{ordered}{the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE}
-
-\item{directions}{4/8}
 }
 \value{
 a data.frame

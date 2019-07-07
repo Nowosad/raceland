@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(sd)
 library(raster)
-library(dplyr)
 library(sf)
 # library(tmap)
 ```
@@ -69,8 +68,8 @@ head(metr_df)
 
 ```{r}
 grid_sf = create_grid(real_raster, size = 100)
-grid_sf = dplyr::left_join(grid_sf, metr_df, by = c("row", "col"))
-plot(filter(grid_sf, realization == 1))
+grid_sf = merge(grid_sf, metr_df, by = c("row", "col"), all.x = TRUE)
+plot(subset(grid_sf, realization == 1))
 # tm_shape(grid_sf) +
 #   tm_polygons("ent", style = "cont") +
 #   tm_facets(by = "realization")

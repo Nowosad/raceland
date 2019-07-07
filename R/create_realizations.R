@@ -9,8 +9,6 @@
 #' @examples
 #' \dontrun{
 #' library(raster)
-#' system.time({a = create_realization(perc_raster)})
-#' plot(a)
 #' system.time({b = create_realizations(perc_raster, 10)})
 #' plot(b)
 #' }
@@ -28,8 +26,6 @@ create_realizations = function(x, n){
   # parallel::stopCluster(cl)
   return(out)
 }
-
-#' @export
 create_realization = function(x){
   tmp_rst = raster::raster(ncols = raster::ncol(x), nrows = raster::nrow(x),
                            ext = raster::extent(x), crs = raster::crs(x),
