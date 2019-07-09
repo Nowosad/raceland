@@ -9,7 +9,13 @@
 What the package does (one paragraph).
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (YOUR-ORCID-ID)
+\strong{Maintainer}: Jakub Nowosad \email{nowosad.jakub@gmail.com} (0000-0002-1057-3721)
+
+Authors:
+\itemize{
+  \item Anna Dmowska
+  \item Tomasz Stepinski
+}
 
 }
 \keyword{internal}
