@@ -2,11 +2,9 @@ Package: sd
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    c(person(given = "Jakub", family = "Nowosad", role = c("aut", "cre"), email =
+           "nowosad.jakub@gmail.com", comment = c(ORCID = "0000-0002-1057-3721")), person("Anna",
+           "Dmowska", role = c("aut")), person("Tomasz", "Stepinski", role = c("aut")))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -14,7 +12,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Depends: 
-    R (>= 3.0)
+    R (>= 3.5)
 LinkingTo: 
     Rcpp,
     comat,
