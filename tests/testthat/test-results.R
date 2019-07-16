@@ -1,8 +1,8 @@
 # load a reference objects ------------------------------------------------
-load(system.file("results", "real_raster.rda", package = "racialscape"))
-load(system.file("results", "weig_raster.rda", package = "racialscape"))
-load(system.file("results", "metr_df.rda", package = "racialscape"))
-load(system.file("results", "grid_sf.rda", package = "racialscape"))
+load(system.file("results", "real_raster.rda", package = "raceland"))
+load(system.file("results", "weig_raster.rda", package = "raceland"))
+load(system.file("results", "metr_df.rda", package = "raceland"))
+load(system.file("results", "grid_sf.rda", package = "raceland"))
 
 # calculate new results ---------------------------------------------------
 set.seed(22)

@@ -4,14 +4,14 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 IntegerMatrix create_motifels(IntegerMatrix x, int size, int shift) {
 
+  // get number of rows and columns
   int num_r = x.nrow();
   int num_c = x.ncol();
 
+  // create a result matrix of the same dimensions
   IntegerMatrix result(num_r, num_c);
-  // std::fill(result.begin(), result.end(), NA_REAL);
+  // start from m (motifel) zero
   int m = 0;
-  // int m_row = 1;
-  // int m_col = 1;
 
   for (int i = 0; i < num_r; i = i + shift){
     for (int j = 0; j < num_c; j = j + shift){
@@ -30,9 +30,7 @@ IntegerMatrix create_motifels(IntegerMatrix x, int size, int shift) {
         }
       }
       m++;
-      // m_col++;
     }
-    // m_row++;
   }
   return result;
 }
@@ -78,12 +76,12 @@ cats = raster(nrows = 4, ncols = 4,
               vals = c(NA, 2, 2, 3, NA, NA, 1, 1, 3, 1, 1, 2, NA, 2, 2, 2))
 
 plot(cats)
-create_motifels(as.matrix(cats), 2)
-create_motifels_ids(as.matrix(cats), 2)
+create_motifels(as.matrix(cats), 2, 1)
+create_motifels_ids(as.matrix(cats), 2, 2)
 
 cats2 = raster(nrows = 8, ncols = 6,
               xmn = 0, xmx = 4, ymn = 0, ymx = 4,
               crs = NA,
               vals = sample(1:48))
-create_motifels_ids(as.matrix(cats2), 2)
+create_motifels_ids(as.matrix(cats2), 2, 2)
 */

@@ -1,6 +1,6 @@
 library(testthat)
-library(racialscape)
+library(raceland)
 library(raster)
 library(sf)
 
-test_check("racialscape")
+test_check("raceland")

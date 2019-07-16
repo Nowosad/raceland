@@ -2,54 +2,54 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 create_motifels <- function(x, size, shift) {
-    .Call('_racialscape_create_motifels', PACKAGE = 'racialscape', x, size, shift)
+    .Call(`_raceland_create_motifels`, x, size, shift)
 }
 
 create_motifels_ids <- function(x, size, shift) {
-    .Call('_racialscape_create_motifels_ids', PACKAGE = 'racialscape', x, size, shift)
+    .Call(`_raceland_create_motifels_ids`, x, size, shift)
 }
 
 draw_values <- function(x, y) {
-    .Call('_racialscape_draw_values', PACKAGE = 'racialscape', x, y)
+    .Call(`_raceland_draw_values`, x, y)
 }
 
 get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0L, shift = 0L) {
-    .Call('_racialscape_get_metrics', PACKAGE = 'racialscape', x, w, directions, fun, na_action, base, ordered, size, shift)
+    .Call(`_raceland_get_metrics`, x, w, directions, fun, na_action, base, ordered, size, shift)
 }
 
 rcpp_ent <- function(x, base = "log2") {
-    .Call('_racialscape_rcpp_ent', PACKAGE = 'racialscape', x, base)
+    .Call(`_raceland_rcpp_ent`, x, base)
 }
 
 rcpp_joinent <- function(x, base = "log2", ordered = TRUE) {
-    .Call('_racialscape_rcpp_joinent', PACKAGE = 'racialscape', x, base, ordered)
+    .Call(`_raceland_rcpp_joinent`, x, base, ordered)
 }
 
 rcpp_condent <- function(x, base = "log2", ordered = TRUE) {
-    .Call('_racialscape_rcpp_condent', PACKAGE = 'racialscape', x, base, ordered)
+    .Call(`_raceland_rcpp_condent`, x, base, ordered)
 }
 
 rcpp_mutinf <- function(x, base = "log2", ordered = TRUE) {
-    .Call('_racialscape_rcpp_mutinf', PACKAGE = 'racialscape', x, base, ordered)
+    .Call(`_raceland_rcpp_mutinf`, x, base, ordered)
 }
 
 motifel_areas <- function(x, size, shift) {
-    .Call('_racialscape_motifel_areas', PACKAGE = 'racialscape', x, size, shift)
+    .Call(`_raceland_motifel_areas`, x, size, shift)
 }
 
 motifel_sums <- function(x, size, shift) {
-    .Call('_racialscape_motifel_sums', PACKAGE = 'racialscape', x, size, shift)
+    .Call(`_raceland_motifel_sums`, x, size, shift)
 }
 
 motifel_adjustment <- function(x, y) {
-    .Call('_racialscape_motifel_adjustment', PACKAGE = 'racialscape', x, y)
+    .Call(`_raceland_motifel_adjustment`, x, y)
 }
 
 motifel_to_grid <- function(x, y, size, shift) {
-    .Call('_racialscape_motifel_to_grid', PACKAGE = 'racialscape', x, y, size, shift)
+    .Call(`_raceland_motifel_to_grid`, x, y, size, shift)
 }
 
 rcpp_get_unique_values <- function(x, na_omit = TRUE) {
-    .Call('_racialscape_rcpp_get_unique_values', PACKAGE = 'racialscape', x, na_omit)
+    .Call(`_raceland_rcpp_get_unique_values`, x, na_omit)
 }
 
