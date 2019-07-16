@@ -1,5 +1,5 @@
 ---
-title: "An examples of the workflow in the sd package"
+title: "An examples of the workflow in the racialscape package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{workflow}
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(sd)
+library(racialscape)
 library(raster)
 library(sf)
 # library(tmap)

@@ -33,7 +33,7 @@ a data.frame
 Calculate Metrics
 }
 \examples{
-library(sd)
+library(racialscape)
 library(raster)
 x = create_realizations(perc_raster, n = 5)
 w = create_weights(x, perc_raster, size = 100)
