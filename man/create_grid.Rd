@@ -21,6 +21,6 @@ Create a grid of motifels
 }
 \examples{
 x = create_realizations(perc_raster, 1)
-y = create_grid(x, size = 100)
+y = create_grid(x, size = 10)
 y
 }
