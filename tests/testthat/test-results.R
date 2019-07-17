@@ -8,12 +8,12 @@ load(system.file("results", "grid_sf.rda", package = "raceland"))
 set.seed(22)
 real_raster2 = create_realizations(prop_raster, n = 5)
 
-weig_raster2 = create_weights(real_raster, prop_raster, size = 100)
+weig_raster2 = create_densities(real_raster, prop_raster, size = 4)
 
 metr_df2 = calculate_metrics(real_raster, weig_raster,
-                            neighbourhood = 4, fun = "mean", size = 100)
+                            neighbourhood = 4, fun = "mean", size = 4)
 
-grid_sf2 = create_grid(real_raster, size = 100)
+grid_sf2 = create_grid(real_raster, size = 4)
 
 # tests -------------------------------------------------------------------
 expect_equal(real_raster2, real_raster)
