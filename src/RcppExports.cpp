@@ -128,12 +128,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // motifel_sums
-Rcpp::IntegerMatrix motifel_sums(Rcpp::IntegerMatrix x, int size, int shift);
+Rcpp::NumericMatrix motifel_sums(Rcpp::NumericMatrix x, int size, int shift);
 RcppExport SEXP _raceland_motifel_sums(SEXP xSEXP, SEXP sizeSEXP, SEXP shiftSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< int >::type shift(shiftSEXP);
     rcpp_result_gen = Rcpp::wrap(motifel_sums(x, size, shift));
