@@ -56,9 +56,9 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size, int shift) {
   return(result);
 }
 
-IntegerMatrix motifel_sums(IntegerMatrix x, int size, int shift) {
+NumericMatrix motifel_sums(NumericMatrix x, int size, int shift) {
 
-  const int na = NA_INTEGER;
+  const int na = NA_REAL;
 
   int num_r = x.nrow();
   int num_c = x.ncol();
@@ -70,7 +70,7 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size, int shift) {
     }
   }
 
-  IntegerMatrix result(nr_of_motifels, 1);
+  NumericMatrix result(nr_of_motifels, 1);
   int nr_of_motifels2 = 0;
 
   for (int i = 0; i < num_r; i = i + shift){
@@ -83,11 +83,11 @@ IntegerMatrix motifel_sums(IntegerMatrix x, int size, int shift) {
       if (j_max >= num_c){
         j_max = num_c - 1;
       }
-      IntegerMatrix motifel = x(Range(i, i_max), Range(j, j_max));
-      // Rcout << "The value of motifel : \n" << motifel << "\n";
+      NumericMatrix motifel = x(Range(i, i_max), Range(j, j_max));
+      Rcout << "The value of motifel : \n" << motifel << "\n";
 
       for (int k = 0; k < motifel.length(); k++){
-        const int tmp = motifel[k];
+        const double tmp = motifel[k];
         // Rcout << "The value of tmp : \n" << tmp << "\n";
         if (tmp == na)
           continue;
@@ -118,19 +118,16 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
       }
     }
   }
-  // return missing_vals;
-  // Rcpp::Rcout << "y: " << y << std::endl;
+  //Rcpp::Rcout << "missing_vals: " << missing_vals << std::endl;
+
   NumericVector row_sums_y = rowSums(y);
-  // Rcpp::Rcout << "rowSum: " << row_sums_y << std::endl;
   NumericVector tmp_y(num_c);
 
   int row_sums_y_len = row_sums_y.length();
 
   for (int i = 0; i < row_sums_y_len; i++) {
     tmp_y = y(i,_) / row_sums_y[i];
-    // Rcpp::Rcout << "y: " << tmp_y << std::endl;
-    // Rcpp::Rcout << "mv: " << missing_vals << std::endl;
-    y(i,_) = ((missing_vals(i, 0) * tmp_y) + y(i,_)) / x(i,_);
+    y(i,_) = ((missing_vals(i, 0) * tmp_y) + y(i,_));
   }
 
   return y;
@@ -196,7 +193,37 @@ cats = raster(nrows = 4, ncols = 4,
               crs = NA,
               vals = c(NA, 2, 2, 3, NA, NA, 1, 1, 3, 1, 1, 2, NA, 2, 2, 2))
 
+race_a = raster(nrows = 4, ncols = 4,
+                xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+                crs = NA,
+                vals = c(NA, 2, 2, 1, NA, NA, 8, 6, 2, 6, 5, 1, NA, 0, 3, 0))
+
+race_b = raster(nrows = 4, ncols = 4,
+                xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+                crs = NA,
+                vals = c(NA, 6, 7, 4, NA, NA, 0, 0, 1, 3, 2, 6, NA, 8, 7, 9))
+
+race_c = raster(nrows = 4, ncols = 4,
+                xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+                crs = NA,
+                vals = c(NA, 2, 1, 5, NA, NA, 2, 4, 7, 1, 3, 3, NA, 2, 0, 1))
+
 plot(cats)
-motifel_areas(as.matrix(cats), 2, 2)
-motifel_sums(as.matrix(cats), 2)
+a = motifel_areas(as.matrix(cats), 2, 2)
+s = cbind(
+  motifel_sums(as.matrix(race_a), 2, 2),
+  motifel_sums(as.matrix(race_b), 2, 2),
+  motifel_sums(as.matrix(race_c), 2, 2)
+  )
+
+s2 = cbind(
+  motifel_sums(as.matrix(race_raster[[1]]), 20, 20),
+  motifel_sums(as.matrix(race_raster[[2]]), 20, 20),
+  motifel_sums(as.matrix(race_raster[[3]]), 20, 20),
+  motifel_sums(as.matrix(race_raster[[4]]), 20, 20),
+  motifel_sums(as.matrix(race_raster[[5]]), 20, 20)
+)
+
+motifel_adjustment(a, s)
+u = motifel_adjustment(x_areas, y_sums)
 */
