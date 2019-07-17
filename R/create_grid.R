@@ -9,21 +9,21 @@
 #'
 #' @examples
 #' x = create_realizations(perc_raster, 1)
-#' y = create_grid(x, size = 100)
+#' y = create_grid(x, size = 10)
 #' y
 create_grid = function(x, size, shift = NULL){
   if (missing(shift)){
     shift = size
   }
   bb = sf::st_bbox(raster::extent(x))
-  offset = bb[c("xmin", "ymin")]
+  offset = bb[c("xmin", "ymax")]
 
   cellsize = c((size * raster::res(x)[1]), (size * raster::res(x)[2]))
   cellshift = c(((shift) * raster::res(x)[[1]]),
                 ((shift) * raster::res(x)[[2]]))
 
-  nx = ceiling((bb[3] - offset[1]) / cellshift[1])
-  ny = ceiling((bb[4] - offset[2]) / cellshift[2])
+  nx = ceiling(abs((bb[3] - offset[1]) / cellshift[1]))
+  ny = ceiling(abs((bb[2] - offset[2]) / cellshift[2]))
 
   ret = vector("list", nx * ny)
   square = function(x1, y1, x2, y2){
@@ -31,11 +31,11 @@ create_grid = function(x, size, shift = NULL){
   }
 
   xc = offset[1] + (0:nx) * cellshift[1]
-  yc = offset[2] + (0:ny) * cellshift[2]
+  yc = offset[2] - (0:ny) * cellshift[2]
 
   for (i in 1:nx){
     for (j in 1:ny){
-      ret[[(j - 1) * nx + i]] = square(xc[i], yc[j], xc[i] + cellsize[1], yc[j] + cellsize[2])
+      ret[[(j - 1) * nx + i]] = square(xc[i], yc[j], xc[i] + cellsize[1], yc[j] - cellsize[2])
     }
   }
 
