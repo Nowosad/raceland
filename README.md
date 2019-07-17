@@ -6,27 +6,30 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/Nowosad/sd.svg?branch=master)](https://travis-ci.org/Nowosad/racialscape)
+status](https://travis-ci.org/Nowosad/sd.svg?branch=master)](https://travis-ci.org/Nowosad/raceland)
 [![Codecov test
-coverage](https://codecov.io/gh/Nowosad/sd/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/racialscape?branch=master)
+coverage](https://codecov.io/gh/Nowosad/sd/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
 <!-- badges: end -->
 
-The goal of racialscape is to …
+The goal of raceland is to
+…
 
 ## Installation
 
-You can install the released version of racialscape from
-[CRAN](https://CRAN.R-project.org) with:
+<!-- You can install the released version of raceland from [CRAN](https://CRAN.R-project.org) with: -->
 
-``` r
-install.packages("racialscape")
-```
+<!-- ``` r -->
 
-And the development version from [GitHub](https://github.com/) with:
+<!-- install.packages("raceland") -->
+
+<!-- ``` -->
+
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Nowosad/racialscape")
+devtools::install_github("Nowosad/raceland")
 ```
 
 ## Example
