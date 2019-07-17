@@ -1,6 +1,6 @@
 #' Create a grid of motifels
 #'
-#' @param x A RasterLayer
+#' @param x A RasterLayer/RasterStack/RasterBrick
 #' @param size size of a motifel
 #' @param shift shift of a motifel
 #'
@@ -12,6 +12,9 @@
 #' y = create_grid(x, size = 10)
 #' y
 create_grid = function(x, size, shift = NULL){
+  if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
+    stop("x needs to be either RasterLayer, RasterStack or RasterBrick", call. = FALSE)
+  }
   if (missing(shift)){
     shift = size
   }

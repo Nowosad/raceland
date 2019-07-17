@@ -31,6 +31,12 @@
 #' }
 calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
                              na_action = "replace", base = "log2", ordered = TRUE){
+  if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
+    stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)
+  }
+  if (!(methods::is(w, "RasterStack") || methods::is(w, "RasterBrick"))){
+    stop("w needs to be either RasterStack or RasterBrick", call. = FALSE)
+  }
   if (is.null(size)){
     size = 0
   }

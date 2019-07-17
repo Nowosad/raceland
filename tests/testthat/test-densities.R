@@ -5,6 +5,3 @@ test_that("total population stays the same for a realization", {
   expect_equal(sum(prop_raster[], na.rm = TRUE),
                sum(weig_raster[[1]][], na.rm = TRUE))
 })
-
-
-

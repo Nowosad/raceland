@@ -9,11 +9,14 @@
 #' @examples
 #' \dontrun{
 #' library(raster)
-#' system.time({b = create_realizations(perc_raster, 10)})
-#' plot(b)
+#' system.time({real = create_realizations(perc_raster, 10)})
+#' plot(real)
 #' }
 
 create_realizations = function(x, n){
+  if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
+    stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)
+  }
   # fork does not work on windows
   # cl = parallel::makeForkCluster(4L)
   # raster::stack(lapply(1:n, function(i) create_realization(x)))

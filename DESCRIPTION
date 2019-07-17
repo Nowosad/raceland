@@ -18,6 +18,7 @@ LinkingTo:
     comat,
     RcppArmadillo
 Imports:
+    methods,
     sf,
     raster,
     Rcpp

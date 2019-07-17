@@ -24,10 +24,6 @@ Calculate Densities
 \examples{
 \dontrun{
 library(raster)
-real_raster = create_realization(perc_raster)
-plot(real_raster)
-b = calculate_density(real_raster, perc_raster, size = 10)
-
 real_rasters = create_realizations(perc_raster, n = 5)
 plot(real_rasters)
 d = calculate_densities(real_rasters, perc_raster, size = 10)

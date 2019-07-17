@@ -24,12 +24,6 @@ Create Densities
 \examples{
 \dontrun{
 library(raster)
-real_raster = create_realization(perc_raster)
-plot(real_raster)
-output = create_density(real_raster, perc_raster, size = 10)
-output
-plot(output)
-
 real_rasters = create_realizations(perc_raster, n = 5)
 plot(real_rasters)
 output2 = create_densities(real_rasters, perc_raster, size = 10)

@@ -20,7 +20,7 @@ Create Realizations
 \examples{
 \dontrun{
 library(raster)
-system.time({b = create_realizations(perc_raster, 10)})
-plot(b)
+system.time({real = create_realizations(perc_raster, 10)})
+plot(real)
 }
 }

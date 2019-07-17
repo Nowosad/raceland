@@ -11,12 +11,6 @@
 #' @examples
 #' \dontrun{
 #' library(raster)
-#' real_raster = create_realization(perc_raster)
-#' plot(real_raster)
-#' output = create_density(real_raster, perc_raster, size = 10)
-#' output
-#' plot(output)
-#'
 #' real_rasters = create_realizations(perc_raster, n = 5)
 #' plot(real_rasters)
 #' output2 = create_densities(real_rasters, perc_raster, size = 10)
@@ -24,6 +18,12 @@
 #' }
 #'
 create_densities = function(x, y, size, shift = NULL){
+  if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
+    stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)
+  }
+  if (!(methods::is(y, "RasterStack") || methods::is(y, "RasterBrick"))){
+    stop("y needs to be either RasterStack or RasterBrick", call. = FALSE)
+  }
   if (missing(shift)){
     shift = size
   }
@@ -35,6 +35,11 @@ create_densities = function(x, y, size, shift = NULL){
   return(out)
 }
 
+# real_raster = create_realization(perc_raster)
+# plot(real_raster)
+# output = create_density(real_raster, perc_raster, size = 10)
+# output
+# plot(output)
 create_density = function(x, y, size, shift){
   if (missing(shift)){
     shift = size

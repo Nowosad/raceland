@@ -7,7 +7,7 @@
 create_grid(x, size, shift = NULL)
 }
 \arguments{
-\item{x}{A RasterLayer}
+\item{x}{A RasterLayer/RasterStack/RasterBrick}
 
 \item{size}{size of a motifel}
 
