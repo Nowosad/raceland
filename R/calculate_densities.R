@@ -1,4 +1,4 @@
-#' Calculate Weights
+#' Calculate Densities
 #'
 #' @param x RasterStack with realizations
 #' @param y RasterStack with shares
@@ -13,34 +13,34 @@
 #' library(raster)
 #' real_raster = create_realization(perc_raster)
 #' plot(real_raster)
-#' b = calculate_weight(real_raster, perc_raster, size = 10)
+#' b = calculate_density(real_raster, perc_raster, size = 10)
 #'
 #' real_rasters = create_realizations(perc_raster, n = 5)
 #' plot(real_rasters)
-#' d = calculate_weights(real_rasters, perc_raster, size = 10)
+#' d = calculate_densities(real_rasters, perc_raster, size = 10)
 #' }
-calculate_weights = function(x, y, size, shift = NULL){
+calculate_densities = function(x, y, size, shift = NULL){
   if (missing(shift)){
     shift = size
   }
   out = if (requireNamespace("pbapply", quietly = TRUE)){
     # raster::stack(
-      pbapply::pblapply(raster::as.list(x), calculate_weight, y = y, size = size, shift = shift)
+      pbapply::pblapply(raster::as.list(x), calculate_density, y = y, size = size, shift = shift)
       # )
   } else {
     # raster::stack(
-      lapply(raster::as.list(x), calculate_weight, y = y, size = size, shift = shift)
+      lapply(raster::as.list(x), calculate_density, y = y, size = size, shift = shift)
       # )
   }
   return(out)
 }
 
-calculate_weight = function(x, y, size, shift){
+calculate_density = function(x, y, size, shift){
   if (missing(shift)){
     shift = size
   }
   # x = cats; y = s; size = 2
-  x_areas = motifel_areas(x = raster::as.matrix(x), size = size, shift = shift)
+  x_areas = motifel_areas(x = raster::as.matrix(x[[1]]), size = size, shift = shift)
 
   y_prep = lapply(raster::as.list(y), raster::as.matrix)
 

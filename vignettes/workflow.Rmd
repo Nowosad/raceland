@@ -49,7 +49,7 @@ plot(real_raster)
 # Create weights
 
 ```{r}
-weig_raster = create_weights(real_raster, prop_raster, size = 4)
+weig_raster = create_densities(real_raster, prop_raster, size = 4)
 plot(weig_raster)
 # tm_shape(weig_raster) +
   # tm_raster(palette = "viridis", title = "Weights:") +
