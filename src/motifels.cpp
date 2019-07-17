@@ -4,6 +4,10 @@
 
 using namespace Rcpp;
 
+// calculates a numer of pixels of each category
+// in each motifel
+// motifels (rows)
+// categories (columns)
 IntegerMatrix motifel_areas(IntegerMatrix x, int size, int shift) {
 
   const int na = NA_INTEGER;
@@ -42,7 +46,6 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size, int shift) {
       // Rcout << "The value of motifel : \n" << motifel << "\n";
 
       for (int k = 0; k < motifel.length(); k++){
-        // Rcout << "The value of k : \n" << k << "\n";
         const int tmp = motifel[k];
         if (tmp == na)
           continue;
@@ -56,12 +59,17 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size, int shift) {
   return(result);
 }
 
+// calculates a sum of values of pixels
+// in each motifel
+// motifels (rows)
 NumericMatrix motifel_sums(NumericMatrix x, int size, int shift) {
 
-  const int na = NA_REAL;
+  // const double na = nan;
 
   int num_r = x.nrow();
   int num_c = x.ncol();
+
+  // Rcout << "The value of x : \n" << x << "\n";
 
   int nr_of_motifels = 0;
   for (int i = 0; i < num_r; i = i + shift) {
@@ -84,32 +92,34 @@ NumericMatrix motifel_sums(NumericMatrix x, int size, int shift) {
         j_max = num_c - 1;
       }
       NumericMatrix motifel = x(Range(i, i_max), Range(j, j_max));
-      Rcout << "The value of motifel : \n" << motifel << "\n";
+      // Rcout << "The value of motifel : \n" << motifel << "\n";
 
       for (int k = 0; k < motifel.length(); k++){
         const double tmp = motifel[k];
         // Rcout << "The value of tmp : \n" << tmp << "\n";
-        if (tmp == na)
+        // Rcout << "The value of na : \n" << na << "\n";
+
+        if (std::isnan(tmp))
           continue;
         result(nr_of_motifels2, 0) = result(nr_of_motifels2, 0) + tmp;
-        // Rcout << "The value of result(nr_of_motifels2, 1) : \n" << result(nr_of_motifels2, 1) << "\n";
-        // Rcout << "The value of nr_of_motifels2 : \n" << nr_of_motifels2 << "\n";
       }
       nr_of_motifels2 ++;
-
     }
   }
 
   return(result);
 }
 
+// adjust values in the second matrix based on a missing values in the first one
 NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
 
+  // get input data dimensions
   int num_r = x.nrow();
   int num_c = x.ncol();
 
+  // calculate how many values are left in each motifel
+  // to be moved to different classes
   NumericMatrix missing_vals(num_r, 1);
-
   for (int i = 0; i < num_r; i++){
     for (int j = 0; j < num_c; j++){
       if (x(i, j) == 0){
@@ -120,37 +130,40 @@ NumericMatrix motifel_adjustment(NumericMatrix x, NumericMatrix y){
   }
   //Rcpp::Rcout << "missing_vals: " << missing_vals << std::endl;
 
+  // distribute leftover values in each motifel
+  // to an existing classes
   NumericVector row_sums_y = rowSums(y);
   NumericVector tmp_y(num_c);
-
   int row_sums_y_len = row_sums_y.length();
 
   for (int i = 0; i < row_sums_y_len; i++) {
     tmp_y = y(i,_) / row_sums_y[i];
-    y(i,_) = ((missing_vals(i, 0) * tmp_y) + y(i,_));
+    y(i,_) = ((missing_vals(i, 0) * tmp_y) + y(i,_)) / x(i,_);
   }
 
   return y;
 }
 
+// redispose outputs of motifel_adjustment to a raster
 NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size, int shift){
 
   const int na = NA_INTEGER;
 
+  // get classes
   std::vector<int> classes = rcpp_get_unique_values(x);
   std::map<int, unsigned> class_index = get_class_index_map(classes);
   unsigned n_classes = class_index.size();
   // NAs need an index, otherwise they are counted as neighbors of class[0]
   class_index.insert(std::make_pair(na, n_classes));
 
-  // int num_c_y = y.ncol();
-  // int num_r_y = y.nrow();
-
+  // calculate output dimensions
+  // and create an output
   int num_r = x.nrow();
   int num_c = x.ncol();
-
   NumericMatrix result(num_r, num_c);
   std::fill(result.begin(), result.end(), NA_REAL);
+
+  // for each motifel
   int m = 0;
   for (int i = 0; i < num_r; i = i + shift){
     for (int j = 0; j < num_c; j = j + shift){
@@ -163,6 +176,8 @@ NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size, int sh
         j_max = num_c - 1;
       }
 
+      // fill the values
+      // for each cell in each motifel
       for (int ii = i; ii <= i_max; ii++){
         for (int jj = j; jj <= j_max; jj++){
           // Rcout << "The value of ii : \n" << ii << "\n";
@@ -175,11 +190,9 @@ NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size, int sh
           // Rcout << "The value of focal_class : \n" << focal_class << "\n";
           result(ii, jj) = y(m, focal_class);
           // Rcout << "The value of y : \n" << y << "\n";
-          // r(ii, jj) = y(m, l);
         }
       }
       m++;
-      // Rcout << "The value of m : \n" << m << "\n";
     }
   }
   return result;
@@ -216,14 +229,14 @@ s = cbind(
   motifel_sums(as.matrix(race_c), 2, 2)
   )
 
-s2 = cbind(
-  motifel_sums(as.matrix(race_raster[[1]]), 20, 20),
-  motifel_sums(as.matrix(race_raster[[2]]), 20, 20),
-  motifel_sums(as.matrix(race_raster[[3]]), 20, 20),
-  motifel_sums(as.matrix(race_raster[[4]]), 20, 20),
-  motifel_sums(as.matrix(race_raster[[5]]), 20, 20)
-)
+# s2 = cbind(
+#   motifel_sums(as.matrix(race_raster[[1]]), 20, 20),
+#   motifel_sums(as.matrix(race_raster[[2]]), 20, 20),
+#   motifel_sums(as.matrix(race_raster[[3]]), 20, 20),
+#   motifel_sums(as.matrix(race_raster[[4]]), 20, 20),
+#   motifel_sums(as.matrix(race_raster[[5]]), 20, 20)
+# )
 
-motifel_adjustment(a, s)
-u = motifel_adjustment(x_areas, y_sums)
+ma = motifel_adjustment(a, s)
+# motifel_adjustment(x_areas, y_sums)
 */

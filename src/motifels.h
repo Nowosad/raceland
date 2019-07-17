@@ -8,7 +8,7 @@
 Rcpp::IntegerMatrix motifel_areas(Rcpp::IntegerMatrix x, int size, int shift);
 
 // [[Rcpp::export]]
-Rcpp::IntegerMatrix motifel_sums(Rcpp::IntegerMatrix x, int size, int shift);
+Rcpp::NumericMatrix motifel_sums(Rcpp::NumericMatrix x, int size, int shift);
 
 // [[Rcpp::export]]
 Rcpp::NumericMatrix motifel_adjustment(Rcpp::NumericMatrix x, Rcpp::NumericMatrix y);
