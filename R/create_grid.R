@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' x = create_realizations(perc_raster, 1)
+#' x = create_realizations(race_raster, 1)
 #' y = create_grid(x, size = 10)
 #' y
 create_grid = function(x, size, shift = NULL){

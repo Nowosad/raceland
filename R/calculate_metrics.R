@@ -15,8 +15,8 @@
 #'
 #' @examples
 #' library(raster)
-#' x = create_realizations(perc_raster, n = 5)
-#' w = create_densities(x, perc_raster, size = 100)
+#' x = create_realizations(race_raster, n = 5)
+#' w = create_densities(x, race_raster, size = 100)
 #'
 #' #1
 #' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")

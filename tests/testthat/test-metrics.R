@@ -1,6 +1,6 @@
 library(raster)
-x = create_realizations(prop_raster, n = 5)
-w = create_densities(x, prop_raster, size = 100)
+x = create_realizations(race_raster, n = 5)
+w = create_densities(x, race_raster, size = 100)
 df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
 

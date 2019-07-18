@@ -1,4 +1,4 @@
 #' A RasterStack
 #'
 #' @format A RasterLayer
-"prop_raster"
+"race_raster"

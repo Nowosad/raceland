@@ -3,12 +3,12 @@ library(raster)
 library(dplyr)
 library(sf)
 
-load("data/prop_raster.rda")
+load("data/race_raster.rda")
 
 set.seed(22)
-real_raster = create_realizations(prop_raster, n = 5)
+real_raster = create_realizations(race_raster, n = 5)
 
-weig_raster = create_densities(real_raster, prop_raster, size = 4)
+weig_raster = create_densities(real_raster, race_raster, size = 4)
 
 metr_df = calculate_metrics(real_raster, weig_raster,
                             neighbourhood = 4, fun = "mean", size = 4)

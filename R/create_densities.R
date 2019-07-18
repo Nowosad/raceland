@@ -11,9 +11,9 @@
 #' @examples
 #' \dontrun{
 #' library(raster)
-#' real_rasters = create_realizations(perc_raster, n = 5)
+#' real_rasters = create_realizations(race_raster, n = 5)
 #' plot(real_rasters)
-#' output2 = create_densities(real_rasters, perc_raster, size = 10)
+#' output2 = create_densities(real_rasters, race_raster, size = 10)
 #' output2
 #' }
 #'

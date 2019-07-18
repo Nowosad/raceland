@@ -27,8 +27,8 @@ library(sf)
 <!-- describe the data -->
 
 ```{r}
-prop_raster
-plot(prop_raster)
+race_raster
+plot(race_raster)
 # tm_shape(prop_raster) + 
 #   tm_raster(palette = "viridis", title = "Share of population:") +
 #   tm_facets(free.scales = FALSE) +
@@ -38,7 +38,7 @@ plot(prop_raster)
 # Create realizations
 
 ```{r}
-real_raster = create_realizations(prop_raster, n = 5)
+real_raster = create_realizations(race_raster, n = 5)
 plot(real_raster)
 # tm_shape(real_raster) + 
 #   tm_raster(style = "cat", palette = "Set2", title = "Category:", 
@@ -49,7 +49,7 @@ plot(real_raster)
 # Create weights
 
 ```{r}
-weig_raster = create_densities(real_raster, prop_raster, size = 4)
+weig_raster = create_densities(real_raster, race_raster, size = 4)
 plot(weig_raster)
 # tm_shape(weig_raster) +
   # tm_raster(palette = "viridis", title = "Weights:") +

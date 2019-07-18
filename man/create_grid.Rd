@@ -20,7 +20,7 @@ An sf polygon object
 Create a grid of motifels
 }
 \examples{
-x = create_realizations(perc_raster, 1)
+x = create_realizations(race_raster, 1)
 y = create_grid(x, size = 10)
 y
 }

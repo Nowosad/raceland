@@ -24,8 +24,8 @@ Calculate Densities
 \examples{
 \dontrun{
 library(raster)
-real_rasters = create_realizations(perc_raster, n = 5)
+real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
-d = calculate_densities(real_rasters, perc_raster, size = 10)
+d = calculate_densities(real_rasters, race_raster, size = 10)
 }
 }

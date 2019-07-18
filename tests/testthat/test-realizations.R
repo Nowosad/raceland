@@ -1,7 +1,7 @@
-real_raster = create_realizations(prop_raster, n = 2)
+real_raster = create_realizations(race_raster, n = 2)
 
 test_that("create_realizations is stable", {
   expect_s4_class(real_raster, "RasterStack")
-  expect_equal(res(real_raster), res(prop_raster))
+  expect_equal(res(real_raster), res(race_raster))
   expect_equal(nlayers(real_raster), 2)
 })
