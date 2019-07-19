@@ -33,20 +33,20 @@ rcpp_mutinf <- function(x, base = "log2", ordered = TRUE) {
     .Call(`_raceland_rcpp_mutinf`, x, base, ordered)
 }
 
-motifel_areas <- function(x, size, shift) {
-    .Call(`_raceland_motifel_areas`, x, size, shift)
+motifel_areas <- function(x, size) {
+    .Call(`_raceland_motifel_areas`, x, size)
 }
 
-motifel_sums <- function(x, size, shift) {
-    .Call(`_raceland_motifel_sums`, x, size, shift)
+motifel_sums <- function(x, size) {
+    .Call(`_raceland_motifel_sums`, x, size)
 }
 
 motifel_adjustment <- function(x, y) {
     .Call(`_raceland_motifel_adjustment`, x, y)
 }
 
-motifel_to_grid <- function(x, y, size, shift) {
-    .Call(`_raceland_motifel_to_grid`, x, y, size, shift)
+motifel_to_grid <- function(x, y, size) {
+    .Call(`_raceland_motifel_to_grid`, x, y, size)
 }
 
 rcpp_get_unique_values <- function(x, na_omit = TRUE) {

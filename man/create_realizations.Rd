@@ -18,9 +18,8 @@ a RasterStack
 Create Realizations
 }
 \examples{
-\dontrun{
 library(raster)
-system.time({real = create_realizations(race_raster, 10)})
+real = create_realizations(race_raster, 10)
 plot(real)
-}
+
 }

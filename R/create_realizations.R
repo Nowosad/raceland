@@ -7,12 +7,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(raster)
-#' system.time({real = create_realizations(race_raster, 10)})
+#' real = create_realizations(race_raster, 10)
 #' plot(real)
-#' }
-
+#'
 create_realizations = function(x, n){
   if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
     stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)

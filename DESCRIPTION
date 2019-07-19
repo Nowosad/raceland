@@ -1,6 +1,6 @@
 Package: raceland
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     c(person(given = "Jakub", family = "Nowosad", role = c("aut", "cre"), email =
            "nowosad.jakub@gmail.com", comment = c(ORCID = "0000-0002-1057-3721")), person("Anna",

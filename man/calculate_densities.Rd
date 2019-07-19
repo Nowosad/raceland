@@ -4,7 +4,7 @@
 \alias{calculate_densities}
 \title{Calculate Densities}
 \usage{
-calculate_densities(x, y, size, shift = NULL)
+calculate_densities(x, y, size)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
@@ -12,8 +12,6 @@ calculate_densities(x, y, size, shift = NULL)
 \item{y}{RasterStack with shares}
 
 \item{size}{size of a motifel}
-
-\item{shift}{shift of a motifel}
 }
 \value{
 a list of data.frames
@@ -29,3 +27,4 @@ plot(real_rasters)
 d = calculate_densities(real_rasters, race_raster, size = 10)
 }
 }
+\keyword{internal}

@@ -4,7 +4,7 @@
 \alias{create_densities}
 \title{Create Densities}
 \usage{
-create_densities(x, y, size, shift = NULL)
+create_densities(x, y, size)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
@@ -12,8 +12,6 @@ create_densities(x, y, size, shift = NULL)
 \item{y}{RasterStack with shares}
 
 \item{size}{size of a motifel}
-
-\item{shift}{shift of a motifel}
 }
 \value{
 a RasterStack
