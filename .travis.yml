@@ -13,6 +13,9 @@ addons:
       - libgeos-dev
       - libgdal-dev
 
+r_github_packages:
+  - nowosad/comat
+
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
