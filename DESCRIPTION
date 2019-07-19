@@ -15,7 +15,7 @@ Depends:
     R (>= 3.5)
 LinkingTo: 
     Rcpp,
-    comat,
+    comat (>= 0.1.1),
     RcppArmadillo
 Imports:
     methods,
