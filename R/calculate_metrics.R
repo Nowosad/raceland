@@ -16,7 +16,7 @@
 #' @examples
 #' library(raster)
 #' x = create_realizations(race_raster, n = 5)
-#' w = create_densities(x, race_raster, size = 100)
+#' w = create_densities(x, race_raster, window_size = 100)
 #'
 #' #1
 #' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")

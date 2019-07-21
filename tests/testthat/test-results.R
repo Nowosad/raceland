@@ -8,7 +8,7 @@ load(system.file("results", "grid_sf.rda", package = "raceland"))
 set.seed(22)
 real_raster2 = create_realizations(race_raster, n = 5)
 
-weig_raster2 = create_densities(real_raster, race_raster, size = 4)
+weig_raster2 = create_densities(real_raster, race_raster, window_size = 4)
 
 metr_df2 = calculate_metrics(real_raster, weig_raster,
                             neighbourhood = 4, fun = "mean", size = 4)

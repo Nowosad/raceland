@@ -4,14 +4,14 @@
 \alias{create_densities}
 \title{Create Densities}
 \usage{
-create_densities(x, y, size)
+create_densities(x, y, window_size)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
 
 \item{y}{RasterStack with shares}
 
-\item{size}{size of a motifel}
+\item{window_size}{size of a local window}
 }
 \value{
 a RasterStack
@@ -24,7 +24,7 @@ Create Densities
 library(raster)
 real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
-output2 = create_densities(real_rasters, race_raster, size = 10)
+output2 = create_densities(real_rasters, race_raster, window_size = 10)
 output2
 }
 

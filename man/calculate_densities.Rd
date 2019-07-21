@@ -4,14 +4,14 @@
 \alias{calculate_densities}
 \title{Calculate Densities}
 \usage{
-calculate_densities(x, y, size)
+calculate_densities(x, y, window_size)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
 
 \item{y}{RasterStack with shares}
 
-\item{size}{size of a motifel}
+\item{window_size}{size of a local window}
 }
 \value{
 a list of data.frames
@@ -24,7 +24,7 @@ Calculate Densities
 library(raster)
 real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
-d = calculate_densities(real_rasters, race_raster, size = 10)
+d = calculate_densities(real_rasters, race_raster, window_size = 10)
 }
 }
 \keyword{internal}
