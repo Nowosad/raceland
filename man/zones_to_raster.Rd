@@ -12,7 +12,7 @@ zones_to_raster(v, resolution, variables, ...)
 \item{resolution}{A numeric vector of length 1 or 2 to set the resolution}
 
 \item{variables}{A character vector with columns names from \code{v}.
-The values from these columns will be rasterized.
+The values from these columns will be (1) recalculated to densities and then (2) rasterized.
 Each column will be represented as an layer in the output RasterStack.}
 
 \item{...}{Additional arguments as for \code{\link[fasterize:fasterize]{fasterize::fasterize()}}}
@@ -27,6 +27,7 @@ Convert zones to rasters
 library(sf)
 library(raster)
 plot(pop_vector)
-popdens_raster = zones_to_raster(pop_vector, resolution = 100, variables = c("NHW", "NHB", "NHAS", "NHOTHER", "HISP"))
+popdens_raster = zones_to_raster(pop_vector, resolution = 100,
+                                 variables = c("NHW", "NHB", "NHAS", "NHOTHER", "HISP"))
 plot(popdens_raster)
 }
