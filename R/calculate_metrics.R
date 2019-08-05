@@ -47,8 +47,11 @@ calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, shift = NULL
   #   pbapply::pbmapply(calculate_metric, raster::as.list(x), raster::as.list(w), neighbourhood = neighbourhood,
   #                     fun = fun, size = size, na_action = na_action, base = base, ordered = ordered, SIMPLIFY = FALSE)
   # } else {
-  out = mapply(calculate_metric, raster::as.list(x), raster::as.list(w), neighbourhood = neighbourhood,
-           fun = fun, size = size, shift = shift, na_action = na_action, base = base, ordered = ordered, SIMPLIFY = FALSE)
+  out = mapply(calculate_metric, raster::as.list(x), raster::as.list(w),
+               neighbourhood = neighbourhood, fun = fun,
+               size = size, shift = shift,
+               na_action = na_action, base = base,
+               ordered = ordered, SIMPLIFY = FALSE)
   # }
 
   out = mapply(function(x, y) "[<-"(x, "realization", value = y), out, seq_along(out), SIMPLIFY = FALSE)
@@ -68,7 +71,8 @@ calculate_metric = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
   }
   df_metrics = get_metrics(x = raster::as.matrix(x), w = raster::as.matrix(w),
               directions = as.matrix(neighbourhood), fun = fun,
-              na_action = na_action, base = base, ordered = ordered, size = size, shift = shift)
+              na_action = na_action, base = base,
+              ordered = ordered, size = size, shift = shift)
   as.data.frame(df_metrics)
 }
 
