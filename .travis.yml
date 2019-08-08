@@ -16,6 +16,9 @@ addons:
 r_github_packages:
   - nowosad/comat
 
+before_install:
+  - Rscript -e 'remotes::install_github("nowosad/comat")'
+
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
