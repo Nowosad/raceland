@@ -20,8 +20,9 @@ LinkingTo:
 Imports:
     fasterize,
     methods,
-    sf,
+    plotwidgets,
     raster,
+    sf,
     Rcpp
 Suggests:
     pbapply,

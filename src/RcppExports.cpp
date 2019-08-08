@@ -6,6 +6,18 @@
 
 using namespace Rcpp;
 
+// colander
+Rcpp::NumericVector colander(Rcpp::NumericMatrix x, Rcpp::IntegerVector y);
+RcppExport SEXP _raceland_colander(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(colander(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // create_motifels
 IntegerMatrix create_motifels(IntegerMatrix x, int size, int shift);
 RcppExport SEXP _raceland_create_motifels(SEXP xSEXP, SEXP sizeSEXP, SEXP shiftSEXP) {
@@ -177,6 +189,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_raceland_colander", (DL_FUNC) &_raceland_colander, 2},
     {"_raceland_create_motifels", (DL_FUNC) &_raceland_create_motifels, 3},
     {"_raceland_create_motifels_ids", (DL_FUNC) &_raceland_create_motifels_ids, 3},
     {"_raceland_draw_values", (DL_FUNC) &_raceland_draw_values, 2},
