@@ -4,7 +4,7 @@
 #' @param resolution A numeric vector of length 1 or 2 to set the resolution
 #' @param variables A character vector with columns names from `v`.
 #' The values from these columns will be (1) rasterized and (2) recalculated to densities.
-#' Each column will be represented as an layer in the output RasterStack.
+#' Each column will be represented as an layer in the output RasterStack
 #' @param ... Additional arguments as for [fasterize::fasterize()]
 #'
 #' @return a RasterStack

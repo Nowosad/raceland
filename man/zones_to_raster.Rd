@@ -13,7 +13,7 @@ zones_to_raster(v, resolution, variables, ...)
 
 \item{variables}{A character vector with columns names from \code{v}.
 The values from these columns will be (1) rasterized and (2) recalculated to densities.
-Each column will be represented as an layer in the output RasterStack.}
+Each column will be represented as an layer in the output RasterStack}
 
 \item{...}{Additional arguments as for \code{\link[fasterize:fasterize]{fasterize::fasterize()}}}
 }
