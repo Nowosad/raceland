@@ -36,10 +36,12 @@ plot_realization = function(x, y, hex, ...){
 
   # converts hex to HSL
   df = cbind(data.frame(cat = seq_along(hex), t(plotwidgets::col2hsl(hex))))
+  # df = data.table::data.table(cbind(data.frame(cat = seq_along(hex), t(plotwidgets::col2hsl(hex)))))
 
   # extract density values for a given race
   cats = as.numeric(x[])
   y_mat = data.frame(id = seq_along(cats), cat = cats)
+  # y_mat = data.table::data.table(data.frame(id = seq_along(cats), cat = cats))
   y_mat$vals = colander(y[], y_mat$cat)
 
   # add HSL
@@ -105,6 +107,8 @@ plot_realization = function(x, y, hex, ...){
 
   # reconnects data to colors
   df_cols = data.frame(id = seq_along(cats))
+  # df_cols = data.table::data.table(data.frame(id = seq_along(cats)))
+
   y_mat = merge(df_cols, y_mat, by = "id", all.x = TRUE)
   # y_mat = merge(data.table::data.table(df_cols), data.table::data.table(y_mat), by = "id", all.x = TRUE)
   # y_mat = dplyr::left_join(df_cols, y_mat, by = "id")
