@@ -44,6 +44,8 @@ plot_realization = function(x, y, hex, ...){
 
   # add HSL
   y_mat = merge(y_mat, df, by = "cat", all.x = TRUE)
+  # y_mat = merge(data.table::data.table(y_mat), data.table::data.table(df), by = "cat", all.x = TRUE)
+  # y_mat = dplyr::left_join(y_mat, df, by = "cat")
 
   # replace values below 5 percentile and above 95 percentile
   q5 = stats::quantile(y_mat$vals, probs = 0.05, na.rm = TRUE)
@@ -104,6 +106,8 @@ plot_realization = function(x, y, hex, ...){
   # reconnects data to colors
   df_cols = data.frame(id = seq_along(cats))
   y_mat = merge(df_cols, y_mat, by = "id", all.x = TRUE)
+  # y_mat = merge(data.table::data.table(df_cols), data.table::data.table(y_mat), by = "id", all.x = TRUE)
+  # y_mat = dplyr::left_join(df_cols, y_mat, by = "id")
 
   # creates a raster stack
   rgb_rast = raster::stack(raster::setValues(x, y_mat$R),
