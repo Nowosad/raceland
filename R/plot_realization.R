@@ -28,7 +28,7 @@ plot_realization = function(x, y, hex, ...){
   if (length(hex) != raster::nlayers(y)){
     stop("Number of colors in hex should correspond to a number of layers in y", call. = FALSE)
   }
-  if (!identical(dim(x)[c(1, 2)], dim(y)[c(1, 2)])){
+  if (!all.equal(dim(x)[c(1, 2)], dim(y)[c(1, 2)])){
     stop("x and y must have the same number of rows and columns", call. = FALSE)
   }
 
@@ -59,6 +59,7 @@ plot_realization = function(x, y, hex, ...){
   # calculate log
   # log or log1p?
   y_mat$vals = log(y_mat$vals)
+  y_mat$vals[is.infinite(y_mat$vals )] = NA
 
   # calculate density stats
   density_median = stats::median(y_mat$vals, na.rm = TRUE)
