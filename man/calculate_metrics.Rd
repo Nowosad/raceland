@@ -27,7 +27,7 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
 
 \item{ordered}{the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE}
 
-\item{threshold}{the share of cells with NA in a motifel to allow metrics calculation}
+\item{threshold}{the share of NA cells to allow metrics calculation in a motifel}
 }
 \value{
 a data.frame
@@ -44,7 +44,7 @@ w = create_densities(x, race_raster, window_size = 100)
 df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 
 #2
-df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10)
+df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10, threshold = 0.9)
 my_grid = create_grid(x, size = 100)
 \dontrun{
  df3 = dplyr::filter(df2, realization == 2)

@@ -9,7 +9,7 @@
 #' @param na_action "replace", "omit", "keep"
 #' @param base the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used
 #' @param ordered the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE
-#' @param threshold the share of cells with NA in a motifel to allow metrics calculation
+#' @param threshold the share of NA cells to allow metrics calculation in a motifel
 #'
 #' @return a data.frame
 #' @export
@@ -23,7 +23,7 @@
 #' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 #'
 #' #2
-#' df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10)
+#' df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10, threshold = 0.9)
 #' my_grid = create_grid(x, size = 100)
 #' \dontrun{
 #'  df3 = dplyr::filter(df2, realization == 2)
