@@ -23,7 +23,7 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
 
     double na_perc = na_prop(x);
 
-    if (na_perc < na_threshold){
+    if (na_perc <= na_threshold){
 
       NumericMatrix wecoma = comat::rcpp_get_wecoma(x, w, directions, fun, na_action);
 
@@ -85,7 +85,7 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
 
         double na_perc = na_prop(motifel_x);
 
-        if (na_perc < na_threshold){
+        if (na_perc <= na_threshold){
           NumericMatrix wecoma = comat::rcpp_get_wecoma(motifel_x, motifel_w, directions, fun, na_action);
 
           ent = rcpp_ent(wecoma, base);
