@@ -38,7 +38,7 @@ create_grid = function(x, size, shift = NULL){
 
   for (i in 1:nx){
     for (j in 1:ny){
-      ret[[(j - 1) * nx + i]] = square(xc[i], yc[j], xc[i] + cellsize[1], yc[j] - cellsize[2])
+      ret[[(j - 1) * nx + i]] = square(xc[i], yc[j], xc[i] + cellshift[1], yc[j] - cellshift[2])
     }
   }
 

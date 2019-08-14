@@ -23,7 +23,7 @@
 #' df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 #'
 #' #2
-#' df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10, threshold = 0.9)
+#' df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10, threshold = 0.5)
 #' my_grid = create_grid(x, size = 100)
 #' \dontrun{
 #'  df3 = dplyr::filter(df2, realization == 2)
