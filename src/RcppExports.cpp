@@ -57,8 +57,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_metrics
-Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size, int shift);
-RcppExport SEXP _raceland_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP, SEXP sizeSEXP, SEXP shiftSEXP) {
+Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size, int shift, double na_threshold);
+RcppExport SEXP _raceland_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP, SEXP sizeSEXP, SEXP shiftSEXP, SEXP na_thresholdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -71,7 +71,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< int >::type shift(shiftSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered, size, shift));
+    Rcpp::traits::input_parameter< double >::type na_threshold(na_thresholdSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_metrics(x, w, directions, fun, na_action, base, ordered, size, shift, na_threshold));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -175,6 +176,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// na_prop
+double na_prop(Rcpp::IntegerMatrix x);
+RcppExport SEXP _raceland_na_prop(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(na_prop(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcpp_get_unique_values
 std::vector<int> rcpp_get_unique_values(const Rcpp::IntegerVector& x, bool na_omit);
 RcppExport SEXP _raceland_rcpp_get_unique_values(SEXP xSEXP, SEXP na_omitSEXP) {
@@ -187,13 +199,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// count_positive_serial
+int count_positive_serial(NumericVector data);
+RcppExport SEXP _raceland_count_positive_serial(SEXP dataSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_positive_serial(data));
+    return rcpp_result_gen;
+END_RCPP
+}
+// count_positive_threaded
+int count_positive_threaded(NumericVector data, int nthreads);
+RcppExport SEXP _raceland_count_positive_threaded(SEXP dataSEXP, SEXP nthreadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< int >::type nthreads(nthreadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_positive_threaded(data, nthreads));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_raceland_colander", (DL_FUNC) &_raceland_colander, 2},
     {"_raceland_create_motifels", (DL_FUNC) &_raceland_create_motifels, 3},
     {"_raceland_create_motifels_ids", (DL_FUNC) &_raceland_create_motifels_ids, 3},
     {"_raceland_draw_values", (DL_FUNC) &_raceland_draw_values, 2},
-    {"_raceland_get_metrics", (DL_FUNC) &_raceland_get_metrics, 9},
+    {"_raceland_get_metrics", (DL_FUNC) &_raceland_get_metrics, 10},
     {"_raceland_rcpp_ent", (DL_FUNC) &_raceland_rcpp_ent, 2},
     {"_raceland_rcpp_joinent", (DL_FUNC) &_raceland_rcpp_joinent, 3},
     {"_raceland_rcpp_condent", (DL_FUNC) &_raceland_rcpp_condent, 3},
@@ -202,7 +237,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raceland_motifel_sums", (DL_FUNC) &_raceland_motifel_sums, 2},
     {"_raceland_motifel_adjustment", (DL_FUNC) &_raceland_motifel_adjustment, 2},
     {"_raceland_motifel_to_grid", (DL_FUNC) &_raceland_motifel_to_grid, 3},
+    {"_raceland_na_prop", (DL_FUNC) &_raceland_na_prop, 1},
     {"_raceland_rcpp_get_unique_values", (DL_FUNC) &_raceland_rcpp_get_unique_values, 2},
+    {"_raceland_count_positive_serial", (DL_FUNC) &_raceland_count_positive_serial, 1},
+    {"_raceland_count_positive_threaded", (DL_FUNC) &_raceland_count_positive_threaded, 2},
     {NULL, NULL, 0}
 };
 

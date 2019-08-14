@@ -17,6 +17,7 @@ Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
                           std::string base = "log2",
                           bool ordered = true,
                           int size = 0,
-                          int shift = 0);
+                          int shift = 0,
+                          double na_threshold = 0.5);
 
 #endif // GET_METRICS_H

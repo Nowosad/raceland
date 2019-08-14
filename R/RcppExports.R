@@ -17,8 +17,8 @@ draw_values <- function(x, y) {
     .Call(`_raceland_draw_values`, x, y)
 }
 
-get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0L, shift = 0L) {
-    .Call(`_raceland_get_metrics`, x, w, directions, fun, na_action, base, ordered, size, shift)
+get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0L, shift = 0L, na_threshold = 0.5) {
+    .Call(`_raceland_get_metrics`, x, w, directions, fun, na_action, base, ordered, size, shift, na_threshold)
 }
 
 rcpp_ent <- function(x, base = "log2") {
@@ -53,7 +53,19 @@ motifel_to_grid <- function(x, y, size) {
     .Call(`_raceland_motifel_to_grid`, x, y, size)
 }
 
+na_prop <- function(x) {
+    .Call(`_raceland_na_prop`, x)
+}
+
 rcpp_get_unique_values <- function(x, na_omit = TRUE) {
     .Call(`_raceland_rcpp_get_unique_values`, x, na_omit)
+}
+
+count_positive_serial <- function(data) {
+    .Call(`_raceland_count_positive_serial`, data)
+}
+
+count_positive_threaded <- function(data, nthreads) {
+    .Call(`_raceland_count_positive_threaded`, data, nthreads)
 }
 

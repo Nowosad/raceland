@@ -1,4 +1,5 @@
 #include "get_metrics.h"
+#include "na_prop.h"
 using namespace Rcpp;
 
 NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
@@ -9,18 +10,29 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
                           std::string base,
                           bool ordered,
                           int size,
-                          int shift){
+                          int shift,
+                          double na_threshold){
 
   if (size == 0){
     NumericMatrix result(1, 6);
 
-    NumericMatrix wecoma = comat::rcpp_get_wecoma(x, w, directions, fun, na_action);
+    double ent = NA_REAL;
+    double joinent = NA_REAL;
+    double condent = NA_REAL;
+    double mutinf = NA_REAL;
 
-    double ent = rcpp_ent(wecoma, base);
-    double joinent = rcpp_joinent(wecoma, base, ordered);
-    double condent = rcpp_condent(wecoma, base, ordered);
-    double mutinf = rcpp_mutinf(wecoma, base, ordered);
+    double na_perc = na_prop(x);
 
+    if (na_perc < na_threshold){
+
+      NumericMatrix wecoma = comat::rcpp_get_wecoma(x, w, directions, fun, na_action);
+
+      ent = rcpp_ent(wecoma, base);
+      joinent = rcpp_joinent(wecoma, base, ordered);
+      condent = rcpp_condent(wecoma, base, ordered);
+      mutinf = rcpp_mutinf(wecoma, base, ordered);
+
+    }
     result(0, 0) = 1;
     result(0, 1) = 1;
     result(0, 2) = ent;
@@ -66,12 +78,21 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
         IntegerMatrix motifel_x = x(Range(i, i_max), Range(j, j_max));
         NumericMatrix motifel_w = w(Range(i, i_max), Range(j, j_max));
 
-        NumericMatrix wecoma = comat::rcpp_get_wecoma(motifel_x, motifel_w, directions, fun, na_action);
+        double ent = NA_REAL;
+        double joinent = NA_REAL;
+        double condent = NA_REAL;
+        double mutinf = NA_REAL;
 
-        double ent = rcpp_ent(wecoma, base);
-        double joinent = rcpp_joinent(wecoma, base, ordered);
-        double condent = rcpp_condent(wecoma, base, ordered);
-        double mutinf = rcpp_mutinf(wecoma, base, ordered);
+        double na_perc = na_prop(motifel_x);
+
+        if (na_perc < na_threshold){
+          NumericMatrix wecoma = comat::rcpp_get_wecoma(motifel_x, motifel_w, directions, fun, na_action);
+
+          ent = rcpp_ent(wecoma, base);
+          joinent = rcpp_joinent(wecoma, base, ordered);
+          condent = rcpp_condent(wecoma, base, ordered);
+          mutinf = rcpp_mutinf(wecoma, base, ordered);
+        }
 
         result(nr_of_motifels2, 2) = ent;
         result(nr_of_motifels2, 3) = joinent;
@@ -92,13 +113,27 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
 
 
 /*** R
-library(sd)
+library(raceland)
 library(raster)
-x = create_realization(perc_raster)
-w = create_weights(x, perc_raster, size = 10)
+x = create_realizations(perc_raster, n = 1)
+w = create_densities(x, perc_raster, window_size = 10)
 
 plot(w)
 plot(x)
+
+get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean")
+get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_threshold = 0.9)
+get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_threshold = 0.9, size = 100, shift = 100)
+
+# bench::mark(
+#   get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean"),
+#   get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_threshold = 0.9),
+#   get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_threshold = 0.9, size = 100, shift = 100),
+#   iterations = 10,
+#   check = FALSE
+# )
+#
+# na_prop(as.matrix(x))
 
 # sd::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = TRUE, size = 0)
 # sd::get_metrics(as.matrix(x), as.matrix(w), directions = as.matrix(4), fun = "mean", na_action = "replace", base = "log2", ordered = FALSE, size = 0)
