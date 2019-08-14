@@ -199,29 +199,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// count_positive_serial
-int count_positive_serial(NumericVector data);
-RcppExport SEXP _raceland_count_positive_serial(SEXP dataSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
-    rcpp_result_gen = Rcpp::wrap(count_positive_serial(data));
-    return rcpp_result_gen;
-END_RCPP
-}
-// count_positive_threaded
-int count_positive_threaded(NumericVector data, int nthreads);
-RcppExport SEXP _raceland_count_positive_threaded(SEXP dataSEXP, SEXP nthreadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< int >::type nthreads(nthreadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(count_positive_threaded(data, nthreads));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_raceland_colander", (DL_FUNC) &_raceland_colander, 2},
@@ -239,8 +216,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raceland_motifel_to_grid", (DL_FUNC) &_raceland_motifel_to_grid, 3},
     {"_raceland_na_prop", (DL_FUNC) &_raceland_na_prop, 1},
     {"_raceland_rcpp_get_unique_values", (DL_FUNC) &_raceland_rcpp_get_unique_values, 2},
-    {"_raceland_count_positive_serial", (DL_FUNC) &_raceland_count_positive_serial, 1},
-    {"_raceland_count_positive_threaded", (DL_FUNC) &_raceland_count_positive_threaded, 2},
     {NULL, NULL, 0}
 };
 

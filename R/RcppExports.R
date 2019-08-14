@@ -61,11 +61,3 @@ rcpp_get_unique_values <- function(x, na_omit = TRUE) {
     .Call(`_raceland_rcpp_get_unique_values`, x, na_omit)
 }
 
-count_positive_serial <- function(data) {
-    .Call(`_raceland_count_positive_serial`, data)
-}
-
-count_positive_threaded <- function(data, nthreads) {
-    .Call(`_raceland_count_positive_threaded`, data, nthreads)
-}
-
