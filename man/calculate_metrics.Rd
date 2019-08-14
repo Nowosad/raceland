@@ -5,7 +5,8 @@
 \title{Calculate Metrics}
 \usage{
 calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
-  na_action = "replace", base = "log2", ordered = TRUE)
+  na_action = "replace", base = "log2", ordered = TRUE,
+  threshold = 0.5)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
@@ -25,6 +26,8 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
 \item{base}{the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used}
 
 \item{ordered}{the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE}
+
+\item{threshold}{the share of cells with NA in a motifel to allow metrics calculation}
 }
 \value{
 a data.frame
@@ -41,7 +44,7 @@ w = create_densities(x, race_raster, window_size = 100)
 df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 
 #2
-df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 100)
+df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10)
 my_grid = create_grid(x, size = 100)
 \dontrun{
  df3 = dplyr::filter(df2, realization == 2)
