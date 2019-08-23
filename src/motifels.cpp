@@ -1,5 +1,4 @@
 #include "motifels.h"
-#include "get_class_index_map.h"
 
 using namespace Rcpp;
 

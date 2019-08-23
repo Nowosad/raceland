@@ -1,5 +1,4 @@
 #include "get_metrics.h"
-#include "na_prop.h"
 using namespace Rcpp;
 
 NumericMatrix get_metrics(Rcpp::IntegerMatrix x,

@@ -1,8 +1,7 @@
 #ifndef IT_METRICS_H
 #define IT_METRICS_H
-// [[Rcpp::depends(comat)]]
 #include <comat.h>
-#include "Rcpp.h"
+// [[Rcpp::depends(comat)]]
 using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp11)]]

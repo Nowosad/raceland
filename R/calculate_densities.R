@@ -22,13 +22,9 @@ calculate_densities = function(x, y, window_size){
     stop("y needs to be either RasterStack or RasterBrick", call. = FALSE)
   }
   out = if (requireNamespace("pbapply", quietly = TRUE)){
-    # raster::stack(
       pbapply::pblapply(raster::as.list(x), calculate_density, y = y, window_size = window_size)
-      # )
   } else {
-    # raster::stack(
       lapply(raster::as.list(x), calculate_density, y = y, window_size = window_size)
-      # )
   }
   return(out)
 }

@@ -1,7 +1,8 @@
 #ifndef motifels_H
 #define motifels_H
-// [[Rcpp::depends(comat)]]
+#include "get_class_index_map.h"
 #include <comat.h>
+// [[Rcpp::depends(comat)]]
 
 // [[Rcpp::plugins(cpp11)]]
 
