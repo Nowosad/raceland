@@ -20,12 +20,11 @@ a RasterStack
 Create Densities
 }
 \examples{
-\dontrun{
 library(raster)
 real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
-output2 = create_densities(real_rasters, race_raster, window_size = 10)
-output2
-}
+dens_raster = create_densities(real_rasters, race_raster, window_size = 10)
+dens_raster
+plot(dens_raster)
 
 }

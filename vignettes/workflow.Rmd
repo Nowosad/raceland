@@ -46,7 +46,7 @@ plot(real_raster)
 #   tm_facets(free.scales = FALSE)
 ```
 
-# Create weights
+# Create densities
 
 ```{r}
 weig_raster = create_densities(real_raster, race_raster, window_size = 4)
@@ -73,5 +73,12 @@ plot(subset(grid_sf, realization == 1))
 # tm_shape(grid_sf) +
 #   tm_polygons("ent", style = "cont") +
 #   tm_facets(by = "realization")
+```
+
+# Plot realization
+
+```{r}
+hex_colors = c("#F16667", "#6EBE44", "#7E69AF", "#C77213","#F8DF1D")
+plot_realization(real_raster[[3]], race_raster, hex = hex_colors)
 ```
 
