@@ -187,18 +187,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpp_get_unique_values
-std::vector<int> rcpp_get_unique_values(const Rcpp::IntegerVector& x, bool na_omit);
-RcppExport SEXP _raceland_rcpp_get_unique_values(SEXP xSEXP, SEXP na_omitSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::IntegerVector& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< bool >::type na_omit(na_omitSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_get_unique_values(x, na_omit));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_raceland_colander", (DL_FUNC) &_raceland_colander, 2},
@@ -215,7 +203,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raceland_motifel_adjustment", (DL_FUNC) &_raceland_motifel_adjustment, 2},
     {"_raceland_motifel_to_grid", (DL_FUNC) &_raceland_motifel_to_grid, 3},
     {"_raceland_na_prop", (DL_FUNC) &_raceland_na_prop, 1},
-    {"_raceland_rcpp_get_unique_values", (DL_FUNC) &_raceland_rcpp_get_unique_values, 2},
     {NULL, NULL, 0}
 };
 

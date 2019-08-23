@@ -1,6 +1,7 @@
 #ifndef motifels_H
 #define motifels_H
-#include "Rcpp.h"
+// [[Rcpp::depends(comat)]]
+#include <comat.h>
 
 // [[Rcpp::plugins(cpp11)]]
 

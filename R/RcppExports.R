@@ -57,7 +57,3 @@ na_prop <- function(x) {
     .Call(`_raceland_na_prop`, x)
 }
 
-rcpp_get_unique_values <- function(x, na_omit = TRUE) {
-    .Call(`_raceland_rcpp_get_unique_values`, x, na_omit)
-}
-

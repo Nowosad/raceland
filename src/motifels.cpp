@@ -1,5 +1,4 @@
 #include "motifels.h"
-#include "rcpp_get_unique_values.h"
 #include "get_class_index_map.h"
 
 using namespace Rcpp;
@@ -12,7 +11,7 @@ IntegerMatrix motifel_areas(IntegerMatrix x, int size) {
 
   const int na = NA_INTEGER;
 
-  std::vector<int> classes = rcpp_get_unique_values(x);
+  std::vector<int> classes = comat::get_unique_values(x, true);
   std::map<int, unsigned> class_index = get_class_index_map(classes);
   unsigned n_classes = class_index.size();
   // NAs need an index, otherwise they are counted as neighbors of class[0]
@@ -150,7 +149,7 @@ NumericMatrix motifel_to_grid(IntegerMatrix x, NumericMatrix y, int size){
   const int na = NA_INTEGER;
 
   // get classes
-  std::vector<int> classes = rcpp_get_unique_values(x);
+  std::vector<int> classes = comat::get_unique_values(x, true);
   std::map<int, unsigned> class_index = get_class_index_map(classes);
   unsigned n_classes = class_index.size();
   // NAs need an index, otherwise they are counted as neighbors of class[0]
