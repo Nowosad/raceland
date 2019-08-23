@@ -13,8 +13,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Depends: 
-    R (>= 3.5),
-    comat
+    R (>= 3.5)
 LinkingTo: 
     Rcpp,
     comat (>= 0.3.0),
@@ -25,7 +24,8 @@ Imports:
     plotwidgets,
     raster,
     sf,
-    Rcpp
+    Rcpp,
+    comat
 Suggests:
     pbapply,
     testthat (>= 2.1.0),
