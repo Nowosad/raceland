@@ -33,3 +33,5 @@ Suggests:
 Remotes:
     nowosad/comat
 VignetteBuilder: knitr
+SystemRequirements: C++11
+
