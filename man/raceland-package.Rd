@@ -4,7 +4,7 @@
 \name{raceland-package}
 \alias{raceland}
 \alias{raceland-package}
-\title{raceland: What the Package Does (One Line, Title Case)}
+\title{raceland: Pattern-based Zoneless Method for Analysis and Visualization of Racial Topography}
 \description{
 What the package does (one paragraph).
 }

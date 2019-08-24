@@ -1,5 +1,5 @@
 Package: raceland
-Title: What the Package Does (One Line, Title Case)
+Title: Pattern-based Zoneless Method for Analysis and Visualization of Racial Topography
 Version: 0.9.9
 Authors@R: 
     c(person(given = "Jakub", family = "Nowosad", role = c("aut", "cre"), 
@@ -28,6 +28,7 @@ Imports:
     comat
 Suggests:
     dplyr,
+    rgdal,
     pbapply,
     testthat (>= 2.1.0),
     knitr,
