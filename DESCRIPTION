@@ -1,5 +1,5 @@
 Package: raceland
-Title: Pattern-based Zoneless Method for Analysis and Visualization of Racial Topography
+Title: Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography
 Version: 0.9.9
 Authors@R: 
     c(person(given = "Jakub", family = "Nowosad", role = c("aut", "cre"), 
