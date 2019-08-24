@@ -57,7 +57,6 @@ library(raceland)
 library(raster)
 library(sf)
 library(dplyr)
-library(RColorBrewer)
 ```
 
 ## Input data 
@@ -433,13 +432,15 @@ mut_breaks = seq(0, 1, 0.1)
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid["ent_mean"], breaks = ent_breaks, key.pos = 1, 
-     pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
+     # pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
+     pal = rev(grDevices::hcl.colors(length(ent_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid["mutinf_mean"], breaks = mut_breaks, key.pos = 1, 
-     pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
+     # pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
+     pal = rev(grDevices::hcl.colors(length(mut_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
@@ -495,14 +496,16 @@ attr_grid10 = dplyr::left_join(grid_sf10, smr10, by = c("row", "col"))
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 #plot(attr_grid["ent_mean"], key.pos = 1, bty="n", box=FALSE, main = "Racial diversity (Entropy)")
 plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1, 
-     pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")), 
+     # pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")), 
+     pal = rev(grDevices::hcl.colors(length(ent_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 #plot(attr_grid["mutinf_mean"], key.pos = 1, main = "Racial segregation (Mutual Information)")
 plot(attr_grid10["mutinf_mean"], breaks = mut_breaks, key.pos = 1,
-     pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
+     # pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
+     pal = rev(grDevices::hcl.colors(length(mut_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
