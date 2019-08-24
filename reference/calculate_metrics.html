@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Calculate Metrics — calculate_metrics" />
 
-<meta property="og:description" content="Calculate Metrics" />
+<meta property="og:description" content="Calculates exposure matrix and quantifies it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf).
+Entropy is associated with measuring racial diversity and mutual information is associated with measuring racial segregation." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,7 +114,8 @@
 
     <div class="ref-description">
     
-    <p>Calculate Metrics</p>
+    <p>Calculates exposure matrix and quantifies it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf).
+Entropy is associated with measuring racial diversity and mutual information is associated with measuring racial segregation.</p>
     
     </div>
 
@@ -130,39 +132,39 @@
     </tr>
     <tr>
       <th>w</th>
-      <td><p>RasterStack with weights</p></td>
+      <td><p>RasterStack with local densities</p></td>
     </tr>
     <tr>
       <th>neighbourhood</th>
-      <td><p>4/8</p></td>
+      <td><p>The number of directions in which cell adjacencies are considered as neighbours: <code>4</code> (rook's case), <code>8</code> (queen's case). The default is <code>4</code>.</p></td>
     </tr>
     <tr>
       <th>fun</th>
-      <td><p>"mean", "geometric_mean", or "focal"</p></td>
+      <td><p>Function to calculate values from adjacent cells to contribute to exposure matrix, <code>"mean"</code> - calculate average values of local population densities from adjacent cells, <code>"geometric_mean"</code> - calculate geometric mean values of local population densities from adjacent cells, or <code>"focal"</code> assign value from the focal cell</p></td>
     </tr>
     <tr>
       <th>size</th>
-      <td><p>size of a motifel</p></td>
+      <td><p>Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If <code>size=NULL</code> calculations are performed for a whole area</p></td>
     </tr>
     <tr>
       <th>shift</th>
-      <td><p>shift of a motifel</p></td>
+      <td><p>Defines the shift between adjacent squares of cells along with the N-S and W-E directions. It describes the density (resolution) of the output grid. The resolution of the output map will be reduced to the original resolution multiplied by the shift. If shift=size the input map will be divided into a grid of non-overlapping square windows. Each square window defines the extent of a local pattern. If shift &lt; size - results in the grid of overlapping square windows.</p></td>
     </tr>
     <tr>
       <th>na_action</th>
-      <td><p>"replace", "omit", "keep"</p></td>
+      <td><p><code>"replace"</code>, <code>"omit"</code>, <code>"keep"</code></p></td>
     </tr>
     <tr>
       <th>base</th>
-      <td><p>the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used</p></td>
+      <td><p>The unit in which entropy is measured. The default is "log2", which compute entropy in "bits". <code>"log"</code> and <code>"log10"</code> can be also used</p></td>
     </tr>
     <tr>
       <th>ordered</th>
-      <td><p>the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE</p></td>
+      <td><p>The type of pairs considered. Either ordered (<code>TRUE</code>) or unordered (<code>FALSE</code>). The default is <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>threshold</th>
-      <td><p>the share of NA cells to allow metrics calculation in a motifel</p></td>
+      <td><p>The share of NA cells to allow metrics calculation in a square-shaped window</p></td>
     </tr>
     </table>
     

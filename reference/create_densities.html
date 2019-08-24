@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Create Densities — create_densities" />
 
-<meta property="og:description" content="Create Densities" />
+<meta property="og:description" content="Calculate local densities of subpopulations (race-specific local densities)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,7 +113,7 @@
 
     <div class="ref-description">
     
-    <p>Create Densities</p>
+    <p>Calculate local densities of subpopulations (race-specific local densities)</p>
     
     </div>
 
@@ -128,17 +128,17 @@
     </tr>
     <tr>
       <th>y</th>
-      <td><p>RasterStack with shares</p></td>
+      <td><p>RasterStack with shares of subpopulations</p></td>
     </tr>
     <tr>
       <th>window_size</th>
-      <td><p>size of a local window</p></td>
+      <td><p>Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a RasterStack</p>
+    <p>a RasterStack containing n local densities. Local density layer is calculated for each realization</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

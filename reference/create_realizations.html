@@ -32,7 +32,9 @@
 
 <meta property="og:title" content="Create Realizations — create_realizations" />
 
-<meta property="og:description" content="Create Realizations" />
+<meta property="og:description" content="It constructs a high-resolution grid (a racial landscape) in which each cell contains only inhabitants of a single race.
+Realization is constructed based on race-specific grids. Racial composition at each cell is translated to probabilities of drawing a person of a specific race from a cell.
+Thus, the race label of a cell is a random variable. To obtain a stochastic realization of racial landscape, we use the cell's race probabilities and a random number generator to randomly assign specific race label to each cell (Monte Carlo procedure)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,7 +115,9 @@
 
     <div class="ref-description">
     
-    <p>Create Realizations</p>
+    <p>It constructs a high-resolution grid (a racial landscape) in which each cell contains only inhabitants of a single race.
+Realization is constructed based on race-specific grids. Racial composition at each cell is translated to probabilities of drawing a person of a specific race from a cell.
+Thus, the race label of a cell is a random variable. To obtain a stochastic realization of racial landscape, we use the cell's race probabilities and a random number generator to randomly assign specific race label to each cell (Monte Carlo procedure).</p>
     
     </div>
 
@@ -124,17 +128,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>RasterStack with shares</p></td>
+      <td><p>RasterStack with race-specific population densities assign to each cell</p></td>
     </tr>
     <tr>
       <th>n</th>
-      <td><p>number of realizations</p></td>
+      <td><p>A number of realizations</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a RasterStack</p>
+    <p>A RasterStack object containing n realizations. Single race label in a racial landscape is assigned based on the order of race-specific grids in RasterStack with input data (For example, the <code>race_raster</code> object has five layers named: asian, black, hispanic, other, white. The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white).</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

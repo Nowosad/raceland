@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Plot a Realization — plot_realization" />
 
-<meta property="og:description" content="Plot a Realization" />
+<meta property="og:description" content="Displays realization taking into account also subpopulation density." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,7 +113,7 @@
 
     <div class="ref-description">
     
-    <p>Plot a Realization</p>
+    <p>Displays realization taking into account also subpopulation density.</p>
     
     </div>
 
@@ -129,7 +129,7 @@ Each value should correspond to a layer in <code>y</code>.</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>A RasterStack/RasterBrick with shares</p></td>
+      <td><p>A RasterStack/RasterBrick with race-specific population densities</p></td>
     </tr>
     <tr>
       <th>hex</th>
@@ -141,10 +141,6 @@ Each color should correspond to a layer in <code>y</code> and value in <code>x</
       <td><p>Additional arguments as for <code><a href='https://www.rdocumentation.org/packages/raster/topics/plotRGB'>raster::plotRGB()</a></code></p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>D</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -158,9 +154,7 @@ Each color should correspond to a layer in <code>y</code> and value in <code>x</
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
