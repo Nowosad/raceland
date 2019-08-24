@@ -1,10 +1,12 @@
 #' Create Densities
 #'
-#' @param x RasterStack with realizations
-#' @param y RasterStack with shares
-#' @param window_size size of a local window
+#' Calculate local densities of subpopulations (race-specific local densities)
 #'
-#' @return a RasterStack
+#' @param x RasterStack with realizations
+#' @param y RasterStack with shares of subpopulations
+#' @param window_size Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10
+#'
+#' @return a RasterStack containing n local densities. Local density layer is calculated for each realization
 #' @export
 #'
 #' @examples

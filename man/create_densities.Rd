@@ -9,15 +9,15 @@ create_densities(x, y, window_size)
 \arguments{
 \item{x}{RasterStack with realizations}
 
-\item{y}{RasterStack with shares}
+\item{y}{RasterStack with shares of subpopulations}
 
-\item{window_size}{size of a local window}
+\item{window_size}{Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10}
 }
 \value{
-a RasterStack
+a RasterStack containing n local densities. Local density layer is calculated for each realization
 }
 \description{
-Create Densities
+Calculate local densities of subpopulations (race-specific local densities)
 }
 \examples{
 library(raster)

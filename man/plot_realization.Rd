@@ -10,18 +10,15 @@ plot_realization(x, y, hex, ...)
 \item{x}{A RasterLayer or a RasterStack/RasterBrick with one layer.
 Each value should correspond to a layer in \code{y}.}
 
-\item{y}{A RasterStack/RasterBrick with shares}
+\item{y}{A RasterStack/RasterBrick with race-specific population densities}
 
 \item{hex}{A character vector with colors specified in hexadecimal format.
 Each color should correspond to a layer in \code{y} and value in \code{x}.}
 
 \item{...}{Additional arguments as for \code{\link[raster:plotRGB]{raster::plotRGB()}}}
 }
-\value{
-D
-}
 \description{
-Plot a Realization
+Displays realization taking into account also subpopulation density.
 }
 \examples{
 library(raster)

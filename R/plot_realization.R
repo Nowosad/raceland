@@ -1,13 +1,14 @@
 #' Plot a Realization
 #'
+#' Displays realization taking into account also subpopulation density.
+#'
 #' @param x A RasterLayer or a RasterStack/RasterBrick with one layer.
 #'   Each value should correspond to a layer in `y`.
-#' @param y A RasterStack/RasterBrick with shares
+#' @param y A RasterStack/RasterBrick with race-specific population densities
 #' @param hex A character vector with colors specified in hexadecimal format.
 #'   Each color should correspond to a layer in `y` and value in `x`.
 #' @param ... Additional arguments as for [raster::plotRGB()]
 #'
-#' @return D
 #' @export
 #'
 #' @examples

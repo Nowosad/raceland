@@ -2,22 +2,22 @@
 % Please edit documentation in R/create_grid.R
 \name{create_grid}
 \alias{create_grid}
-\title{Create a grid of motifels}
+\title{Create a grid of square-shaped windows}
 \usage{
 create_grid(x, size, shift = NULL)
 }
 \arguments{
 \item{x}{A RasterLayer/RasterStack/RasterBrick}
 
-\item{size}{size of a motifel}
+\item{size}{Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If \code{size=NULL} calculations are perfomed for the whole area}
 
-\item{shift}{shift of a motifel}
+\item{shift}{Defines the shift between adjacent squares of cells along with the N-S and W-E directions. It describes the density (resolution) of the output grid. The resolution of the output map will be reduced to the original resolution multiplied by the shift. If shift=size the input map will be divided into a grid of non-overlapping square windows. Each square window defines the extent of a local pattern. If shift < size - results in the grid of overlapping square windows.}
 }
 \value{
 An sf polygon object
 }
 \description{
-Create a grid of motifels
+Create a grid of square-shaped windows
 }
 \examples{
 x = create_realizations(race_raster, 1)

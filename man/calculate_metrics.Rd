@@ -11,29 +11,30 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
 \arguments{
 \item{x}{RasterStack with realizations}
 
-\item{w}{RasterStack with weights}
+\item{w}{RasterStack with local densities}
 
-\item{neighbourhood}{4/8}
+\item{neighbourhood}{The number of directions in which cell adjacencies are considered as neighbours: \code{4} (rook's case), \code{8} (queen's case). The default is \code{4}.}
 
-\item{fun}{"mean", "geometric_mean", or "focal"}
+\item{fun}{Function to calculate values from adjacent cells to contribute to exposure matrix, \code{"mean"} - calculate average values of local population densities from adjacent cells, \code{"geometric_mean"} - calculate geometric mean values of local population densities from adjacent cells, or \code{"focal"} assign value from the focal cell}
 
-\item{size}{size of a motifel}
+\item{size}{Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If \code{size=NULL} calculations are performed for a whole area}
 
-\item{shift}{shift of a motifel}
+\item{shift}{Defines the shift between adjacent squares of cells along with the N-S and W-E directions. It describes the density (resolution) of the output grid. The resolution of the output map will be reduced to the original resolution multiplied by the shift. If shift=size the input map will be divided into a grid of non-overlapping square windows. Each square window defines the extent of a local pattern. If shift < size - results in the grid of overlapping square windows.}
 
-\item{na_action}{"replace", "omit", "keep"}
+\item{na_action}{\code{"replace"}, \code{"omit"}, \code{"keep"}}
 
-\item{base}{the unit in which entropy is measured. The default is "log2", which compute entropy in "bits". "log" and "log10" can be also used}
+\item{base}{The unit in which entropy is measured. The default is "log2", which compute entropy in "bits". \code{"log"} and \code{"log10"} can be also used}
 
-\item{ordered}{the type of pairs considered. Either ordered (TRUE) or unordered (FALSE). The default is TRUE}
+\item{ordered}{The type of pairs considered. Either ordered (\code{TRUE}) or unordered (\code{FALSE}). The default is \code{TRUE}}
 
-\item{threshold}{the share of NA cells to allow metrics calculation in a motifel}
+\item{threshold}{The share of NA cells to allow metrics calculation in a square-shaped window}
 }
 \value{
 a data.frame
 }
 \description{
-Calculate Metrics
+Calculates exposure matrix and quantifies it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf).
+Entropy is associated with measuring racial diversity and mutual information is associated with measuring racial segregation.
 }
 \examples{
 library(raster)
@@ -46,6 +47,7 @@ df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
 #2
 df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10, threshold = 0.5)
 my_grid = create_grid(x, size = 10)
+
 \dontrun{
  df3 = dplyr::filter(df2, realization == 2)
  result = dplyr::left_join(my_grid, df2, by = c("row", "col"))
