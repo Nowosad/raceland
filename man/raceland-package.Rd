@@ -4,9 +4,12 @@
 \name{raceland-package}
 \alias{raceland}
 \alias{raceland-package}
-\title{raceland: Pattern-based Zoneless Method for Analysis and Visualization of Racial Topography}
+\title{raceland: Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography}
 \description{
-What the package does (one paragraph).
+Raceland package implements a computational framework for a pattern-based, 
+    zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined
+    approach for analyzing residential segregation and racial diversity based on 
+    the concept of 'landscape’ used in the domain of landscape ecology.
 }
 \author{
 \strong{Maintainer}: Jakub Nowosad \email{nowosad.jakub@gmail.com} (0000-0002-1057-3721)

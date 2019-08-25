@@ -9,6 +9,6 @@
 race_raster
 }
 \description{
-A RasterStack
+A RasterStack covering an area of 60x60 cells. RasterStack contains 5 layers - a high resolution (30m) race-specific grids with values of subpopulation densities for Asian, Black, Hispanic, other and Whites
 }
 \keyword{datasets}

@@ -9,6 +9,6 @@
 pop_vector
 }
 \description{
-An sf object
+It is an sf POLYGON object with census block-level data. It consists of 7 variables: GISJOIN - block ID, ASIAN, BLACK, HISPANIC, OTHER, WHITE - number of people of given race/ethnicity in each block
 }
 \keyword{datasets}

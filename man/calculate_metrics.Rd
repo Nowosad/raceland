@@ -21,7 +21,7 @@ calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
 
 \item{shift}{Defines the shift between adjacent squares of cells along with the N-S and W-E directions. It describes the density (resolution) of the output grid. The resolution of the output map will be reduced to the original resolution multiplied by the shift. If shift=size the input map will be divided into a grid of non-overlapping square windows. Each square window defines the extent of a local pattern. If shift < size - results in the grid of overlapping square windows.}
 
-\item{na_action}{\code{"replace"}, \code{"omit"}, \code{"keep"}}
+\item{na_action}{Decides on how to behave in the presence of missing values in \code{w}. Possible options are \code{"replace"}, \code{"omit"}, \code{"keep"}. The default, \code{"replace"}, replaces missing values with 0, \code{"omit"} does not use cells with missing values, and \code{"keep"} keeps missing values.}
 
 \item{base}{The unit in which entropy is measured. The default is "log2", which compute entropy in "bits". \code{"log"} and \code{"log10"} can be also used}
 
