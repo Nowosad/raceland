@@ -9,7 +9,7 @@
 #' @param fun Function to calculate values from adjacent cells to contribute to exposure matrix, `"mean"` - calculate average values of local population densities from adjacent cells, `"geometric_mean"` - calculate geometric mean values of local population densities from adjacent cells, or `"focal"` assign value from the focal cell
 #' @param size Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If `size=NULL` calculations are performed for a whole area
 #' @param shift Defines the shift between adjacent squares of cells along with the N-S and W-E directions. It describes the density (resolution) of the output grid. The resolution of the output map will be reduced to the original resolution multiplied by the shift. If shift=size the input map will be divided into a grid of non-overlapping square windows. Each square window defines the extent of a local pattern. If shift < size - results in the grid of overlapping square windows.
-#' @param na_action `"replace"`, `"omit"`, `"keep"`
+#' @param na_action Decides on how to behave in the presence of missing values in `w`. Possible options are `"replace"`, `"omit"`, `"keep"`. The default, `"replace"`, replaces missing values with 0, `"omit"` does not use cells with missing values, and `"keep"` keeps missing values.
 #' @param base The unit in which entropy is measured. The default is "log2", which compute entropy in "bits". `"log"` and `"log10"` can be also used
 #' @param ordered The type of pairs considered. Either ordered (`TRUE`) or unordered (`FALSE`). The default is `TRUE`
 #' @param threshold The share of NA cells to allow metrics calculation in a square-shaped window
