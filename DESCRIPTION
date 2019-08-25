@@ -6,7 +6,10 @@ Authors@R:
     email = "nowosad.jakub@gmail.com", comment = c(ORCID = "0000-0002-1057-3721")),
     person("Anna", "Dmowska", role = c("aut")),
     person("Tomasz", "Stepinski", role = c("aut")))
-Description: What the package does (one paragraph).
+Description: Raceland package implements a computational framework for a pattern-based, 
+    zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined
+    approach for analyzing residential segregation and racial diversity based on 
+    the concept of 'landscape’ used in the domain of landscape ecology.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
