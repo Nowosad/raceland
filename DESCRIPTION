@@ -37,8 +37,6 @@ Suggests:
     knitr,
     rmarkdown,
     covr
-Remotes:
-    nowosad/comat
 VignetteBuilder: knitr
 SystemRequirements: C++11
 
