@@ -10,7 +10,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography">
-<meta property="og:description" content="What the package does (one paragraph).">
+<meta property="og:description" content="Raceland package implements a computational framework for a pattern-based, 
+    zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined
+    approach for analyzing residential segregation and racial diversity based on 
+    the concept of 'landscape’ used in the domain of landscape ecology.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -53,7 +56,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/raceland-intro.html">raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</a>
+      <a href="articles/raceland-intro1.html">raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</a>
+    </li>
+    <li>
+      <a href="articles/raceland-intro2.html">raceland: Describing local racial patterns of racial landscapes at different spatial scales</a>
     </li>
   </ul>
 </li>
@@ -79,7 +85,8 @@
 <a href="#raceland" class="anchor"></a>raceland</h1></div>
 <!-- badges: start -->
 
-<p>The goal of raceland is to …</p>
+<p>Raceland package implements a computational framework for a pattern-based, zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. A racial landscape, represented by a high-resolution raster grid with each cell containing only inhabitants of a single race, is quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
+<p>Racial landscape method is based on the raster gridded data, and unlike the previous methods, does not depend on the division of specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing calculations at different spatial scales.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -94,6 +101,47 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raceland)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raster)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Loading required package: sp</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Construct racial landscape</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">real_raster =<span class="st"> </span><span class="kw"><a href="reference/create_realizations.html">create_realizations</a></span>(<span class="dt">x =</span> race_raster, <span class="dt">n =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">race_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>,<span class="st">"#F8DF1D"</span>)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(real_raster, <span class="dt">col =</span> race_colors)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Plot racial ladnscape </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/plot_realization.html">plot_realization</a></span>(<span class="dt">x =</span> real_raster[[<span class="dv">1</span>]], <span class="dt">y =</span> race_raster, <span class="dt">hex =</span> race_colors)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Calculate local subpopulation densities</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">dens_raster =<span class="st"> </span><span class="kw"><a href="reference/create_densities.html">create_densities</a></span>(real_raster, race_raster, <span class="dt">window_size =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(dens_raster)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Calculate IT-metrics </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">metr_df =<span class="st"> </span><span class="kw"><a href="reference/calculate_metrics.html">calculate_metrics</a></span>(<span class="dt">x =</span> real_raster, <span class="dt">w =</span> dens_raster,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                            <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>, </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/headtail">head</a></span>(metr_df)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.637654 3.161558 1.523904 0.1137498</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.638081 3.158567 1.520486 0.1175947</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.649426 3.181433 1.532007 0.1174197</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.652396 3.195642 1.543246 0.1091505</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.629957 3.139725 1.509769 0.1201881</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.632684 3.148507 1.515823 0.1168609</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Summarize IT metrics </span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;       ent            mutinf       </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.598   Min.   :0.09529  </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10874  </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;  Median :1.635   Median :0.11366  </span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.634   Mean   :0.11371  </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11841  </span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.659   Max.   :0.13743</span></a></code></pre></div>
+</div>
+<div id="contribution" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contribution" class="anchor"></a>Contribution</h2>
+<p>Contributions to this package are welcome. The preferred method of contribution is through a GitHub pull request. Feel free to contact us by creating <a href="https://github.com/Nowosad/raceland/issues">an issue</a>.</p>
 </div>
 </div>
   </div>
