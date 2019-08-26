@@ -196,8 +196,8 @@ attr_grid = dplyr::left_join(grid_sf, smr, by = c("row", "col"))
 ```{r}
 # calculate breaks parameter for plotting entropy and mutual information
 # the values of entropy and mutual information are divided into equal breaks
-ent_breaks = c(seq(0, 2, 0.25), log2(nlayers(race_raster)))
-mut_breaks = seq(0, 1, 0.1)
+ent_breaks = c(seq(0, 2, by = 0.25), log2(nlayers(race_raster)))
+mut_breaks = seq(0, 1, by = 0.1)
 ```
 
 ### Mapping racial diversity 
