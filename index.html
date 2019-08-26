@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography">
-<meta property="og:description" content="Raceland package implements a computational framework for a pattern-based, 
+<meta property="og:description" content="Implements a computational framework for a pattern-based, 
     zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined
     approach for analyzing residential segregation and racial diversity based on 
     the concept of 'landscape’ used in the domain of landscape ecology.">
@@ -129,21 +129,21 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/headtail">head</a></span>(metr_df)</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.637598 3.170269 1.532672 0.1049259</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.629208 3.151750 1.522542 0.1066663</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.621061 3.125630 1.504569 0.1164925</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.653145 3.201583 1.548437 0.1047079</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.617726 3.111292 1.493567 0.1241592</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.639240 3.168371 1.529131 0.1101090</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.636854 3.152256 1.515403 0.1214512</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.634912 3.147729 1.512817 0.1220951</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.638893 3.167098 1.528205 0.1106878</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.638693 3.174405 1.535713 0.1029802</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.646219 3.183085 1.536867 0.1093523</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.644958 3.178513 1.533555 0.1114031</span></a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Summarize IT metrics </span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;       ent            mutinf      </span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.613   Min.   :0.0987  </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.1073  </span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  Median :1.635   Median :0.1125  </span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.635   Mean   :0.1138  </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1212  </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.666   Max.   :0.1340</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;       ent            mutinf       </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.605   Min.   :0.09082  </span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.626   1st Qu.:0.10935  </span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  Median :1.634   Median :0.11391  </span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.634   Mean   :0.11464  </span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11956  </span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.661   Max.   :0.13654</span></a></code></pre></div>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">
