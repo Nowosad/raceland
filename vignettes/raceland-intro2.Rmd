@@ -29,6 +29,23 @@ Here we demonstrate, how the **raceland** package can be used for describing rac
 Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. 
 Racial landscape method also allows for performing the calculation at different spatial scales.
 
+```{r, eval=FALSE}
+# install required packages 
+pkgs = c(
+  "raceland",                
+  "comat",            
+  "rgdal",   
+  "raster",
+  "sf",              
+  "dplyr",
+  "RCartoColor"
+)
+to_install = !pkgs %in% installed.packages()
+if(any(to_install)) {
+  install.packages(pkgs[to_install])
+}
+```
+
 ```{r, warning=FALSE, message=FALSE, include=FALSE}
 library(raceland)
 library(raster)
@@ -204,8 +221,8 @@ mut_breaks = seq(0, 1, by = 0.1)
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid["ent_mean"], breaks = ent_breaks, key.pos = 1, 
-     # pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
-     pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(RColorBrewer::brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
+     # pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
@@ -213,8 +230,8 @@ plot(attr_grid["ent_mean"], breaks = ent_breaks, key.pos = 1,
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid["mutinf_mean"], breaks = mut_breaks, key.pos = 1, 
-     # pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
-     pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(RColorBrewer::brewer.pal(length(mut_breaks) - 1, name = "RdBu")),
+     # pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),
      bty = "n", main = "Racial segregation (Mutual information)")
 ```
 
@@ -280,8 +297,8 @@ attr_grid10 = dplyr::left_join(grid_sf10, smr10, by = c("row", "col"))
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1, 
-     # pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")), 
-     pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(RColorBrewer::brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
+     # pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
@@ -289,8 +306,8 @@ plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1,
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid10["mutinf_mean"], breaks = mut_breaks, key.pos = 1,
-     # pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
-     pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(RColorBrewer::brewer.pal(length(mut_breaks) - 1, name = "RdBu")),
+     # pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),
      bty = "n", main = "Racial segregation (Mutual information)")
 ```
 

@@ -266,7 +266,7 @@ round(exposure_mat, 2)
 
 ### Information theory metrics (IT metrics)
 
-To lucid quantification of racial topography, further compression of the exposure matrix is required.
+For lucid quantification of racial topography, further compression of the exposure matrix is required.
 A racial pattern can be described (in the same way as landscape pattern in the domain of landscape ecology) by using Information Theory metrics - entropy and mutual information.
 Entropy is associated with measuring racial diversity, and mutual information is associated with measuring racial segregation.
 

@@ -36,6 +36,7 @@ Suggests:
     testthat (>= 2.1.0),
     knitr,
     rmarkdown,
+    RColorBrewer,
     covr
 VignetteBuilder: knitr
 SystemRequirements: C++11
