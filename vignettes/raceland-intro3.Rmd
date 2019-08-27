@@ -80,12 +80,45 @@ Script creates a *results* directory with four subdirectories:
 - **shp** - contains shapefiles with attribute tables for each defined spatial scale. 
 Shapefiles can be used to prepare maps
 
+```{r, echo = FALSE}
+df = data.frame(size = c("60", "120", "240", "480", "ALL"),
+                shift = c("30", "60", "120", "240", "ALL"),
+                n = c(2245,584,145,37,1),
+                ent = c(1.0468, 1.1331, 1.2951, 1.4403, 1.8393),
+                ent_sd = c(0.0166, 0.0087, 0.0043, 0.0023, 0.0006),
+                mutinf = c(0.0422, 0.0759, 0.1432, 0.2229, 0.4732),
+                mutinf_sd = c(0.0051, 0.0036, 0.0027, 0.0019, 0.0009))
+knitr::kable(df, caption = "Table 1: Entropy and mutual information for different spatial scales")
+```
+
+```{r, echo=FALSE, out.width = '40%', fig.cap="Figure 1: Racial landscape"}
+knitr::include_graphics("racial_landscape.png")
+```
+
+```{r, echo=FALSE, out.width = '100%', fig.cap="Figure 2: Racial diversity and segregation at different spatial scales (an example for the scale of 1.8 km)"}
+knitr::include_graphics("div_seg.png")
+```
+
 # SCRIPT TO CALCULATE THE IT-DERIVED METRICS FOR DIFFERENT SPATIAL SCALES
 
 *Note: This calculation could take several minutes for larger counties.*
 
 ```{r, eval=FALSE}
 # R script calculates IT-derived metrices for different spatial scales. 
+
+# INSTALL REQUIRED PACKAGES 
+pkgs = c(
+  "raceland",                
+  "comat",            
+  "rgdal",   
+  "raster",
+  "sf",              
+  "dplyr"
+)
+to_install = !pkgs %in% installed.packages()
+if(any(to_install)) {
+  install.packages(pkgs[to_install])
+}
 
 # REQUIRED R-PACKAGES
 library(raceland)
@@ -179,7 +212,7 @@ list_raster = list.files(pf_to_data, pattern = sfx, full.names = TRUE)
 race_raster = stack(list_raster)
 
 # Rename raster layers
-rnames = gsub("il_cook_", "", names(race_raster))
+rnames = sapply(strsplit(names(race_raster), "_"), tail, 1)
 rnames = substr(rnames, 1, nchar(rnames) - nchar(sfx))
 
 new_names = dplyr::recode(
@@ -220,14 +253,19 @@ saveRDS(race_raster, file.path(pf, "results", "out_data", "race_raster.rds"))
 ################################## CONSTRUCTING RACIAL LANDSCAPE ##################################
 real_raster = create_realizations(race_raster, n = nrealization)
 
-#save real_raster object
+# save real_raster object
 saveRDS(real_raster, file.path(pf, "results", "out_data", "real_rast.rds"))
+
+# plot racial landscape
+png(file.path("results", "final", "racial_landscape.png")) 
+plot_realization(x = real_raster[[1]], y = race_raster, hex = race_colors)
+dev.off() 
 ###################################################################################################
 
 ################################## CALCULATE RACE-SPECIFIC DENSTITIES #############################
 dens_raster = create_densities(real_raster, race_raster, window_size = 10)
 
-#save dens_raster object
+# save dens_raster object
 saveRDS(dens_raster, file.path(pf, "results", "out_data", "dens_rast.rds"))
 ###################################################################################################
 
