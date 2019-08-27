@@ -11,7 +11,7 @@ status](https://travis-ci.org/Nowosad/raceland.svg?branch=master)](https://travi
 coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
 <!-- badges: end -->
 
-Raceland package implements a computational framework for a
+The **raceland** package implements a computational framework for a
 pattern-based, zoneless analysis, and visualization of (ethno)racial
 topography. It is a reimagined approach for analyzing residential
 segregation and racial diversity based on the concept of ‘landscape’
@@ -96,24 +96,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.634242 3.154323 1.520082 0.1141598
-#> 2           2   1   1 1.633990 3.155930 1.521940 0.1120499
-#> 3           3   1   1 1.642078 3.178563 1.536485 0.1055935
-#> 4           4   1   1 1.635785 3.168928 1.533143 0.1026423
-#> 5           5   1   1 1.646446 3.172136 1.525690 0.1207565
-#> 6           6   1   1 1.641480 3.157474 1.515995 0.1254850
+#> 1           1   1   1 1.636385 3.167094 1.530709 0.1056761
+#> 2           2   1   1 1.631413 3.140357 1.508945 0.1224680
+#> 3           3   1   1 1.622525 3.123644 1.501119 0.1214064
+#> 4           4   1   1 1.623140 3.134430 1.511290 0.1118498
+#> 5           5   1   1 1.643013 3.169580 1.526567 0.1164463
+#> 6           6   1   1 1.629700 3.145177 1.515477 0.1142236
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.607   Min.   :0.09232  
-#>  1st Qu.:1.628   1st Qu.:0.10767  
-#>  Median :1.633   Median :0.11246  
-#>  Mean   :1.634   Mean   :0.11310  
-#>  3rd Qu.:1.641   3rd Qu.:0.11968  
-#>  Max.   :1.665   Max.   :0.13855
+#>  Min.   :1.609   Min.   :0.09638  
+#>  1st Qu.:1.629   1st Qu.:0.10817  
+#>  Median :1.634   Median :0.11395  
+#>  Mean   :1.635   Mean   :0.11409  
+#>  3rd Qu.:1.641   3rd Qu.:0.11927  
+#>  Max.   :1.663   Max.   :0.13366
 ```
 
 ## Contribution
