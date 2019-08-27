@@ -46,13 +46,34 @@ A computational framework implemented in the **raceland** package allows for:
 
 4. Mapping racial diversity and segregation at different scales. 
 
-A computational framework consists of the four steps (see figure below, the blue font indicates the names of function from the **raceland** package). 
+The computational framework consists of the four steps (see figure below, the blue font indicates the names of function from the **raceland** package). 
 
 ```{r, echo=FALSE, out.width=800}
 knitr::include_graphics("fig0framework.png")
 ```
 
+## Required packages
+
+The computational framework requires following packages: **raceland**, **comat**, **rgdal**, **raster**, **sf**, and **dplyr**. 
+
+```{r, eval=FALSE}
+# install required packages 
+pkgs = c(
+  "raceland",                
+  "comat",            
+  "rgdal",   
+  "raster",
+  "sf",              
+  "dplyr"
+)
+to_install = !pkgs %in% installed.packages()
+if(any(to_install)) {
+  install.packages(pkgs[to_install])
+}
+```
+
 ```{r, warning=FALSE, message=FALSE, include=FALSE}
+# attach required packages
 library(raceland)
 library(raster)
 library(sf)
