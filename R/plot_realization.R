@@ -23,6 +23,9 @@ plot_realization = function(x, y, hex, ...){
   if (!(methods::is(x, "RasterLayer") || methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
     stop("x needs to be either RasterLayer, RasterStack or RasterBrick", call. = FALSE)
   }
+  if (raster::nlayers(x) != 1){
+    stop("x needs have only one layer", call. = FALSE)
+  }
   if (!(methods::is(y, "RasterStack") || methods::is(y, "RasterBrick"))){
     stop("y needs to be either RasterStack or RasterBrick", call. = FALSE)
   }
