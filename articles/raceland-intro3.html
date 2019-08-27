@@ -79,7 +79,7 @@
       <h1>raceland: Describing local pattern of racial landscape using SocScape grids</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2019-08-26</h4>
+            <h4 class="date">2019-08-27</h4>
       
       
       <div class="hidden name"><code>raceland-intro3.Rmd</code></div>
@@ -150,6 +150,75 @@
 <li><p><strong>out_metrics</strong> - IT-metrics calculated for each defined spatial scale</p></li>
 <li><p><strong>shp</strong> - contains shapefiles with attribute tables for each defined spatial scale. Shapefiles can be used to prepare maps</p></li>
 </ul>
+<table class="table">
+<caption>Table 1: Entropy and mutual information for different spatial scales</caption>
+<thead><tr class="header">
+<th align="left">size</th>
+<th align="left">shift</th>
+<th align="right">n</th>
+<th align="right">ent</th>
+<th align="right">ent_sd</th>
+<th align="right">mutinf</th>
+<th align="right">mutinf_sd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">60</td>
+<td align="left">30</td>
+<td align="right">2245</td>
+<td align="right">1.0468</td>
+<td align="right">0.0166</td>
+<td align="right">0.0422</td>
+<td align="right">0.0051</td>
+</tr>
+<tr class="even">
+<td align="left">120</td>
+<td align="left">60</td>
+<td align="right">584</td>
+<td align="right">1.1331</td>
+<td align="right">0.0087</td>
+<td align="right">0.0759</td>
+<td align="right">0.0036</td>
+</tr>
+<tr class="odd">
+<td align="left">240</td>
+<td align="left">120</td>
+<td align="right">145</td>
+<td align="right">1.2951</td>
+<td align="right">0.0043</td>
+<td align="right">0.1432</td>
+<td align="right">0.0027</td>
+</tr>
+<tr class="even">
+<td align="left">480</td>
+<td align="left">240</td>
+<td align="right">37</td>
+<td align="right">1.4403</td>
+<td align="right">0.0023</td>
+<td align="right">0.2229</td>
+<td align="right">0.0019</td>
+</tr>
+<tr class="odd">
+<td align="left">ALL</td>
+<td align="left">ALL</td>
+<td align="right">1</td>
+<td align="right">1.8393</td>
+<td align="right">0.0006</td>
+<td align="right">0.4732</td>
+<td align="right">0.0009</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="racial_landscape.png" alt="Figure 1: Racial landscape" width="40%"><p class="caption">
+Figure 1: Racial landscape
+</p>
+</div>
+<div class="figure">
+<img src="div_seg.png" alt="Figure 2: Racial diversity and segregation at different spatial scales (an example for the scale of 1.8 km)" width="100%"><p class="caption">
+Figure 2: Racial diversity and segregation at different spatial scales (an example for the scale of 1.8 km)
+</p>
+</div>
 </div>
 <div id="script-to-calculate-the-it-derived-metrics-for-different-spatial-scales" class="section level1">
 <h1 class="hasAnchor">
@@ -157,284 +226,303 @@
 <p><em>Note: This calculation could take several minutes for larger counties.</em></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># R script calculates IT-derived metrices for different spatial scales. </span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># REQUIRED R-PACKAGES</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raceland)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raster)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sf)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(RColorBrewer)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co"># SET WORKING DIRECTORY</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">## setwd("")</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">################################## USER DEFINED PARAMETERS #######################################</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co"># Please define following parameters before running a script. </span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co"># Path to race directory with downloaded data.</span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">pf_to_data =<span class="st"> "il_cook/race"</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co"># sfx indicates which dataset will be used. There are 3 options: </span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">## sfx="1990myc" - race specific grids for 1990 year.</a>
-<a class="sourceLine" id="cb1-21" data-line-number="21">## sfx="2000myc" - race specific grids for 2000 year.</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">## sfx="2010myc" - race specific grids for 2010 year.</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># INSTALL REQUIRED PACKAGES </span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">pkgs =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="st">"raceland"</span>,                </a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="st">"comat"</span>,            </a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="st">"rgdal"</span>,   </a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="st">"raster"</span>,</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="st">"sf"</span>,              </a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="st">"dplyr"</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">to_install =<span class="st"> </span><span class="op">!</span>pkgs <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/installed.packages">installed.packages</a></span>()</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="cf">if</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/any">any</a></span>(to_install)) {</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(pkgs[to_install])</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co"># REQUIRED R-PACKAGES</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raceland)</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raster)</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sf)</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(RColorBrewer)</a>
 <a class="sourceLine" id="cb1-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24">sfx =<span class="st"> "2010myc"</span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co"># Number of realizations (racial landscape) to generate.</span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co"># It is recommended to generate at least 30 realizations. </span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28">nrealization =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co"># SET WORKING DIRECTORY</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">## setwd("")</a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">################################## USER DEFINED PARAMETERS #######################################</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co"># Please define following parameters before running a script. </span></a>
 <a class="sourceLine" id="cb1-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co"># list with size and shift parameters: list(c(size, shift), c(size, shift),...). </span></a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co"># In this case calculation will be performed for 4 different spatia scale:</span></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="co"># 1. c(60,30) - size = 60 local ladnscape from 60x60 cells window will be calculated, </span></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="co">#    it corresponds to the spatial scale of 1.8km (60 cells x 30m).</span></a>
-<a class="sourceLine" id="cb1-34" data-line-number="34"><span class="co"># 2. c(120,60) - corresponds to the scale of 3.6 km. </span></a>
-<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="co"># 3. c(240,120) - corresponds to the scale of 7.2 km. </span></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="co"># 4. c(480, 240) - corresponds to the scale of 14.4 km. </span></a>
-<a class="sourceLine" id="cb1-37" data-line-number="37">list_size_shift =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">60</span>,<span class="dv">30</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">120</span>,<span class="dv">60</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">240</span>,<span class="dv">120</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">480</span>, <span class="dv">240</span>))</a>
-<a class="sourceLine" id="cb1-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb1-39" data-line-number="39">####################################################################################################</a>
-<a class="sourceLine" id="cb1-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb1-41" data-line-number="41"><span class="co"># FUNCTION TO CALCULATE RACIAL SEGREGATION/DIVERSITY CLASSIFICATION</span></a>
-<a class="sourceLine" id="cb1-42" data-line-number="42">bivariate_classification =<span class="st"> </span><span class="cf">function</span>(entropy, mutual_information, n) {</a>
-<a class="sourceLine" id="cb1-43" data-line-number="43">  </a>
-<a class="sourceLine" id="cb1-44" data-line-number="44">  <span class="co"># max entropy is calculated as log2 from the number of race categories</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45">  nent =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(n)</a>
-<a class="sourceLine" id="cb1-46" data-line-number="46">  </a>
-<a class="sourceLine" id="cb1-47" data-line-number="47">  <span class="co"># divide entropy values into 3 categories</span></a>
-<a class="sourceLine" id="cb1-48" data-line-number="48">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/cut">cut</a></span>(entropy, <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, nent), <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), </a>
-<a class="sourceLine" id="cb1-49" data-line-number="49">                <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-50" data-line-number="50">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/as.character">as.character</a></span>(ent_cat))</a>
-<a class="sourceLine" id="cb1-51" data-line-number="51">  </a>
-<a class="sourceLine" id="cb1-52" data-line-number="52">  <span class="co"># divide mutual information values into 3 categories</span></a>
-<a class="sourceLine" id="cb1-53" data-line-number="53">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/cut">cut</a></span>(mutual_information, <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), </a>
-<a class="sourceLine" id="cb1-54" data-line-number="54">                <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-55" data-line-number="55">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/as.character">as.character</a></span>(mut_cat))</a>
-<a class="sourceLine" id="cb1-56" data-line-number="56">  </a>
-<a class="sourceLine" id="cb1-57" data-line-number="57">  <span class="co"># combine categories of entropy (measure of racial diversity) </span></a>
-<a class="sourceLine" id="cb1-58" data-line-number="58">  <span class="co"># and mutual information (measure of racial segregation) </span></a>
-<a class="sourceLine" id="cb1-59" data-line-number="59">  bivar_cls =<span class="st"> </span>mut_cat <span class="op">+</span><span class="st"> </span>ent_cat</a>
-<a class="sourceLine" id="cb1-60" data-line-number="60">  bivar_cls =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/factor">as.factor</a></span>(bivar_cls)</a>
-<a class="sourceLine" id="cb1-61" data-line-number="61">  </a>
-<a class="sourceLine" id="cb1-62" data-line-number="62">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(bivar_cls)</a>
-<a class="sourceLine" id="cb1-63" data-line-number="63">}</a>
-<a class="sourceLine" id="cb1-64" data-line-number="64"></a>
-<a class="sourceLine" id="cb1-65" data-line-number="65">####################################################################################################</a>
-<a class="sourceLine" id="cb1-66" data-line-number="66"></a>
-<a class="sourceLine" id="cb1-67" data-line-number="67"><span class="co"># COLORS USED FOR VISUALIZATION</span></a>
-<a class="sourceLine" id="cb1-68" data-line-number="68">## They corresponds to 5 racial categories: ASIAN, BLACK, HISPANIC, OTHER, WHITE</a>
-<a class="sourceLine" id="cb1-69" data-line-number="69">race_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)</a>
-<a class="sourceLine" id="cb1-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb1-71" data-line-number="71">## Bivariate palette to display the racial segregation/diversity classification</a>
-<a class="sourceLine" id="cb1-72" data-line-number="72">bivariate_class_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"11"</span> =<span class="st"> "#e8e8e8"</span>, <span class="st">"12"</span> =<span class="st"> "#e4acac"</span>, <span class="st">"13"</span> =<span class="st"> "#c85a5a"</span>,</a>
-<a class="sourceLine" id="cb1-73" data-line-number="73">                           <span class="st">"21"</span> =<span class="st"> "#b0d5df"</span>, <span class="st">"22"</span> =<span class="st"> "#ad9ea5"</span>, <span class="st">"23"</span> =<span class="st"> "#985356"</span>,</a>
-<a class="sourceLine" id="cb1-74" data-line-number="74">                           <span class="st">"31"</span> =<span class="st"> "#64acbe"</span>, <span class="st">"32"</span> =<span class="st"> "#627f8c"</span>, <span class="st">"33"</span> =<span class="st"> "#574249"</span>)</a>
-<a class="sourceLine" id="cb1-75" data-line-number="75"></a>
-<a class="sourceLine" id="cb1-76" data-line-number="76">####################################################################################################</a>
-<a class="sourceLine" id="cb1-77" data-line-number="77"></a>
-<a class="sourceLine" id="cb1-78" data-line-number="78">################################## CREATE RESULTS DIRECTORY WITH SUBDIRECTORIES ####################</a>
-<a class="sourceLine" id="cb1-79" data-line-number="79"><span class="co"># results directory will be created as subdirectory in working directory</span></a>
-<a class="sourceLine" id="cb1-80" data-line-number="80">pf =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/getwd">getwd</a></span>()</a>
-<a class="sourceLine" id="cb1-81" data-line-number="81"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-82" data-line-number="82"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-83" data-line-number="83"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_metrics"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-84" data-line-number="84"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"final"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-85" data-line-number="85"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"shp"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-86" data-line-number="86"></a>
-<a class="sourceLine" id="cb1-87" data-line-number="87">###################################################################################################</a>
-<a class="sourceLine" id="cb1-88" data-line-number="88"></a>
-<a class="sourceLine" id="cb1-89" data-line-number="89">################################## PREPROCESS RACE-SPECIFIC DATA ##################################</a>
-<a class="sourceLine" id="cb1-90" data-line-number="90"><span class="co"># Read data from GeoTIFFs to a RasterStack object</span></a>
-<a class="sourceLine" id="cb1-91" data-line-number="91">list_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(pf_to_data, <span class="dt">pattern =</span> sfx, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-92" data-line-number="92">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/stack">stack</a></span>(list_raster)</a>
-<a class="sourceLine" id="cb1-93" data-line-number="93"></a>
-<a class="sourceLine" id="cb1-94" data-line-number="94"><span class="co"># Rename raster layers</span></a>
-<a class="sourceLine" id="cb1-95" data-line-number="95">rnames =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">gsub</a></span>(<span class="st">"il_cook_"</span>, <span class="st">""</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/names">names</a></span>(race_raster))</a>
-<a class="sourceLine" id="cb1-96" data-line-number="96">rnames =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/substr">substr</a></span>(rnames, <span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(rnames) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(sfx))</a>
-<a class="sourceLine" id="cb1-97" data-line-number="97"></a>
-<a class="sourceLine" id="cb1-98" data-line-number="98">new_names =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(</a>
-<a class="sourceLine" id="cb1-99" data-line-number="99">  rnames,</a>
-<a class="sourceLine" id="cb1-100" data-line-number="100">  <span class="st">"hispanic"</span> =<span class="st"> "hispanic"</span>,</a>
-<a class="sourceLine" id="cb1-101" data-line-number="101">  <span class="st">"nham"</span> =<span class="st"> "am"</span>,</a>
-<a class="sourceLine" id="cb1-102" data-line-number="102">  <span class="st">"nhas"</span> =<span class="st"> "asian"</span>,</a>
-<a class="sourceLine" id="cb1-103" data-line-number="103">  <span class="st">"nhb"</span> =<span class="st"> "black"</span>,</a>
-<a class="sourceLine" id="cb1-104" data-line-number="104">  <span class="st">"nhother"</span> =<span class="st"> "other"</span>,</a>
-<a class="sourceLine" id="cb1-105" data-line-number="105">  <span class="st">"nhpi"</span> =<span class="st"> "pi"</span>,</a>
-<a class="sourceLine" id="cb1-106" data-line-number="106">  <span class="st">"nhw"</span> =<span class="st"> "white"</span></a>
-<a class="sourceLine" id="cb1-107" data-line-number="107">)</a>
-<a class="sourceLine" id="cb1-108" data-line-number="108"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/names">names</a></span>(race_raster) =<span class="st"> </span>new_names</a>
-<a class="sourceLine" id="cb1-109" data-line-number="109"></a>
-<a class="sourceLine" id="cb1-110" data-line-number="110"><span class="co"># Reorder layers in RasterStack</span></a>
-<a class="sourceLine" id="cb1-111" data-line-number="111">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/subset">subset</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"asian"</span>, <span class="st">"am"</span>, <span class="st">"black"</span>, <span class="st">"hispanic"</span>, <span class="st">"other"</span>, <span class="st">"pi"</span>, <span class="st">"white"</span>))</a>
-<a class="sourceLine" id="cb1-112" data-line-number="112"></a>
-<a class="sourceLine" id="cb1-113" data-line-number="113"><span class="co"># Combine race-specific categories (ASIAN=ASIAN+PI, OTHER=OTHER+AM). </span></a>
-<a class="sourceLine" id="cb1-114" data-line-number="114"><span class="co"># Please notice that pi category does not exist for 1990myc dataset.</span></a>
-<a class="sourceLine" id="cb1-115" data-line-number="115"><span class="cf">if</span> (sfx <span class="op">==</span><span class="st"> "1990myc"</span>) {</a>
-<a class="sourceLine" id="cb1-116" data-line-number="116">  race_raster[[<span class="st">"other"</span>]] =<span class="st"> </span>race_raster[[<span class="st">"other"</span>]] <span class="op">+</span><span class="st"> </span>race_raster[[<span class="st">"am"</span>]]</a>
-<a class="sourceLine" id="cb1-117" data-line-number="117">  race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/addLayer">dropLayer</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"am"</span>))</a>
-<a class="sourceLine" id="cb1-118" data-line-number="118">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb1-119" data-line-number="119">  race_raster[[<span class="st">"other"</span>]] =<span class="st"> </span>race_raster[[<span class="st">"other"</span>]] <span class="op">+</span><span class="st"> </span>race_raster[[<span class="st">"am"</span>]]</a>
-<a class="sourceLine" id="cb1-120" data-line-number="120">  race_raster[[<span class="st">"asian"</span>]] =<span class="st"> </span>race_raster[[<span class="st">"asian"</span>]] <span class="op">+</span><span class="st"> </span>race_raster[[<span class="st">"pi"</span>]]</a>
-<a class="sourceLine" id="cb1-121" data-line-number="121">  race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/addLayer">dropLayer</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"am"</span>, <span class="st">"pi"</span>))</a>
-<a class="sourceLine" id="cb1-122" data-line-number="122">}</a>
+<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co"># Path to race directory with downloaded data.</span></a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">pf_to_data =<span class="st"> "il_cook/race"</span></a>
+<a class="sourceLine" id="cb1-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="co"># sfx indicates which dataset will be used. There are 3 options: </span></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34">## sfx="1990myc" - race specific grids for 1990 year.</a>
+<a class="sourceLine" id="cb1-35" data-line-number="35">## sfx="2000myc" - race specific grids for 2000 year.</a>
+<a class="sourceLine" id="cb1-36" data-line-number="36">## sfx="2010myc" - race specific grids for 2010 year.</a>
+<a class="sourceLine" id="cb1-37" data-line-number="37"></a>
+<a class="sourceLine" id="cb1-38" data-line-number="38">sfx =<span class="st"> "2010myc"</span></a>
+<a class="sourceLine" id="cb1-39" data-line-number="39"></a>
+<a class="sourceLine" id="cb1-40" data-line-number="40"><span class="co"># Number of realizations (racial landscape) to generate.</span></a>
+<a class="sourceLine" id="cb1-41" data-line-number="41"><span class="co"># It is recommended to generate at least 30 realizations. </span></a>
+<a class="sourceLine" id="cb1-42" data-line-number="42">nrealization =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb1-43" data-line-number="43"></a>
+<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co"># list with size and shift parameters: list(c(size, shift), c(size, shift),...). </span></a>
+<a class="sourceLine" id="cb1-45" data-line-number="45"><span class="co"># In this case calculation will be performed for 4 different spatia scale:</span></a>
+<a class="sourceLine" id="cb1-46" data-line-number="46"><span class="co"># 1. c(60,30) - size = 60 local ladnscape from 60x60 cells window will be calculated, </span></a>
+<a class="sourceLine" id="cb1-47" data-line-number="47"><span class="co">#    it corresponds to the spatial scale of 1.8km (60 cells x 30m).</span></a>
+<a class="sourceLine" id="cb1-48" data-line-number="48"><span class="co"># 2. c(120,60) - corresponds to the scale of 3.6 km. </span></a>
+<a class="sourceLine" id="cb1-49" data-line-number="49"><span class="co"># 3. c(240,120) - corresponds to the scale of 7.2 km. </span></a>
+<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="co"># 4. c(480, 240) - corresponds to the scale of 14.4 km. </span></a>
+<a class="sourceLine" id="cb1-51" data-line-number="51">list_size_shift =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">60</span>,<span class="dv">30</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">120</span>,<span class="dv">60</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">240</span>,<span class="dv">120</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">480</span>, <span class="dv">240</span>))</a>
+<a class="sourceLine" id="cb1-52" data-line-number="52"></a>
+<a class="sourceLine" id="cb1-53" data-line-number="53">####################################################################################################</a>
+<a class="sourceLine" id="cb1-54" data-line-number="54"></a>
+<a class="sourceLine" id="cb1-55" data-line-number="55"><span class="co"># FUNCTION TO CALCULATE RACIAL SEGREGATION/DIVERSITY CLASSIFICATION</span></a>
+<a class="sourceLine" id="cb1-56" data-line-number="56">bivariate_classification =<span class="st"> </span><span class="cf">function</span>(entropy, mutual_information, n) {</a>
+<a class="sourceLine" id="cb1-57" data-line-number="57">  </a>
+<a class="sourceLine" id="cb1-58" data-line-number="58">  <span class="co"># max entropy is calculated as log2 from the number of race categories</span></a>
+<a class="sourceLine" id="cb1-59" data-line-number="59">  nent =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(n)</a>
+<a class="sourceLine" id="cb1-60" data-line-number="60">  </a>
+<a class="sourceLine" id="cb1-61" data-line-number="61">  <span class="co"># divide entropy values into 3 categories</span></a>
+<a class="sourceLine" id="cb1-62" data-line-number="62">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/cut">cut</a></span>(entropy, <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, nent), <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), </a>
+<a class="sourceLine" id="cb1-63" data-line-number="63">                <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-64" data-line-number="64">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/as.character">as.character</a></span>(ent_cat))</a>
+<a class="sourceLine" id="cb1-65" data-line-number="65">  </a>
+<a class="sourceLine" id="cb1-66" data-line-number="66">  <span class="co"># divide mutual information values into 3 categories</span></a>
+<a class="sourceLine" id="cb1-67" data-line-number="67">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/cut">cut</a></span>(mutual_information, <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), </a>
+<a class="sourceLine" id="cb1-68" data-line-number="68">                <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-69" data-line-number="69">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/as.character">as.character</a></span>(mut_cat))</a>
+<a class="sourceLine" id="cb1-70" data-line-number="70">  </a>
+<a class="sourceLine" id="cb1-71" data-line-number="71">  <span class="co"># combine categories of entropy (measure of racial diversity) </span></a>
+<a class="sourceLine" id="cb1-72" data-line-number="72">  <span class="co"># and mutual information (measure of racial segregation) </span></a>
+<a class="sourceLine" id="cb1-73" data-line-number="73">  bivar_cls =<span class="st"> </span>mut_cat <span class="op">+</span><span class="st"> </span>ent_cat</a>
+<a class="sourceLine" id="cb1-74" data-line-number="74">  bivar_cls =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/factor">as.factor</a></span>(bivar_cls)</a>
+<a class="sourceLine" id="cb1-75" data-line-number="75">  </a>
+<a class="sourceLine" id="cb1-76" data-line-number="76">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(bivar_cls)</a>
+<a class="sourceLine" id="cb1-77" data-line-number="77">}</a>
+<a class="sourceLine" id="cb1-78" data-line-number="78"></a>
+<a class="sourceLine" id="cb1-79" data-line-number="79">####################################################################################################</a>
+<a class="sourceLine" id="cb1-80" data-line-number="80"></a>
+<a class="sourceLine" id="cb1-81" data-line-number="81"><span class="co"># COLORS USED FOR VISUALIZATION</span></a>
+<a class="sourceLine" id="cb1-82" data-line-number="82">## They corresponds to 5 racial categories: ASIAN, BLACK, HISPANIC, OTHER, WHITE</a>
+<a class="sourceLine" id="cb1-83" data-line-number="83">race_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)</a>
+<a class="sourceLine" id="cb1-84" data-line-number="84"></a>
+<a class="sourceLine" id="cb1-85" data-line-number="85">## Bivariate palette to display the racial segregation/diversity classification</a>
+<a class="sourceLine" id="cb1-86" data-line-number="86">bivariate_class_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"11"</span> =<span class="st"> "#e8e8e8"</span>, <span class="st">"12"</span> =<span class="st"> "#e4acac"</span>, <span class="st">"13"</span> =<span class="st"> "#c85a5a"</span>,</a>
+<a class="sourceLine" id="cb1-87" data-line-number="87">                           <span class="st">"21"</span> =<span class="st"> "#b0d5df"</span>, <span class="st">"22"</span> =<span class="st"> "#ad9ea5"</span>, <span class="st">"23"</span> =<span class="st"> "#985356"</span>,</a>
+<a class="sourceLine" id="cb1-88" data-line-number="88">                           <span class="st">"31"</span> =<span class="st"> "#64acbe"</span>, <span class="st">"32"</span> =<span class="st"> "#627f8c"</span>, <span class="st">"33"</span> =<span class="st"> "#574249"</span>)</a>
+<a class="sourceLine" id="cb1-89" data-line-number="89"></a>
+<a class="sourceLine" id="cb1-90" data-line-number="90">####################################################################################################</a>
+<a class="sourceLine" id="cb1-91" data-line-number="91"></a>
+<a class="sourceLine" id="cb1-92" data-line-number="92">################################## CREATE RESULTS DIRECTORY WITH SUBDIRECTORIES ####################</a>
+<a class="sourceLine" id="cb1-93" data-line-number="93"><span class="co"># results directory will be created as subdirectory in working directory</span></a>
+<a class="sourceLine" id="cb1-94" data-line-number="94">pf =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/getwd">getwd</a></span>()</a>
+<a class="sourceLine" id="cb1-95" data-line-number="95"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-96" data-line-number="96"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-97" data-line-number="97"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_metrics"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-98" data-line-number="98"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"final"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-99" data-line-number="99"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files2">dir.create</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"shp"</span>), <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-100" data-line-number="100"></a>
+<a class="sourceLine" id="cb1-101" data-line-number="101">###################################################################################################</a>
+<a class="sourceLine" id="cb1-102" data-line-number="102"></a>
+<a class="sourceLine" id="cb1-103" data-line-number="103">################################## PREPROCESS RACE-SPECIFIC DATA ##################################</a>
+<a class="sourceLine" id="cb1-104" data-line-number="104"><span class="co"># Read data from GeoTIFFs to a RasterStack object</span></a>
+<a class="sourceLine" id="cb1-105" data-line-number="105">list_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(pf_to_data, <span class="dt">pattern =</span> sfx, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-106" data-line-number="106">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/stack">stack</a></span>(list_raster)</a>
+<a class="sourceLine" id="cb1-107" data-line-number="107"></a>
+<a class="sourceLine" id="cb1-108" data-line-number="108"><span class="co"># Rename raster layers</span></a>
+<a class="sourceLine" id="cb1-109" data-line-number="109">rnames =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">sapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/strsplit">strsplit</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/names">names</a></span>(race_raster), <span class="st">"_"</span>), tail, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-110" data-line-number="110">rnames =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/substr">substr</a></span>(rnames, <span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(rnames) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(sfx))</a>
+<a class="sourceLine" id="cb1-111" data-line-number="111"></a>
+<a class="sourceLine" id="cb1-112" data-line-number="112">new_names =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(</a>
+<a class="sourceLine" id="cb1-113" data-line-number="113">  rnames,</a>
+<a class="sourceLine" id="cb1-114" data-line-number="114">  <span class="st">"hispanic"</span> =<span class="st"> "hispanic"</span>,</a>
+<a class="sourceLine" id="cb1-115" data-line-number="115">  <span class="st">"nham"</span> =<span class="st"> "am"</span>,</a>
+<a class="sourceLine" id="cb1-116" data-line-number="116">  <span class="st">"nhas"</span> =<span class="st"> "asian"</span>,</a>
+<a class="sourceLine" id="cb1-117" data-line-number="117">  <span class="st">"nhb"</span> =<span class="st"> "black"</span>,</a>
+<a class="sourceLine" id="cb1-118" data-line-number="118">  <span class="st">"nhother"</span> =<span class="st"> "other"</span>,</a>
+<a class="sourceLine" id="cb1-119" data-line-number="119">  <span class="st">"nhpi"</span> =<span class="st"> "pi"</span>,</a>
+<a class="sourceLine" id="cb1-120" data-line-number="120">  <span class="st">"nhw"</span> =<span class="st"> "white"</span></a>
+<a class="sourceLine" id="cb1-121" data-line-number="121">)</a>
+<a class="sourceLine" id="cb1-122" data-line-number="122"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/names">names</a></span>(race_raster) =<span class="st"> </span>new_names</a>
 <a class="sourceLine" id="cb1-123" data-line-number="123"></a>
-<a class="sourceLine" id="cb1-124" data-line-number="124"><span class="co"># race raster object contains 5 layers: </span></a>
-<a class="sourceLine" id="cb1-125" data-line-number="125"><span class="co"># asian, black, hispanic, other, white with subpolulation densities</span></a>
-<a class="sourceLine" id="cb1-126" data-line-number="126">race_raster</a>
-<a class="sourceLine" id="cb1-127" data-line-number="127"></a>
-<a class="sourceLine" id="cb1-128" data-line-number="128"><span class="co"># save race_raster to a rds file</span></a>
-<a class="sourceLine" id="cb1-129" data-line-number="129"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"race_raster.rds"</span>))</a>
-<a class="sourceLine" id="cb1-130" data-line-number="130"></a>
-<a class="sourceLine" id="cb1-131" data-line-number="131">###################################################################################################</a>
-<a class="sourceLine" id="cb1-132" data-line-number="132"></a>
-<a class="sourceLine" id="cb1-133" data-line-number="133">################################## CONSTRUCTING RACIAL LANDSCAPE ##################################</a>
-<a class="sourceLine" id="cb1-134" data-line-number="134">real_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_realizations.html">create_realizations</a></span>(race_raster, <span class="dt">n =</span> nrealization)</a>
-<a class="sourceLine" id="cb1-135" data-line-number="135"></a>
-<a class="sourceLine" id="cb1-136" data-line-number="136"><span class="co">#save real_raster object</span></a>
-<a class="sourceLine" id="cb1-137" data-line-number="137"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(real_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"real_rast.rds"</span>))</a>
-<a class="sourceLine" id="cb1-138" data-line-number="138">###################################################################################################</a>
-<a class="sourceLine" id="cb1-139" data-line-number="139"></a>
-<a class="sourceLine" id="cb1-140" data-line-number="140">################################## CALCULATE RACE-SPECIFIC DENSTITIES #############################</a>
-<a class="sourceLine" id="cb1-141" data-line-number="141">dens_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_densities.html">create_densities</a></span>(real_raster, race_raster, <span class="dt">window_size =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb1-142" data-line-number="142"></a>
-<a class="sourceLine" id="cb1-143" data-line-number="143"><span class="co">#save dens_raster object</span></a>
-<a class="sourceLine" id="cb1-144" data-line-number="144"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(dens_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"dens_rast.rds"</span>))</a>
+<a class="sourceLine" id="cb1-124" data-line-number="124"><span class="co"># Reorder layers in RasterStack</span></a>
+<a class="sourceLine" id="cb1-125" data-line-number="125">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/subset">subset</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"asian"</span>, <span class="st">"am"</span>, <span class="st">"black"</span>, <span class="st">"hispanic"</span>, <span class="st">"other"</span>, <span class="st">"pi"</span>, <span class="st">"white"</span>))</a>
+<a class="sourceLine" id="cb1-126" data-line-number="126"></a>
+<a class="sourceLine" id="cb1-127" data-line-number="127"><span class="co"># Combine race-specific categories (ASIAN=ASIAN+PI, OTHER=OTHER+AM). </span></a>
+<a class="sourceLine" id="cb1-128" data-line-number="128"><span class="co"># Please notice that pi category does not exist for 1990myc dataset.</span></a>
+<a class="sourceLine" id="cb1-129" data-line-number="129"><span class="cf">if</span> (sfx <span class="op">==</span><span class="st"> "1990myc"</span>) {</a>
+<a class="sourceLine" id="cb1-130" data-line-number="130">  race_raster[[<span class="st">"other"</span>]] =<span class="st"> </span>race_raster[[<span class="st">"other"</span>]] <span class="op">+</span><span class="st"> </span>race_raster[[<span class="st">"am"</span>]]</a>
+<a class="sourceLine" id="cb1-131" data-line-number="131">  race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/addLayer">dropLayer</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"am"</span>))</a>
+<a class="sourceLine" id="cb1-132" data-line-number="132">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1-133" data-line-number="133">  race_raster[[<span class="st">"other"</span>]] =<span class="st"> </span>race_raster[[<span class="st">"other"</span>]] <span class="op">+</span><span class="st"> </span>race_raster[[<span class="st">"am"</span>]]</a>
+<a class="sourceLine" id="cb1-134" data-line-number="134">  race_raster[[<span class="st">"asian"</span>]] =<span class="st"> </span>race_raster[[<span class="st">"asian"</span>]] <span class="op">+</span><span class="st"> </span>race_raster[[<span class="st">"pi"</span>]]</a>
+<a class="sourceLine" id="cb1-135" data-line-number="135">  race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/addLayer">dropLayer</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"am"</span>, <span class="st">"pi"</span>))</a>
+<a class="sourceLine" id="cb1-136" data-line-number="136">}</a>
+<a class="sourceLine" id="cb1-137" data-line-number="137"></a>
+<a class="sourceLine" id="cb1-138" data-line-number="138"><span class="co"># race raster object contains 5 layers: </span></a>
+<a class="sourceLine" id="cb1-139" data-line-number="139"><span class="co"># asian, black, hispanic, other, white with subpolulation densities</span></a>
+<a class="sourceLine" id="cb1-140" data-line-number="140">race_raster</a>
+<a class="sourceLine" id="cb1-141" data-line-number="141"></a>
+<a class="sourceLine" id="cb1-142" data-line-number="142"><span class="co"># save race_raster to a rds file</span></a>
+<a class="sourceLine" id="cb1-143" data-line-number="143"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(race_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"race_raster.rds"</span>))</a>
+<a class="sourceLine" id="cb1-144" data-line-number="144"></a>
 <a class="sourceLine" id="cb1-145" data-line-number="145">###################################################################################################</a>
 <a class="sourceLine" id="cb1-146" data-line-number="146"></a>
-<a class="sourceLine" id="cb1-147" data-line-number="147">################################## CALCULATE METRICS FOR DIFFERENT SPATIAL SCALES ################</a>
-<a class="sourceLine" id="cb1-148" data-line-number="148"></a>
-<a class="sourceLine" id="cb1-149" data-line-number="149">complete_smr_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>()</a>
-<a class="sourceLine" id="cb1-150" data-line-number="150"><span class="cf">for</span> (i <span class="cf">in</span> list_size_shift) { <span class="co">#start size loop</span></a>
-<a class="sourceLine" id="cb1-151" data-line-number="151">  size =<span class="st"> </span>i[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb1-152" data-line-number="152">  shift =<span class="st"> </span>i[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb1-153" data-line-number="153">  </a>
-<a class="sourceLine" id="cb1-154" data-line-number="154">  #######################CALCULATE METRICS FOR SPECIFIED SIZE/SHIFT PARAMETER######################</a>
-<a class="sourceLine" id="cb1-155" data-line-number="155">  metr_df =<span class="st"> </span><span class="kw"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(real_raster, dens_raster,</a>
-<a class="sourceLine" id="cb1-156" data-line-number="156">                              <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>,</a>
-<a class="sourceLine" id="cb1-157" data-line-number="157">                              <span class="dt">size =</span> size, <span class="dt">shift =</span> shift, <span class="dt">threshold =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb1-158" data-line-number="158">  </a>
-<a class="sourceLine" id="cb1-159" data-line-number="159">  <span class="co"># Summarize metrics</span></a>
-<a class="sourceLine" id="cb1-160" data-line-number="160">  ## Number of motifels at given spatial scale</a>
-<a class="sourceLine" id="cb1-161" data-line-number="161">  sel =<span class="st"> </span>metr_df[<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(metr_df<span class="op">$</span>ent), ]</a>
-<a class="sourceLine" id="cb1-162" data-line-number="162">  nmotif =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(sel<span class="op">$</span>realization))</a>
-<a class="sourceLine" id="cb1-163" data-line-number="163">  </a>
-<a class="sourceLine" id="cb1-164" data-line-number="164">  <span class="co"># Metrics summary</span></a>
-<a class="sourceLine" id="cb1-165" data-line-number="165">  smr =<span class="st"> </span>metr_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-166" data-line-number="166"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(row, col) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-167" data-line-number="167"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(</a>
-<a class="sourceLine" id="cb1-168" data-line-number="168">      <span class="dt">ent_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-169" data-line-number="169">      <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-170" data-line-number="170">      <span class="dt">mutinf_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-171" data-line-number="171">      <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-172" data-line-number="172">    )</a>
-<a class="sourceLine" id="cb1-173" data-line-number="173">  </a>
-<a class="sourceLine" id="cb1-174" data-line-number="174">  smr =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/as.data.frame">as.data.frame</a></span>(smr)</a>
-<a class="sourceLine" id="cb1-175" data-line-number="175"></a>
-<a class="sourceLine" id="cb1-176" data-line-number="176">  <span class="co"># Calculate an ensemble average for entropy and mutual information</span></a>
-<a class="sourceLine" id="cb1-177" data-line-number="177">  complete_smr =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
-<a class="sourceLine" id="cb1-178" data-line-number="178">    <span class="dt">size =</span> size,</a>
-<a class="sourceLine" id="cb1-179" data-line-number="179">    <span class="dt">shift =</span> shift,</a>
-<a class="sourceLine" id="cb1-180" data-line-number="180">    <span class="dt">n =</span> nmotif,</a>
-<a class="sourceLine" id="cb1-181" data-line-number="181">    <span class="dt">ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>ent_mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-182" data-line-number="182">    <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>ent_sd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-183" data-line-number="183">    <span class="dt">mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>mutinf_mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-184" data-line-number="184">    <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>mutinf_sd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-185" data-line-number="185">  )</a>
-<a class="sourceLine" id="cb1-186" data-line-number="186">  complete_smr_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(complete_smr_df, complete_smr)</a>
-<a class="sourceLine" id="cb1-187" data-line-number="187">  </a>
-<a class="sourceLine" id="cb1-188" data-line-number="188">  <span class="co"># Calculate racial segregation/diversity classification</span></a>
-<a class="sourceLine" id="cb1-189" data-line-number="189">  smr<span class="op">$</span>bivar_cls =<span class="st"> </span><span class="kw">bivariate_classification</span>(<span class="dt">entropy =</span> smr<span class="op">$</span>ent_mean, </a>
-<a class="sourceLine" id="cb1-190" data-line-number="190">                                           <span class="dt">mutual_information =</span> smr<span class="op">$</span>mutinf_mean,</a>
-<a class="sourceLine" id="cb1-191" data-line-number="191">                                           <span class="dt">n =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/nlayers">nlayers</a></span>(race_raster))</a>
+<a class="sourceLine" id="cb1-147" data-line-number="147">################################## CONSTRUCTING RACIAL LANDSCAPE ##################################</a>
+<a class="sourceLine" id="cb1-148" data-line-number="148">real_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_realizations.html">create_realizations</a></span>(race_raster, <span class="dt">n =</span> nrealization)</a>
+<a class="sourceLine" id="cb1-149" data-line-number="149"></a>
+<a class="sourceLine" id="cb1-150" data-line-number="150"><span class="co"># save real_raster object</span></a>
+<a class="sourceLine" id="cb1-151" data-line-number="151"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(real_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"real_rast.rds"</span>))</a>
+<a class="sourceLine" id="cb1-152" data-line-number="152"></a>
+<a class="sourceLine" id="cb1-153" data-line-number="153"><span class="co"># plot racial landscape</span></a>
+<a class="sourceLine" id="cb1-154" data-line-number="154"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"racial_landscape.png"</span>)) </a>
+<a class="sourceLine" id="cb1-155" data-line-number="155"><span class="kw"><a href="../reference/plot_realization.html">plot_realization</a></span>(<span class="dt">x =</span> real_raster[[<span class="dv">1</span>]], <span class="dt">y =</span> race_raster, <span class="dt">hex =</span> race_colors)</a>
+<a class="sourceLine" id="cb1-156" data-line-number="156"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
+<a class="sourceLine" id="cb1-157" data-line-number="157">###################################################################################################</a>
+<a class="sourceLine" id="cb1-158" data-line-number="158"></a>
+<a class="sourceLine" id="cb1-159" data-line-number="159">################################## CALCULATE RACE-SPECIFIC DENSTITIES #############################</a>
+<a class="sourceLine" id="cb1-160" data-line-number="160">dens_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_densities.html">create_densities</a></span>(real_raster, race_raster, <span class="dt">window_size =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1-161" data-line-number="161"></a>
+<a class="sourceLine" id="cb1-162" data-line-number="162"><span class="co"># save dens_raster object</span></a>
+<a class="sourceLine" id="cb1-163" data-line-number="163"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(dens_raster, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(pf, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"dens_rast.rds"</span>))</a>
+<a class="sourceLine" id="cb1-164" data-line-number="164">###################################################################################################</a>
+<a class="sourceLine" id="cb1-165" data-line-number="165"></a>
+<a class="sourceLine" id="cb1-166" data-line-number="166">################################## CALCULATE METRICS FOR DIFFERENT SPATIAL SCALES ################</a>
+<a class="sourceLine" id="cb1-167" data-line-number="167"></a>
+<a class="sourceLine" id="cb1-168" data-line-number="168">complete_smr_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>()</a>
+<a class="sourceLine" id="cb1-169" data-line-number="169"><span class="cf">for</span> (i <span class="cf">in</span> list_size_shift) { <span class="co">#start size loop</span></a>
+<a class="sourceLine" id="cb1-170" data-line-number="170">  size =<span class="st"> </span>i[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb1-171" data-line-number="171">  shift =<span class="st"> </span>i[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb1-172" data-line-number="172">  </a>
+<a class="sourceLine" id="cb1-173" data-line-number="173">  #######################CALCULATE METRICS FOR SPECIFIED SIZE/SHIFT PARAMETER######################</a>
+<a class="sourceLine" id="cb1-174" data-line-number="174">  metr_df =<span class="st"> </span><span class="kw"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(real_raster, dens_raster,</a>
+<a class="sourceLine" id="cb1-175" data-line-number="175">                              <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>,</a>
+<a class="sourceLine" id="cb1-176" data-line-number="176">                              <span class="dt">size =</span> size, <span class="dt">shift =</span> shift, <span class="dt">threshold =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1-177" data-line-number="177">  </a>
+<a class="sourceLine" id="cb1-178" data-line-number="178">  <span class="co"># Summarize metrics</span></a>
+<a class="sourceLine" id="cb1-179" data-line-number="179">  ## Number of motifels at given spatial scale</a>
+<a class="sourceLine" id="cb1-180" data-line-number="180">  sel =<span class="st"> </span>metr_df[<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(metr_df<span class="op">$</span>ent), ]</a>
+<a class="sourceLine" id="cb1-181" data-line-number="181">  nmotif =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(sel<span class="op">$</span>realization))</a>
+<a class="sourceLine" id="cb1-182" data-line-number="182">  </a>
+<a class="sourceLine" id="cb1-183" data-line-number="183">  <span class="co"># Metrics summary</span></a>
+<a class="sourceLine" id="cb1-184" data-line-number="184">  smr =<span class="st"> </span>metr_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-185" data-line-number="185"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(row, col) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-186" data-line-number="186"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(</a>
+<a class="sourceLine" id="cb1-187" data-line-number="187">      <span class="dt">ent_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-188" data-line-number="188">      <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-189" data-line-number="189">      <span class="dt">mutinf_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-190" data-line-number="190">      <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-191" data-line-number="191">    )</a>
 <a class="sourceLine" id="cb1-192" data-line-number="192">  </a>
-<a class="sourceLine" id="cb1-193" data-line-number="193">  <span class="co"># Save the metrics to csv</span></a>
-<a class="sourceLine" id="cb1-194" data-line-number="194">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(metr_df, </a>
-<a class="sourceLine" id="cb1-195" data-line-number="195">            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"out_metrics"</span>,</a>
-<a class="sourceLine" id="cb1-196" data-line-number="196">                      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"metr_df_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".csv"</span>, <span class="dt">sep =</span> <span class="st">""</span>)),</a>
-<a class="sourceLine" id="cb1-197" data-line-number="197">            <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-198" data-line-number="198">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(smr, </a>
-<a class="sourceLine" id="cb1-199" data-line-number="199">            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"out_metrics"</span>, </a>
-<a class="sourceLine" id="cb1-200" data-line-number="200">                      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"smr_metr_df_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".csv"</span>, <span class="dt">sep =</span> <span class="st">""</span>)),</a>
-<a class="sourceLine" id="cb1-201" data-line-number="201">            <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-202" data-line-number="202">  </a>
-<a class="sourceLine" id="cb1-203" data-line-number="203">  </a>
-<a class="sourceLine" id="cb1-204" data-line-number="204">  #######################CREATE SPATIAL OBJECT WITG METRICES######################</a>
-<a class="sourceLine" id="cb1-205" data-line-number="205">  </a>
-<a class="sourceLine" id="cb1-206" data-line-number="206">  <span class="co"># Create spatial object</span></a>
-<a class="sourceLine" id="cb1-207" data-line-number="207">  grid_sf =<span class="st"> </span><span class="kw"><a href="../reference/create_grid.html">create_grid</a></span>(real_raster, <span class="dt">size =</span> size, <span class="dt">shift =</span> shift)</a>
-<a class="sourceLine" id="cb1-208" data-line-number="208">  </a>
-<a class="sourceLine" id="cb1-209" data-line-number="209">  <span class="co"># Join metrics to the grid</span></a>
-<a class="sourceLine" id="cb1-210" data-line-number="210">  attr_grid =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(grid_sf, smr, <span class="dt">by =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</a>
-<a class="sourceLine" id="cb1-211" data-line-number="211">  sel_grid =<span class="st"> </span>attr_grid[<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(attr_grid<span class="op">$</span>ent_mean),]</a>
-<a class="sourceLine" id="cb1-212" data-line-number="212">  </a>
-<a class="sourceLine" id="cb1-213" data-line-number="213">  <span class="co"># Save the grid as shapefile</span></a>
-<a class="sourceLine" id="cb1-214" data-line-number="214">  <span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_write">st_write</a></span>(attr_grid, </a>
-<a class="sourceLine" id="cb1-215" data-line-number="215">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"shp"</span>, </a>
-<a class="sourceLine" id="cb1-216" data-line-number="216">                     <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"metr_stat_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".shp"</span>, <span class="dt">sep =</span> <span class="st">""</span>)))</a>
-<a class="sourceLine" id="cb1-217" data-line-number="217">  </a>
-<a class="sourceLine" id="cb1-218" data-line-number="218">  #######################VISUALIZATION#########################################</a>
-<a class="sourceLine" id="cb1-219" data-line-number="219">  </a>
-<a class="sourceLine" id="cb1-220" data-line-number="220">  <span class="co"># Divide entropy values into 10 class</span></a>
-<a class="sourceLine" id="cb1-221" data-line-number="221">  ent_breaks =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dt">by =</span> <span class="fl">0.25</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/nlayers">nlayers</a></span>(race_raster)))</a>
+<a class="sourceLine" id="cb1-193" data-line-number="193">  smr =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/as.data.frame">as.data.frame</a></span>(smr)</a>
+<a class="sourceLine" id="cb1-194" data-line-number="194"></a>
+<a class="sourceLine" id="cb1-195" data-line-number="195">  <span class="co"># Calculate an ensemble average for entropy and mutual information</span></a>
+<a class="sourceLine" id="cb1-196" data-line-number="196">  complete_smr =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<a class="sourceLine" id="cb1-197" data-line-number="197">    <span class="dt">size =</span> size,</a>
+<a class="sourceLine" id="cb1-198" data-line-number="198">    <span class="dt">shift =</span> shift,</a>
+<a class="sourceLine" id="cb1-199" data-line-number="199">    <span class="dt">n =</span> nmotif,</a>
+<a class="sourceLine" id="cb1-200" data-line-number="200">    <span class="dt">ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>ent_mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-201" data-line-number="201">    <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>ent_sd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-202" data-line-number="202">    <span class="dt">mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>mutinf_mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-203" data-line-number="203">    <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(smr<span class="op">$</span>mutinf_sd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-204" data-line-number="204">  )</a>
+<a class="sourceLine" id="cb1-205" data-line-number="205">  complete_smr_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(complete_smr_df, complete_smr)</a>
+<a class="sourceLine" id="cb1-206" data-line-number="206">  </a>
+<a class="sourceLine" id="cb1-207" data-line-number="207">  <span class="co"># Calculate racial segregation/diversity classification</span></a>
+<a class="sourceLine" id="cb1-208" data-line-number="208">  smr<span class="op">$</span>bivar_cls =<span class="st"> </span><span class="kw">bivariate_classification</span>(<span class="dt">entropy =</span> smr<span class="op">$</span>ent_mean, </a>
+<a class="sourceLine" id="cb1-209" data-line-number="209">                                           <span class="dt">mutual_information =</span> smr<span class="op">$</span>mutinf_mean,</a>
+<a class="sourceLine" id="cb1-210" data-line-number="210">                                           <span class="dt">n =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/nlayers">nlayers</a></span>(race_raster))</a>
+<a class="sourceLine" id="cb1-211" data-line-number="211">  </a>
+<a class="sourceLine" id="cb1-212" data-line-number="212">  <span class="co"># Save the metrics to csv</span></a>
+<a class="sourceLine" id="cb1-213" data-line-number="213">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(metr_df, </a>
+<a class="sourceLine" id="cb1-214" data-line-number="214">            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"out_metrics"</span>,</a>
+<a class="sourceLine" id="cb1-215" data-line-number="215">                      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"metr_df_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".csv"</span>, <span class="dt">sep =</span> <span class="st">""</span>)),</a>
+<a class="sourceLine" id="cb1-216" data-line-number="216">            <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-217" data-line-number="217">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(smr, </a>
+<a class="sourceLine" id="cb1-218" data-line-number="218">            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"out_metrics"</span>, </a>
+<a class="sourceLine" id="cb1-219" data-line-number="219">                      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"smr_metr_df_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".csv"</span>, <span class="dt">sep =</span> <span class="st">""</span>)),</a>
+<a class="sourceLine" id="cb1-220" data-line-number="220">            <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-221" data-line-number="221">  </a>
 <a class="sourceLine" id="cb1-222" data-line-number="222">  </a>
-<a class="sourceLine" id="cb1-223" data-line-number="223">  <span class="co"># Divide mutual information into 10 class</span></a>
-<a class="sourceLine" id="cb1-224" data-line-number="224">  mut_breaks =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb1-225" data-line-number="225">  </a>
-<a class="sourceLine" id="cb1-226" data-line-number="226">  <span class="co"># Spatial scale in km</span></a>
-<a class="sourceLine" id="cb1-227" data-line-number="227">  scale_km =<span class="st"> </span>(shift <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/resolution">res</a></span>(race_raster)[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb1-228" data-line-number="228">  </a>
-<a class="sourceLine" id="cb1-229" data-line-number="229">  <span class="co"># Mapping racial diversity (save plot to .png)</span></a>
-<a class="sourceLine" id="cb1-230" data-line-number="230">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"diversity_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".png"</span>, <span class="dt">sep =</span> <span class="st">""</span>))) </a>
-<a class="sourceLine" id="cb1-231" data-line-number="231">  <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(sel_grid[<span class="st">"ent_mean"</span>], <span class="dt">breaks =</span> ent_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb1-232" data-line-number="232">       <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(<span class="kw">brewer.pal</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(ent_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)), <span class="dt">bty =</span> <span class="st">"n"</span>, </a>
-<a class="sourceLine" id="cb1-233" data-line-number="233">       <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Racial diversity (Entropy) at the scale of "</span>, </a>
-<a class="sourceLine" id="cb1-234" data-line-number="234">                    scale_km, <span class="st">" km"</span>, <span class="dt">sep =</span> <span class="st">""</span>))</a>
-<a class="sourceLine" id="cb1-235" data-line-number="235">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
+<a class="sourceLine" id="cb1-223" data-line-number="223">  #######################CREATE SPATIAL OBJECT WITG METRICES######################</a>
+<a class="sourceLine" id="cb1-224" data-line-number="224">  </a>
+<a class="sourceLine" id="cb1-225" data-line-number="225">  <span class="co"># Create spatial object</span></a>
+<a class="sourceLine" id="cb1-226" data-line-number="226">  grid_sf =<span class="st"> </span><span class="kw"><a href="../reference/create_grid.html">create_grid</a></span>(real_raster, <span class="dt">size =</span> size, <span class="dt">shift =</span> shift)</a>
+<a class="sourceLine" id="cb1-227" data-line-number="227">  </a>
+<a class="sourceLine" id="cb1-228" data-line-number="228">  <span class="co"># Join metrics to the grid</span></a>
+<a class="sourceLine" id="cb1-229" data-line-number="229">  attr_grid =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(grid_sf, smr, <span class="dt">by =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</a>
+<a class="sourceLine" id="cb1-230" data-line-number="230">  sel_grid =<span class="st"> </span>attr_grid[<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(attr_grid<span class="op">$</span>ent_mean),]</a>
+<a class="sourceLine" id="cb1-231" data-line-number="231">  </a>
+<a class="sourceLine" id="cb1-232" data-line-number="232">  <span class="co"># Save the grid as shapefile</span></a>
+<a class="sourceLine" id="cb1-233" data-line-number="233">  <span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_write">st_write</a></span>(attr_grid, </a>
+<a class="sourceLine" id="cb1-234" data-line-number="234">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"shp"</span>, </a>
+<a class="sourceLine" id="cb1-235" data-line-number="235">                     <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"metr_stat_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".shp"</span>, <span class="dt">sep =</span> <span class="st">""</span>)))</a>
 <a class="sourceLine" id="cb1-236" data-line-number="236">  </a>
-<a class="sourceLine" id="cb1-237" data-line-number="237">  <span class="co"># Mapping racial segregation (save plot to .png)</span></a>
-<a class="sourceLine" id="cb1-238" data-line-number="238">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"segregation_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".png"</span>, <span class="dt">sep =</span> <span class="st">""</span>))) </a>
-<a class="sourceLine" id="cb1-239" data-line-number="239">  <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(sel_grid[<span class="st">"mutinf_mean"</span>], <span class="dt">breaks =</span> mut_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb1-240" data-line-number="240">       <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(<span class="kw">brewer.pal</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(mut_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)), <span class="dt">bty =</span> <span class="st">"n"</span>, </a>
-<a class="sourceLine" id="cb1-241" data-line-number="241">       <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Racial segregation (Mutual information) at the scale of "</span>,</a>
-<a class="sourceLine" id="cb1-242" data-line-number="242">                    scale_km, <span class="st">" km"</span>, <span class="dt">sep =</span> <span class="st">""</span>))</a>
-<a class="sourceLine" id="cb1-243" data-line-number="243">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
+<a class="sourceLine" id="cb1-237" data-line-number="237">  #######################VISUALIZATION#########################################</a>
+<a class="sourceLine" id="cb1-238" data-line-number="238">  </a>
+<a class="sourceLine" id="cb1-239" data-line-number="239">  <span class="co"># Divide entropy values into 10 class</span></a>
+<a class="sourceLine" id="cb1-240" data-line-number="240">  ent_breaks =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dt">by =</span> <span class="fl">0.25</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/nlayers">nlayers</a></span>(race_raster)))</a>
+<a class="sourceLine" id="cb1-241" data-line-number="241">  </a>
+<a class="sourceLine" id="cb1-242" data-line-number="242">  <span class="co"># Divide mutual information into 10 class</span></a>
+<a class="sourceLine" id="cb1-243" data-line-number="243">  mut_breaks =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb1-244" data-line-number="244">  </a>
-<a class="sourceLine" id="cb1-245" data-line-number="245">  <span class="co"># Mapping racial segregation/diversity (save plot to .png)</span></a>
-<a class="sourceLine" id="cb1-246" data-line-number="246">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"bivar_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".png"</span>, <span class="dt">sep =</span> <span class="st">""</span>)))   </a>
-<a class="sourceLine" id="cb1-247" data-line-number="247">  bcat =<span class="st"> </span>bivariate_class_colors[<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/names">names</a></span>(bivariate_class_colors)<span class="op">%in%</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/unique">unique</a></span>(sel_grid<span class="op">$</span>bivar_cls)]</a>
-<a class="sourceLine" id="cb1-248" data-line-number="248">  <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(sel_grid[<span class="st">"bivar_cls"</span>], </a>
-<a class="sourceLine" id="cb1-249" data-line-number="249">       <span class="dt">pal =</span> bcat,</a>
-<a class="sourceLine" id="cb1-250" data-line-number="250">       <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Racial diversity/segregation classification at the scale of "</span>,</a>
-<a class="sourceLine" id="cb1-251" data-line-number="251">                     scale_km, <span class="st">" km"</span>, <span class="dt">sep =</span> <span class="st">""</span>))</a>
-<a class="sourceLine" id="cb1-252" data-line-number="252">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
-<a class="sourceLine" id="cb1-253" data-line-number="253">} <span class="co">#stop size loop</span></a>
-<a class="sourceLine" id="cb1-254" data-line-number="254"></a>
-<a class="sourceLine" id="cb1-255" data-line-number="255"></a>
-<a class="sourceLine" id="cb1-256" data-line-number="256">###################################################################################################</a>
-<a class="sourceLine" id="cb1-257" data-line-number="257"></a>
-<a class="sourceLine" id="cb1-258" data-line-number="258">################################## CALCULATE METRICS FOR THE WHOLE RACIAL LANDSCAPE ###############</a>
-<a class="sourceLine" id="cb1-259" data-line-number="259"></a>
-<a class="sourceLine" id="cb1-260" data-line-number="260">metr =<span class="st"> </span><span class="kw"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(real_raster, dens_raster,</a>
-<a class="sourceLine" id="cb1-261" data-line-number="261">                         <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>, </a>
-<a class="sourceLine" id="cb1-262" data-line-number="262">                         <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-263" data-line-number="263">complete_smr_all =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
-<a class="sourceLine" id="cb1-264" data-line-number="264">  <span class="dt">size =</span> <span class="st">"ALL"</span>,</a>
-<a class="sourceLine" id="cb1-265" data-line-number="265">  <span class="dt">shift =</span> <span class="st">"ALL"</span>,</a>
-<a class="sourceLine" id="cb1-266" data-line-number="266">  <span class="dt">n =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb1-267" data-line-number="267">  <span class="dt">ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(metr<span class="op">$</span>ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-268" data-line-number="268">  <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(metr<span class="op">$</span>ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-269" data-line-number="269">  <span class="dt">mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(metr<span class="op">$</span>mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1-270" data-line-number="270">  <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(metr<span class="op">$</span>mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-271" data-line-number="271">)</a>
-<a class="sourceLine" id="cb1-272" data-line-number="272">complete_smr_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(complete_smr_df, complete_smr_all)</a>
-<a class="sourceLine" id="cb1-273" data-line-number="273"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(complete_smr_df) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"size"</span>, <span class="st">"shift"</span>, <span class="st">"n"</span>, <span class="st">"ent"</span>, <span class="st">"ent_sd"</span>, <span class="st">"mutinf"</span>, <span class="st">"mutinf_sd"</span>)</a>
+<a class="sourceLine" id="cb1-245" data-line-number="245">  <span class="co"># Spatial scale in km</span></a>
+<a class="sourceLine" id="cb1-246" data-line-number="246">  scale_km =<span class="st"> </span>(shift <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/resolution">res</a></span>(race_raster)[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb1-247" data-line-number="247">  </a>
+<a class="sourceLine" id="cb1-248" data-line-number="248">  <span class="co"># Mapping racial diversity (save plot to .png)</span></a>
+<a class="sourceLine" id="cb1-249" data-line-number="249">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"diversity_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".png"</span>, <span class="dt">sep =</span> <span class="st">""</span>))) </a>
+<a class="sourceLine" id="cb1-250" data-line-number="250">  <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(sel_grid[<span class="st">"ent_mean"</span>], <span class="dt">breaks =</span> ent_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb1-251" data-line-number="251">       <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(<span class="kw">brewer.pal</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(ent_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)), <span class="dt">bty =</span> <span class="st">"n"</span>, </a>
+<a class="sourceLine" id="cb1-252" data-line-number="252">       <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Racial diversity (Entropy) at the scale of "</span>, </a>
+<a class="sourceLine" id="cb1-253" data-line-number="253">                    scale_km, <span class="st">" km"</span>, <span class="dt">sep =</span> <span class="st">""</span>))</a>
+<a class="sourceLine" id="cb1-254" data-line-number="254">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
+<a class="sourceLine" id="cb1-255" data-line-number="255">  </a>
+<a class="sourceLine" id="cb1-256" data-line-number="256">  <span class="co"># Mapping racial segregation (save plot to .png)</span></a>
+<a class="sourceLine" id="cb1-257" data-line-number="257">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"segregation_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".png"</span>, <span class="dt">sep =</span> <span class="st">""</span>))) </a>
+<a class="sourceLine" id="cb1-258" data-line-number="258">  <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(sel_grid[<span class="st">"mutinf_mean"</span>], <span class="dt">breaks =</span> mut_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb1-259" data-line-number="259">       <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(<span class="kw">brewer.pal</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(mut_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)), <span class="dt">bty =</span> <span class="st">"n"</span>, </a>
+<a class="sourceLine" id="cb1-260" data-line-number="260">       <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Racial segregation (Mutual information) at the scale of "</span>,</a>
+<a class="sourceLine" id="cb1-261" data-line-number="261">                    scale_km, <span class="st">" km"</span>, <span class="dt">sep =</span> <span class="st">""</span>))</a>
+<a class="sourceLine" id="cb1-262" data-line-number="262">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
+<a class="sourceLine" id="cb1-263" data-line-number="263">  </a>
+<a class="sourceLine" id="cb1-264" data-line-number="264">  <span class="co"># Mapping racial segregation/diversity (save plot to .png)</span></a>
+<a class="sourceLine" id="cb1-265" data-line-number="265">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"bivar_"</span>, size, <span class="st">"_"</span>, shift, <span class="st">".png"</span>, <span class="dt">sep =</span> <span class="st">""</span>)))   </a>
+<a class="sourceLine" id="cb1-266" data-line-number="266">  bcat =<span class="st"> </span>bivariate_class_colors[<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/names">names</a></span>(bivariate_class_colors)<span class="op">%in%</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/unique">unique</a></span>(sel_grid<span class="op">$</span>bivar_cls)]</a>
+<a class="sourceLine" id="cb1-267" data-line-number="267">  <span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(sel_grid[<span class="st">"bivar_cls"</span>], </a>
+<a class="sourceLine" id="cb1-268" data-line-number="268">       <span class="dt">pal =</span> bcat,</a>
+<a class="sourceLine" id="cb1-269" data-line-number="269">       <span class="dt">main =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="st">"Racial diversity/segregation classification at the scale of "</span>,</a>
+<a class="sourceLine" id="cb1-270" data-line-number="270">                     scale_km, <span class="st">" km"</span>, <span class="dt">sep =</span> <span class="st">""</span>))</a>
+<a class="sourceLine" id="cb1-271" data-line-number="271">  <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>() </a>
+<a class="sourceLine" id="cb1-272" data-line-number="272">} <span class="co">#stop size loop</span></a>
+<a class="sourceLine" id="cb1-273" data-line-number="273"></a>
 <a class="sourceLine" id="cb1-274" data-line-number="274"></a>
-<a class="sourceLine" id="cb1-275" data-line-number="275"><span class="co"># Write table with metrices for different spatial scales and for the whole area. </span></a>
-<a class="sourceLine" id="cb1-276" data-line-number="276"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(complete_smr_df,</a>
-<a class="sourceLine" id="cb1-277" data-line-number="277">          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"complete_smr.csv"</span>),</a>
-<a class="sourceLine" id="cb1-278" data-line-number="278">          <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-279" data-line-number="279"></a>
-<a class="sourceLine" id="cb1-280" data-line-number="280">###################################################################################################</a></code></pre></div>
+<a class="sourceLine" id="cb1-275" data-line-number="275">###################################################################################################</a>
+<a class="sourceLine" id="cb1-276" data-line-number="276"></a>
+<a class="sourceLine" id="cb1-277" data-line-number="277">################################## CALCULATE METRICS FOR THE WHOLE RACIAL LANDSCAPE ###############</a>
+<a class="sourceLine" id="cb1-278" data-line-number="278"></a>
+<a class="sourceLine" id="cb1-279" data-line-number="279">metr =<span class="st"> </span><span class="kw"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(real_raster, dens_raster,</a>
+<a class="sourceLine" id="cb1-280" data-line-number="280">                         <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>, </a>
+<a class="sourceLine" id="cb1-281" data-line-number="281">                         <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-282" data-line-number="282">complete_smr_all =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<a class="sourceLine" id="cb1-283" data-line-number="283">  <span class="dt">size =</span> <span class="st">"ALL"</span>,</a>
+<a class="sourceLine" id="cb1-284" data-line-number="284">  <span class="dt">shift =</span> <span class="st">"ALL"</span>,</a>
+<a class="sourceLine" id="cb1-285" data-line-number="285">  <span class="dt">n =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb1-286" data-line-number="286">  <span class="dt">ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(metr<span class="op">$</span>ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-287" data-line-number="287">  <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(metr<span class="op">$</span>ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-288" data-line-number="288">  <span class="dt">mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(metr<span class="op">$</span>mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1-289" data-line-number="289">  <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(metr<span class="op">$</span>mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-290" data-line-number="290">)</a>
+<a class="sourceLine" id="cb1-291" data-line-number="291">complete_smr_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(complete_smr_df, complete_smr_all)</a>
+<a class="sourceLine" id="cb1-292" data-line-number="292"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(complete_smr_df) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"size"</span>, <span class="st">"shift"</span>, <span class="st">"n"</span>, <span class="st">"ent"</span>, <span class="st">"ent_sd"</span>, <span class="st">"mutinf"</span>, <span class="st">"mutinf_sd"</span>)</a>
+<a class="sourceLine" id="cb1-293" data-line-number="293"></a>
+<a class="sourceLine" id="cb1-294" data-line-number="294"><span class="co"># Write table with metrices for different spatial scales and for the whole area. </span></a>
+<a class="sourceLine" id="cb1-295" data-line-number="295"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(complete_smr_df,</a>
+<a class="sourceLine" id="cb1-296" data-line-number="296">          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"complete_smr.csv"</span>),</a>
+<a class="sourceLine" id="cb1-297" data-line-number="297">          <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-298" data-line-number="298"></a>
+<a class="sourceLine" id="cb1-299" data-line-number="299">###################################################################################################</a></code></pre></div>
 </div>
   </div>
 

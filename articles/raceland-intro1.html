@@ -79,7 +79,7 @@
       <h1>raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2019-08-26</h4>
+            <h4 class="date">2019-08-27</h4>
       
       
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -106,8 +106,26 @@
 <li><p>Mapping the racial landscape.</p></li>
 <li><p>Mapping racial diversity and segregation at different scales.</p></li>
 </ol>
-<p>A computational framework consists of the four steps (see figure below, the blue font indicates the names of function from the <strong>raceland</strong> package).</p>
+<p>The computational framework consists of the four steps (see figure below, the blue font indicates the names of function from the <strong>raceland</strong> package).</p>
 <p><img src="fig0framework.png" width="800"></p>
+<div id="required-packages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#required-packages" class="anchor"></a>Required packages</h2>
+<p>The computational framework requires following packages: <strong>raceland</strong>, <strong>comat</strong>, <strong>rgdal</strong>, <strong>raster</strong>, <strong>sf</strong>, and <strong>dplyr</strong>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install required packages </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">pkgs =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="st">"raceland"</span>,                </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="st">"comat"</span>,            </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="st">"rgdal"</span>,   </a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="st">"raster"</span>,</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="st">"sf"</span>,              </a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="st">"dplyr"</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">to_install =<span class="st"> </span><span class="op">!</span>pkgs <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/installed.packages">installed.packages</a></span>()</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="cf">if</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/any">any</a></span>(to_install)) {</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(pkgs[to_install])</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">}</a></code></pre></div>
+</div>
 <div id="input-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#input-data" class="anchor"></a>Input data</h2>
@@ -119,19 +137,19 @@
 <div id="working-with-high-resolution-grids" class="section level3">
 <h3 class="hasAnchor">
 <a href="#working-with-high-resolution-grids" class="anchor"></a>Working with high resolution grids</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">list_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"rast_data"</span>, <span class="dt">package =</span> <span class="st">"raceland"</span>),</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">                         <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/stack">stack</a></span>(list_raster)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">race_raster</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; class      : RasterStack </span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; dimensions : 60, 60, 3600, 5  (nrow, ncol, ncell, nlayers)</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; resolution : 30, 30  (x, y)</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; extent     : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; crs        : +proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; names      :      asian,      black,   hispanic,      other,      white </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; min values :          0,          0,          0,          0,          0 </span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; max values :  1.3333334, 15.3125000,  9.6666670,  0.5714286,  3.7500000</span></a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(race_raster)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">list_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"rast_data"</span>, <span class="dt">package =</span> <span class="st">"raceland"</span>),</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">                         <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/stack">stack</a></span>(list_raster)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">race_raster</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; class      : RasterStack </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; dimensions : 60, 60, 3600, 5  (nrow, ncol, ncell, nlayers)</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; resolution : 30, 30  (x, y)</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; extent     : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; crs        : +proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; names      :      asian,      black,   hispanic,      other,      white </span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; min values :          0,          0,          0,          0,          0 </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; max values :  1.3333334, 15.3125000,  9.6666670,  0.5714286,  3.7500000</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(race_raster)</a></code></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig1-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div id="working-with-vector-data" class="section level3">
@@ -147,21 +165,21 @@
 <li>
 <code>variables</code> - a character vector with columns names from <em>v</em>. The values from these columns will be (1) rasterized and (2) recalculated to densities. Each column will be represented as a layer in the output RasterStack.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">pf_to_data =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"vect_data/block_data.gpkg"</span>, <span class="dt">package =</span> <span class="st">"raceland"</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">vect_data =<span class="st"> </span><span class="kw">st_read</span>(pf_to_data)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; Reading layer `block_data' from data source `/home/travis/R/Library/raceland/vect_data/block_data.gpkg' using driver `GPKG'</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; Simple feature collection with 264 features and 6 fields</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; geometry type:  POLYGON</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; bbox:           xmin: 685545 ymin: 496468.7 xmax: 687345 ymax: 498268.7</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; epsg (SRID):    NA</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs</span></a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(vect_data)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; [1] "GISJOIN"  "ASIAN"    "BLACK"    "HISPANIC" "OTHER"    "WHITE"   </span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; [7] "geom"</span></a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">race_raster_from_vect =<span class="st"> </span><span class="kw"><a href="../reference/zones_to_raster.html">zones_to_raster</a></span>(<span class="dt">v =</span> vect_data,</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">                                        <span class="dt">resolution =</span> <span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                                        <span class="dt">variables =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">pf_to_data =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"vect_data/block_data.gpkg"</span>, <span class="dt">package =</span> <span class="st">"raceland"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">vect_data =<span class="st"> </span><span class="kw">st_read</span>(pf_to_data)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Reading layer `block_data' from data source `/home/travis/R/Library/raceland/vect_data/block_data.gpkg' using driver `GPKG'</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Simple feature collection with 264 features and 6 fields</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; geometry type:  POLYGON</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; dimension:      XY</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; bbox:           xmin: 685545 ymin: 496468.7 xmax: 687345 ymax: 498268.7</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; epsg (SRID):    NA</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(vect_data)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] "GISJOIN"  "ASIAN"    "BLACK"    "HISPANIC" "OTHER"    "WHITE"   </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [7] "geom"</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">race_raster_from_vect =<span class="st"> </span><span class="kw"><a href="../reference/zones_to_raster.html">zones_to_raster</a></span>(<span class="dt">v =</span> vect_data,</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">                                        <span class="dt">resolution =</span> <span class="dv">30</span>, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                                        <span class="dt">variables =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>))</a></code></pre></div>
 <p>Once vector data is rasterized, there is no difference, whether race_raster object or race_raster_from_vect will be used for further analysis.</p>
 </div>
 </div>
@@ -180,10 +198,10 @@
 <code>n</code> - A number of realizations to generate</li>
 </ul>
 <p>Function returns <em>RasterStack</em> object containing <em>n</em> realizations. Single race label in a racial landscape is assigned based on the order of race-specific grids stored in RasterStack. For example, <em>race_raster</em> object has five layers named: asian, black, hispanic, other, white. The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># generate 100 realizations based on race_raster object</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">real_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_realizations.html">create_realizations</a></span>(<span class="dt">x =</span> race_raster, <span class="dt">n =</span> <span class="dv">100</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># plot five first realizations</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(real_raster[[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]], <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># generate 100 realizations based on race_raster object</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">real_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_realizations.html">create_realizations</a></span>(<span class="dt">x =</span> race_raster, <span class="dt">n =</span> <span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># plot five first realizations</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(real_raster[[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]], <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>))</a></code></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig2-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>The racial landscape provides a skewed visualization of the racial pattern because it does not take into consideration the spatial variability of the population densities. To obtain an accurate depiction of racial distribution, the values of RL must be modified to reflect race and subpopulation densities.</p>
 <p>Function <code><a href="../reference/plot_realization.html">plot_realization()</a></code> display realization taking into account also subpopulation density. The function takes three arguments:</p>
@@ -195,10 +213,10 @@
 <li>
 <code>hex</code> - A character vector with colors specified in hexadecimal format. Colors should correspond to categories in realization (racial landscape)</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># In race_colors first color corresponds to asian, second to black,</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># third to hispanics, fourth to other and fifth to white)</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">race_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="../reference/plot_realization.html">plot_realization</a></span>(<span class="dt">x =</span> real_raster[[<span class="dv">1</span>]], <span class="dt">y =</span> race_raster, <span class="dt">hex =</span> race_colors)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># In race_colors first color corresponds to asian, second to black,</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co"># third to hispanics, fourth to other and fifth to white)</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">race_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="kw"><a href="../reference/plot_realization.html">plot_realization</a></span>(<span class="dt">x =</span> real_raster[[<span class="dv">1</span>]], <span class="dt">y =</span> race_raster, <span class="dt">hex =</span> race_colors)</a></code></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig3-1.png" width="40%" style="display: block; margin: auto;"></p>
 </div>
 <div id="describing-racial-patterns-of-racial-landscape" class="section level2">
@@ -223,7 +241,7 @@
 <code>window_size</code> - the size, expressed in the number of cells, of a square-shaped window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10 (<code>window_size=10</code> means that the local densities will be calculated from the area of 10 x 10 cells).</li>
 </ul>
 <p>The output is a RasterStack with local densities calculated separately for each realization.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dens_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_densities.html">create_densities</a></span>(real_raster, race_raster, <span class="dt">window_size =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">dens_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_densities.html">create_densities</a></span>(real_raster, race_raster, <span class="dt">window_size =</span> <span class="dv">10</span>)</a></code></pre></div>
 </div>
 <div id="exposure-matrix" class="section level3">
 <h3 class="hasAnchor">
@@ -237,16 +255,16 @@
 <code>y</code> - RasterLayer with local densities corresponding to selected realizations.</li>
 </ul>
 <p>As default, the exposure matrix with 4-directions adjacencies (<code>neighboorhood = 4</code>) is calculated using the average values from 2 adjacent cells (<code>fun = "mean"</code>).</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">exposure_mat =<span class="st"> </span>comat<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/comat/topics/get_wecoma">get_wecoma</a></span>(<span class="dt">x =</span> real_raster[[<span class="dv">1</span>]], <span class="dt">w =</span> dens_raster[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(exposure_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(exposure_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(exposure_mat, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; ASIAN     0.00   24.91    20.37   0.00   28.73</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; BLACK    24.91 7369.92  3362.24  92.11 1813.17</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; HISPANIC 20.37 3362.24  9119.45 136.85 3918.96</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; OTHER     0.00   92.11   136.85  11.01   81.81</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; WHITE    28.73 1813.17  3918.96  81.81 3248.66</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">exposure_mat =<span class="st"> </span>comat<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/comat/topics/get_wecoma">get_wecoma</a></span>(<span class="dt">x =</span> real_raster[[<span class="dv">1</span>]], <span class="dt">w =</span> dens_raster[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(exposure_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(exposure_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(exposure_mat, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; ASIAN     7.33   66.44    37.10   0.00   53.03</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; BLACK    66.44 7345.92  3392.99 147.12 1722.99</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; HISPANIC 37.10 3392.99  9030.43 175.78 4058.49</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; OTHER     0.00  147.12   175.78  22.40   55.88</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; WHITE    53.03 1722.99  4058.49  55.88 2913.16</span></a></code></pre></div>
 </div>
 <div id="information-theory-metrics-it-metrics" class="section level3">
 <h3 class="hasAnchor">
@@ -267,33 +285,33 @@
 <li>
 <code>threshold</code> - the share of NA cells to allow metrics calculation. <code>threshold = 1</code> - calculation will be performed, even if there are 100% cells with NA values (recommended with <code>size = NULL</code>)</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">metr_df =<span class="st"> </span><span class="kw"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(<span class="dt">x =</span> real_raster, <span class="dt">w =</span> dens_raster, </a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">                            <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>, </a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(metr_df)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; 1           1   1   1 1.617022 3.122680 1.505658 0.1113642</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; 2           2   1   1 1.630012 3.155073 1.525061 0.1049506</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 3           3   1   1 1.630420 3.145187 1.514767 0.1156532</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; 4           4   1   1 1.631166 3.145783 1.514617 0.1165482</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 5           5   1   1 1.636304 3.168422 1.532119 0.1041851</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 6           6   1   1 1.634205 3.157197 1.522991 0.1112138</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">metr_df =<span class="st"> </span><span class="kw"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(<span class="dt">x =</span> real_raster, <span class="dt">w =</span> dens_raster, </a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">                            <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>, </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(metr_df)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; 1           1   1   1 1.638140 3.166468 1.528329 0.1098112</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2           2   1   1 1.619012 3.129809 1.510797 0.1082145</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3           3   1   1 1.635792 3.154481 1.518688 0.1171039</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4           4   1   1 1.638833 3.159387 1.520554 0.1182792</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 5           5   1   1 1.624944 3.132790 1.507846 0.1170976</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 6           6   1   1 1.634723 3.153636 1.518913 0.1158108</span></a></code></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;       ent            mutinf       </span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;  Min.   :1.607   Min.   :0.08795  </span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt;  1st Qu.:1.630   1st Qu.:0.10767  </span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt;  Median :1.636   Median :0.11472  </span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt;  Mean   :1.636   Mean   :0.11471  </span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.12087  </span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt;  Max.   :1.658   Max.   :0.13451</span></a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">metr_df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">  <span class="dt">sd_ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">  <span class="dt">mean_mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf),</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">  <span class="dt">sd_mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf))</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; 1 1.635645 0.008153407   0.1147105 0.008907456</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;       ent            mutinf       </span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;  Min.   :1.617   Min.   :0.09483  </span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10916  </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt;  Median :1.635   Median :0.11411  </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;  Mean   :1.635   Mean   :0.11362  </span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11852  </span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  Max.   :1.656   Max.   :0.13488</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">metr_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">sd_ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">mean_mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf),</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">  <span class="dt">sd_mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf))</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;   mean_ent     sd_ent mean_mutinf   sd_mutinf</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; 1 1.634933 0.00832029   0.1136193 0.007862315</span></a></code></pre></div>
 </div>
 </div>
 </div>
@@ -307,7 +325,8 @@
 <li><a href="#introduction">INTRODUCTION</a></li>
       <li>
 <a href="#a-computational-framework">A COMPUTATIONAL FRAMEWORK</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#input-data">Input data</a></li>
+<li><a href="#required-packages">Required packages</a></li>
+      <li><a href="#input-data">Input data</a></li>
       <li><a href="#constructing-racial-landscape">Constructing racial landscape</a></li>
       <li><a href="#describing-racial-patterns-of-racial-landscape">Describing racial patterns of racial landscape</a></li>
       </ul>
