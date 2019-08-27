@@ -6,7 +6,7 @@
 \alias{raceland-package}
 \title{raceland: Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography}
 \description{
-Raceland package implements a computational framework for a pattern-based, 
+Implements a computational framework for a pattern-based, 
     zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined
     approach for analyzing residential segregation and racial diversity based on 
     the concept of 'landscape’ used in the domain of landscape ecology.
