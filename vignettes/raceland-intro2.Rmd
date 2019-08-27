@@ -281,7 +281,7 @@ attr_grid10 = dplyr::left_join(grid_sf10, smr10, by = c("row", "col"))
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1, 
      # pal = rev(brewer.pal(length(ent_breaks) - 1, name = "RdBu")), 
-     pal = rev(grDevices::hcl.colors(length(ent_breaks) - 1, palette = "ag_GrnYl")),
+     pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Red-Blue"),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
@@ -290,7 +290,7 @@ plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1,
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid10["mutinf_mean"], breaks = mut_breaks, key.pos = 1,
      # pal = rev(brewer.pal(length(mut_breaks) - 1, name = "RdBu")), 
-     pal = rev(grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Cividis")),
+     pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Red-Blue"),
      bty = "n", main = "Racial segregation (Mutual information)")
 ```
 
