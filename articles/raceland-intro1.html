@@ -260,16 +260,16 @@
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(exposure_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(exposure_mat, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; ASIAN     0.00   48.86    47.33   3.31   32.73</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; BLACK    48.86 7449.09  3250.24 106.53 1848.81</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; HISPANIC 47.33 3250.24  9295.51 169.51 3770.83</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; OTHER     3.31  106.53   169.51  13.22   75.68</span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; WHITE    32.73 1848.81  3770.83  75.68 3249.08</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; ASIAN     0.00   49.98    49.55   0.00   54.79</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; BLACK    49.98 7069.09  3452.66 140.83 1748.34</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; HISPANIC 49.55 3452.66  9115.15 170.52 4017.52</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; OTHER     0.00  140.83   170.52   4.23  100.32</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; WHITE    54.79 1748.34  4017.52 100.32 2965.75</span></a></code></pre></div>
 </div>
 <div id="information-theory-metrics-it-metrics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#information-theory-metrics-it-metrics" class="anchor"></a>Information theory metrics (IT metrics)</h3>
-<p>To lucid quantification of racial topography, further compression of the exposure matrix is required. A racial pattern can be described (in the same way as landscape pattern in the domain of landscape ecology) by using Information Theory metrics - entropy and mutual information. Entropy is associated with measuring racial diversity, and mutual information is associated with measuring racial segregation.</p>
+<p>For lucid quantification of racial topography, further compression of the exposure matrix is required. A racial pattern can be described (in the same way as landscape pattern in the domain of landscape ecology) by using Information Theory metrics - entropy and mutual information. Entropy is associated with measuring racial diversity, and mutual information is associated with measuring racial segregation.</p>
 <p>Information theory metrics are calculated using function <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code>. This function calculates the exposure matrix and summarizes it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf). The function requires the following arguments:</p>
 <ul>
 <li>
@@ -289,29 +289,29 @@
 <a class="sourceLine" id="cb14-2" data-line-number="2">                            <span class="dt">neighbourhood =</span> <span class="dv">4</span>, <span class="dt">fun =</span> <span class="st">"mean"</span>, </a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(metr_df)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; 1           1   1   1 1.632530 3.147560 1.515030 0.1175004</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2           2   1   1 1.639129 3.150918 1.511789 0.1273394</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3           3   1   1 1.647346 3.183604 1.536258 0.1110883</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4           4   1   1 1.633130 3.153624 1.520494 0.1126355</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 5           5   1   1 1.628839 3.141281 1.512442 0.1163969</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 6           6   1   1 1.651519 3.189549 1.538030 0.1134895</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; 1           1   1   1 1.638369 3.176759 1.538389 0.09997994</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2           2   1   1 1.625763 3.141304 1.515541 0.11022230</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3           3   1   1 1.644518 3.170557 1.526039 0.11847836</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4           4   1   1 1.618693 3.103839 1.485146 0.13354695</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 5           5   1   1 1.611993 3.095014 1.483021 0.12897206</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 6           6   1   1 1.618571 3.125724 1.507152 0.11141895</span></a></code></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;       ent            mutinf       </span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;  Min.   :1.613   Min.   :0.09243  </span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10777  </span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt;  Median :1.636   Median :0.11338  </span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;  Mean   :1.634   Mean   :0.11397  </span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11855  </span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  Max.   :1.652   Max.   :0.14007</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;  Min.   :1.612   Min.   :0.09383  </span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;  1st Qu.:1.626   1st Qu.:0.10882  </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt;  Median :1.634   Median :0.11375  </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;  Mean   :1.633   Mean   :0.11458  </span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;  3rd Qu.:1.639   3rd Qu.:0.12013  </span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  Max.   :1.652   Max.   :0.14034</span></a></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">metr_df <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">sd_ent =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">mean_mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf),</a>
 <a class="sourceLine" id="cb17-5" data-line-number="5">  <span class="dt">sd_mutinf =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf))</a>
 <a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; 1 1.634418 0.009206297   0.1139662 0.009491553</span></a></code></pre></div>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; 1 1.633137 0.008959753   0.1145766 0.008368442</span></a></code></pre></div>
 </div>
 </div>
 </div>
