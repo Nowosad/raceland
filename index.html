@@ -88,7 +88,7 @@
 <a href="#raceland" class="anchor"></a>raceland</h1></div>
 <!-- badges: start -->
 
-<p>Raceland package implements a computational framework for a pattern-based, zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. A racial landscape, represented by a high-resolution raster grid with each cell containing only inhabitants of a single race, is quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
+<p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. A racial landscape, represented by a high-resolution raster grid with each cell containing only inhabitants of a single race, is quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
 <p>Racial landscape method is based on the raster gridded data, and unlike the previous methods, does not depend on the division of specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing calculations at different spatial scales.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -129,21 +129,21 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/headtail">head</a></span>(metr_df)</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.641000 3.163072 1.522072 0.1189275</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.637949 3.169077 1.531128 0.1068215</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.630978 3.144200 1.513222 0.1177564</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.625820 3.139254 1.513434 0.1123862</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.609023 3.105140 1.496117 0.1129066</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.658105 3.218125 1.560020 0.0980845</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.633029 3.159749 1.526721 0.1063080</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.624438 3.135638 1.511200 0.1132382</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.627214 3.122393 1.495179 0.1320348</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.633128 3.150216 1.517088 0.1160393</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.627509 3.123787 1.496278 0.1312311</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.643459 3.183251 1.539792 0.1036676</span></a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Summarize IT metrics </span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;       ent            mutinf       </span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.609   Min.   :0.09588  </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.631   1st Qu.:0.10985  </span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  Median :1.636   Median :0.11488  </span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.635   Mean   :0.11465  </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11931  </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.658   Max.   :0.13281</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.613   Min.   :0.09745  </span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10826  </span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  Median :1.635   Median :0.11404  </span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.635   Mean   :0.11454  </span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.12011  </span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.664   Max.   :0.14079</span></a></code></pre></div>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">
