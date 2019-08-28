@@ -79,7 +79,7 @@
       <h1>raceland: Describing local racial patterns of racial landscapes at different spatial scales</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2019-08-27</h4>
+            <h4 class="date">2019-08-28</h4>
       
       
       <div class="hidden name"><code>raceland-intro2.Rmd</code></div>
@@ -101,7 +101,7 @@
 <a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="st">"raster"</span>,</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="st">"sf"</span>,              </a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="st">"dplyr"</span>,</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="st">"RCartoColor"</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="st">"RColorBrewer"</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">)</a>
 <a class="sourceLine" id="cb1-11" data-line-number="11">to_install =<span class="st"> </span><span class="op">!</span>pkgs <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/installed.packages">installed.packages</a></span>()</a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="cf">if</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/any">any</a></span>(to_install)) {</a>
@@ -157,15 +157,15 @@
 <a class="sourceLine" id="cb4-3" data-line-number="3">                               <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">threshold =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">metr_df_<span class="dv">20</span>[metr_df_<span class="dv">20</span><span class="op">$</span>realization <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1           1   1   1 1.282785 2.553945 1.271160 0.01162447</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2           1   1   2 1.580693 2.998483 1.417791 0.16290175</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3           1   1   3 1.385363 2.700824 1.315461 0.06990275</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4           1   2   1 1.633085 3.103654 1.470569 0.16251626</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 5           1   2   2 1.538584 3.031038 1.492453 0.04613066</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; 6           1   2   3 1.494990 2.815819 1.320829 0.17416036</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 7           1   3   1 1.435336 2.720948 1.285612 0.14972375</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 8           1   3   2 1.574431 3.132370 1.557938 0.01649308</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 9           1   3   3 1.449367 2.856513 1.407146 0.04222161</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1           1   1   1 1.280108 2.549493 1.269385 0.01072342</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2           1   1   2 1.598428 3.092879 1.494452 0.10397617</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3           1   1   3 1.406010 2.773480 1.367470 0.03853917</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4           1   2   1 1.592266 3.066146 1.473880 0.11838560</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 5           1   2   2 1.548190 3.075220 1.527029 0.02116092</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; 6           1   2   3 1.487178 2.785654 1.298476 0.18870158</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 7           1   3   1 1.463958 2.820425 1.356467 0.10749033</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 8           1   3   2 1.576963 3.136925 1.559962 0.01700066</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 9           1   3   3 1.431202 2.803516 1.372314 0.05888771</span></a></code></pre></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble average from multiple realizations. First, for each square window is calculated the average value of entropy and mutual information based on 100 realizations. The table below shows the mean (<code>ent_mean</code>, <code>mutinf_mean</code>) and standard deviation (<code>ent_sd</code>, <code>mutinf_sd</code>) values for each square window.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">smr =<span class="st"> </span>metr_df_<span class="dv">20</span> <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(row, col) <span class="op">%&gt;%</span></a>
@@ -180,15 +180,15 @@
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; # Groups:   row [3]</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 1     1     1     1.26 0.0435      0.0205   0.00982</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 2     1     2     1.59 0.0125      0.161    0.0284 </span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 3     1     3     1.42 0.0317      0.0454   0.0148 </span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 4     2     1     1.61 0.0294      0.157    0.0358 </span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 5     2     2     1.52 0.0274      0.0367   0.0133 </span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 6     2     3     1.51 0.0293      0.152    0.0300 </span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 7     3     1     1.38 0.0472      0.142    0.0404 </span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 8     3     2     1.54 0.0335      0.0158   0.00673</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 9     3     3     1.41 0.0355      0.0459   0.0146</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 1     1     1     1.26 0.0438      0.0185   0.00876</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 2     1     2     1.59 0.0123      0.164    0.0285 </span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 3     1     3     1.41 0.0291      0.0451   0.0126 </span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 4     2     1     1.60 0.0251      0.147    0.0381 </span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 5     2     2     1.52 0.0220      0.0354   0.0140 </span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 6     2     3     1.51 0.0264      0.159    0.0302 </span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 7     3     1     1.38 0.0475      0.151    0.0536 </span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 8     3     2     1.54 0.0280      0.0156   0.00767</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 9     3     3     1.42 0.0289      0.0481   0.0139</span></a></code></pre></div>
 <p>Then the averages from the mean values of entropy and mutual information are calculated.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">smr <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -197,7 +197,7 @@
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1     1.47 0.0322      0.0862    0.0215</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1     1.47 0.0292      0.0871    0.0230</span></a></code></pre></div>
 <div id="racial-diversity-segregation-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#racial-diversity-segregation-classification" class="anchor"></a>Racial diversity-segregation classification</h3>
@@ -292,7 +292,7 @@
 <a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span></a>
 <a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; 1     1.47 0.0343      0.0822    0.0228</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; 1     1.48 0.0329      0.0828    0.0236</span></a>
 <a class="sourceLine" id="cb14-23" data-line-number="23"></a>
 <a class="sourceLine" id="cb14-24" data-line-number="24"><span class="co"># calculate bivariate classification</span></a>
 <a class="sourceLine" id="cb14-25" data-line-number="25">smr10<span class="op">$</span>bivar_cls =<span class="st"> </span><span class="kw">bivariate_classification</span>(</a>
