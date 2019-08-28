@@ -38,7 +38,7 @@ pkgs = c(
   "raster",
   "sf",              
   "dplyr",
-  "RCartoColor"
+  "RColorBrewer"
 )
 to_install = !pkgs %in% installed.packages()
 if(any(to_install)) {
