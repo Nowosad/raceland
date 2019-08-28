@@ -15,8 +15,8 @@ metr_df = calculate_metrics(real_raster, weig_raster,
 
 grid_sf = create_grid(real_raster, size = 4)
 
-popdens_raster = zones_to_raster(pop_vector, resolution = 100,
-                                 variables = c("NHW", "NHB", "NHAS", "NHOTHER", "HISP"))
+popdens_raster = zones_to_raster(pop_vector, resolution = 30,
+                                 variables = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE"))
 
 
 # hex_colors = c("#F16667", "#6EBE44", "#7E69AF", "#C77213","#F8DF1D")

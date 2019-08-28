@@ -14,8 +14,8 @@
 #' library(sf)
 #' library(raster)
 #' plot(pop_vector)
-#' popdens_raster = zones_to_raster(pop_vector, resolution = 100,
-#'                                  variables = c("NHW", "NHB", "NHAS", "NHOTHER", "HISP"))
+#' popdens_raster = zones_to_raster(pop_vector, resolution = 30,
+#'                                  variables = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE"))
 #' plot(popdens_raster)
 zones_to_raster = function(v, resolution, variables, ...){
   template_raster = raster::raster(v, resolution = resolution)

@@ -16,8 +16,8 @@ metr_df2 = calculate_metrics(real_raster, weig_raster,
 
 grid_sf2 = create_grid(real_raster, size = 4)
 
-popdens_raster2 = zones_to_raster(pop_vector, resolution = 100,
-                                  variables = c("NHW", "NHB", "NHAS", "NHOTHER", "HISP"))
+popdens_raster2 = zones_to_raster(pop_vector, resolution = 30,
+                                  variables = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE"))
 
 # tests -------------------------------------------------------------------
 expect_equal(real_raster2, real_raster)

@@ -39,7 +39,7 @@ Entropy is associated with measuring racial diversity and mutual information is 
 \examples{
 library(raster)
 x = create_realizations(race_raster, n = 5)
-w = create_densities(x, race_raster, window_size = 100)
+w = create_densities(x, race_raster, window_size = 10)
 
 #1
 df = calculate_metrics(x, w, neighbourhood = 4, fun = "mean")
