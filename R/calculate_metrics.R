@@ -29,11 +29,9 @@
 #' df2 = calculate_metrics(x, w, neighbourhood = 4, fun = "mean", size = 10, threshold = 0.5)
 #' my_grid = create_grid(x, size = 10)
 #'
-#' \dontrun{
-#'  df3 = dplyr::filter(df2, realization == 2)
-#'  result = dplyr::left_join(my_grid, df2, by = c("row", "col"))
-#'  plot(result)
-#' }
+#' df3 = dplyr::filter(df2, realization == 2)
+#' result = dplyr::left_join(my_grid, df2, by = c("row", "col"))
+#' plot(result)
 calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
                              na_action = "replace", base = "log2", ordered = TRUE,
                              threshold = 0.5){

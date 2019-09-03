@@ -8,12 +8,11 @@
 #' @keywords internal
 #'
 #' @examples
-#' \dontrun{
 #' library(raster)
 #' real_rasters = create_realizations(race_raster, n = 5)
 #' plot(real_rasters)
-#' d = calculate_densities(real_rasters, race_raster, window_size = 10)
-#' }
+#' d = raceland:::calculate_densities(real_rasters, race_raster, window_size = 10)
+#'
 calculate_densities = function(x, y, window_size){
   if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
     stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)

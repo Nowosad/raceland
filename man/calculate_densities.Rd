@@ -20,11 +20,10 @@ a list of data.frames
 Calculate Densities
 }
 \examples{
-\dontrun{
 library(raster)
 real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
-d = calculate_densities(real_rasters, race_raster, window_size = 10)
-}
+d = raceland:::calculate_densities(real_rasters, race_raster, window_size = 10)
+
 }
 \keyword{internal}
