@@ -129,21 +129,21 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/headtail">head</a></span>(metr_df)</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.628651 3.145815 1.517164 0.1114870</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.641095 3.158078 1.516984 0.1241111</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.643311 3.173343 1.530032 0.1132790</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.645595 3.183749 1.538154 0.1074407</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.638649 3.147631 1.508982 0.1296667</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.638257 3.149077 1.510820 0.1274373</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1           1   1   1 1.635906 3.168265 1.532358 0.1035477</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2           2   1   1 1.635434 3.132641 1.497208 0.1382257</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3           3   1   1 1.638882 3.175640 1.536758 0.1021242</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 4           4   1   1 1.646665 3.179761 1.533096 0.1135696</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 5           5   1   1 1.629344 3.149699 1.520355 0.1089894</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 6           6   1   1 1.648589 3.191376 1.542787 0.1058016</span></a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Summarize IT metrics </span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(metr_df[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;       ent            mutinf       </span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.610   Min.   :0.09952  </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10931  </span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  Median :1.633   Median :0.11316  </span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.633   Mean   :0.11425  </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11736  </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.652   Max.   :0.14077</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  Min.   :1.610   Min.   :0.09388  </span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  1st Qu.:1.630   1st Qu.:0.10871  </span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  Median :1.635   Median :0.11136  </span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  Mean   :1.636   Mean   :0.11357  </span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  3rd Qu.:1.642   3rd Qu.:0.11818  </span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  Max.   :1.660   Max.   :0.14023</span></a></code></pre></div>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">
