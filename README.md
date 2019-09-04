@@ -9,6 +9,8 @@
 status](https://travis-ci.org/Nowosad/raceland.svg?branch=master)](https://travis-ci.org/Nowosad/raceland)
 [![Codecov test
 coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/raceland)](https://CRAN.R-project.org/package=raceland)
 <!-- badges: end -->
 
 The **raceland** package implements a computational framework for a
@@ -96,24 +98,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.636385 3.167094 1.530709 0.1056761
-#> 2           2   1   1 1.631413 3.140357 1.508945 0.1224680
-#> 3           3   1   1 1.622525 3.123644 1.501119 0.1214064
-#> 4           4   1   1 1.623140 3.134430 1.511290 0.1118498
-#> 5           5   1   1 1.643013 3.169580 1.526567 0.1164463
-#> 6           6   1   1 1.629700 3.145177 1.515477 0.1142236
+#> 1           1   1   1 1.632356 3.162491 1.530134 0.1022222
+#> 2           2   1   1 1.625560 3.147418 1.521858 0.1037016
+#> 3           3   1   1 1.645656 3.168970 1.523314 0.1223416
+#> 4           4   1   1 1.629595 3.137422 1.507827 0.1217680
+#> 5           5   1   1 1.629634 3.154291 1.524657 0.1049766
+#> 6           6   1   1 1.632111 3.161367 1.529256 0.1028558
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.609   Min.   :0.09638  
-#>  1st Qu.:1.629   1st Qu.:0.10817  
-#>  Median :1.634   Median :0.11395  
-#>  Mean   :1.635   Mean   :0.11409  
-#>  3rd Qu.:1.641   3rd Qu.:0.11927  
-#>  Max.   :1.663   Max.   :0.13366
+#>  Min.   :1.609   Min.   :0.09362  
+#>  1st Qu.:1.629   1st Qu.:0.10840  
+#>  Median :1.635   Median :0.11323  
+#>  Mean   :1.635   Mean   :0.11436  
+#>  3rd Qu.:1.642   3rd Qu.:0.12042  
+#>  Max.   :1.663   Max.   :0.13610
 ```
 
 ## Contribution
