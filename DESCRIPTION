@@ -40,4 +40,5 @@ Suggests:
     covr
 VignetteBuilder: knitr
 SystemRequirements: C++11
-
+URL: https://nowosad.github.io/raceland/
+BugReports: https://github.com/Nowosad/raceland/issues

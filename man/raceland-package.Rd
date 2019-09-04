@@ -11,6 +11,14 @@ Implements a computational framework for a pattern-based,
     approach for analyzing residential segregation and racial diversity based on 
     the concept of 'landscape’ used in the domain of landscape ecology.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://nowosad.github.io/raceland/}
+  \item Report bugs at \url{https://github.com/Nowosad/raceland/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Jakub Nowosad \email{nowosad.jakub@gmail.com} (0000-0002-1057-3721)
 
