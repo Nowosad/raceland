@@ -282,7 +282,7 @@ smr10$bivar_cls = bivariate_classification(
 
 ## Mapping local racial diversity and racial segregation 
 
-The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to spatial grid object (created by `create_grid()` ). 
+The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to spatial grid object (created by `create_grid()`). 
 For overlapping windows, the resolution of the grid will be defined by *shift* parameter.
 
 ```{r}
