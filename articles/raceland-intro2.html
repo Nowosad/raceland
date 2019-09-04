@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>raceland: Describing local racial patterns of racial landscapes at different spatial scales • raceland</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="raceland: Describing local racial patterns of racial landscapes at different spatial scales">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -73,13 +74,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>raceland: Describing local racial patterns of racial landscapes at different spatial scales</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2019-09-03</h4>
+            <h4 class="date">2019-09-04</h4>
       
       
       <div class="hidden name"><code>raceland-intro2.Rmd</code></div>
@@ -94,7 +96,7 @@
 <p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. An overview of the implemented method is presented in the first vignette. Here we demonstrate, how the <strong>raceland</strong> package can be used for describing racial landscape at different spatial scales.</p>
 <p><strong>Racial landscape method</strong> is based on the raster gridded data, and unlike the previous methods, does not depend on the division for specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing the calculation at different spatial scales.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install required packages </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">pkgs =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">pkgs =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="st">"raceland"</span>,                </a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="st">"comat"</span>,            </a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="st">"rgdal"</span>,   </a>
@@ -103,15 +105,15 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="st">"dplyr"</span>,</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="st">"RColorBrewer"</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">)</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">to_install =<span class="st"> </span><span class="op">!</span>pkgs <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/installed.packages">installed.packages</a></span>()</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="cf">if</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/any">any</a></span>(to_install)) {</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(pkgs[to_install])</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">to_install =<span class="st"> </span><span class="op">!</span>pkgs <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span>()</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="cf">if</span>(<span class="kw"><a href="https://rdrr.io/r/base/any.html">any</a></span>(to_install)) {</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(pkgs[to_install])</a>
 <a class="sourceLine" id="cb1-14" data-line-number="14">}</a></code></pre></div>
 <p>A computational framework requires a few steps (see the first vignette for details) before calculating IT-metrics:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># reading input data</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">list_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"rast_data"</span>, <span class="dt">package =</span> <span class="st">"raceland"</span>),</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">list_raster =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"rast_data"</span>, <span class="dt">package =</span> <span class="st">"raceland"</span>),</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">                         <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">race_raster =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/stack">stack</a></span>(list_raster)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">race_raster =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/stack.html">stack</a></span>(list_raster)</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># constructing racial landscape</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">real_raster =<span class="st"> </span><span class="kw"><a href="../reference/create_realizations.html">create_realizations</a></span>(<span class="dt">x =</span> race_raster, <span class="dt">n =</span> <span class="dv">100</span>)</a>
@@ -145,10 +147,10 @@
 <h2 class="hasAnchor">
 <a href="#calculate-it-metrics-from-local-patterns-1" class="anchor"></a>Calculate IT metrics from local patterns (1)</h2>
 <p>The <code><a href="../reference/create_grid.html">create_grid()</a></code> function creates spatial object with a grid (each ‘cell’ is defined by size and shift). This function requires the RasterStack object with realizations (racial landscapes) and size parameter. If the shift parameter is not set, it is assumed that <code>size=shift</code>. Below such grid is imposed into the racial landscape to show local patterns.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">race_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">race_colors =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">grid_sf =<span class="st"> </span><span class="kw"><a href="../reference/create_grid.html">create_grid</a></span>(real_raster, <span class="dt">size =</span> <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/plot_realization.html">plot_realization</a></span>(real_raster[[<span class="dv">1</span>]], race_raster, <span class="dt">hex =</span> race_colors)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(<span class="kw">st_geometry</span>(grid_sf), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="kw">st_geometry</span>(grid_sf), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/fig5-1.png" width="40%" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function is used to calculate IT metrics. Parameter <code>size=20</code> means that the area of interests will be divided into a grid of local patterns of the size 20x20 cells (which in this case corresponds to the square of 0.6 km x 0.6km). The <code>neighboorhood = 4</code> defines that adjacencies between cells are defined in four directions, <code>fun="mean"</code> calculate average values of population density from adjacent cells, <code>threshold = 0.5</code> - calculation will be performed if there is at least 50% of non-NA cells.</p>
 <p>IT metrics are calculated for each local pattern for each realization. The output table will have 900 rows (there are nine local patterns of size 20x20 cells and 100 realizations).</p>
@@ -157,38 +159,38 @@
 <a class="sourceLine" id="cb4-3" data-line-number="3">                               <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">threshold =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">metr_df_<span class="dv">20</span>[metr_df_<span class="dv">20</span><span class="op">$</span>realization <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1           1   1   1 1.217599 2.411031 1.193432 0.02416676</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2           1   1   2 1.582940 2.990131 1.407191 0.17574869</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3           1   1   3 1.390784 2.758106 1.367322 0.02346168</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4           1   2   1 1.586611 3.046915 1.460304 0.12630669</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 5           1   2   2 1.501565 2.966189 1.464624 0.03694085</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; 6           1   2   3 1.478934 2.798635 1.319701 0.15923375</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 7           1   3   1 1.390975 2.639463 1.248487 0.14248781</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 8           1   3   2 1.572012 3.131071 1.559059 0.01295263</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 9           1   3   3 1.374453 2.697662 1.323209 0.05124464</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1           1   1   1 1.197811 2.378467 1.180657 0.01715414</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2           1   1   2 1.605915 3.068223 1.462308 0.14360688</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3           1   1   3 1.424958 2.806571 1.381613 0.04334519</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4           1   2   1 1.628340 3.075456 1.447116 0.18122487</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 5           1   2   2 1.491815 2.940777 1.448962 0.04285375</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; 6           1   2   3 1.490148 2.792078 1.301930 0.18821747</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 7           1   3   1 1.322656 2.530167 1.207511 0.11514428</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 8           1   3   2 1.554776 3.098044 1.543267 0.01150945</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 9           1   3   3 1.390685 2.721795 1.331110 0.05957511</span></a></code></pre></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble average from multiple realizations. First, for each square window is calculated the average value of entropy and mutual information based on 100 realizations. The table below shows the mean (<code>ent_mean</code>, <code>mutinf_mean</code>) and standard deviation (<code>ent_sd</code>, <code>mutinf_sd</code>) values for each square window.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">smr =<span class="st"> </span>metr_df_<span class="dv">20</span> <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(row, col) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="dt">ent_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="dt">mutinf_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">    <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="dt">ent_mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="dt">ent_sd =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="dt">mutinf_mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">  )</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">smr</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; # A tibble: 9 x 6</span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; # Groups:   row [3]</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 1     1     1     1.25 0.0517      0.0193   0.0101 </span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 2     1     2     1.59 0.0118      0.165    0.0286 </span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 3     1     3     1.41 0.0286      0.0464   0.0148 </span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 4     2     1     1.61 0.0290      0.151    0.0360 </span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 5     2     2     1.51 0.0209      0.0343   0.0129 </span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 6     2     3     1.52 0.0287      0.159    0.0284 </span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 7     3     1     1.37 0.0484      0.139    0.0449 </span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 8     3     2     1.54 0.0305      0.0163   0.00679</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 9     3     3     1.42 0.0347      0.0486   0.0155</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 1     1     1     1.26 0.0461      0.0188   0.00759</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 2     1     2     1.59 0.0117      0.167    0.0292 </span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 3     1     3     1.41 0.0310      0.0471   0.0174 </span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 4     2     1     1.61 0.0245      0.152    0.0374 </span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 5     2     2     1.52 0.0208      0.0374   0.0116 </span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 6     2     3     1.51 0.0279      0.152    0.0293 </span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 7     3     1     1.38 0.0482      0.138    0.0399 </span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 8     3     2     1.54 0.0295      0.0166   0.00703</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 9     3     3     1.42 0.0305      0.0492   0.0143</span></a></code></pre></div>
 <p>Then the averages from the mean values of entropy and mutual information are calculated.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">smr <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -197,7 +199,7 @@
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1     1.47 0.0316      0.0865    0.0220</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1     1.47 0.0300      0.0865    0.0215</span></a></code></pre></div>
 <div id="racial-diversity-segregation-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#racial-diversity-segregation-classification" class="anchor"></a>Racial diversity-segregation classification</h3>
@@ -209,19 +211,19 @@
 <a class="sourceLine" id="cb7-2" data-line-number="2">bivariate_classification =<span class="st"> </span><span class="cf">function</span>(entropy, mutual_information, n) {</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">  </a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="co"># calculate bivariate classification</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">  nent =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(n)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(entropy, <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, nent), <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), </a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  nent =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(n)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(entropy, <span class="dt">breaks =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, nent), <span class="dt">labels =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), </a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">                <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(ent_cat))</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  ent_cat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(ent_cat))</a>
 <a class="sourceLine" id="cb7-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(mutual_information, <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), </a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(mutual_information, <span class="dt">breaks =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), </a>
 <a class="sourceLine" id="cb7-11" data-line-number="11">                <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(mut_cat))</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">  mut_cat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(mut_cat))</a>
 <a class="sourceLine" id="cb7-13" data-line-number="13">  </a>
 <a class="sourceLine" id="cb7-14" data-line-number="14">  bivar_cls =<span class="st"> </span>mut_cat <span class="op">+</span><span class="st"> </span>ent_cat</a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">  bivar_cls =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(bivar_cls)</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">  bivar_cls =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(bivar_cls)</a>
 <a class="sourceLine" id="cb7-16" data-line-number="16">  </a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(bivar_cls)</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(bivar_cls)</a>
 <a class="sourceLine" id="cb7-18" data-line-number="18">}</a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">smr<span class="op">$</span>bivar_cls =<span class="st"> </span><span class="kw">bivariate_classification</span>(<span class="dt">entropy =</span> smr<span class="op">$</span>ent_mean, </a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">                                         <span class="dt">mutual_information =</span> smr<span class="op">$</span>mutinf_mean,</a>
@@ -232,17 +234,17 @@
 <a href="#mapping-local-racial-diversity-and-racial-segregation" class="anchor"></a>Mapping local racial diversity and racial segregation</h3>
 <p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to the spatial grid object. Such operation allows for mapping metrics and shows how segregation and racial diversity change over the area.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># join IT-metric to the grid</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">attr_grid =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(grid_sf, smr, <span class="dt">by =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2">attr_grid =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(grid_sf, smr, <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</a></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># calculate breaks parameter for plotting entropy and mutual information</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># the values of entropy and mutual information are divided into equal breaks</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">ent_breaks =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dt">by =</span> <span class="fl">0.25</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(<span class="kw">nlayers</span>(race_raster)))</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">mut_breaks =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb10-3" data-line-number="3">ent_breaks =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dt">by =</span> <span class="fl">0.25</span>), <span class="kw"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="kw">nlayers</span>(race_raster)))</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">mut_breaks =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a></code></pre></div>
 </div>
 <div id="mapping-racial-diversity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-diversity" class="anchor"></a>Mapping racial diversity</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(attr_grid[<span class="st">"ent_mean"</span>], <span class="dt">breaks =</span> ent_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer">brewer.pal</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(ent_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(attr_grid[<span class="st">"ent_mean"</span>], <span class="dt">breaks =</span> ent_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(ent_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">     <span class="co"># pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">     <span class="dt">bty =</span> <span class="st">"n"</span>, <span class="dt">main =</span> <span class="st">"Racial diversity (Entropy)"</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -250,8 +252,8 @@
 <div id="mapping-racial-segregation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation" class="anchor"></a>Mapping racial segregation</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(attr_grid[<span class="st">"mutinf_mean"</span>], <span class="dt">breaks =</span> mut_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer">brewer.pal</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(mut_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(attr_grid[<span class="st">"mutinf_mean"</span>], <span class="dt">breaks =</span> mut_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(mut_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">     <span class="co"># pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">     <span class="dt">bty =</span> <span class="st">"n"</span>, <span class="dt">main =</span> <span class="st">"Racial segregation (Mutual information)"</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -259,11 +261,11 @@
 <div id="mapping-racial-segregation-and-diversity-using-bivariate-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-and-diversity-using-bivariate-classification" class="anchor"></a>Mapping racial segregation and diversity using bivariate classification</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">biv_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"11"</span> =<span class="st"> "#e8e8e8"</span>, <span class="st">"12"</span> =<span class="st"> "#e4acac"</span>, <span class="st">"13"</span> =<span class="st"> "#c85a5a"</span>, <span class="st">"21"</span> =<span class="st"> "#b0d5df"</span>,</a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">biv_colors =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> =<span class="st"> "#e8e8e8"</span>, <span class="st">"12"</span> =<span class="st"> "#e4acac"</span>, <span class="st">"13"</span> =<span class="st"> "#c85a5a"</span>, <span class="st">"21"</span> =<span class="st"> "#b0d5df"</span>,</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">               <span class="st">"22"</span> =<span class="st"> "#ad9ea5"</span>, <span class="st">"23"</span> =<span class="st"> "#985356"</span>, <span class="st">"31"</span> =<span class="st"> "#64acbe"</span>, <span class="st">"32"</span>=<span class="st"> "#627f8c"</span>, </a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">               <span class="st">"33"</span> =<span class="st"> "#574249"</span>)</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">bcat =<span class="st"> </span>biv_colors[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(biv_colors)<span class="op">%in%</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(attr_grid<span class="op">$</span>bivar_cls)]</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(attr_grid[<span class="st">"bivar_cls"</span>], <span class="dt">pal =</span> bcat, <span class="dt">main =</span> <span class="st">"Racial diversity and residential segregation"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb13-4" data-line-number="4">bcat =<span class="st"> </span>biv_colors[<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(biv_colors)<span class="op">%in%</span><span class="kw"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(attr_grid<span class="op">$</span>bivar_cls)]</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(attr_grid[<span class="st">"bivar_cls"</span>], <span class="dt">pal =</span> bcat, <span class="dt">main =</span> <span class="st">"Racial diversity and residential segregation"</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="calculate-it-metrics-from-local-patterns-overlapping-windows" class="section level3">
@@ -279,10 +281,10 @@
 <a class="sourceLine" id="cb14-6" data-line-number="6">smr10 =<span class="st"> </span>metr_df_<span class="dv">10</span> <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-7" data-line-number="7"><span class="st">  </span><span class="kw">group_by</span>(row, col) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">    <span class="dt">ent_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">    <span class="dt">ent_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb14-11" data-line-number="11">    <span class="dt">mutinf_mean =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb14-12" data-line-number="12">    <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/sd">sd</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">    <span class="dt">ent_mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">    <span class="dt">ent_sd =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">    <span class="dt">mutinf_mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">    <span class="dt">mutinf_sd =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(mutinf, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb14-13" data-line-number="13">  )</a>
 <a class="sourceLine" id="cb14-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb14-15" data-line-number="15">smr10 <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -292,7 +294,7 @@
 <a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span></a>
 <a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; 1     1.47 0.0316      0.0865    0.0220</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; 1     1.47 0.0325      0.0827    0.0228</span></a>
 <a class="sourceLine" id="cb14-23" data-line-number="23"></a>
 <a class="sourceLine" id="cb14-24" data-line-number="24"><span class="co"># calculate bivariate classification</span></a>
 <a class="sourceLine" id="cb14-25" data-line-number="25">smr10<span class="op">$</span>bivar_cls =<span class="st"> </span><span class="kw">bivariate_classification</span>(</a>
@@ -305,17 +307,17 @@
 <div id="mapping-local-racial-diversity-and-racial-segregation-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mapping-local-racial-diversity-and-racial-segregation-1" class="anchor"></a>Mapping local racial diversity and racial segregation</h2>
-<p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to spatial grid object (created by <code><a href="../reference/create_grid.html">create_grid()</a></code> ). For overlapping windows, the resolution of the grid will be defined by <em>shift</em> parameter.</p>
+<p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to spatial grid object (created by <code><a href="../reference/create_grid.html">create_grid()</a></code>). For overlapping windows, the resolution of the grid will be defined by <em>shift</em> parameter.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># create spatial grid object</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">grid_sf10 =<span class="st"> </span><span class="kw"><a href="../reference/create_grid.html">create_grid</a></span>(real_raster, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">shift =</span> <span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb15-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># join IT-metrics to the grid</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">attr_grid10 =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(grid_sf10, smr10, <span class="dt">by =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb15-5" data-line-number="5">attr_grid10 =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(grid_sf10, smr10, <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</a></code></pre></div>
 <div id="mapping-racial-diversity-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-diversity-1" class="anchor"></a>Mapping racial diversity</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(attr_grid10[<span class="st">"ent_mean"</span>], <span class="dt">breaks =</span> ent_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer">brewer.pal</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(ent_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(attr_grid10[<span class="st">"ent_mean"</span>], <span class="dt">breaks =</span> ent_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(ent_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">     <span class="co"># pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4">     <span class="dt">bty =</span> <span class="st">"n"</span>, <span class="dt">main =</span> <span class="st">"Racial diversity (Entropy)"</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -323,8 +325,8 @@
 <div id="mapping-racial-segregation-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-1" class="anchor"></a>Mapping racial segregation</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(attr_grid10[<span class="st">"mutinf_mean"</span>], <span class="dt">breaks =</span> mut_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer">brewer.pal</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(mut_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(attr_grid10[<span class="st">"mutinf_mean"</span>], <span class="dt">breaks =</span> mut_breaks, <span class="dt">key.pos =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">     <span class="dt">pal =</span> <span class="kw"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(RColorBrewer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(mut_breaks) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">name =</span> <span class="st">"RdBu"</span>)),</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">     <span class="co"># pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),</span></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">     <span class="dt">bty =</span> <span class="st">"n"</span>, <span class="dt">main =</span> <span class="st">"Racial segregation (Mutual information)"</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -334,11 +336,11 @@
 <a href="#mapping-racial-segregation-and-diversity-using-bivariate-classification-1" class="anchor"></a>Mapping racial segregation and diversity using bivariate classification</h3>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># `biv_color`s defines a bivariate palette, </span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># `bcat` selects only colors for categories available for analyzed areas</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">biv_colors =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"11"</span> =<span class="st"> "#e8e8e8"</span>, <span class="st">"12"</span> =<span class="st"> "#e4acac"</span>, <span class="st">"13"</span> =<span class="st"> "#c85a5a"</span>, <span class="st">"21"</span> =<span class="st"> "#b0d5df"</span>, </a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">biv_colors =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> =<span class="st"> "#e8e8e8"</span>, <span class="st">"12"</span> =<span class="st"> "#e4acac"</span>, <span class="st">"13"</span> =<span class="st"> "#c85a5a"</span>, <span class="st">"21"</span> =<span class="st"> "#b0d5df"</span>, </a>
 <a class="sourceLine" id="cb18-4" data-line-number="4">               <span class="st">"22"</span> =<span class="st"> "#ad9ea5"</span>, <span class="st">"23"</span> =<span class="st"> "#985356"</span>, <span class="st">"31"</span> =<span class="st"> "#64acbe"</span>,<span class="st">"32"</span> =<span class="st"> "#627f8c"</span>,</a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">               <span class="st">"33"</span> =<span class="st"> "#574249"</span>)</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">bcat =<span class="st"> </span>biv_colors[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(biv_colors)<span class="op">%in%</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(attr_grid10<span class="op">$</span>bivar_cls)]</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(attr_grid10[<span class="st">"bivar_cls"</span>], <span class="dt">pal =</span> bcat, <span class="dt">main =</span> <span class="st">"Racial diversity and residential segregation"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb18-6" data-line-number="6">bcat =<span class="st"> </span>biv_colors[<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(biv_colors)<span class="op">%in%</span><span class="kw"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(attr_grid10<span class="op">$</span>bivar_cls)]</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(attr_grid10[<span class="st">"bivar_cls"</span>], <span class="dt">pal =</span> bcat, <span class="dt">main =</span> <span class="st">"Racial diversity and residential segregation"</span>)</a></code></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -365,17 +367,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Jakub Nowosad, Anna Dmowska, Tomasz Stepinski.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
