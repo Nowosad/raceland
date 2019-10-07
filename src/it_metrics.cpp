@@ -13,7 +13,7 @@ double rcpp_joinent(const NumericMatrix x,
                     std::string base,
                     bool ordered){
 
-  NumericVector coh = comat::rcpp_get_wecove(x, ordered);
+  NumericVector coh = comat::rcpp_get_vec(x, ordered, "none");
 
   double cplx = comat::rcpp_get_entropy(coh, base);
   return cplx;

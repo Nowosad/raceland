@@ -258,7 +258,8 @@ Calculation of exposure matrix requires two arguments:
 As default, the exposure matrix with 4-directions adjacencies (`neighboorhood = 4`) is calculated using the average values from 2 adjacent cells (`fun = "mean"`). 
 
 ```{r}
-exposure_mat = comat::get_wecoma(x = real_raster[[1]], w = dens_raster[[1]])
+exposure_mat = comat::get_wecoma(x = as.matrix(real_raster[[1]]), 
+                                 w = as.matrix(dens_raster[[1]]))
 colnames(exposure_mat) = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE")
 rownames(exposure_mat) = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE")
 round(exposure_mat, 2)
