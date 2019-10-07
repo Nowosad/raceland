@@ -38,6 +38,8 @@ Suggests:
     rmarkdown,
     RColorBrewer,
     covr
+Remotes:
+    nowosad/comat
 VignetteBuilder: knitr
 SystemRequirements: C++11
 URL: https://nowosad.github.io/raceland/
