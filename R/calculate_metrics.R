@@ -44,7 +44,7 @@ calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, shift = NULL
   if (is.null(size)){
     size = 0
   }
-  if (missing(shift)){
+  if (is.null(shift)){
     shift = size
   }
   out = if (requireNamespace("pbapply", quietly = TRUE)){
@@ -75,7 +75,7 @@ calculate_metric = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
   if (is.null(size)){
     size = 0
   }
-  if (missing(shift)){
+  if (is.null(shift)){
     shift = size
   }
   df_metrics = get_metrics(x = raster::as.matrix(x), w = raster::as.matrix(w),
