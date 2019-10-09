@@ -15,7 +15,7 @@ create_grid = function(x, size, shift = NULL){
   if (!(methods::is(x, "RasterLayer") || methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
     stop("x needs to be either RasterLayer, RasterStack or RasterBrick", call. = FALSE)
   }
-  if (missing(shift)){
+  if (is.null(shift)){
     shift = size
   }
   bb = sf::st_bbox(raster::extent(x))
