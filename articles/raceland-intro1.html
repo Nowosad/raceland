@@ -81,7 +81,7 @@
       <h1>raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2019-10-09</h4>
+            <h4 class="date">2019-10-10</h4>
       
       
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -263,11 +263,11 @@
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(exposure_mat) =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(exposure_mat, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; ASIAN     0.00   38.58    30.87   0.00   46.70</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; BLACK    38.58 7238.71  3308.98 115.32 1811.62</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; HISPANIC 30.87 3308.98  8972.50 112.98 4127.05</span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; OTHER     0.00  115.32   112.98   9.64   74.24</span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt; WHITE    46.70 1811.62  4127.05  74.24 3122.90</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; ASIAN     6.90   41.28    37.36   7.49   33.93</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; BLACK    41.28 7038.50  3298.43 165.15 1871.53</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; HISPANIC 37.36 3298.43  9292.27 113.08 4109.78</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; OTHER     7.49  165.15   113.08  15.81   68.54</span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt; WHITE    33.93 1871.53  4109.78  68.54 2852.62</span></a></code></pre></div>
 </div>
 <div id="information-theory-metrics-it-metrics" class="section level3">
 <h3 class="hasAnchor">
@@ -293,28 +293,28 @@
 <a class="sourceLine" id="cb14-3" data-line-number="3">                            <span class="dt">size =</span> <span class="ot">NULL</span>, <span class="dt">threshold =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(metr_df)</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; 1           1   1   1 1.624540 3.140801 1.516261 0.1082790</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2           2   1   1 1.630835 3.146987 1.516151 0.1146839</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3           3   1   1 1.636923 3.153068 1.516144 0.1207792</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4           4   1   1 1.635202 3.160794 1.525592 0.1096104</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 5           5   1   1 1.628874 3.150516 1.521642 0.1072325</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 6           6   1   1 1.649511 3.184159 1.534647 0.1148638</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; 1           1   1   1 1.627994 3.152689 1.524695 0.1032982</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2           2   1   1 1.643498 3.176509 1.533010 0.1104879</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3           3   1   1 1.629872 3.141490 1.511618 0.1182545</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4           4   1   1 1.635674 3.159283 1.523610 0.1120640</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 5           5   1   1 1.635253 3.167195 1.531942 0.1033108</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 6           6   1   1 1.634453 3.161178 1.526726 0.1077268</span></a></code></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(metr_df[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;       ent            mutinf      </span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;  Min.   :1.614   Min.   :0.0892  </span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;  1st Qu.:1.627   1st Qu.:0.1094  </span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt;  Median :1.635   Median :0.1146  </span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;  Mean   :1.635   Mean   :0.1148  </span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;  3rd Qu.:1.642   3rd Qu.:0.1198  </span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  Max.   :1.660   Max.   :0.1355</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;       ent            mutinf       </span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;  Min.   :1.610   Min.   :0.09089  </span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10667  </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt;  Median :1.635   Median :0.11274  </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;  Mean   :1.634   Mean   :0.11274  </span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11709  </span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  Max.   :1.655   Max.   :0.13624</span></a></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">metr_df <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_ent =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">sd_ent =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(ent, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">mean_mutinf =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(mutinf),</a>
 <a class="sourceLine" id="cb17-5" data-line-number="5">  <span class="dt">sd_mutinf =</span> <span class="kw"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(mutinf))</a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;   mean_ent      sd_ent mean_mutinf  sd_mutinf</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; 1 1.634749 0.009780086   0.1147672 0.00844808</span></a></code></pre></div>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; 1 1.633984 0.009628987   0.1127406 0.008525484</span></a></code></pre></div>
 </div>
 </div>
 </div>
