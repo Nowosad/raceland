@@ -19,7 +19,7 @@ Depends:
     R (>= 3.5)
 LinkingTo: 
     Rcpp,
-    comat (>= 0.6.0),
+    comat (>= 0.7.0),
     RcppArmadillo
 Imports:
     fasterize,
