@@ -30,18 +30,16 @@ the previous methods, does not depend on the division of specific zones
 (entropy) and racial segregation (mutual information) can be performed
 for the whole area of interests (i.e., metropolitan area) without
 introducing any arbitrary divisions. Racial landscape method also allows
-for performing calculations at different spatial
-scales.
+for performing calculations at different spatial scales.
 
 ## Installation
 
-<!-- You can install the released version of raceland from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version of raceland from
+[CRAN](https://CRAN.R-project.org) with:
 
-<!-- ``` r -->
-
-<!-- install.packages("raceland") -->
-
-<!-- ``` -->
+``` r
+install.packages("raceland")
+```
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -98,24 +96,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.632356 3.162491 1.530134 0.1022222
-#> 2           2   1   1 1.625560 3.147418 1.521858 0.1037016
-#> 3           3   1   1 1.645656 3.168970 1.523314 0.1223416
-#> 4           4   1   1 1.629595 3.137422 1.507827 0.1217680
-#> 5           5   1   1 1.629634 3.154291 1.524657 0.1049766
-#> 6           6   1   1 1.632111 3.161367 1.529256 0.1028558
+#> 1           1   1   1 1.633341 3.142363 1.509022 0.1243184
+#> 2           2   1   1 1.637324 3.160367 1.523043 0.1142804
+#> 3           3   1   1 1.634186 3.146756 1.512570 0.1216158
+#> 4           4   1   1 1.629882 3.152127 1.522246 0.1076359
+#> 5           5   1   1 1.638865 3.177159 1.538294 0.1005704
+#> 6           6   1   1 1.635714 3.152158 1.516443 0.1192709
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.609   Min.   :0.09362  
-#>  1st Qu.:1.629   1st Qu.:0.10840  
-#>  Median :1.635   Median :0.11323  
-#>  Mean   :1.635   Mean   :0.11436  
-#>  3rd Qu.:1.642   3rd Qu.:0.12042  
-#>  Max.   :1.663   Max.   :0.13610
+#>  Min.   :1.609   Min.   :0.09275  
+#>  1st Qu.:1.630   1st Qu.:0.10834  
+#>  Median :1.636   Median :0.11335  
+#>  Mean   :1.635   Mean   :0.11365  
+#>  3rd Qu.:1.640   3rd Qu.:0.11992  
+#>  Max.   :1.655   Max.   :0.13526
 ```
 
 ## Contribution
