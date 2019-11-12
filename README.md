@@ -11,6 +11,8 @@ status](https://travis-ci.org/Nowosad/raceland.svg?branch=master)](https://travi
 coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/raceland)](https://CRAN.R-project.org/package=raceland)
+[![CRAN RStudio mirror
+downloads](http://cranlogs.r-pkg.org/badges/raceland)](https://cran.r-project.org/package=raceland)
 <!-- badges: end -->
 
 The **raceland** package implements a computational framework for a
@@ -96,24 +98,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.633341 3.142363 1.509022 0.1243184
-#> 2           2   1   1 1.637324 3.160367 1.523043 0.1142804
-#> 3           3   1   1 1.634186 3.146756 1.512570 0.1216158
-#> 4           4   1   1 1.629882 3.152127 1.522246 0.1076359
-#> 5           5   1   1 1.638865 3.177159 1.538294 0.1005704
-#> 6           6   1   1 1.635714 3.152158 1.516443 0.1192709
+#> 1           1   1   1 1.642960 3.172001 1.529041 0.1139193
+#> 2           2   1   1 1.622988 3.126443 1.503456 0.1195318
+#> 3           3   1   1 1.648145 3.193061 1.544916 0.1032296
+#> 4           4   1   1 1.652367 3.198486 1.546119 0.1062475
+#> 5           5   1   1 1.635775 3.152407 1.516632 0.1191429
+#> 6           6   1   1 1.646357 3.187201 1.540844 0.1055126
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.609   Min.   :0.09275  
-#>  1st Qu.:1.630   1st Qu.:0.10834  
-#>  Median :1.636   Median :0.11335  
-#>  Mean   :1.635   Mean   :0.11365  
-#>  3rd Qu.:1.640   3rd Qu.:0.11992  
-#>  Max.   :1.655   Max.   :0.13526
+#>  Min.   :1.610   Min.   :0.09508  
+#>  1st Qu.:1.627   1st Qu.:0.10456  
+#>  Median :1.634   Median :0.11101  
+#>  Mean   :1.634   Mean   :0.11088  
+#>  3rd Qu.:1.640   3rd Qu.:0.11640  
+#>  Max.   :1.653   Max.   :0.13660
 ```
 
 ## Contribution
