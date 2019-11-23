@@ -4,9 +4,18 @@
 \alias{calculate_metrics}
 \title{Calculate Metrics}
 \usage{
-calculate_metrics(x, w, neighbourhood, fun, size = NULL, shift = NULL,
-  na_action = "replace", base = "log2", ordered = TRUE,
-  threshold = 0.5)
+calculate_metrics(
+  x,
+  w,
+  neighbourhood,
+  fun,
+  size = NULL,
+  shift = NULL,
+  na_action = "replace",
+  base = "log2",
+  ordered = TRUE,
+  threshold = 0.5
+)
 }
 \arguments{
 \item{x}{RasterStack with realizations}
