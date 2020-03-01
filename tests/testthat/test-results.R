@@ -20,8 +20,8 @@ popdens_raster2 = zones_to_raster(pop_vector, resolution = 30,
                                   variables = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE"))
 
 # tests -------------------------------------------------------------------
-expect_equal(real_raster2, real_raster)
-expect_equal(weig_raster2, weig_raster)
-expect_equal(metr_df2, metr_df)
-expect_equal(grid_sf2, grid_sf)
-expect_equal(popdens_raster2, popdens_raster)
+expect_equivalent(real_raster2, real_raster)
+expect_equivalent(weig_raster2, weig_raster)
+expect_equivalent(metr_df2, metr_df)
+expect_equivalent(grid_sf2, grid_sf)
+expect_equivalent(popdens_raster2, popdens_raster)
