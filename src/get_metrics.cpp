@@ -1,9 +1,9 @@
 #include "get_metrics.h"
 using namespace Rcpp;
 
-NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
-                          Rcpp::NumericMatrix w,
-                          const arma::imat directions,
+NumericMatrix get_metrics(Rcpp::IntegerMatrix& x,
+                          Rcpp::NumericMatrix& w,
+                          const arma::imat& directions,
                           const std::string fun,
                           const std::string na_action,
                           std::string base,

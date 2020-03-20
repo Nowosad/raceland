@@ -57,14 +57,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_metrics
-Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x, Rcpp::NumericMatrix w, const arma::imat directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size, int shift, double na_threshold);
+Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix& x, Rcpp::NumericMatrix& w, const arma::imat& directions, const std::string fun, const std::string na_action, std::string base, bool ordered, int size, int shift, double na_threshold);
 RcppExport SEXP _raceland_get_metrics(SEXP xSEXP, SEXP wSEXP, SEXP directionsSEXP, SEXP funSEXP, SEXP na_actionSEXP, SEXP baseSEXP, SEXP orderedSEXP, SEXP sizeSEXP, SEXP shiftSEXP, SEXP na_thresholdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type w(wSEXP);
-    Rcpp::traits::input_parameter< const arma::imat >::type directions(directionsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type w(wSEXP);
+    Rcpp::traits::input_parameter< const arma::imat& >::type directions(directionsSEXP);
     Rcpp::traits::input_parameter< const std::string >::type fun(funSEXP);
     Rcpp::traits::input_parameter< const std::string >::type na_action(na_actionSEXP);
     Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);

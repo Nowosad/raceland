@@ -10,9 +10,9 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix x,
-                          Rcpp::NumericMatrix w,
-                          const arma::imat directions,
+Rcpp::NumericMatrix get_metrics(Rcpp::IntegerMatrix& x,
+                          Rcpp::NumericMatrix& w,
+                          const arma::imat& directions,
                           const std::string fun = "mean",
                           const std::string na_action = "replace",
                           std::string base = "log2",
