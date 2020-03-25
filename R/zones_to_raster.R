@@ -19,7 +19,15 @@
 #' plot(popdens_raster)
 zones_to_raster = function(v, resolution, variables, ...){
 
-  template_raster = raster::raster(v, resolution = resolution)
+
+  v_extent = extent(vect_data)
+  v_crs = st_crs(v)$proj4string
+  template_raster = raster::raster(v_extent,
+                                   crs = v_crs,
+                                   resolution = resolution)
+
+  # template_raster = raster::raster(v,
+  #                                  resolution = resolution)
 
   v$id = seq_len(nrow(v))
   r_id = fasterize::fasterize(v, template_raster, field = "id", ...)
