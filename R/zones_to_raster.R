@@ -18,6 +18,7 @@
 #'                                  variables = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE"))
 #' plot(popdens_raster)
 zones_to_raster = function(v, resolution, variables, ...){
+
   template_raster = raster::raster(v, resolution = resolution)
 
   v$id = seq_len(nrow(v))

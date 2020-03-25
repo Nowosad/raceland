@@ -4,7 +4,9 @@
 \name{race_raster}
 \alias{race_raster}
 \title{A RasterStack}
-\format{A RasterLayer}
+\format{
+A RasterLayer
+}
 \usage{
 race_raster
 }

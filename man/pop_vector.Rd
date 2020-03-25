@@ -4,7 +4,9 @@
 \name{pop_vector}
 \alias{pop_vector}
 \title{An sf object}
-\format{An sf object}
+\format{
+An sf object
+}
 \usage{
 pop_vector
 }
