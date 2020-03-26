@@ -20,8 +20,8 @@
 zones_to_raster = function(v, resolution, variables, ...){
 
 
-  v_extent = extent(vect_data)
-  v_crs = st_crs(v)$proj4string
+  v_extent = raster::extent(v)
+  v_crs = sf::st_crs(v)$proj4string
   template_raster = raster::raster(v_extent,
                                    crs = v_crs,
                                    resolution = resolution)
