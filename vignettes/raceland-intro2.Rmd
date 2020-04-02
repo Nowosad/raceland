@@ -274,8 +274,8 @@ smr10 %>%
 
 # calculate bivariate classification
 smr10$bivar_cls = bivariate_classification(
-  entropy = smr$ent_mean,
-  mutual_information = smr$mutinf_mean,
+  entropy = smr10$ent_mean,
+  mutual_information = smr10$mutinf_mean,
   n = nlayers(race_raster)
 )
 ```
