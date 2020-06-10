@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/Nowosad/raceland.svg?branch=master)](https://travis-ci.org/Nowosad/raceland)
+[![R build
+status](https://github.com/Nowosad/racialscape/workflows/pkgdown/badge.svg)](https://github.com/Nowosad/racialscape/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
 [![CRAN
@@ -47,8 +47,8 @@ You can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("Nowosad/raceland")
+# install.packages("remotes")
+remotes::install_github("Nowosad/raceland")
 ```
 
 ## Example
@@ -98,24 +98,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.642960 3.172001 1.529041 0.1139193
-#> 2           2   1   1 1.622988 3.126443 1.503456 0.1195318
-#> 3           3   1   1 1.648145 3.193061 1.544916 0.1032296
-#> 4           4   1   1 1.652367 3.198486 1.546119 0.1062475
-#> 5           5   1   1 1.635775 3.152407 1.516632 0.1191429
-#> 6           6   1   1 1.646357 3.187201 1.540844 0.1055126
+#> 1           1   1   1 1.636257 3.154606 1.518349 0.1179075
+#> 2           2   1   1 1.634388 3.154078 1.519690 0.1146989
+#> 3           3   1   1 1.621270 3.115015 1.493745 0.1275249
+#> 4           4   1   1 1.628930 3.148915 1.519986 0.1089437
+#> 5           5   1   1 1.626084 3.130602 1.504518 0.1215664
+#> 6           6   1   1 1.632169 3.156788 1.524620 0.1075492
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
-#>       ent            mutinf       
-#>  Min.   :1.610   Min.   :0.09508  
-#>  1st Qu.:1.627   1st Qu.:0.10456  
-#>  Median :1.634   Median :0.11101  
-#>  Mean   :1.634   Mean   :0.11088  
-#>  3rd Qu.:1.640   3rd Qu.:0.11640  
-#>  Max.   :1.653   Max.   :0.13660
+#>       ent            mutinf      
+#>  Min.   :1.601   Min.   :0.0957  
+#>  1st Qu.:1.628   1st Qu.:0.1076  
+#>  Median :1.635   Median :0.1137  
+#>  Mean   :1.634   Mean   :0.1137  
+#>  3rd Qu.:1.641   3rd Qu.:0.1194  
+#>  Max.   :1.657   Max.   :0.1275
 ```
 
 ## Contribution

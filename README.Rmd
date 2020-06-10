@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # raceland
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/Nowosad/raceland.svg?branch=master)](https://travis-ci.org/Nowosad/raceland)
+[![R build status](https://github.com/Nowosad/racialscape/workflows/pkgdown/badge.svg)](https://github.com/Nowosad/racialscape/actions)
 [![Codecov test coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/raceland)](https://CRAN.R-project.org/package=raceland)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/raceland)](https://cran.r-project.org/package=raceland)
@@ -41,8 +41,8 @@ install.packages("raceland")
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("Nowosad/raceland")
+# install.packages("remotes")
+remotes::install_github("Nowosad/raceland")
 ```
 ## Example
 
