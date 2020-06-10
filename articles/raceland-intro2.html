@@ -795,15 +795,15 @@
                                <span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="fl">0.5</span>)
 <span class="no">metr_df_20</span>[<span class="no">metr_df_20</span>$<span class="no">realization</span> <span class="kw">==</span> <span class="fl">1</span>, ]
 <span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.266768 2.522650 1.255882 0.01088586</span>
-<span class="co">#&gt; 2           1   1   2 1.582404 3.003013 1.420609 0.16179475</span>
-<span class="co">#&gt; 3           1   1   3 1.351777 2.665120 1.313343 0.03843364</span>
-<span class="co">#&gt; 4           1   2   1 1.588424 3.101408 1.512983 0.07544101</span>
-<span class="co">#&gt; 5           1   2   2 1.540393 3.040097 1.499704 0.04068914</span>
-<span class="co">#&gt; 6           1   2   3 1.532836 2.950312 1.417476 0.11535994</span>
-<span class="co">#&gt; 7           1   3   1 1.347734 2.569500 1.221766 0.12596862</span>
-<span class="co">#&gt; 8           1   3   2 1.561980 3.102083 1.540103 0.02187745</span>
-<span class="co">#&gt; 9           1   3   3 1.367214 2.679825 1.312611 0.05460288</span></pre></body></html></div>
+<span class="co">#&gt; 1           1   1   1 1.196118 2.377725 1.181608 0.01451006</span>
+<span class="co">#&gt; 2           1   1   2 1.580362 3.005180 1.424818 0.15554373</span>
+<span class="co">#&gt; 3           1   1   3 1.366060 2.666393 1.300332 0.06572837</span>
+<span class="co">#&gt; 4           1   2   1 1.644421 3.095058 1.450637 0.19378318</span>
+<span class="co">#&gt; 5           1   2   2 1.530592 3.022235 1.491643 0.03894944</span>
+<span class="co">#&gt; 6           1   2   3 1.499169 2.817352 1.318184 0.18098501</span>
+<span class="co">#&gt; 7           1   3   1 1.378302 2.548780 1.170478 0.20782437</span>
+<span class="co">#&gt; 8           1   3   2 1.549214 3.072453 1.523239 0.02597423</span>
+<span class="co">#&gt; 9           1   3   3 1.486100 2.929650 1.443551 0.04254908</span></pre></body></html></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble average from multiple realizations. First, for each square window is calculated the average value of entropy and mutual information based on 100 realizations. The table below shows the mean (<code>ent_mean</code>, <code>mutinf_mean</code>) and standard deviation (<code>ent_sd</code>, <code>mutinf_sd</code>) values for each square window.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">smr</span> <span class="kw">=</span> <span class="no">metr_df_20</span> <span class="kw">%&gt;%</span>
   <span class="fu">group_by</span>(<span class="no">row</span>, <span class="no">col</span>) <span class="kw">%&gt;%</span>
@@ -819,15 +819,15 @@
 <span class="co">#&gt; # Groups:   row [3]</span>
 <span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1     1.26 0.0453      0.0188   0.00922</span>
-<span class="co">#&gt; 2     1     2     1.59 0.0120      0.164    0.0299 </span>
-<span class="co">#&gt; 3     1     3     1.41 0.0315      0.0470   0.0128 </span>
-<span class="co">#&gt; 4     2     1     1.61 0.0301      0.151    0.0412 </span>
-<span class="co">#&gt; 5     2     2     1.52 0.0240      0.0364   0.0118 </span>
-<span class="co">#&gt; 6     2     3     1.52 0.0321      0.155    0.0291 </span>
-<span class="co">#&gt; 7     3     1     1.38 0.0512      0.145    0.0446 </span>
-<span class="co">#&gt; 8     3     2     1.54 0.0292      0.0158   0.00665</span>
-<span class="co">#&gt; 9     3     3     1.42 0.0317      0.0507   0.0156</span></pre></body></html></div>
+<span class="co">#&gt; 1     1     1     1.26 0.0478      0.0184   0.00749</span>
+<span class="co">#&gt; 2     1     2     1.59 0.0120      0.166    0.0282 </span>
+<span class="co">#&gt; 3     1     3     1.41 0.0288      0.0453   0.0144 </span>
+<span class="co">#&gt; 4     2     1     1.61 0.0263      0.149    0.0422 </span>
+<span class="co">#&gt; 5     2     2     1.52 0.0251      0.0367   0.0125 </span>
+<span class="co">#&gt; 6     2     3     1.51 0.0304      0.159    0.0328 </span>
+<span class="co">#&gt; 7     3     1     1.37 0.0526      0.139    0.0466 </span>
+<span class="co">#&gt; 8     3     2     1.54 0.0268      0.0158   0.00732</span>
+<span class="co">#&gt; 9     3     3     1.42 0.0325      0.0463   0.0156</span></pre></body></html></div>
 <p>Then the averages from the mean values of entropy and mutual information are calculated.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">smr</span> <span class="kw">%&gt;%</span>
   <span class="fu">ungroup</span>() <span class="kw">%&gt;%</span>
@@ -836,7 +836,7 @@
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.47 0.0319      0.0870    0.0223</span></pre></body></html></div>
+<span class="co">#&gt; 1     1.47 0.0314      0.0862    0.0230</span></pre></body></html></div>
 <div id="racial-diversity-segregation-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#racial-diversity-segregation-classification" class="anchor"></a>Racial diversity-segregation classification</h3>
@@ -932,7 +932,7 @@
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.48 0.0340      0.0831    0.0228</span>
+<span class="co">#&gt; 1     1.48 0.0333      0.0821    0.0232</span>
 
 <span class="co"># calculate bivariate classification</span>
 <span class="no">smr10</span>$<span class="no">bivar_cls</span> <span class="kw">=</span> <span class="fu">bivariate_classification</span>(

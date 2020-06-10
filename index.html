@@ -100,8 +100,8 @@
 <p>You can install the released version of raceland from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"raceland"</span>)</pre></div>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"Nowosad/raceland"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
+<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Nowosad/raceland"</span>)</pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -131,21 +131,21 @@
                             <span class="kw">size</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span>(<span class="no">metr_df</span>)
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.642960 3.172001 1.529041 0.1139193</span>
-<span class="co">#&gt; 2           2   1   1 1.622988 3.126443 1.503456 0.1195318</span>
-<span class="co">#&gt; 3           3   1   1 1.648145 3.193061 1.544916 0.1032296</span>
-<span class="co">#&gt; 4           4   1   1 1.652367 3.198486 1.546119 0.1062475</span>
-<span class="co">#&gt; 5           5   1   1 1.635775 3.152407 1.516632 0.1191429</span>
-<span class="co">#&gt; 6           6   1   1 1.646357 3.187201 1.540844 0.1055126</span></pre></div>
+<span class="co">#&gt; 1           1   1   1 1.636257 3.154606 1.518349 0.1179075</span>
+<span class="co">#&gt; 2           2   1   1 1.634388 3.154078 1.519690 0.1146989</span>
+<span class="co">#&gt; 3           3   1   1 1.621270 3.115015 1.493745 0.1275249</span>
+<span class="co">#&gt; 4           4   1   1 1.628930 3.148915 1.519986 0.1089437</span>
+<span class="co">#&gt; 5           5   1   1 1.626084 3.130602 1.504518 0.1215664</span>
+<span class="co">#&gt; 6           6   1   1 1.632169 3.156788 1.524620 0.1075492</span></pre></div>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="co"># Summarize IT metrics </span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">metr_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])
-<span class="co">#&gt;       ent            mutinf       </span>
-<span class="co">#&gt;  Min.   :1.610   Min.   :0.09508  </span>
-<span class="co">#&gt;  1st Qu.:1.627   1st Qu.:0.10456  </span>
-<span class="co">#&gt;  Median :1.634   Median :0.11101  </span>
-<span class="co">#&gt;  Mean   :1.634   Mean   :0.11088  </span>
-<span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11640  </span>
-<span class="co">#&gt;  Max.   :1.653   Max.   :0.13660</span></pre></div>
+<span class="co">#&gt;       ent            mutinf      </span>
+<span class="co">#&gt;  Min.   :1.601   Min.   :0.0957  </span>
+<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.1076  </span>
+<span class="co">#&gt;  Median :1.635   Median :0.1137  </span>
+<span class="co">#&gt;  Mean   :1.634   Mean   :0.1137  </span>
+<span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1194  </span>
+<span class="co">#&gt;  Max.   :1.657   Max.   :0.1275</span></pre></div>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">
@@ -186,7 +186,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/Nowosad/raceland"><img src="https://travis-ci.org/Nowosad/raceland.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://github.com/Nowosad/racialscape/actions"><img src="https://github.com/Nowosad/racialscape/workflows/pkgdown/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/Nowosad/raceland?branch=master"><img src="https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://CRAN.R-project.org/package=raceland"><img src="https://www.r-pkg.org/badges/version/raceland" alt="CRAN status"></a></li>
 <li><a href="https://cran.r-project.org/package=raceland"><img src="http://cranlogs.r-pkg.org/badges/raceland" alt="CRAN RStudio mirror downloads"></a></li>
