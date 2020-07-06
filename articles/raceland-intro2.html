@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -82,13 +82,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="raceland-intro2_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>raceland: Describing local racial patterns of racial landscapes at different spatial scales</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-06-10</h4>
+            <h4 class="date">2020-07-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro2.Rmd"><code>vignettes/raceland-intro2.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro2.Rmd</code></div>
@@ -102,25 +102,28 @@
 <a href="#introduction" class="anchor"></a>INTRODUCTION</h1>
 <p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. An overview of the implemented method is presented in the first vignette. Here we demonstrate, how the <strong>raceland</strong> package can be used for describing racial landscape at different spatial scales.</p>
 <p><strong>Racial landscape method</strong> is based on the raster gridded data, and unlike the previous methods, does not depend on the division for specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing the calculation at different spatial scales.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># install required packages </span>
-<span class="no">pkgs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-  <span class="st">"raceland"</span>,
-  <span class="st">"comat"</span>,
-  <span class="st">"rgdal"</span>,
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install required packages </span>
+<span class="kw">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+  <span class="st">"raceland"</span>,                
+  <span class="st">"comat"</span>,            
+  <span class="st">"rgdal"</span>,   
   <span class="st">"raster"</span>,
-  <span class="st">"sf"</span>,
+  <span class="st">"sf"</span>,              
   <span class="st">"dplyr"</span>,
   <span class="st">"RColorBrewer"</span>
 )
-<span class="no">to_install</span> <span class="kw">=</span> !<span class="no">pkgs</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span>()
-<span class="kw">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span>(<span class="no">to_install</span>)) {
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="no">pkgs</span>[<span class="no">to_install</span>])
-}</pre></body></html></div>
+<span class="kw">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="kw">pkgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span>()
+<span class="co">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span>(<span class="kw">to_install</span>)) {
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="kw">pkgs</span>[<span class="kw">to_install</span>])
+}
+</pre></div>
 <p>A computational framework requires a few steps (see the first vignette for details) before calculating IT-metrics:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># reading input data</span>
-<span class="no">list_raster</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"rast_data"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"raceland"</span>),
-                         <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="no">race_raster</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">stack</a></span>(<span class="no">list_raster</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># reading input data</span>
+<span class="kw">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"rast_data"</span>, package = <span class="st">"raceland"</span>),
+                         full.names = <span class="fl">TRUE</span>)
+<span class="kw">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span>(<span class="kw">list_raster</span>)
 <span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
 <span class="co">#&gt;  but +towgs84= values preserved</span>
 
@@ -140,614 +143,11 @@
 <span class="co">#&gt;  but +towgs84= values preserved</span>
 
 <span class="co"># constructing racial landscape</span>
-<span class="no">real_raster</span> <span class="kw">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">race_raster</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="kw">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span>(x = <span class="kw">race_raster</span>, n = <span class="fl">100</span>)
 
 <span class="co"># calculating local subpopulation densities</span>
-<span class="no">dens_raster</span> <span class="kw">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span>(<span class="no">real_raster</span>, <span class="no">race_raster</span>, <span class="kw">window_size</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span></pre></body></html></div>
+<span class="kw">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span>(<span class="kw">real_raster</span>, <span class="kw">race_raster</span>, window_size = <span class="fl">10</span>)
+</pre></div>
 </div>
 <div id="describing-local-racial-patterns-of-racial-landscapes-at-different-spatial-scales" class="section level1">
 <h1 class="hasAnchor">
@@ -775,68 +175,68 @@
 <h2 class="hasAnchor">
 <a href="#calculate-it-metrics-from-local-patterns-1" class="anchor"></a>Calculate IT metrics from local patterns (1)</h2>
 <p>The <code><a href="../reference/create_grid.html">create_grid()</a></code> function creates spatial object with a grid (each ‘cell’ is defined by size and shift). This function requires the RasterStack object with realizations (racial landscapes) and size parameter. If the shift parameter is not set, it is assumed that <code>size=shift</code>. Below such grid is imposed into the racial landscape to show local patterns.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">race_colors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)
-<span class="no">grid_sf</span> <span class="kw">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span>(<span class="no">real_raster</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>)
-<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span>(<span class="no">real_raster</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="no">race_raster</span>, <span class="kw">hex</span> <span class="kw">=</span> <span class="no">race_colors</span>)
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu">st_geometry</span>(<span class="no">grid_sf</span>), <span class="kw">add</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">lwd</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)
+<span class="kw">grid_sf</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span>(<span class="kw">real_raster</span>, size = <span class="fl">20</span>)
+<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span>(<span class="kw">real_raster</span>[[<span class="fl">1</span>]], <span class="kw">race_raster</span>, hex = <span class="kw">race_colors</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">grid_sf</span>), add = <span class="fl">TRUE</span>, lwd = <span class="fl">2</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/fig5-1.png" width="40%" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function is used to calculate IT metrics. Parameter <code>size=20</code> means that the area of interests will be divided into a grid of local patterns of the size 20x20 cells (which in this case corresponds to the square of 0.6 km x 0.6km). The <code>neighboorhood = 4</code> defines that adjacencies between cells are defined in four directions, <code>fun="mean"</code> calculate average values of population density from adjacent cells, <code>threshold = 0.5</code> - calculation will be performed if there is at least 50% of non-NA cells.</p>
 <p>IT metrics are calculated for each local pattern for each realization. The output table will have 900 rows (there are nine local patterns of size 20x20 cells and 100 realizations).</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">metr_df_20</span> <span class="kw">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">real_raster</span>, <span class="kw">w</span> <span class="kw">=</span> <span class="no">dens_raster</span>,
-                               <span class="kw">neighbourhood</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">fun</span> <span class="kw">=</span> <span class="st">"mean"</span>,
-                               <span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="fl">0.5</span>)
-<span class="no">metr_df_20</span>[<span class="no">metr_df_20</span>$<span class="no">realization</span> <span class="kw">==</span> <span class="fl">1</span>, ]
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">metr_df_20</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(x = <span class="kw">real_raster</span>, w = <span class="kw">dens_raster</span>, 
+                               neighbourhood = <span class="fl">4</span>, fun = <span class="st">"mean"</span>, 
+                               size = <span class="fl">20</span>, threshold = <span class="fl">0.5</span>)
+<span class="kw">metr_df_20</span>[<span class="kw">metr_df_20</span><span class="op">$</span><span class="kw">realization</span> <span class="op">==</span> <span class="fl">1</span>, ]
 <span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.196118 2.377725 1.181608 0.01451006</span>
-<span class="co">#&gt; 2           1   1   2 1.580362 3.005180 1.424818 0.15554373</span>
-<span class="co">#&gt; 3           1   1   3 1.366060 2.666393 1.300332 0.06572837</span>
-<span class="co">#&gt; 4           1   2   1 1.644421 3.095058 1.450637 0.19378318</span>
-<span class="co">#&gt; 5           1   2   2 1.530592 3.022235 1.491643 0.03894944</span>
-<span class="co">#&gt; 6           1   2   3 1.499169 2.817352 1.318184 0.18098501</span>
-<span class="co">#&gt; 7           1   3   1 1.378302 2.548780 1.170478 0.20782437</span>
-<span class="co">#&gt; 8           1   3   2 1.549214 3.072453 1.523239 0.02597423</span>
-<span class="co">#&gt; 9           1   3   3 1.486100 2.929650 1.443551 0.04254908</span></pre></body></html></div>
+<span class="co">#&gt; 1           1   1   1 1.322131 2.623421 1.301290 0.02084021</span>
+<span class="co">#&gt; 2           1   1   2 1.602016 3.033201 1.431186 0.17082960</span>
+<span class="co">#&gt; 3           1   1   3 1.366691 2.665266 1.298575 0.06811606</span>
+<span class="co">#&gt; 4           1   2   1 1.627447 3.033712 1.406265 0.22118227</span>
+<span class="co">#&gt; 5           1   2   2 1.525715 3.031943 1.506228 0.01948636</span>
+<span class="co">#&gt; 6           1   2   3 1.507888 2.844697 1.336808 0.17108002</span>
+<span class="co">#&gt; 7           1   3   1 1.348211 2.616853 1.268642 0.07956938</span>
+<span class="co">#&gt; 8           1   3   2 1.557972 3.104440 1.546468 0.01150452</span>
+<span class="co">#&gt; 9           1   3   3 1.406366 2.765375 1.359010 0.04735568</span>
+</pre></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble average from multiple realizations. First, for each square window is calculated the average value of entropy and mutual information based on 100 realizations. The table below shows the mean (<code>ent_mean</code>, <code>mutinf_mean</code>) and standard deviation (<code>ent_sd</code>, <code>mutinf_sd</code>) values for each square window.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">smr</span> <span class="kw">=</span> <span class="no">metr_df_20</span> <span class="kw">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="no">row</span>, <span class="no">col</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">smr</span> <span class="op">=</span> <span class="kw">metr_df_20</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="kw">row</span>, <span class="kw">col</span>) <span class="op">%&gt;%</span>
   <span class="fu">summarize</span>(
-    <span class="kw">ent_mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">ent</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">ent_sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="no">ent</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">mutinf_mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">mutinf</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">mutinf_sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="no">mutinf</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+    ent_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
+    ent_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
+    mutinf_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>),
+    mutinf_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>)
   )
 <span class="co">#&gt; `summarise()` regrouping output by 'row' (override with `.groups` argument)</span>
-<span class="no">smr</span>
+<span class="kw">smr</span>
 <span class="co">#&gt; # A tibble: 9 x 6</span>
 <span class="co">#&gt; # Groups:   row [3]</span>
 <span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1     1.26 0.0478      0.0184   0.00749</span>
-<span class="co">#&gt; 2     1     2     1.59 0.0120      0.166    0.0282 </span>
-<span class="co">#&gt; 3     1     3     1.41 0.0288      0.0453   0.0144 </span>
-<span class="co">#&gt; 4     2     1     1.61 0.0263      0.149    0.0422 </span>
-<span class="co">#&gt; 5     2     2     1.52 0.0251      0.0367   0.0125 </span>
-<span class="co">#&gt; 6     2     3     1.51 0.0304      0.159    0.0328 </span>
-<span class="co">#&gt; 7     3     1     1.37 0.0526      0.139    0.0466 </span>
-<span class="co">#&gt; 8     3     2     1.54 0.0268      0.0158   0.00732</span>
-<span class="co">#&gt; 9     3     3     1.42 0.0325      0.0463   0.0156</span></pre></body></html></div>
+<span class="co">#&gt; 1     1     1     1.26 0.0512      0.0191   0.00749</span>
+<span class="co">#&gt; 2     1     2     1.59 0.0113      0.160    0.0243 </span>
+<span class="co">#&gt; 3     1     3     1.42 0.0283      0.0459   0.0138 </span>
+<span class="co">#&gt; 4     2     1     1.61 0.0281      0.152    0.0423 </span>
+<span class="co">#&gt; 5     2     2     1.52 0.0234      0.0351   0.0110 </span>
+<span class="co">#&gt; 6     2     3     1.51 0.0243      0.154    0.0271 </span>
+<span class="co">#&gt; 7     3     1     1.38 0.0519      0.140    0.0402 </span>
+<span class="co">#&gt; 8     3     2     1.54 0.0288      0.0153   0.00696</span>
+<span class="co">#&gt; 9     3     3     1.42 0.0308      0.0460   0.0125</span>
+</pre></div>
 <p>Then the averages from the mean values of entropy and mutual information are calculated.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">smr</span> <span class="kw">%&gt;%</span>
-  <span class="fu">ungroup</span>() <span class="kw">%&gt;%</span>
-  <span class="fu">select</span>(-<span class="no">row</span>, -<span class="no">col</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">summarise_all</span>(<span class="no">mean</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">smr</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ungroup</span>() <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/select.html">select</a></span>(<span class="op">-</span><span class="kw">row</span>, <span class="op">-</span><span class="kw">col</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">summarise_all</span>(<span class="kw">mean</span>)
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.47 0.0314      0.0862    0.0230</span></pre></body></html></div>
+<span class="co">#&gt; 1     1.47 0.0309      0.0853    0.0206</span>
+</pre></div>
 <div id="racial-diversity-segregation-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#racial-diversity-segregation-classification" class="anchor"></a>Racial diversity-segregation classification</h3>
@@ -844,65 +244,79 @@
 <p>Each class is coded by one color using bivariate palette (see below).</p>
 <p><img src="fig4_bivariate.png" width="40%"></p>
 <p>The <code>bivariate_classification()</code> function presented below takes three arguments (<code>entropy</code> - a vector of entropy values, <code>mutual_information</code> - a vector of mutual information values, <code>n</code> - a number of categories in racial landscape) and return a 9-coded vector of racial segregation/divesity classes.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># n is a number of categories in racial landscape</span>
-<span class="no">bivariate_classification</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">entropy</span>, <span class="no">mutual_information</span>, <span class="no">n</span>) {
-
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="co"># n is a number of categories in racial landscape</span>
+<span class="kw">bivariate_classification</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">entropy</span>, <span class="kw">mutual_information</span>, <span class="kw">n</span>) {
+  
   <span class="co"># calculate bivariate classification</span>
-  <span class="no">nent</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="no">n</span>)
-  <span class="no">ent_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">entropy</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, <span class="no">nent</span>), <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>),
-                <span class="kw">include.lowest</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">right</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  <span class="no">ent_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">ent_cat</span>))
-
-  <span class="no">mut_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">mutual_information</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">1</span>), <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>),
-                <span class="kw">include.lowest</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">right</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-  <span class="no">mut_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">mut_cat</span>))
-
-  <span class="no">bivar_cls</span> <span class="kw">=</span> <span class="no">mut_cat</span> + <span class="no">ent_cat</span>
-  <span class="no">bivar_cls</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">bivar_cls</span>)
-
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">bivar_cls</span>)
-}</pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">smr</span>$<span class="no">bivar_cls</span> <span class="kw">=</span> <span class="fu">bivariate_classification</span>(<span class="kw">entropy</span> <span class="kw">=</span> <span class="no">smr</span>$<span class="no">ent_mean</span>,
-                                         <span class="kw">mutual_information</span> <span class="kw">=</span> <span class="no">smr</span>$<span class="no">mutinf_mean</span>,
-                                         <span class="kw">n</span> <span class="kw">=</span> <span class="fu">nlayers</span>(<span class="no">race_raster</span>))</pre></body></html></div>
+  <span class="kw">nent</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="kw">n</span>)
+  <span class="kw">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span>(<span class="kw">entropy</span>, breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, <span class="kw">nent</span>), labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), 
+                include.lowest = <span class="fl">TRUE</span>, right = <span class="fl">TRUE</span>)
+  <span class="kw">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span>(<span class="kw">ent_cat</span>))
+  
+  <span class="kw">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span>(<span class="kw">mutual_information</span>, breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">1</span>), labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>), 
+                include.lowest = <span class="fl">TRUE</span>, right = <span class="fl">TRUE</span>)
+  <span class="kw">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span>(<span class="kw">mut_cat</span>))
+  
+  <span class="kw">bivar_cls</span> <span class="op">=</span> <span class="kw">mut_cat</span> <span class="op">+</span> <span class="kw">ent_cat</span>
+  <span class="kw">bivar_cls</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span>(<span class="kw">bivar_cls</span>)
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw">bivar_cls</span>)
+}
+</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">smr</span><span class="op">$</span><span class="kw">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span>(entropy = <span class="kw">smr</span><span class="op">$</span><span class="kw">ent_mean</span>, 
+                                         mutual_information = <span class="kw">smr</span><span class="op">$</span><span class="kw">mutinf_mean</span>,
+                                         n = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span>(<span class="kw">race_raster</span>))
+</pre></div>
 </div>
 <div id="mapping-local-racial-diversity-and-racial-segregation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-local-racial-diversity-and-racial-segregation" class="anchor"></a>Mapping local racial diversity and racial segregation</h3>
 <p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to the spatial grid object. Such operation allows for mapping metrics and shows how segregation and racial diversity change over the area.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># join IT-metric to the grid</span>
-<span class="no">attr_grid</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">grid_sf</span>, <span class="no">smr</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</pre></body></html></div>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># calculate breaks parameter for plotting entropy and mutual information</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="co"># join IT-metric to the grid</span>
+<span class="kw">attr_grid</span> <span class="op">=</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="kw">grid_sf</span>, <span class="kw">smr</span>, by = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))
+</pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="co"># calculate breaks parameter for plotting entropy and mutual information</span>
 <span class="co"># the values of entropy and mutual information are divided into equal breaks</span>
-<span class="no">ent_breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">2</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">0.25</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="fu">nlayers</span>(<span class="no">race_raster</span>)))
-<span class="no">mut_breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">0.1</span>)</pre></body></html></div>
+<span class="kw">ent_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">2</span>, by = <span class="fl">0.25</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span>(<span class="kw">race_raster</span>)))
+<span class="kw">mut_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, by = <span class="fl">0.1</span>)
+</pre></div>
 </div>
 <div id="mapping-racial-diversity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-diversity" class="anchor"></a>Mapping racial diversity</h3>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">attr_grid</span>[<span class="st">"ent_mean"</span>], <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">ent_breaks</span>, <span class="kw">key.pos</span> <span class="kw">=</span> <span class="fl">1</span>,
-     <span class="kw">pal</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw pkg">RColorBrewer</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">ent_breaks</span>) - <span class="fl">1</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"RdBu"</span>)),
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid</span>[<span class="st">"ent_mean"</span>], breaks = <span class="kw">ent_breaks</span>, key.pos = <span class="fl">1</span>, 
+     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">ent_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
      <span class="co"># pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),</span>
-     <span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Racial diversity (Entropy)"</span>)</pre></body></html></div>
+     bty = <span class="st">"n"</span>, main = <span class="st">"Racial diversity (Entropy)"</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation" class="anchor"></a>Mapping racial segregation</h3>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">attr_grid</span>[<span class="st">"mutinf_mean"</span>], <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">mut_breaks</span>, <span class="kw">key.pos</span> <span class="kw">=</span> <span class="fl">1</span>,
-     <span class="kw">pal</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw pkg">RColorBrewer</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">mut_breaks</span>) - <span class="fl">1</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"RdBu"</span>)),
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid</span>[<span class="st">"mutinf_mean"</span>], breaks = <span class="kw">mut_breaks</span>, key.pos = <span class="fl">1</span>, 
+     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">mut_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
      <span class="co"># pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),</span>
-     <span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Racial segregation (Mutual information)"</span>)</pre></body></html></div>
+     bty = <span class="st">"n"</span>, main = <span class="st">"Racial segregation (Mutual information)"</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation-and-diversity-using-bivariate-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-and-diversity-using-bivariate-classification" class="anchor"></a>Mapping racial segregation and diversity using bivariate classification</h3>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">biv_colors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> <span class="kw">=</span> <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> <span class="kw">=</span> <span class="st">"#e4acac"</span>, <span class="st">"13"</span> <span class="kw">=</span> <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> <span class="kw">=</span> <span class="st">"#b0d5df"</span>,
-               <span class="st">"22"</span> <span class="kw">=</span> <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> <span class="kw">=</span> <span class="st">"#985356"</span>, <span class="st">"31"</span> <span class="kw">=</span> <span class="st">"#64acbe"</span>, <span class="st">"32"</span><span class="kw">=</span> <span class="st">"#627f8c"</span>,
-               <span class="st">"33"</span> <span class="kw">=</span> <span class="st">"#574249"</span>)
-<span class="no">bcat</span> <span class="kw">=</span> <span class="no">biv_colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">biv_colors</span>)<span class="kw">%in%</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">attr_grid</span>$<span class="no">bivar_cls</span>)]
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">attr_grid</span>[<span class="st">"bivar_cls"</span>], <span class="kw">pal</span> <span class="kw">=</span> <span class="no">bcat</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Racial diversity and residential segregation"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="kw">biv_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> = <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> = <span class="st">"#e4acac"</span>, <span class="st">"13"</span> = <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> = <span class="st">"#b0d5df"</span>,
+               <span class="st">"22"</span> = <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> = <span class="st">"#985356"</span>, <span class="st">"31"</span> = <span class="st">"#64acbe"</span>, <span class="st">"32"</span>= <span class="st">"#627f8c"</span>, 
+               <span class="st">"33"</span> = <span class="st">"#574249"</span>)
+<span class="kw">bcat</span> <span class="op">=</span> <span class="kw">biv_colors</span>[<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">biv_colors</span>)<span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span>(<span class="kw">attr_grid</span><span class="op">$</span><span class="kw">bivar_cls</span>)]
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid</span>[<span class="st">"bivar_cls"</span>], pal = <span class="kw">bcat</span>, main = <span class="st">"Racial diversity and residential segregation"</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="calculate-it-metrics-from-local-patterns-overlapping-windows" class="section level3">
@@ -910,75 +324,85 @@
 <a href="#calculate-it-metrics-from-local-patterns-overlapping-windows" class="anchor"></a>Calculate IT metrics from local patterns (overlapping windows)</h3>
 <p>The next example shows how to calculate a local pattern using overlapping windows. This option is recommended to use, especially for a larger size value. Using overlapping windows does not introduce arbitrary boundaries.</p>
 <p>To obtain overlapping windows the <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function requires additional argument - <code>shift</code>.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># calculate metrics for overlapping windows</span>
-<span class="no">metr_df_10</span> <span class="kw">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">real_raster</span>, <span class="kw">w</span> <span class="kw">=</span> <span class="no">dens_raster</span>,
-                               <span class="kw">neighbourhood</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">fun</span> <span class="kw">=</span> <span class="st">"mean"</span>,
-                               <span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">shift</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="fl">0.5</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="co"># calculate metrics for overlapping windows</span>
+<span class="kw">metr_df_10</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(x = <span class="kw">real_raster</span>, w = <span class="kw">dens_raster</span>, 
+                               neighbourhood = <span class="fl">4</span>, fun = <span class="st">"mean"</span>, 
+                               size = <span class="fl">20</span>, shift = <span class="fl">10</span>, threshold = <span class="fl">0.5</span>)
 
-<span class="no">smr10</span> <span class="kw">=</span> <span class="no">metr_df_10</span> <span class="kw">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="no">row</span>, <span class="no">col</span>) <span class="kw">%&gt;%</span>
+<span class="kw">smr10</span> <span class="op">=</span> <span class="kw">metr_df_10</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="kw">row</span>, <span class="kw">col</span>) <span class="op">%&gt;%</span>
   <span class="fu">summarize</span>(
-    <span class="kw">ent_mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">ent</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">ent_sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="no">ent</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">mutinf_mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">mutinf</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
-    <span class="kw">mutinf_sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="no">mutinf</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+    ent_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
+    ent_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
+    mutinf_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>),
+    mutinf_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>)
   )
 <span class="co">#&gt; `summarise()` regrouping output by 'row' (override with `.groups` argument)</span>
 
-<span class="no">smr10</span> <span class="kw">%&gt;%</span>
-  <span class="fu">ungroup</span>() <span class="kw">%&gt;%</span>
-  <span class="fu">select</span>(-<span class="no">row</span>, -<span class="no">col</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">summarise_all</span>(<span class="no">mean</span>)
+<span class="kw">smr10</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ungroup</span>() <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/select.html">select</a></span>(<span class="op">-</span><span class="kw">row</span>, <span class="op">-</span><span class="kw">col</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">summarise_all</span>(<span class="kw">mean</span>)
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.48 0.0333      0.0821    0.0232</span>
+<span class="co">#&gt; 1     1.48 0.0333      0.0815    0.0219</span>
 
 <span class="co"># calculate bivariate classification</span>
-<span class="no">smr10</span>$<span class="no">bivar_cls</span> <span class="kw">=</span> <span class="fu">bivariate_classification</span>(
-  <span class="kw">entropy</span> <span class="kw">=</span> <span class="no">smr10</span>$<span class="no">ent_mean</span>,
-  <span class="kw">mutual_information</span> <span class="kw">=</span> <span class="no">smr10</span>$<span class="no">mutinf_mean</span>,
-  <span class="kw">n</span> <span class="kw">=</span> <span class="fu">nlayers</span>(<span class="no">race_raster</span>)
-)</pre></body></html></div>
+<span class="kw">smr10</span><span class="op">$</span><span class="kw">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span>(
+  entropy = <span class="kw">smr10</span><span class="op">$</span><span class="kw">ent_mean</span>,
+  mutual_information = <span class="kw">smr10</span><span class="op">$</span><span class="kw">mutinf_mean</span>,
+  n = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span>(<span class="kw">race_raster</span>)
+)
+</pre></div>
 </div>
 </div>
 <div id="mapping-local-racial-diversity-and-racial-segregation-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mapping-local-racial-diversity-and-racial-segregation-1" class="anchor"></a>Mapping local racial diversity and racial segregation</h2>
 <p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to spatial grid object (created by <code><a href="../reference/create_grid.html">create_grid()</a></code>). For overlapping windows, the resolution of the grid will be defined by <em>shift</em> parameter.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co"># create spatial grid object</span>
-<span class="no">grid_sf10</span> <span class="kw">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span>(<span class="no">real_raster</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">shift</span> <span class="kw">=</span> <span class="fl">10</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="co"># create spatial grid object</span>
+<span class="kw">grid_sf10</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span>(<span class="kw">real_raster</span>, size = <span class="fl">20</span>, shift = <span class="fl">10</span>)
 
 <span class="co"># join IT-metrics to the grid</span>
-<span class="no">attr_grid10</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">grid_sf10</span>, <span class="no">smr10</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</pre></body></html></div>
+<span class="kw">attr_grid10</span> <span class="op">=</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="kw">grid_sf10</span>, <span class="kw">smr10</span>, by = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))
+</pre></div>
 <div id="mapping-racial-diversity-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-diversity-1" class="anchor"></a>Mapping racial diversity</h3>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">attr_grid10</span>[<span class="st">"ent_mean"</span>], <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">ent_breaks</span>, <span class="kw">key.pos</span> <span class="kw">=</span> <span class="fl">1</span>,
-     <span class="kw">pal</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw pkg">RColorBrewer</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">ent_breaks</span>) - <span class="fl">1</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"RdBu"</span>)),
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid10</span>[<span class="st">"ent_mean"</span>], breaks = <span class="kw">ent_breaks</span>, key.pos = <span class="fl">1</span>, 
+     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">ent_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
      <span class="co"># pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),</span>
-     <span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Racial diversity (Entropy)"</span>)</pre></body></html></div>
+     bty = <span class="st">"n"</span>, main = <span class="st">"Racial diversity (Entropy)"</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-1" class="anchor"></a>Mapping racial segregation</h3>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">attr_grid10</span>[<span class="st">"mutinf_mean"</span>], <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">mut_breaks</span>, <span class="kw">key.pos</span> <span class="kw">=</span> <span class="fl">1</span>,
-     <span class="kw">pal</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw pkg">RColorBrewer</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">mut_breaks</span>) - <span class="fl">1</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"RdBu"</span>)),
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid10</span>[<span class="st">"mutinf_mean"</span>], breaks = <span class="kw">mut_breaks</span>, key.pos = <span class="fl">1</span>,
+     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">mut_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
      <span class="co"># pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),</span>
-     <span class="kw">bty</span> <span class="kw">=</span> <span class="st">"n"</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Racial segregation (Mutual information)"</span>)</pre></body></html></div>
+     bty = <span class="st">"n"</span>, main = <span class="st">"Racial segregation (Mutual information)"</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation-and-diversity-using-bivariate-classification-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-and-diversity-using-bivariate-classification-1" class="anchor"></a>Mapping racial segregation and diversity using bivariate classification</h3>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="co"># `biv_color`s defines a bivariate palette, </span>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="co"># `biv_color`s defines a bivariate palette, </span>
 <span class="co"># `bcat` selects only colors for categories available for analyzed areas</span>
-<span class="no">biv_colors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> <span class="kw">=</span> <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> <span class="kw">=</span> <span class="st">"#e4acac"</span>, <span class="st">"13"</span> <span class="kw">=</span> <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> <span class="kw">=</span> <span class="st">"#b0d5df"</span>,
-               <span class="st">"22"</span> <span class="kw">=</span> <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> <span class="kw">=</span> <span class="st">"#985356"</span>, <span class="st">"31"</span> <span class="kw">=</span> <span class="st">"#64acbe"</span>,<span class="st">"32"</span> <span class="kw">=</span> <span class="st">"#627f8c"</span>,
-               <span class="st">"33"</span> <span class="kw">=</span> <span class="st">"#574249"</span>)
-<span class="no">bcat</span> <span class="kw">=</span> <span class="no">biv_colors</span>[<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">biv_colors</span>)<span class="kw">%in%</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">attr_grid10</span>$<span class="no">bivar_cls</span>)]
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">attr_grid10</span>[<span class="st">"bivar_cls"</span>], <span class="kw">pal</span> <span class="kw">=</span> <span class="no">bcat</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Racial diversity and residential segregation"</span>)</pre></body></html></div>
+<span class="kw">biv_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> = <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> = <span class="st">"#e4acac"</span>, <span class="st">"13"</span> = <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> = <span class="st">"#b0d5df"</span>, 
+               <span class="st">"22"</span> = <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> = <span class="st">"#985356"</span>, <span class="st">"31"</span> = <span class="st">"#64acbe"</span>,<span class="st">"32"</span> = <span class="st">"#627f8c"</span>,
+               <span class="st">"33"</span> = <span class="st">"#574249"</span>)
+<span class="kw">bcat</span> <span class="op">=</span> <span class="kw">biv_colors</span>[<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">biv_colors</span>)<span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span>(<span class="kw">attr_grid10</span><span class="op">$</span><span class="kw">bivar_cls</span>)]
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid10</span>[<span class="st">"bivar_cls"</span>], pal = <span class="kw">bcat</span>, main = <span class="st">"Racial diversity and residential segregation"</span>)
+</pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>

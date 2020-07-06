@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -98,54 +98,72 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of raceland from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"raceland"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"raceland"</span>)
+</pre></div>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Nowosad/raceland"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># install.packages("remotes")</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Nowosad/raceland"</span>)
+</pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raceland</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
-<span class="co">#&gt; Loading required package: sp</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="co"># Plot the input data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">race_raster</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"raceland"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="no">race_raster</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://nowosad.github.io/raceland">raceland</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rspatial.org/raster">raster</a></span>)
+<span class="co">#&gt; Loading required package: sp</span>
+</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># Plot the input data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">race_raster</span>, package = <span class="st">"raceland"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">race_raster</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Construct racial landscape</span>
-<span class="no">real_raster</span> <span class="kw">=</span> <span class="fu"><a href="reference/create_realizations.html">create_realizations</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">race_raster</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="no">race_colors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>,<span class="st">"#F8DF1D"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="no">real_raster</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">race_colors</span>, <span class="kw">maxnl</span> <span class="kw">=</span> <span class="fl">9</span>)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co"># Construct racial landscape</span>
+<span class="kw">real_raster</span> <span class="op">=</span> <span class="fu"><a href="reference/create_realizations.html">create_realizations</a></span>(x = <span class="kw">race_raster</span>, n = <span class="fl">100</span>)
+<span class="kw">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>,<span class="st">"#F8DF1D"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">real_raster</span>, col = <span class="kw">race_colors</span>, maxnl = <span class="fl">9</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="co"># Plot racial ladnscape </span>
-<span class="fu"><a href="reference/plot_realization.html">plot_realization</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">real_raster</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="kw">y</span> <span class="kw">=</span> <span class="no">race_raster</span>, <span class="kw">hex</span> <span class="kw">=</span> <span class="no">race_colors</span>)</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co"># Plot racial ladnscape </span>
+<span class="fu"><a href="reference/plot_realization.html">plot_realization</a></span>(x = <span class="kw">real_raster</span>[[<span class="fl">1</span>]], y = <span class="kw">race_raster</span>, hex = <span class="kw">race_colors</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="co"># Calculate local subpopulation densities</span>
-<span class="no">dens_raster</span> <span class="kw">=</span> <span class="fu"><a href="reference/create_densities.html">create_densities</a></span>(<span class="no">real_raster</span>, <span class="no">race_raster</span>, <span class="kw">window_size</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="no">dens_raster</span>, <span class="kw">maxnl</span> <span class="kw">=</span> <span class="fl">9</span>)</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="co"># Calculate local subpopulation densities</span>
+<span class="kw">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="reference/create_densities.html">create_densities</a></span>(<span class="kw">real_raster</span>, <span class="kw">race_raster</span>, window_size = <span class="fl">10</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">dens_raster</span>, maxnl = <span class="fl">9</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="co"># Calculate IT-metrics </span>
-<span class="no">metr_df</span> <span class="kw">=</span> <span class="fu"><a href="reference/calculate_metrics.html">calculate_metrics</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">real_raster</span>, <span class="kw">w</span> <span class="kw">=</span> <span class="no">dens_raster</span>,
-                            <span class="kw">neighbourhood</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">fun</span> <span class="kw">=</span> <span class="st">"mean"</span>,
-                            <span class="kw">size</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="fl">1</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span>(<span class="no">metr_df</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="co"># Calculate IT-metrics </span>
+<span class="kw">metr_df</span> <span class="op">=</span> <span class="fu"><a href="reference/calculate_metrics.html">calculate_metrics</a></span>(x = <span class="kw">real_raster</span>, w = <span class="kw">dens_raster</span>,
+                            neighbourhood = <span class="fl">4</span>, fun = <span class="st">"mean"</span>, 
+                            size = <span class="kw">NULL</span>, threshold = <span class="fl">1</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span>(<span class="kw">metr_df</span>)
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
 <span class="co">#&gt; 1           1   1   1 1.636257 3.154606 1.518349 0.1179075</span>
 <span class="co">#&gt; 2           2   1   1 1.634388 3.154078 1.519690 0.1146989</span>
 <span class="co">#&gt; 3           3   1   1 1.621270 3.115015 1.493745 0.1275249</span>
 <span class="co">#&gt; 4           4   1   1 1.628930 3.148915 1.519986 0.1089437</span>
 <span class="co">#&gt; 5           5   1   1 1.626084 3.130602 1.504518 0.1215664</span>
-<span class="co">#&gt; 6           6   1   1 1.632169 3.156788 1.524620 0.1075492</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="co"># Summarize IT metrics </span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">metr_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])
+<span class="co">#&gt; 6           6   1   1 1.632169 3.156788 1.524620 0.1075492</span>
+</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="co"># Summarize IT metrics </span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">metr_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])
 <span class="co">#&gt;       ent            mutinf      </span>
 <span class="co">#&gt;  Min.   :1.601   Min.   :0.0957  </span>
 <span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.1076  </span>
 <span class="co">#&gt;  Median :1.635   Median :0.1137  </span>
 <span class="co">#&gt;  Mean   :1.634   Mean   :0.1137  </span>
 <span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1194  </span>
-<span class="co">#&gt;  Max.   :1.657   Max.   :0.1275</span></pre></div>
+<span class="co">#&gt;  Max.   :1.657   Max.   :0.1275</span>
+</pre></div>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">
@@ -172,6 +190,12 @@
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+</ul>
+</div>
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing raceland</a></li>
 </ul>
 </div>
 <div class="developers">
