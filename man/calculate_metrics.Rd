@@ -7,7 +7,7 @@
 calculate_metrics(
   x,
   w,
-  neighbourhood,
+  neighbourhood = 4,
   fun,
   size = NULL,
   shift = NULL,

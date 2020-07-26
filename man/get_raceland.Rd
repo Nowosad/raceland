@@ -8,7 +8,7 @@ get_raceland(
   x,
   n,
   window_size,
-  neighbourhood,
+  neighbourhood = 4,
   fun,
   size = NULL,
   shift = NULL,
@@ -29,5 +29,5 @@ Title
 }
 \examples{
 library(raster)
-rl = get_raceland(race_raster, 10)
+rl = get_raceland(race_raster, n = 10, window_size = 10, neighbourhood = 4, fun = "mean", size = 20)
 }

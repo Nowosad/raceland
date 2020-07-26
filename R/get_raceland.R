@@ -20,7 +20,7 @@
 #' rl = get_raceland(race_raster, n = 10, window_size = 10, neighbourhood = 4, fun = "mean", size = 20)
 get_raceland = function(x, n,
                         window_size,
-                        neighbourhood, fun,
+                        neighbourhood = 4, fun,
                         size = NULL, shift = NULL,
                         na_action = "replace", base = "log2",
                         ordered = TRUE, threshold = 0.5){
@@ -42,5 +42,6 @@ get_raceland = function(x, n,
                   })
   grid_sf = create_grid(realization_rasters, size = size)
   grid_attr = merge(grid_sf, smr, by = c("row", "col"), all.x = TRUE)
+  grid_attr = na.omit(grid_attr)
   grid_attr
 }
