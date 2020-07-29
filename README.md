@@ -98,24 +98,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.627886 3.141467 1.513581 0.1143050
-#> 2           2   1   1 1.619113 3.108702 1.489589 0.1295245
-#> 3           3   1   1 1.638733 3.160958 1.522226 0.1165072
-#> 4           4   1   1 1.635916 3.164117 1.528201 0.1077142
-#> 5           5   1   1 1.637975 3.167892 1.529917 0.1080575
-#> 6           6   1   1 1.634953 3.154888 1.519935 0.1150188
+#> 1           1   1   1 1.613048 3.098844 1.485796 0.1272523
+#> 2           2   1   1 1.632398 3.142268 1.509870 0.1225279
+#> 3           3   1   1 1.647741 3.164575 1.516834 0.1309073
+#> 4           4   1   1 1.642894 3.160951 1.518057 0.1248368
+#> 5           5   1   1 1.627609 3.136853 1.509244 0.1183651
+#> 6           6   1   1 1.630362 3.144456 1.514094 0.1162672
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.608   Min.   :0.09569  
-#>  1st Qu.:1.627   1st Qu.:0.10696  
-#>  Median :1.635   Median :0.11249  
-#>  Mean   :1.634   Mean   :0.11370  
-#>  3rd Qu.:1.640   3rd Qu.:0.11855  
-#>  Max.   :1.657   Max.   :0.13605
+#>  Min.   :1.611   Min.   :0.09491  
+#>  1st Qu.:1.628   1st Qu.:0.10914  
+#>  Median :1.635   Median :0.11422  
+#>  Mean   :1.634   Mean   :0.11421  
+#>  3rd Qu.:1.639   3rd Qu.:0.12085  
+#>  Max.   :1.650   Max.   :0.13091
 ```
 
 ## References
@@ -123,7 +123,7 @@ summary(metr_df[, c("ent", "mutinf")])
   - Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a
     pattern-based, zoneless method for analysis and visualization of
     racial topography. Applied Geography. 122:1-9,
-    <DOI:10.1016/j.apgeog.2020.102239>
+    <http://dx.doi.org/10.1016/j.apgeog.2020.102239>
 
 ## Contribution
 

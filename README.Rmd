@@ -90,7 +90,7 @@ summary(metr_df[, c("ent", "mutinf")])
 
 ## References
 
-- Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a pattern-based, zoneless method for analysis and visualization of racial topography. Applied Geography. 122:1-9, DOI:10.1016/j.apgeog.2020.102239
+- Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a pattern-based, zoneless method for analysis and visualization of racial topography. Applied Geography. 122:1-9, http://dx.doi.org/10.1016/j.apgeog.2020.102239
 
 ## Contribution
 
