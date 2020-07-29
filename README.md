@@ -17,14 +17,14 @@ downloads](http://cranlogs.r-pkg.org/badges/raceland)](https://cran.r-project.or
 
 The **raceland** package implements a computational framework for a
 pattern-based, zoneless analysis, and visualization of (ethno)racial
-topography. It is a reimagined approach for analyzing residential
-segregation and racial diversity based on the concept of ‘landscape’
-used in the domain of landscape ecology. A racial landscape, represented
-by a high-resolution raster grid with each cell containing only
-inhabitants of a single race, is quantified by two metrics (entropy and
-mutual information) derived from Information Theory concept (IT).
-Entropy is the measure of racial diversity and mutual information
-measures racial segregation.
+topography (Dmowska et al., 2020). It is a reimagined approach for
+analyzing residential segregation and racial diversity based on the
+concept of ‘landscape’ used in the domain of landscape ecology. A racial
+landscape, represented by a high-resolution raster grid with each cell
+containing only inhabitants of a single race, is quantified by two
+metrics (entropy and mutual information) derived from Information Theory
+concept (IT). Entropy is the measure of racial diversity and mutual
+information measures racial segregation.
 
 Racial landscape method is based on the raster gridded data, and unlike
 the previous methods, does not depend on the division of specific zones
@@ -98,25 +98,32 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.636257 3.154606 1.518349 0.1179075
-#> 2           2   1   1 1.634388 3.154078 1.519690 0.1146989
-#> 3           3   1   1 1.621270 3.115015 1.493745 0.1275249
-#> 4           4   1   1 1.628930 3.148915 1.519986 0.1089437
-#> 5           5   1   1 1.626084 3.130602 1.504518 0.1215664
-#> 6           6   1   1 1.632169 3.156788 1.524620 0.1075492
+#> 1           1   1   1 1.627886 3.141467 1.513581 0.1143050
+#> 2           2   1   1 1.619113 3.108702 1.489589 0.1295245
+#> 3           3   1   1 1.638733 3.160958 1.522226 0.1165072
+#> 4           4   1   1 1.635916 3.164117 1.528201 0.1077142
+#> 5           5   1   1 1.637975 3.167892 1.529917 0.1080575
+#> 6           6   1   1 1.634953 3.154888 1.519935 0.1150188
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
-#>       ent            mutinf      
-#>  Min.   :1.601   Min.   :0.0957  
-#>  1st Qu.:1.628   1st Qu.:0.1076  
-#>  Median :1.635   Median :0.1137  
-#>  Mean   :1.634   Mean   :0.1137  
-#>  3rd Qu.:1.641   3rd Qu.:0.1194  
-#>  Max.   :1.657   Max.   :0.1275
+#>       ent            mutinf       
+#>  Min.   :1.608   Min.   :0.09569  
+#>  1st Qu.:1.627   1st Qu.:0.10696  
+#>  Median :1.635   Median :0.11249  
+#>  Mean   :1.634   Mean   :0.11370  
+#>  3rd Qu.:1.640   3rd Qu.:0.11855  
+#>  Max.   :1.657   Max.   :0.13605
 ```
+
+## References
+
+  - Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a
+    pattern-based, zoneless method for analysis and visualization of
+    racial topography. Applied Geography. 122:1-9,
+    <DOI:10.1016/j.apgeog.2020.102239>
 
 ## Contribution
 

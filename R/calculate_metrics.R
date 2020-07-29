@@ -32,7 +32,7 @@
 #' df3 = dplyr::filter(df2, realization == 2)
 #' result = dplyr::left_join(my_grid, df2, by = c("row", "col"))
 #' plot(result)
-calculate_metrics = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
+calculate_metrics = function(x, w, neighbourhood = 4, fun, size = NULL, shift = NULL,
                              na_action = "replace", base = "log2", ordered = TRUE,
                              threshold = 0.5){
   if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
