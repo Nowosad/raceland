@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     <p>Displays realization taking into account also subpopulation density.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/raceland/man/plot_realization.html'>plot_realization</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>hex</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_realization</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>hex</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,9 +164,9 @@ Each color should correspond to a layer in <code>y</code> and value in <code>x</
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://rspatial.org/raster'>raster</a></span>)
 <span class='kw'>hex_colors</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#F16667"</span>, <span class='st'>"#6EBE44"</span>, <span class='st'>"#7E69AF"</span>, <span class='st'>"#C77213"</span>,<span class='st'>"#F8DF1D"</span>)
-<span class='kw'>realization</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/raceland/man/create_realizations.html'>create_realizations</a></span>(<span class='kw'>race_raster</span>, <span class='fl'>1</span>)
+<span class='kw'>realization</span> <span class='op'>=</span> <span class='fu'><a href='create_realizations.html'>create_realizations</a></span>(<span class='kw'>race_raster</span>, <span class='fl'>1</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='kw'>race_raster</span>)</div><div class='img'><img src='plot_realization-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='kw'>realization</span>)</div><div class='img'><img src='plot_realization-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/raceland/man/plot_realization.html'>plot_realization</a></span>(<span class='kw'>realization</span>, <span class='kw'>race_raster</span>, hex = <span class='kw'>hex_colors</span>)</div><div class='img'><img src='plot_realization-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot_realization</span>(<span class='kw'>realization</span>, <span class='kw'>race_raster</span>, hex = <span class='kw'>hex_colors</span>)</div><div class='img'><img src='plot_realization-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

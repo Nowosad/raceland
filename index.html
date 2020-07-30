@@ -13,7 +13,9 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography">
 <meta property="og:description" content="Implements a computational framework for a pattern-based, 
-    zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined
+    zoneless analysis, and visualization of (ethno)racial topography 
+    (Dmowska, Stepinski, and Nowosad (2020) &lt;doi:10.1016/j.apgeog.2020.102239&gt;).
+    It is a reimagined
     approach for analyzing residential segregation and racial diversity based on 
     the concept of 'landscape’ used in the domain of landscape ecology.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -34,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -92,7 +94,7 @@
 <a href="#raceland" class="anchor"></a>raceland</h1></div>
 <!-- badges: start -->
 
-<p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis, and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. A racial landscape, represented by a high-resolution raster grid with each cell containing only inhabitants of a single race, is quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
+<p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis, and visualization of (ethno)racial topography (Dmowska et al., 2020). It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. A racial landscape, represented by a high-resolution raster grid with each cell containing only inhabitants of a single race, is quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
 <p>Racial landscape method is based on the raster gridded data, and unlike the previous methods, does not depend on the division of specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing calculations at different spatial scales.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -146,24 +148,32 @@
                             size = <span class="kw">NULL</span>, threshold = <span class="fl">1</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span>(<span class="kw">metr_df</span>)
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.636257 3.154606 1.518349 0.1179075</span>
-<span class="co">#&gt; 2           2   1   1 1.634388 3.154078 1.519690 0.1146989</span>
-<span class="co">#&gt; 3           3   1   1 1.621270 3.115015 1.493745 0.1275249</span>
-<span class="co">#&gt; 4           4   1   1 1.628930 3.148915 1.519986 0.1089437</span>
-<span class="co">#&gt; 5           5   1   1 1.626084 3.130602 1.504518 0.1215664</span>
-<span class="co">#&gt; 6           6   1   1 1.632169 3.156788 1.524620 0.1075492</span>
+<span class="co">#&gt; 1           1   1   1 1.613048 3.098844 1.485796 0.1272523</span>
+<span class="co">#&gt; 2           2   1   1 1.632398 3.142268 1.509870 0.1225279</span>
+<span class="co">#&gt; 3           3   1   1 1.647741 3.164575 1.516834 0.1309073</span>
+<span class="co">#&gt; 4           4   1   1 1.642894 3.160951 1.518057 0.1248368</span>
+<span class="co">#&gt; 5           5   1   1 1.627609 3.136853 1.509244 0.1183651</span>
+<span class="co">#&gt; 6           6   1   1 1.630362 3.144456 1.514094 0.1162672</span>
 </pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># Summarize IT metrics </span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">metr_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])
-<span class="co">#&gt;       ent            mutinf      </span>
-<span class="co">#&gt;  Min.   :1.601   Min.   :0.0957  </span>
-<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.1076  </span>
-<span class="co">#&gt;  Median :1.635   Median :0.1137  </span>
-<span class="co">#&gt;  Mean   :1.634   Mean   :0.1137  </span>
-<span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1194  </span>
-<span class="co">#&gt;  Max.   :1.657   Max.   :0.1275</span>
+<span class="co">#&gt;       ent            mutinf       </span>
+<span class="co">#&gt;  Min.   :1.611   Min.   :0.09491  </span>
+<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10914  </span>
+<span class="co">#&gt;  Median :1.635   Median :0.11422  </span>
+<span class="co">#&gt;  Mean   :1.634   Mean   :0.11421  </span>
+<span class="co">#&gt;  3rd Qu.:1.639   3rd Qu.:0.12085  </span>
+<span class="co">#&gt;  Max.   :1.650   Max.   :0.13091</span>
 </pre></div>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<ul>
+<li>Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a pattern-based, zoneless method for analysis and visualization of racial topography. Applied Geography. 122:1-9, <a href="http://dx.doi.org/10.1016/j.apgeog.2020.102239" class="uri">http://dx.doi.org/10.1016/j.apgeog.2020.102239</a>
+</li>
+</ul>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <h1 data-toc-skip>raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-07-06</h4>
+            <h4 class="date">2020-07-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro1.Rmd"><code>vignettes/raceland-intro1.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -310,11 +310,11 @@
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="kw">exposure_mat</span>) <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">exposure_mat</span>, <span class="fl">2</span>)
 <span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span>
-<span class="co">#&gt; ASIAN     8.04   81.18    64.30   1.44   60.30</span>
-<span class="co">#&gt; BLACK    81.18 7470.52  3117.12 157.96 1782.24</span>
-<span class="co">#&gt; HISPANIC 64.30 3117.12  9075.20 167.66 3996.98</span>
-<span class="co">#&gt; OTHER     1.44  157.96   167.66  17.16   75.60</span>
-<span class="co">#&gt; WHITE    60.30 1782.24  3996.98  75.60 3127.18</span>
+<span class="co">#&gt; ASIAN     4.85   36.00    67.66   1.04   30.07</span>
+<span class="co">#&gt; BLACK    36.00 7321.13  3050.46 151.40 1928.68</span>
+<span class="co">#&gt; HISPANIC 67.66 3050.46  9042.89 207.15 4142.59</span>
+<span class="co">#&gt; OTHER     1.04  151.40   207.15  24.54   87.08</span>
+<span class="co">#&gt; WHITE    30.07 1928.68  4142.59  87.08 2905.69</span>
 </pre></div>
 </div>
 <div id="information-theory-metrics-it-metrics" class="section level3">
@@ -344,23 +344,23 @@
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span>(<span class="kw">metr_df</span>)
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.654435 3.186269 1.531834 0.1226005</span>
-<span class="co">#&gt; 2           2   1   1 1.651724 3.185691 1.533967 0.1177576</span>
-<span class="co">#&gt; 3           3   1   1 1.633994 3.154662 1.520668 0.1133259</span>
-<span class="co">#&gt; 4           4   1   1 1.625930 3.139072 1.513143 0.1127870</span>
-<span class="co">#&gt; 5           5   1   1 1.646479 3.179263 1.532784 0.1136947</span>
-<span class="co">#&gt; 6           6   1   1 1.619793 3.124723 1.504930 0.1148621</span>
+<span class="co">#&gt; 1           1   1   1 1.648524 3.183010 1.534486 0.1140386</span>
+<span class="co">#&gt; 2           2   1   1 1.634743 3.150718 1.515976 0.1187669</span>
+<span class="co">#&gt; 3           3   1   1 1.634040 3.148529 1.514489 0.1195517</span>
+<span class="co">#&gt; 4           4   1   1 1.643163 3.168710 1.525547 0.1176168</span>
+<span class="co">#&gt; 5           5   1   1 1.638763 3.164684 1.525921 0.1128421</span>
+<span class="co">#&gt; 6           6   1   1 1.629766 3.150286 1.520521 0.1092451</span>
 </pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">metr_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])
 <span class="co">#&gt;       ent            mutinf       </span>
-<span class="co">#&gt;  Min.   :1.607   Min.   :0.09555  </span>
-<span class="co">#&gt;  1st Qu.:1.630   1st Qu.:0.10768  </span>
-<span class="co">#&gt;  Median :1.635   Median :0.11437  </span>
-<span class="co">#&gt;  Mean   :1.635   Mean   :0.11390  </span>
-<span class="co">#&gt;  3rd Qu.:1.642   3rd Qu.:0.12001  </span>
-<span class="co">#&gt;  Max.   :1.658   Max.   :0.13165</span>
+<span class="co">#&gt;  Min.   :1.605   Min.   :0.09433  </span>
+<span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10794  </span>
+<span class="co">#&gt;  Median :1.635   Median :0.11289  </span>
+<span class="co">#&gt;  Mean   :1.634   Mean   :0.11329  </span>
+<span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11795  </span>
+<span class="co">#&gt;  Max.   :1.654   Max.   :0.13469</span>
 </pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="kw">metr_df</span> <span class="op">%&gt;%</span> 
@@ -369,7 +369,7 @@
   mean_mutinf = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">mutinf</span>),
   sd_mutinf = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">mutinf</span>))
 <span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span>
-<span class="co">#&gt; 1 1.635358 0.009134715   0.1138963 0.008212732</span>
+<span class="co">#&gt; 1  1.63388 0.009211512   0.1132887 0.008324916</span>
 </pre></div>
 </div>
 </div>

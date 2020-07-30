@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     <p>Calculate Densities</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/raceland/man/calculate_densities.html'>calculate_densities</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>window_size</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_densities</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, <span class='kw'>window_size</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,8 +159,8 @@
     <p>a list of data.frames</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://rspatial.org/raster'>raster</a></span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='kw'>real_rasters</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/raceland/man/create_realizations.html'>create_realizations</a></span>(<span class='kw'>race_raster</span>, n = <span class='fl'>5</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='kw'>real_rasters</span>)</div><div class='img'><img src='calculate_densities-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>d</span> <span class='op'>=</span> <span class='kw'>raceland</span>:::<span class='fu'><a href='https://rdrr.io/pkg/raceland/man/calculate_densities.html'>calculate_densities</a></span>(<span class='kw'>real_rasters</span>, <span class='kw'>race_raster</span>, window_size = <span class='fl'>10</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://rspatial.org/raster'>raster</a></span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='kw'>real_rasters</span> <span class='op'>=</span> <span class='fu'><a href='create_realizations.html'>create_realizations</a></span>(<span class='kw'>race_raster</span>, n = <span class='fl'>5</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='kw'>real_rasters</span>)</div><div class='img'><img src='calculate_densities-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>d</span> <span class='op'>=</span> <span class='kw'>raceland</span>:::<span class='fu'>calculate_densities</span>(<span class='kw'>real_rasters</span>, <span class='kw'>race_raster</span>, window_size = <span class='fl'>10</span>)
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
