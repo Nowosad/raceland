@@ -31,18 +31,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -88,7 +82,7 @@
       <h1 data-toc-skip>raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-07-30</h4>
+            <h4 class="date">2020-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro1.Rmd"><code>vignettes/raceland-intro1.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -123,19 +117,18 @@
 <p>The computational framework requires following packages: <strong>raceland</strong>, <strong>comat</strong>, <strong>rgdal</strong>, <strong>raster</strong>, <strong>sf</strong>, and <strong>dplyr</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># install required packages </span>
-<span class="kw">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="va">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"raceland"</span>,                
   <span class="st">"comat"</span>,            
   <span class="st">"rgdal"</span>,   
   <span class="st">"raster"</span>,
   <span class="st">"sf"</span>,              
   <span class="st">"dplyr"</span>
-)
-<span class="kw">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="kw">pkgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span>()
-<span class="co">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span>(<span class="kw">to_install</span>)) {
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="kw">pkgs</span>[<span class="kw">to_install</span>])
-}
-</pre></div>
+<span class="op">)</span>
+<span class="va">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="va">pkgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">to_install</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">[</span><span class="va">to_install</span><span class="op">]</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 </div>
 <div id="input-data" class="section level2">
 <h2 class="hasAnchor">
@@ -149,47 +142,44 @@
 <h3 class="hasAnchor">
 <a href="#working-with-high-resolution-grids" class="anchor"></a>Working with high resolution grids</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"rast_data"</span>, package = <span class="st">"raceland"</span>),
-                         full.names = <span class="fl">TRUE</span>)
-</pre></div>
+<span class="va">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"rast_data"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span>,
+                         full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span>(<span class="kw">list_raster</span>)
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">list_raster</span><span class="op">)</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
-<span class="kw">race_raster</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
+<span class="va">race_raster</span>
 <span class="co">#&gt; class      : RasterStack </span>
 <span class="co">#&gt; dimensions : 60, 60, 3600, 5  (nrow, ncol, ncell, nlayers)</span>
 <span class="co">#&gt; resolution : 30, 30  (x, y)</span>
 <span class="co">#&gt; extent     : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; crs        : +proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </span>
+<span class="co">#&gt; crs        : +proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs </span>
 <span class="co">#&gt; names      :      asian,      black,   hispanic,      other,      white </span>
 <span class="co">#&gt; min values :          0,          0,          0,          0,          0 </span>
-<span class="co">#&gt; max values :  1.3333334, 15.3125000,  9.6666670,  0.5714286,  3.7500000</span>
-</pre></div>
+<span class="co">#&gt; max values :  1.3333334, 15.3125000,  9.6666670,  0.5714286,  3.7500000</span></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">race_raster</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig1-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div id="working-with-vector-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#working-with-vector-data" class="anchor"></a>Working with vector data</h3>
-<p>While using spatial vector data, the file should be read to R using the <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">st_read()</a></code> function from the <strong>sf</strong> package. In the next step spatial object is rasterized using <code>zones_to_rasters()</code> from the <strong>raceland</strong> package.</p>
+<p>While using spatial vector data, the file should be read to R using the <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read()</a></code> function from the <strong>sf</strong> package. In the next step spatial object is rasterized using <code>zones_to_rasters()</code> from the <strong>raceland</strong> package.</p>
 <p>Function <code>zones_to_rasters()</code> requires three arguments:</p>
 <ul>
 <li>
@@ -200,26 +190,22 @@
 <code>variables</code> - a character vector with columns names from <em>v</em>. The values from these columns will be (1) rasterized and (2) recalculated to densities. Each column will be represented as a layer in the output RasterStack.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">pf_to_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"vect_data/block_data.gpkg"</span>, package = <span class="st">"raceland"</span>)
-</pre></div>
+<span class="va">pf_to_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vect_data/block_data.gpkg"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">vect_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">st_read</a></span>(<span class="kw">pf_to_data</span>)
+<span class="va">vect_data</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="va">pf_to_data</span><span class="op">)</span>
 <span class="co">#&gt; Reading layer `block_data' from data source `/home/runner/work/_temp/Library/raceland/vect_data/block_data.gpkg' using driver `GPKG'</span>
 <span class="co">#&gt; Simple feature collection with 264 features and 6 fields</span>
 <span class="co">#&gt; geometry type:  POLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
 <span class="co">#&gt; bbox:           xmin: 685545 ymin: 496468.7 xmax: 687345 ymax: 498268.7</span>
-<span class="co">#&gt; projected CRS:  unnamed</span>
-</pre></div>
+<span class="co">#&gt; projected CRS:  unnamed</span></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">vect_data</span>)
-<span class="co">#&gt; [1] "GISJOIN"  "ASIAN"    "BLACK"    "HISPANIC" "OTHER"    "WHITE"    "geom"</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">vect_data</span><span class="op">)</span>
+<span class="co">#&gt; [1] "GISJOIN"  "ASIAN"    "BLACK"    "HISPANIC" "OTHER"    "WHITE"    "geom"</span></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">race_raster_from_vect</span> <span class="op">=</span> <span class="fu"><a href="../reference/zones_to_raster.html">zones_to_raster</a></span>(v = <span class="kw">vect_data</span>,
-                                        resolution = <span class="fl">30</span>, 
-                                        variables = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>))
-</pre></div>
+<span class="va">race_raster_from_vect</span> <span class="op">=</span> <span class="fu"><a href="../reference/zones_to_raster.html">zones_to_raster</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">vect_data</span>,
+                                        resolution <span class="op">=</span> <span class="fl">30</span>, 
+                                        variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>Once vector data is rasterized, there is no difference, whether race_raster object or race_raster_from_vect will be used for further analysis.</p>
 </div>
 </div>
@@ -240,12 +226,10 @@
 <p>Function returns <em>RasterStack</em> object containing <em>n</em> realizations. Single race label in a racial landscape is assigned based on the order of race-specific grids stored in RasterStack. For example, <em>race_raster</em> object has five layers named: asian, black, hispanic, other, white. The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># generate 100 realizations based on race_raster object</span>
-<span class="kw">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span>(x = <span class="kw">race_raster</span>, n = <span class="fl">100</span>)
-</pre></div>
+<span class="va">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="co"># plot five first realizations</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">real_raster</span>[[<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>]], col = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>))
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig2-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>The racial landscape provides a skewed visualization of the racial pattern because it does not take into consideration the spatial variability of the population densities. To obtain an accurate depiction of racial distribution, the values of RL must be modified to reflect race and subpopulation densities.</p>
 <p>Function <code><a href="../reference/plot_realization.html">plot_realization()</a></code> display realization taking into account also subpopulation density. The function takes three arguments:</p>
@@ -260,9 +244,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="co"># In race_colors first color corresponds to asian, second to black,</span>
 <span class="co"># third to hispanics, fourth to other and fifth to white)</span>
-<span class="kw">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)
-<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span>(x = <span class="kw">real_raster</span>[[<span class="fl">1</span>]], y = <span class="kw">race_raster</span>, hex = <span class="kw">race_colors</span>)
-</pre></div>
+<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig3-1.png" width="40%" style="display: block; margin: auto;"></p>
 </div>
 <div id="describing-racial-patterns-of-racial-landscape" class="section level2">
@@ -288,8 +271,7 @@
 </ul>
 <p>The output is a RasterStack with local densities calculated separately for each realization.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span>(<span class="kw">real_raster</span>, <span class="kw">race_raster</span>, window_size = <span class="fl">10</span>)
-</pre></div>
+<span class="va">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></pre></div>
 </div>
 <div id="exposure-matrix" class="section level3">
 <h3 class="hasAnchor">
@@ -304,18 +286,17 @@
 </ul>
 <p>As default, the exposure matrix with 4-directions adjacencies (<code>neighboorhood = 4</code>) is calculated using the average values from 2 adjacent cells (<code>fun = "mean"</code>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="kw">exposure_mat</span> <span class="op">=</span> <span class="kw">comat</span>::<span class="fu"><a href="https://rdrr.io/pkg/comat/man/get_wecoma.html">get_wecoma</a></span>(x = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.matrix.html">as.matrix</a></span>(<span class="kw">real_raster</span>[[<span class="fl">1</span>]]), 
-                                 w = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.matrix.html">as.matrix</a></span>(<span class="kw">dens_raster</span>[[<span class="fl">1</span>]]))
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="kw">exposure_mat</span>) <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="kw">exposure_mat</span>) <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">exposure_mat</span>, <span class="fl">2</span>)
+<span class="va">exposure_mat</span> <span class="op">=</span> <span class="fu">comat</span><span class="fu">::</span><span class="fu"><a href="https://nowosad.github.io/comat/reference/get_wecoma.html">get_wecoma</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, 
+                                 w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">dens_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">exposure_mat</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span>
-<span class="co">#&gt; ASIAN     4.85   36.00    67.66   1.04   30.07</span>
-<span class="co">#&gt; BLACK    36.00 7321.13  3050.46 151.40 1928.68</span>
-<span class="co">#&gt; HISPANIC 67.66 3050.46  9042.89 207.15 4142.59</span>
-<span class="co">#&gt; OTHER     1.04  151.40   207.15  24.54   87.08</span>
-<span class="co">#&gt; WHITE    30.07 1928.68  4142.59  87.08 2905.69</span>
-</pre></div>
+<span class="co">#&gt; ASIAN     0.00   47.50    40.86   0.00   54.40</span>
+<span class="co">#&gt; BLACK    47.50 7116.50  3228.84 167.26 1896.68</span>
+<span class="co">#&gt; HISPANIC 40.86 3228.84  9408.66 162.75 3893.40</span>
+<span class="co">#&gt; OTHER     0.00  167.26   162.75  25.32   62.83</span>
+<span class="co">#&gt; WHITE    54.40 1896.68  3893.40  62.83 3050.51</span></pre></div>
 </div>
 <div id="information-theory-metrics-it-metrics" class="section level3">
 <h3 class="hasAnchor">
@@ -337,40 +318,36 @@
 <code>threshold</code> - the share of NA cells to allow metrics calculation. <code>threshold = 1</code> - calculation will be performed, even if there are 100% cells with NA values (recommended with <code>size = NULL</code>)</li>
 </ul>
 <div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="kw">metr_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(x = <span class="kw">real_raster</span>, w = <span class="kw">dens_raster</span>, 
-                            neighbourhood = <span class="fl">4</span>, fun = <span class="st">"mean"</span>, 
-                            size = <span class="kw">NULL</span>, threshold = <span class="fl">1</span>)
-</pre></div>
+<span class="va">metr_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span>, w <span class="op">=</span> <span class="va">dens_raster</span>, 
+                            neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
+                            size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span>(<span class="kw">metr_df</span>)
-<span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.648524 3.183010 1.534486 0.1140386</span>
-<span class="co">#&gt; 2           2   1   1 1.634743 3.150718 1.515976 0.1187669</span>
-<span class="co">#&gt; 3           3   1   1 1.634040 3.148529 1.514489 0.1195517</span>
-<span class="co">#&gt; 4           4   1   1 1.643163 3.168710 1.525547 0.1176168</span>
-<span class="co">#&gt; 5           5   1   1 1.638763 3.164684 1.525921 0.1128421</span>
-<span class="co">#&gt; 6           6   1   1 1.629766 3.150286 1.520521 0.1092451</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
+<span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span>
+<span class="co">#&gt; 1           1   1   1 1.638419 3.167329 1.528910 0.10950884</span>
+<span class="co">#&gt; 2           2   1   1 1.640769 3.177351 1.536581 0.10418804</span>
+<span class="co">#&gt; 3           3   1   1 1.633740 3.157058 1.523318 0.11042242</span>
+<span class="co">#&gt; 4           4   1   1 1.630576 3.163717 1.533141 0.09743495</span>
+<span class="co">#&gt; 5           5   1   1 1.637476 3.148787 1.511312 0.12616399</span>
+<span class="co">#&gt; 6           6   1   1 1.629650 3.155755 1.526106 0.10354401</span></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">metr_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ent"</span>, <span class="st">"mutinf"</span>)])
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;       ent            mutinf       </span>
-<span class="co">#&gt;  Min.   :1.605   Min.   :0.09433  </span>
-<span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10794  </span>
-<span class="co">#&gt;  Median :1.635   Median :0.11289  </span>
-<span class="co">#&gt;  Mean   :1.634   Mean   :0.11329  </span>
-<span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11795  </span>
-<span class="co">#&gt;  Max.   :1.654   Max.   :0.13469</span>
-</pre></div>
+<span class="co">#&gt;  Min.   :1.608   Min.   :0.09743  </span>
+<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10818  </span>
+<span class="co">#&gt;  Median :1.634   Median :0.11325  </span>
+<span class="co">#&gt;  Mean   :1.634   Mean   :0.11344  </span>
+<span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11879  </span>
+<span class="co">#&gt;  Max.   :1.659   Max.   :0.13677</span></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">metr_df</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/sf/man/tidyverse.html">summarise</a></span>(mean_ent = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
-  sd_ent = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
-  mean_mutinf = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">mutinf</span>),
-  sd_mutinf = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">mutinf</span>))
+<span class="va">metr_df</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>mean_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  sd_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  mean_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span>,
+  sd_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span>
-<span class="co">#&gt; 1  1.63388 0.009211512   0.1132887 0.008324916</span>
-</pre></div>
+<span class="co">#&gt; 1 1.633821 0.009033702   0.1134425 0.008173376</span></pre></div>
 </div>
 </div>
 </div>
@@ -391,7 +368,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

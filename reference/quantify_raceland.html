@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Densities — calculate_densities • raceland</title>
+<title>Quantify a racial landscape — quantify_raceland • raceland</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Calculate Densities — calculate_densities" />
-<meta property="og:description" content="Calculate Densities" />
+<meta property="og:title" content="Quantify a racial landscape — quantify_raceland" />
+<meta property="og:description" content="This function is a wrapper of several steps (functions) implemented in the raceland package: create_realizations(), create_densities(), calculate_metrics(), and create_grid()." />
 
 
 
@@ -120,44 +120,81 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Densities</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Nowosad/raceland/blob/master/R/calculate_densities.R'><code>R/calculate_densities.R</code></a></small>
-    <div class="hidden name"><code>calculate_densities.Rd</code></div>
+    <h1>Quantify a racial landscape</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Nowosad/raceland/blob/master/R/quantify_raceland.R'><code>R/quantify_raceland.R</code></a></small>
+    <div class="hidden name"><code>quantify_raceland.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate Densities</p>
+    <p>This function is a wrapper of several steps (functions) implemented in the raceland package: <code><a href='create_realizations.html'>create_realizations()</a></code>, <code><a href='create_densities.html'>create_densities()</a></code>, <code><a href='calculate_metrics.html'>calculate_metrics()</a></code>, and <code><a href='create_grid.html'>create_grid()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calculate_densities</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>window_size</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>quantify_raceland</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>n</span>,
+  <span class='va'>window_size</span>,
+  neighbourhood <span class='op'>=</span> <span class='fl'>4</span>,
+  <span class='va'>fun</span>,
+  size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  na_action <span class='op'>=</span> <span class='st'>"replace"</span>,
+  base <span class='op'>=</span> <span class='st'>"log2"</span>,
+  ordered <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  threshold <span class='op'>=</span> <span class='fl'>0.5</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>RasterStack with realizations</p></td>
+      <td><p>RasterStack with race-specific population densities assign to each cell</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>RasterStack with shares</p></td>
+      <th>n</th>
+      <td><p>A number of realizations</p></td>
     </tr>
     <tr>
       <th>window_size</th>
-      <td><p>size of a local window</p></td>
+      <td><p>Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10</p></td>
+    </tr>
+    <tr>
+      <th>neighbourhood</th>
+      <td><p>The number of directions in which cell adjacencies are considered as neighbours: <code>4</code> (rook's case), <code>8</code> (queen's case). The default is <code>4</code>.</p></td>
+    </tr>
+    <tr>
+      <th>fun</th>
+      <td><p>Function to calculate values from adjacent cells to contribute to exposure matrix, <code>"mean"</code> - calculate average values of local population densities from adjacent cells, <code>"geometric_mean"</code> - calculate geometric mean values of local population densities from adjacent cells, or <code>"focal"</code> assign value from the focal cell</p></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If <code>size=NULL</code> calculations are performed for a whole area</p></td>
+    </tr>
+    <tr>
+      <th>na_action</th>
+      <td><p>Decides on how to behave in the presence of missing values in <code>w</code>. Possible options are <code>"replace"</code>, <code>"omit"</code>, <code>"keep"</code>. The default, <code>"replace"</code>, replaces missing values with 0, <code>"omit"</code> does not use cells with missing values, and <code>"keep"</code> keeps missing values.</p></td>
+    </tr>
+    <tr>
+      <th>base</th>
+      <td><p>The unit in which entropy is measured. The default is "log2", which compute entropy in "bits". <code>"log"</code> and <code>"log10"</code> can be also used</p></td>
+    </tr>
+    <tr>
+      <th>ordered</th>
+      <td><p>The type of pairs considered. Either ordered (<code>TRUE</code>) or unordered (<code>FALSE</code>). The default is <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>The share of NA cells to allow metrics calculation in a square-shaped window</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list of data.frames</p>
+    <p>An sf polygon object with five columns - <code>row</code> and <code>col</code> allowing for identification of each square polygon, <code>ent</code> - entropy measuring racial diversity, <code>mutinf</code> - mutual information, which is associated with measuring racial segregation, and <code>geometry</code> containing spatial geometries.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/raster'>raster</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='va'>real_rasters</span> <span class='op'>=</span> <span class='fu'><a href='create_realizations.html'>create_realizations</a></span><span class='op'>(</span><span class='va'>race_raster</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>real_rasters</span><span class='op'>)</span>
-</div><div class='img'><img src='calculate_densities-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'>raceland</span><span class='fu'>:::</span><span class='fu'>calculate_densities</span><span class='op'>(</span><span class='va'>real_rasters</span>, <span class='va'>race_raster</span>, window_size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-
+<span class='va'>rl</span> <span class='op'>=</span> <span class='fu'>quantify_raceland</span><span class='op'>(</span><span class='va'>race_raster</span>, n <span class='op'>=</span> <span class='fl'>10</span>, window_size <span class='op'>=</span> <span class='fl'>10</span>,
+ neighbourhood <span class='op'>=</span> <span class='fl'>4</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, size <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

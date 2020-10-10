@@ -31,18 +31,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -88,7 +82,7 @@
       <h1 data-toc-skip>raceland: Describing local racial patterns of racial landscapes at different spatial scales</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-07-30</h4>
+            <h4 class="date">2020-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro2.Rmd"><code>vignettes/raceland-intro2.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro2.Rmd</code></div>
@@ -104,7 +98,7 @@
 <p><strong>Racial landscape method</strong> is based on the raster gridded data, and unlike the previous methods, does not depend on the division for specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing the calculation at different spatial scales.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># install required packages </span>
-<span class="kw">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="va">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"raceland"</span>,                
   <span class="st">"comat"</span>,            
   <span class="st">"rgdal"</span>,   
@@ -112,42 +106,40 @@
   <span class="st">"sf"</span>,              
   <span class="st">"dplyr"</span>,
   <span class="st">"RColorBrewer"</span>
-)
-<span class="kw">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="kw">pkgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span>()
-<span class="co">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span>(<span class="kw">to_install</span>)) {
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="kw">pkgs</span>[<span class="kw">to_install</span>])
-}
-</pre></div>
+<span class="op">)</span>
+<span class="va">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="va">pkgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">to_install</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">[</span><span class="va">to_install</span><span class="op">]</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p>A computational framework requires a few steps (see the first vignette for details) before calculating IT-metrics:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># reading input data</span>
-<span class="kw">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"rast_data"</span>, package = <span class="st">"raceland"</span>),
-                         full.names = <span class="fl">TRUE</span>)
-<span class="kw">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span>(<span class="kw">list_raster</span>)
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="va">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"rast_data"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span>,
+                         full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">list_raster</span><span class="op">)</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
-<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition,</span>
-<span class="co">#&gt;  but +towgs84= values preserved</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in CRS definition</span>
 
 <span class="co"># constructing racial landscape</span>
-<span class="kw">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span>(x = <span class="kw">race_raster</span>, n = <span class="fl">100</span>)
+<span class="va">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
 
 <span class="co"># calculating local subpopulation densities</span>
-<span class="kw">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span>(<span class="kw">real_raster</span>, <span class="kw">race_raster</span>, window_size = <span class="fl">10</span>)
-</pre></div>
+<span class="va">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></pre></div>
 </div>
 <div id="describing-local-racial-patterns-of-racial-landscapes-at-different-spatial-scales" class="section level1">
 <h1 class="hasAnchor">
@@ -176,67 +168,63 @@
 <a href="#calculate-it-metrics-from-local-patterns-1" class="anchor"></a>Calculate IT metrics from local patterns (1)</h2>
 <p>The <code><a href="../reference/create_grid.html">create_grid()</a></code> function creates spatial object with a grid (each ‘cell’ is defined by size and shift). This function requires the RasterStack object with realizations (racial landscapes) and size parameter. If the shift parameter is not set, it is assumed that <code>size=shift</code>. Below such grid is imposed into the racial landscape to show local patterns.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span>)
-<span class="kw">grid_sf</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span>(<span class="kw">real_raster</span>, size = <span class="fl">20</span>)
-<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span>(<span class="kw">real_raster</span>[[<span class="fl">1</span>]], <span class="kw">race_raster</span>, hex = <span class="kw">race_colors</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">grid_sf</span>), add = <span class="fl">TRUE</span>, lwd = <span class="fl">2</span>)
-</pre></div>
+<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span>
+<span class="va">grid_sf</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span><span class="op">(</span><span class="va">real_raster</span>, size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">grid_sf</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/fig5-1.png" width="40%" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function is used to calculate IT metrics. Parameter <code>size=20</code> means that the area of interests will be divided into a grid of local patterns of the size 20x20 cells (which in this case corresponds to the square of 0.6 km x 0.6km). The <code>neighboorhood = 4</code> defines that adjacencies between cells are defined in four directions, <code>fun="mean"</code> calculate average values of population density from adjacent cells, <code>threshold = 0.5</code> - calculation will be performed if there is at least 50% of non-NA cells.</p>
 <p>IT metrics are calculated for each local pattern for each realization. The output table will have 900 rows (there are nine local patterns of size 20x20 cells and 100 realizations).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">metr_df_20</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(x = <span class="kw">real_raster</span>, w = <span class="kw">dens_raster</span>, 
-                               neighbourhood = <span class="fl">4</span>, fun = <span class="st">"mean"</span>, 
-                               size = <span class="fl">20</span>, threshold = <span class="fl">0.5</span>)
-<span class="kw">metr_df_20</span>[<span class="kw">metr_df_20</span><span class="op">$</span><span class="kw">realization</span> <span class="op">==</span> <span class="fl">1</span>, ]
+<span class="va">metr_df_20</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span>, w <span class="op">=</span> <span class="va">dens_raster</span>, 
+                               neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
+                               size <span class="op">=</span> <span class="fl">20</span>, threshold <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+<span class="va">metr_df_20</span><span class="op">[</span><span class="va">metr_df_20</span><span class="op">$</span><span class="va">realization</span> <span class="op">==</span> <span class="fl">1</span>, <span class="op">]</span>
 <span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.281910 2.547961 1.266051 0.01585855</span>
-<span class="co">#&gt; 2           1   1   2 1.579126 2.994151 1.415025 0.16410150</span>
-<span class="co">#&gt; 3           1   1   3 1.432791 2.824495 1.391703 0.04108823</span>
-<span class="co">#&gt; 4           1   2   1 1.573958 2.971520 1.397562 0.17639541</span>
-<span class="co">#&gt; 5           1   2   2 1.525056 2.986140 1.461084 0.06397151</span>
-<span class="co">#&gt; 6           1   2   3 1.520459 2.880951 1.360492 0.15996759</span>
-<span class="co">#&gt; 7           1   3   1 1.298133 2.380205 1.082072 0.21606071</span>
-<span class="co">#&gt; 8           1   3   2 1.544456 3.068553 1.524097 0.02035939</span>
-<span class="co">#&gt; 9           1   3   3 1.422459 2.765839 1.343380 0.07907882</span>
-</pre></div>
+<span class="co">#&gt; 1           1   1   1 1.291839 2.572102 1.280264 0.01157526</span>
+<span class="co">#&gt; 2           1   1   2 1.580019 3.000479 1.420459 0.15955959</span>
+<span class="co">#&gt; 3           1   1   3 1.453192 2.871409 1.418217 0.03497534</span>
+<span class="co">#&gt; 4           1   2   1 1.584617 3.021231 1.436614 0.14800243</span>
+<span class="co">#&gt; 5           1   2   2 1.488532 2.954628 1.466096 0.02243525</span>
+<span class="co">#&gt; 6           1   2   3 1.509881 2.869455 1.359574 0.15030683</span>
+<span class="co">#&gt; 7           1   3   1 1.311425 2.406679 1.095254 0.21617053</span>
+<span class="co">#&gt; 8           1   3   2 1.558742 3.099472 1.540730 0.01801165</span>
+<span class="co">#&gt; 9           1   3   3 1.447811 2.867464 1.419653 0.02815722</span></pre></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble average from multiple realizations. First, for each square window is calculated the average value of entropy and mutual information based on 100 realizations. The table below shows the mean (<code>ent_mean</code>, <code>mutinf_mean</code>) and standard deviation (<code>ent_sd</code>, <code>mutinf_sd</code>) values for each square window.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">smr</span> <span class="op">=</span> <span class="kw">metr_df_20</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="kw">row</span>, <span class="kw">col</span>) <span class="op">%&gt;%</span>
-  <span class="fu">summarize</span>(
-    ent_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
-    ent_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
-    mutinf_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>),
-    mutinf_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>)
-  )
+<span class="va">smr</span> <span class="op">=</span> <span class="va">metr_df_20</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">row</span>, <span class="va">col</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarize</span><span class="op">(</span>
+    ent_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    mutinf_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="op">)</span>
 <span class="co">#&gt; `summarise()` regrouping output by 'row' (override with `.groups` argument)</span>
-<span class="kw">smr</span>
+<span class="va">smr</span>
 <span class="co">#&gt; # A tibble: 9 x 6</span>
 <span class="co">#&gt; # Groups:   row [3]</span>
 <span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1     1.26 0.0437      0.0201   0.00899</span>
-<span class="co">#&gt; 2     1     2     1.59 0.0110      0.164    0.0259 </span>
-<span class="co">#&gt; 3     1     3     1.42 0.0276      0.0458   0.0146 </span>
-<span class="co">#&gt; 4     2     1     1.61 0.0242      0.157    0.0391 </span>
-<span class="co">#&gt; 5     2     2     1.52 0.0228      0.0329   0.0117 </span>
-<span class="co">#&gt; 6     2     3     1.52 0.0313      0.157    0.0287 </span>
-<span class="co">#&gt; 7     3     1     1.38 0.0489      0.137    0.0427 </span>
-<span class="co">#&gt; 8     3     2     1.54 0.0305      0.0163   0.00616</span>
-<span class="co">#&gt; 9     3     3     1.42 0.0286      0.0490   0.0157</span>
-</pre></div>
+<span class="co">#&gt; 1     1     1     1.26 0.0442      0.0187   0.00804</span>
+<span class="co">#&gt; 2     1     2     1.59 0.0113      0.160    0.0254 </span>
+<span class="co">#&gt; 3     1     3     1.42 0.0308      0.0465   0.0145 </span>
+<span class="co">#&gt; 4     2     1     1.60 0.0285      0.151    0.0411 </span>
+<span class="co">#&gt; 5     2     2     1.52 0.0235      0.0365   0.0121 </span>
+<span class="co">#&gt; 6     2     3     1.51 0.0285      0.159    0.0305 </span>
+<span class="co">#&gt; 7     3     1     1.37 0.0565      0.136    0.0446 </span>
+<span class="co">#&gt; 8     3     2     1.54 0.0299      0.0161   0.00617</span>
+<span class="co">#&gt; 9     3     3     1.42 0.0344      0.0455   0.0135</span></pre></div>
 <p>Then the averages from the mean values of entropy and mutual information are calculated.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">smr</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ungroup</span>() <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/select.html">select</a></span>(<span class="op">-</span><span class="kw">row</span>, <span class="op">-</span><span class="kw">col</span>) <span class="op">%&gt;%</span> 
-  <span class="fu">summarise_all</span>(<span class="kw">mean</span>)
+<span class="va">smr</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">row</span>, <span class="op">-</span><span class="va">col</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise_all</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.47 0.0299      0.0865    0.0215</span>
-</pre></div>
+<span class="co">#&gt; 1     1.47 0.0320      0.0855    0.0218</span></pre></div>
 <div id="racial-diversity-segregation-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#racial-diversity-segregation-classification" class="anchor"></a>Racial diversity-segregation classification</h3>
@@ -246,29 +234,27 @@
 <p>The <code>bivariate_classification()</code> function presented below takes three arguments (<code>entropy</code> - a vector of entropy values, <code>mutual_information</code> - a vector of mutual information values, <code>n</code> - a number of categories in racial landscape) and return a 9-coded vector of racial segregation/divesity classes.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co"># n is a number of categories in racial landscape</span>
-<span class="kw">bivariate_classification</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">entropy</span>, <span class="kw">mutual_information</span>, <span class="kw">n</span>) {
+<span class="va">bivariate_classification</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">entropy</span>, <span class="va">mutual_information</span>, <span class="va">n</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="co"># calculate bivariate classification</span>
-  <span class="kw">nent</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="kw">n</span>)
-  <span class="kw">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span>(<span class="kw">entropy</span>, breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, <span class="kw">nent</span>), labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), 
-                include.lowest = <span class="fl">TRUE</span>, right = <span class="fl">TRUE</span>)
-  <span class="kw">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span>(<span class="kw">ent_cat</span>))
+  <span class="va">nent</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+  <span class="va">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span><span class="op">(</span><span class="va">entropy</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, <span class="va">nent</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, 
+                include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span><span class="op">(</span><span class="va">ent_cat</span><span class="op">)</span><span class="op">)</span>
   
-  <span class="kw">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span>(<span class="kw">mutual_information</span>, breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">1</span>), labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>), 
-                include.lowest = <span class="fl">TRUE</span>, right = <span class="fl">TRUE</span>)
-  <span class="kw">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span>(<span class="kw">mut_cat</span>))
+  <span class="va">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span><span class="op">(</span><span class="va">mutual_information</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>, 
+                include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span><span class="op">(</span><span class="va">mut_cat</span><span class="op">)</span><span class="op">)</span>
   
-  <span class="kw">bivar_cls</span> <span class="op">=</span> <span class="kw">mut_cat</span> <span class="op">+</span> <span class="kw">ent_cat</span>
-  <span class="kw">bivar_cls</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span>(<span class="kw">bivar_cls</span>)
+  <span class="va">bivar_cls</span> <span class="op">=</span> <span class="va">mut_cat</span> <span class="op">+</span> <span class="va">ent_cat</span>
+  <span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span><span class="op">(</span><span class="va">bivar_cls</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw">bivar_cls</span>)
-}
-</pre></div>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">bivar_cls</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">smr</span><span class="op">$</span><span class="kw">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span>(entropy = <span class="kw">smr</span><span class="op">$</span><span class="kw">ent_mean</span>, 
-                                         mutual_information = <span class="kw">smr</span><span class="op">$</span><span class="kw">mutinf_mean</span>,
-                                         n = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span>(<span class="kw">race_raster</span>))
-</pre></div>
+<span class="va">smr</span><span class="op">$</span><span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span><span class="op">(</span>entropy <span class="op">=</span> <span class="va">smr</span><span class="op">$</span><span class="va">ent_mean</span>, 
+                                         mutual_information <span class="op">=</span> <span class="va">smr</span><span class="op">$</span><span class="va">mutinf_mean</span>,
+                                         n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">)</span></pre></div>
 </div>
 <div id="mapping-local-racial-diversity-and-racial-segregation" class="section level3">
 <h3 class="hasAnchor">
@@ -276,47 +262,42 @@
 <p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to the spatial grid object. Such operation allows for mapping metrics and shows how segregation and racial diversity change over the area.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># join IT-metric to the grid</span>
-<span class="kw">attr_grid</span> <span class="op">=</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="kw">grid_sf</span>, <span class="kw">smr</span>, by = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))
-</pre></div>
+<span class="va">attr_grid</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">grid_sf</span>, <span class="va">smr</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"col"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="co"># calculate breaks parameter for plotting entropy and mutual information</span>
 <span class="co"># the values of entropy and mutual information are divided into equal breaks</span>
-<span class="kw">ent_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">2</span>, by = <span class="fl">0.25</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span>(<span class="kw">race_raster</span>)))
-<span class="kw">mut_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, by = <span class="fl">0.1</span>)
-</pre></div>
+<span class="va">ent_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, by <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mut_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></pre></div>
 </div>
 <div id="mapping-racial-diversity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-diversity" class="anchor"></a>Mapping racial diversity</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid</span>[<span class="st">"ent_mean"</span>], breaks = <span class="kw">ent_breaks</span>, key.pos = <span class="fl">1</span>, 
-     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">ent_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">attr_grid</span><span class="op">[</span><span class="st">"ent_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">ent_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>, 
+     pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ent_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>,
      <span class="co"># pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),</span>
-     bty = <span class="st">"n"</span>, main = <span class="st">"Racial diversity (Entropy)"</span>)
-</pre></div>
+     bty <span class="op">=</span> <span class="st">"n"</span>, main <span class="op">=</span> <span class="st">"Racial diversity (Entropy)"</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation" class="anchor"></a>Mapping racial segregation</h3>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid</span>[<span class="st">"mutinf_mean"</span>], breaks = <span class="kw">mut_breaks</span>, key.pos = <span class="fl">1</span>, 
-     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">mut_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">attr_grid</span><span class="op">[</span><span class="st">"mutinf_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">mut_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>, 
+     pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mut_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>,
      <span class="co"># pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),</span>
-     bty = <span class="st">"n"</span>, main = <span class="st">"Racial segregation (Mutual information)"</span>)
-</pre></div>
+     bty <span class="op">=</span> <span class="st">"n"</span>, main <span class="op">=</span> <span class="st">"Racial segregation (Mutual information)"</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation-and-diversity-using-bivariate-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-and-diversity-using-bivariate-classification" class="anchor"></a>Mapping racial segregation and diversity using bivariate classification</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="kw">biv_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> = <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> = <span class="st">"#e4acac"</span>, <span class="st">"13"</span> = <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> = <span class="st">"#b0d5df"</span>,
-               <span class="st">"22"</span> = <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> = <span class="st">"#985356"</span>, <span class="st">"31"</span> = <span class="st">"#64acbe"</span>, <span class="st">"32"</span>= <span class="st">"#627f8c"</span>, 
-               <span class="st">"33"</span> = <span class="st">"#574249"</span>)
-<span class="kw">bcat</span> <span class="op">=</span> <span class="kw">biv_colors</span>[<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">biv_colors</span>)<span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span>(<span class="kw">attr_grid</span><span class="op">$</span><span class="kw">bivar_cls</span>)]
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid</span>[<span class="st">"bivar_cls"</span>], pal = <span class="kw">bcat</span>, main = <span class="st">"Racial diversity and residential segregation"</span>)
-</pre></div>
+<span class="va">biv_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"11"</span> <span class="op">=</span> <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> <span class="op">=</span> <span class="st">"#e4acac"</span>, <span class="st">"13"</span> <span class="op">=</span> <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> <span class="op">=</span> <span class="st">"#b0d5df"</span>,
+               <span class="st">"22"</span> <span class="op">=</span> <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> <span class="op">=</span> <span class="st">"#985356"</span>, <span class="st">"31"</span> <span class="op">=</span> <span class="st">"#64acbe"</span>, <span class="st">"32"</span><span class="op">=</span> <span class="st">"#627f8c"</span>, 
+               <span class="st">"33"</span> <span class="op">=</span> <span class="st">"#574249"</span><span class="op">)</span>
+<span class="va">bcat</span> <span class="op">=</span> <span class="va">biv_colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">biv_colors</span><span class="op">)</span><span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span><span class="op">(</span><span class="va">attr_grid</span><span class="op">$</span><span class="va">bivar_cls</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">attr_grid</span><span class="op">[</span><span class="st">"bivar_cls"</span><span class="op">]</span>, pal <span class="op">=</span> <span class="va">bcat</span>, main <span class="op">=</span> <span class="st">"Racial diversity and residential segregation"</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="calculate-it-metrics-from-local-patterns-overlapping-windows" class="section level3">
@@ -326,36 +307,35 @@
 <p>To obtain overlapping windows the <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function requires additional argument - <code>shift</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="co"># calculate metrics for overlapping windows</span>
-<span class="kw">metr_df_10</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span>(x = <span class="kw">real_raster</span>, w = <span class="kw">dens_raster</span>, 
-                               neighbourhood = <span class="fl">4</span>, fun = <span class="st">"mean"</span>, 
-                               size = <span class="fl">20</span>, shift = <span class="fl">10</span>, threshold = <span class="fl">0.5</span>)
+<span class="va">metr_df_10</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span>, w <span class="op">=</span> <span class="va">dens_raster</span>, 
+                               neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
+                               size <span class="op">=</span> <span class="fl">20</span>, shift <span class="op">=</span> <span class="fl">10</span>, threshold <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 
-<span class="kw">smr10</span> <span class="op">=</span> <span class="kw">metr_df_10</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="kw">row</span>, <span class="kw">col</span>) <span class="op">%&gt;%</span>
-  <span class="fu">summarize</span>(
-    ent_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
-    ent_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">ent</span>, na.rm = <span class="fl">TRUE</span>),
-    mutinf_mean = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>),
-    mutinf_sd = <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="kw">mutinf</span>, na.rm = <span class="fl">TRUE</span>)
-  )
+<span class="va">smr10</span> <span class="op">=</span> <span class="va">metr_df_10</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">row</span>, <span class="va">col</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarize</span><span class="op">(</span>
+    ent_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    mutinf_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="op">)</span>
 <span class="co">#&gt; `summarise()` regrouping output by 'row' (override with `.groups` argument)</span>
 
-<span class="kw">smr10</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ungroup</span>() <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/select.html">select</a></span>(<span class="op">-</span><span class="kw">row</span>, <span class="op">-</span><span class="kw">col</span>) <span class="op">%&gt;%</span> 
-  <span class="fu">summarise_all</span>(<span class="kw">mean</span>)
+<span class="va">smr10</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">row</span>, <span class="op">-</span><span class="va">col</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise_all</span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.48 0.0327      0.0820    0.0228</span>
+<span class="co">#&gt; 1     1.47 0.0338      0.0819    0.0224</span>
 
 <span class="co"># calculate bivariate classification</span>
-<span class="kw">smr10</span><span class="op">$</span><span class="kw">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span>(
-  entropy = <span class="kw">smr10</span><span class="op">$</span><span class="kw">ent_mean</span>,
-  mutual_information = <span class="kw">smr10</span><span class="op">$</span><span class="kw">mutinf_mean</span>,
-  n = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span>(<span class="kw">race_raster</span>)
-)
-</pre></div>
+<span class="va">smr10</span><span class="op">$</span><span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span><span class="op">(</span>
+  entropy <span class="op">=</span> <span class="va">smr10</span><span class="op">$</span><span class="va">ent_mean</span>,
+  mutual_information <span class="op">=</span> <span class="va">smr10</span><span class="op">$</span><span class="va">mutinf_mean</span>,
+  n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span>
+<span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="mapping-local-racial-diversity-and-racial-segregation-1" class="section level2">
@@ -364,31 +344,28 @@
 <p>The average value of entropy and mutual information calculated for each square-shaped window from all realizations can be joined to spatial grid object (created by <code><a href="../reference/create_grid.html">create_grid()</a></code>). For overlapping windows, the resolution of the grid will be defined by <em>shift</em> parameter.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="co"># create spatial grid object</span>
-<span class="kw">grid_sf10</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span>(<span class="kw">real_raster</span>, size = <span class="fl">20</span>, shift = <span class="fl">10</span>)
+<span class="va">grid_sf10</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span><span class="op">(</span><span class="va">real_raster</span>, size <span class="op">=</span> <span class="fl">20</span>, shift <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># join IT-metrics to the grid</span>
-<span class="kw">attr_grid10</span> <span class="op">=</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="kw">grid_sf10</span>, <span class="kw">smr10</span>, by = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"row"</span>, <span class="st">"col"</span>))
-</pre></div>
+<span class="va">attr_grid10</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">grid_sf10</span>, <span class="va">smr10</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"col"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <div id="mapping-racial-diversity-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-diversity-1" class="anchor"></a>Mapping racial diversity</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid10</span>[<span class="st">"ent_mean"</span>], breaks = <span class="kw">ent_breaks</span>, key.pos = <span class="fl">1</span>, 
-     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">ent_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">attr_grid10</span><span class="op">[</span><span class="st">"ent_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">ent_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>, 
+     pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ent_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>,
      <span class="co"># pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),</span>
-     bty = <span class="st">"n"</span>, main = <span class="st">"Racial diversity (Entropy)"</span>)
-</pre></div>
+     bty <span class="op">=</span> <span class="st">"n"</span>, main <span class="op">=</span> <span class="st">"Racial diversity (Entropy)"</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mapping-racial-segregation-1" class="anchor"></a>Mapping racial segregation</h3>
 <div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid10</span>[<span class="st">"mutinf_mean"</span>], breaks = <span class="kw">mut_breaks</span>, key.pos = <span class="fl">1</span>,
-     pal = <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">RColorBrewer</span>::<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">mut_breaks</span>) <span class="op">-</span> <span class="fl">1</span>, name = <span class="st">"RdBu"</span>)),
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">attr_grid10</span><span class="op">[</span><span class="st">"mutinf_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">mut_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>,
+     pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mut_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>,
      <span class="co"># pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),</span>
-     bty = <span class="st">"n"</span>, main = <span class="st">"Racial segregation (Mutual information)"</span>)
-</pre></div>
+     bty <span class="op">=</span> <span class="st">"n"</span>, main <span class="op">=</span> <span class="st">"Racial segregation (Mutual information)"</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mapping-racial-segregation-and-diversity-using-bivariate-classification-1" class="section level3">
@@ -397,12 +374,11 @@
 <div class="sourceCode" id="cb18"><pre class="downlit">
 <span class="co"># `biv_color`s defines a bivariate palette, </span>
 <span class="co"># `bcat` selects only colors for categories available for analyzed areas</span>
-<span class="kw">biv_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11"</span> = <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> = <span class="st">"#e4acac"</span>, <span class="st">"13"</span> = <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> = <span class="st">"#b0d5df"</span>, 
-               <span class="st">"22"</span> = <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> = <span class="st">"#985356"</span>, <span class="st">"31"</span> = <span class="st">"#64acbe"</span>,<span class="st">"32"</span> = <span class="st">"#627f8c"</span>,
-               <span class="st">"33"</span> = <span class="st">"#574249"</span>)
-<span class="kw">bcat</span> <span class="op">=</span> <span class="kw">biv_colors</span>[<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">biv_colors</span>)<span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span>(<span class="kw">attr_grid10</span><span class="op">$</span><span class="kw">bivar_cls</span>)]
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw">attr_grid10</span>[<span class="st">"bivar_cls"</span>], pal = <span class="kw">bcat</span>, main = <span class="st">"Racial diversity and residential segregation"</span>)
-</pre></div>
+<span class="va">biv_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"11"</span> <span class="op">=</span> <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> <span class="op">=</span> <span class="st">"#e4acac"</span>, <span class="st">"13"</span> <span class="op">=</span> <span class="st">"#c85a5a"</span>, <span class="st">"21"</span> <span class="op">=</span> <span class="st">"#b0d5df"</span>, 
+               <span class="st">"22"</span> <span class="op">=</span> <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> <span class="op">=</span> <span class="st">"#985356"</span>, <span class="st">"31"</span> <span class="op">=</span> <span class="st">"#64acbe"</span>,<span class="st">"32"</span> <span class="op">=</span> <span class="st">"#627f8c"</span>,
+               <span class="st">"33"</span> <span class="op">=</span> <span class="st">"#574249"</span><span class="op">)</span>
+<span class="va">bcat</span> <span class="op">=</span> <span class="va">biv_colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">biv_colors</span><span class="op">)</span><span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span><span class="op">(</span><span class="va">attr_grid10</span><span class="op">$</span><span class="va">bivar_cls</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">attr_grid10</span><span class="op">[</span><span class="st">"bivar_cls"</span><span class="op">]</span>, pal <span class="op">=</span> <span class="va">bcat</span>, main <span class="op">=</span> <span class="st">"Racial diversity and residential segregation"</span><span class="op">)</span></pre></div>
 <p><img src="raceland-intro2_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -424,7 +400,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
