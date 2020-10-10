@@ -1,9 +1,8 @@
 #ifndef GET_METRICS_H
 #define GET_METRICS_H
-#include "it_metrics.h"
 #include "na_prop.h"
-#include "RcppArmadillo.h"
 #include <comat.h>
+#include "RcppArmadillo.h"
 // [[Rcpp::depends(comat)]]
 using namespace Rcpp;
 

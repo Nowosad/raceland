@@ -76,57 +76,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpp_ent
-double rcpp_ent(const Rcpp::NumericMatrix x, std::string base);
-RcppExport SEXP _raceland_rcpp_ent(SEXP xSEXP, SEXP baseSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_ent(x, base));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpp_joinent
-double rcpp_joinent(const Rcpp::NumericMatrix x, std::string base, bool ordered);
-RcppExport SEXP _raceland_rcpp_joinent(SEXP xSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
-    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_joinent(x, base, ordered));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpp_condent
-double rcpp_condent(const Rcpp::NumericMatrix x, std::string base, bool ordered);
-RcppExport SEXP _raceland_rcpp_condent(SEXP xSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
-    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_condent(x, base, ordered));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpp_mutinf
-double rcpp_mutinf(const Rcpp::NumericMatrix x, std::string base, bool ordered);
-RcppExport SEXP _raceland_rcpp_mutinf(SEXP xSEXP, SEXP baseSEXP, SEXP orderedSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type base(baseSEXP);
-    Rcpp::traits::input_parameter< bool >::type ordered(orderedSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_mutinf(x, base, ordered));
-    return rcpp_result_gen;
-END_RCPP
-}
 // motifel_areas
 Rcpp::IntegerMatrix motifel_areas(Rcpp::IntegerMatrix x, int size);
 RcppExport SEXP _raceland_motifel_areas(SEXP xSEXP, SEXP sizeSEXP) {
@@ -194,10 +143,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raceland_create_motifels_ids", (DL_FUNC) &_raceland_create_motifels_ids, 3},
     {"_raceland_draw_values", (DL_FUNC) &_raceland_draw_values, 2},
     {"_raceland_get_metrics", (DL_FUNC) &_raceland_get_metrics, 10},
-    {"_raceland_rcpp_ent", (DL_FUNC) &_raceland_rcpp_ent, 2},
-    {"_raceland_rcpp_joinent", (DL_FUNC) &_raceland_rcpp_joinent, 3},
-    {"_raceland_rcpp_condent", (DL_FUNC) &_raceland_rcpp_condent, 3},
-    {"_raceland_rcpp_mutinf", (DL_FUNC) &_raceland_rcpp_mutinf, 3},
     {"_raceland_motifel_areas", (DL_FUNC) &_raceland_motifel_areas, 2},
     {"_raceland_motifel_sums", (DL_FUNC) &_raceland_motifel_sums, 2},
     {"_raceland_motifel_adjustment", (DL_FUNC) &_raceland_motifel_adjustment, 2},

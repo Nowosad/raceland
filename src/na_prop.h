@@ -1,6 +1,6 @@
 #ifndef na_prop_H
 #define na_prop_H
-#include "Rcpp.h"
+#include "RcppArmadillo.h"
 #include <algorithm>     // for count_if
 // [[Rcpp::plugins(cpp11)]]
 

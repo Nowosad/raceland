@@ -21,22 +21,6 @@ get_metrics <- function(x, w, directions, fun = "mean", na_action = "replace", b
     .Call(`_raceland_get_metrics`, x, w, directions, fun, na_action, base, ordered, size, shift, na_threshold)
 }
 
-rcpp_ent <- function(x, base = "log2") {
-    .Call(`_raceland_rcpp_ent`, x, base)
-}
-
-rcpp_joinent <- function(x, base = "log2", ordered = TRUE) {
-    .Call(`_raceland_rcpp_joinent`, x, base, ordered)
-}
-
-rcpp_condent <- function(x, base = "log2", ordered = TRUE) {
-    .Call(`_raceland_rcpp_condent`, x, base, ordered)
-}
-
-rcpp_mutinf <- function(x, base = "log2", ordered = TRUE) {
-    .Call(`_raceland_rcpp_mutinf`, x, base, ordered)
-}
-
 motifel_areas <- function(x, size) {
     .Call(`_raceland_motifel_areas`, x, size)
 }

@@ -26,10 +26,10 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix& x,
 
       NumericMatrix wecoma = comat::rcpp_get_wecoma(x, w, directions, fun, na_action);
 
-      ent = rcpp_ent(wecoma, base);
-      joinent = rcpp_joinent(wecoma, base, ordered);
-      condent = rcpp_condent(wecoma, base, ordered);
-      mutinf = rcpp_mutinf(wecoma, base, ordered);
+      ent = comat::rcpp_ent(wecoma, base);
+      joinent = comat::rcpp_joinent(wecoma, base, ordered);
+      condent = comat::rcpp_condent(wecoma, base, ordered);
+      mutinf = comat::rcpp_mutinf(wecoma, base, ordered);
 
     }
     result(0, 0) = 1;
@@ -87,10 +87,10 @@ NumericMatrix get_metrics(Rcpp::IntegerMatrix& x,
         if (na_perc <= na_threshold){
           NumericMatrix wecoma = comat::rcpp_get_wecoma(motifel_x, motifel_w, directions, fun, na_action);
 
-          ent = rcpp_ent(wecoma, base);
-          joinent = rcpp_joinent(wecoma, base, ordered);
-          condent = rcpp_condent(wecoma, base, ordered);
-          mutinf = rcpp_mutinf(wecoma, base, ordered);
+          ent = comat::rcpp_ent(wecoma, base);
+          joinent = comat::rcpp_joinent(wecoma, base, ordered);
+          condent = comat::rcpp_condent(wecoma, base, ordered);
+          mutinf = comat::rcpp_mutinf(wecoma, base, ordered);
         }
 
         result(nr_of_motifels2, 2) = ent;
