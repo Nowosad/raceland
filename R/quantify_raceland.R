@@ -18,9 +18,9 @@
 #'
 #' @examples
 #' library(raster)
-#' rl = quanfity_raceland(race_raster, n = 10, window_size = 10,
+#' rl = quantify_raceland(race_raster, n = 10, window_size = 10,
 #'  neighbourhood = 4, fun = "mean", size = 20)
-quanfity_raceland = function(x, n,
+quantify_raceland = function(x, n,
                         window_size,
                         neighbourhood = 4, fun,
                         size = NULL,
