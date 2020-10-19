@@ -82,7 +82,7 @@
       <h1 data-toc-skip>raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-10-10</h4>
+            <h4 class="date">2020-10-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro1.Rmd"><code>vignettes/raceland-intro1.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -133,7 +133,7 @@
 <div id="input-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#input-data" class="anchor"></a>Input data</h2>
-<p>Racial landscape method is based on high-resolution race-specific raster grids. Each cell in race-specific grids contains race subpopulation density. SocScape project provides high-resolution raster grids for 1990, 2000, 2010 years for 365 metropolitan areas and each county in the conterminous US. Data is available at <a href="http://sil.uc.edu/cms/index.php?id=socscape-data" class="uri">http://sil.uc.edu/cms/index.php?id=socscape-data</a>.</p>
+<p>Racial landscape method is based on high-resolution race-specific raster grids. Each cell in race-specific grids contains race subpopulation density. SocScape project provides high-resolution raster grids for 1990, 2000, 2010 years for 365 metropolitan areas and each county in the conterminous US. Data is available at <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>.</p>
 <p>The calculation can also be performed using a spatial vector file (e.g., shapefile) with attribute table containing race counts for aggregated data. In such case, a spatial vector object is first rasterized using the <code>zones_to_rasters()</code> function from the <strong>raceland</strong> package (people of a given race are redistributed to the cells by dividing the number of people by the number of cells belonging to the particular spatial units).</p>
 <p>Please notice that the rasterization time depends on the number of divisions and for large areas (i.e., metropolitan areas) can be time-consuming. It is recommended to use the smallest available divisions.</p>
 <p>Here we demonstrate a computational framework using an example of the area of 60x60 cells. The input data is a high-resolution (30m) raster grids. Race-specific rasters are stored as GeoTIFFs (the directory contains five files for five race-groups: Asians, Blacks, Hispanic, others and Whites).</p>
@@ -292,11 +292,11 @@
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">exposure_mat</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span>
-<span class="co">#&gt; ASIAN     0.00   47.50    40.86   0.00   54.40</span>
-<span class="co">#&gt; BLACK    47.50 7116.50  3228.84 167.26 1896.68</span>
-<span class="co">#&gt; HISPANIC 40.86 3228.84  9408.66 162.75 3893.40</span>
-<span class="co">#&gt; OTHER     0.00  167.26   162.75  25.32   62.83</span>
-<span class="co">#&gt; WHITE    54.40 1896.68  3893.40  62.83 3050.51</span></pre></div>
+<span class="co">#&gt; ASIAN     0.00   37.86    54.35   6.92   54.22</span>
+<span class="co">#&gt; BLACK    37.86 7460.96  3430.21  81.67 1751.46</span>
+<span class="co">#&gt; HISPANIC 54.35 3430.21  9058.72 133.20 3918.15</span>
+<span class="co">#&gt; OTHER     6.92   81.67   133.20  13.85   92.35</span>
+<span class="co">#&gt; WHITE    54.22 1751.46  3918.15  92.35 3060.95</span></pre></div>
 </div>
 <div id="information-theory-metrics-it-metrics" class="section level3">
 <h3 class="hasAnchor">
@@ -323,31 +323,31 @@
                             size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
-<span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.638419 3.167329 1.528910 0.10950884</span>
-<span class="co">#&gt; 2           2   1   1 1.640769 3.177351 1.536581 0.10418804</span>
-<span class="co">#&gt; 3           3   1   1 1.633740 3.157058 1.523318 0.11042242</span>
-<span class="co">#&gt; 4           4   1   1 1.630576 3.163717 1.533141 0.09743495</span>
-<span class="co">#&gt; 5           5   1   1 1.637476 3.148787 1.511312 0.12616399</span>
-<span class="co">#&gt; 6           6   1   1 1.629650 3.155755 1.526106 0.10354401</span></pre></div>
+<span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
+<span class="co">#&gt; 1           1   1   1 1.628743 3.146761 1.518018 0.1107251</span>
+<span class="co">#&gt; 2           2   1   1 1.635016 3.151169 1.516153 0.1188629</span>
+<span class="co">#&gt; 3           3   1   1 1.653223 3.188224 1.535001 0.1182220</span>
+<span class="co">#&gt; 4           4   1   1 1.621720 3.137011 1.515291 0.1064289</span>
+<span class="co">#&gt; 5           5   1   1 1.628615 3.142205 1.513590 0.1150243</span>
+<span class="co">#&gt; 6           6   1   1 1.633929 3.153232 1.519303 0.1146251</span></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;       ent            mutinf       </span>
-<span class="co">#&gt;  Min.   :1.608   Min.   :0.09743  </span>
-<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10818  </span>
-<span class="co">#&gt;  Median :1.634   Median :0.11325  </span>
-<span class="co">#&gt;  Mean   :1.634   Mean   :0.11344  </span>
-<span class="co">#&gt;  3rd Qu.:1.640   3rd Qu.:0.11879  </span>
-<span class="co">#&gt;  Max.   :1.659   Max.   :0.13677</span></pre></div>
+<span class="co">#&gt;  Min.   :1.601   Min.   :0.09853  </span>
+<span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10731  </span>
+<span class="co">#&gt;  Median :1.635   Median :0.11323  </span>
+<span class="co">#&gt;  Mean   :1.635   Mean   :0.11376  </span>
+<span class="co">#&gt;  3rd Qu.:1.642   3rd Qu.:0.11890  </span>
+<span class="co">#&gt;  Max.   :1.656   Max.   :0.13734</span></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="va">metr_df</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>mean_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
   sd_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
   mean_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span>,
   sd_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span>
-<span class="co">#&gt; 1 1.633821 0.009033702   0.1134425 0.008173376</span></pre></div>
+<span class="co">#&gt;   mean_ent    sd_ent mean_mutinf   sd_mutinf</span>
+<span class="co">#&gt; 1 1.634785 0.0104217   0.1137627 0.008184026</span></pre></div>
 </div>
 </div>
 </div>

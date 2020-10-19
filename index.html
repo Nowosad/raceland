@@ -135,22 +135,22 @@
                             size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.613048 3.098844 1.485796 0.1272523</span>
-<span class="co">#&gt; 2           2   1   1 1.632398 3.142268 1.509870 0.1225279</span>
-<span class="co">#&gt; 3           3   1   1 1.647741 3.164575 1.516834 0.1309073</span>
-<span class="co">#&gt; 4           4   1   1 1.642894 3.160951 1.518057 0.1248368</span>
-<span class="co">#&gt; 5           5   1   1 1.627609 3.136853 1.509244 0.1183651</span>
-<span class="co">#&gt; 6           6   1   1 1.630362 3.144456 1.514094 0.1162672</span></pre></div>
+<span class="co">#&gt; 1           1   1   1 1.641782 3.168828 1.527046 0.1147355</span>
+<span class="co">#&gt; 2           2   1   1 1.638414 3.159920 1.521506 0.1169076</span>
+<span class="co">#&gt; 3           3   1   1 1.635824 3.141920 1.506096 0.1297275</span>
+<span class="co">#&gt; 4           4   1   1 1.633109 3.151669 1.518560 0.1145495</span>
+<span class="co">#&gt; 5           5   1   1 1.629351 3.132725 1.503373 0.1259784</span>
+<span class="co">#&gt; 6           6   1   1 1.630314 3.137547 1.507233 0.1230802</span></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># Summarize IT metrics </span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;       ent            mutinf       </span>
-<span class="co">#&gt;  Min.   :1.611   Min.   :0.09491  </span>
-<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10914  </span>
-<span class="co">#&gt;  Median :1.635   Median :0.11422  </span>
-<span class="co">#&gt;  Mean   :1.634   Mean   :0.11421  </span>
-<span class="co">#&gt;  3rd Qu.:1.639   3rd Qu.:0.12085  </span>
-<span class="co">#&gt;  Max.   :1.650   Max.   :0.13091</span></pre></div>
+<span class="co">#&gt;  Min.   :1.608   Min.   :0.09049  </span>
+<span class="co">#&gt;  1st Qu.:1.625   1st Qu.:0.10599  </span>
+<span class="co">#&gt;  Median :1.633   Median :0.11340  </span>
+<span class="co">#&gt;  Mean   :1.633   Mean   :0.11268  </span>
+<span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11902  </span>
+<span class="co">#&gt;  Max.   :1.660   Max.   :0.13287</span></pre></div>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
@@ -205,7 +205,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/Nowosad/racialscape/actions"><img src="https://github.com/Nowosad/racialscape/workflows/pkgdown/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/Nowosad/raceland/actions"><img src="https://github.com/Nowosad/raceland/workflows/pkgdown/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/Nowosad/raceland?branch=master"><img src="https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://CRAN.R-project.org/package=raceland"><img src="https://www.r-pkg.org/badges/version/raceland" alt="CRAN status"></a></li>
 <li><a href="https://cran.r-project.org/package=raceland"><img src="http://cranlogs.r-pkg.org/badges/raceland" alt="CRAN RStudio mirror downloads"></a></li>

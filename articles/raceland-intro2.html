@@ -82,7 +82,7 @@
       <h1 data-toc-skip>raceland: Describing local racial patterns of racial landscapes at different spatial scales</h1>
                         <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-10-10</h4>
+            <h4 class="date">2020-10-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro2.Rmd"><code>vignettes/raceland-intro2.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro2.Rmd</code></div>
@@ -180,16 +180,16 @@
                                neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
                                size <span class="op">=</span> <span class="fl">20</span>, threshold <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 <span class="va">metr_df_20</span><span class="op">[</span><span class="va">metr_df_20</span><span class="op">$</span><span class="va">realization</span> <span class="op">==</span> <span class="fl">1</span>, <span class="op">]</span>
-<span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.291839 2.572102 1.280264 0.01157526</span>
-<span class="co">#&gt; 2           1   1   2 1.580019 3.000479 1.420459 0.15955959</span>
-<span class="co">#&gt; 3           1   1   3 1.453192 2.871409 1.418217 0.03497534</span>
-<span class="co">#&gt; 4           1   2   1 1.584617 3.021231 1.436614 0.14800243</span>
-<span class="co">#&gt; 5           1   2   2 1.488532 2.954628 1.466096 0.02243525</span>
-<span class="co">#&gt; 6           1   2   3 1.509881 2.869455 1.359574 0.15030683</span>
-<span class="co">#&gt; 7           1   3   1 1.311425 2.406679 1.095254 0.21617053</span>
-<span class="co">#&gt; 8           1   3   2 1.558742 3.099472 1.540730 0.01801165</span>
-<span class="co">#&gt; 9           1   3   3 1.447811 2.867464 1.419653 0.02815722</span></pre></div>
+<span class="co">#&gt;   realization row col      ent  joinent  condent      mutinf</span>
+<span class="co">#&gt; 1           1   1   1 1.325803 2.638582 1.312780 0.013022867</span>
+<span class="co">#&gt; 2           1   1   2 1.579169 2.985127 1.405958 0.173210418</span>
+<span class="co">#&gt; 3           1   1   3 1.404181 2.777034 1.372854 0.031327227</span>
+<span class="co">#&gt; 4           1   2   1 1.607799 3.087440 1.479641 0.128157698</span>
+<span class="co">#&gt; 5           1   2   2 1.561388 3.070647 1.509259 0.052128518</span>
+<span class="co">#&gt; 6           1   2   3 1.512854 2.788394 1.275540 0.237313215</span>
+<span class="co">#&gt; 7           1   3   1 1.283625 2.482142 1.198517 0.085108025</span>
+<span class="co">#&gt; 8           1   3   2 1.522858 3.038233 1.515376 0.007481711</span>
+<span class="co">#&gt; 9           1   3   3 1.396598 2.763270 1.366673 0.029924823</span></pre></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble average from multiple realizations. First, for each square window is calculated the average value of entropy and mutual information based on 100 realizations. The table below shows the mean (<code>ent_mean</code>, <code>mutinf_mean</code>) and standard deviation (<code>ent_sd</code>, <code>mutinf_sd</code>) values for each square window.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">smr</span> <span class="op">=</span> <span class="va">metr_df_20</span> <span class="op">%&gt;%</span>
@@ -206,15 +206,15 @@
 <span class="co">#&gt; # Groups:   row [3]</span>
 <span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     1     1.26 0.0442      0.0187   0.00804</span>
-<span class="co">#&gt; 2     1     2     1.59 0.0113      0.160    0.0254 </span>
-<span class="co">#&gt; 3     1     3     1.42 0.0308      0.0465   0.0145 </span>
-<span class="co">#&gt; 4     2     1     1.60 0.0285      0.151    0.0411 </span>
-<span class="co">#&gt; 5     2     2     1.52 0.0235      0.0365   0.0121 </span>
-<span class="co">#&gt; 6     2     3     1.51 0.0285      0.159    0.0305 </span>
-<span class="co">#&gt; 7     3     1     1.37 0.0565      0.136    0.0446 </span>
-<span class="co">#&gt; 8     3     2     1.54 0.0299      0.0161   0.00617</span>
-<span class="co">#&gt; 9     3     3     1.42 0.0344      0.0455   0.0135</span></pre></div>
+<span class="co">#&gt; 1     1     1     1.26 0.0476      0.0216   0.00975</span>
+<span class="co">#&gt; 2     1     2     1.59 0.0110      0.167    0.0289 </span>
+<span class="co">#&gt; 3     1     3     1.42 0.0288      0.0441   0.0137 </span>
+<span class="co">#&gt; 4     2     1     1.60 0.0273      0.153    0.0358 </span>
+<span class="co">#&gt; 5     2     2     1.52 0.0219      0.0353   0.0118 </span>
+<span class="co">#&gt; 6     2     3     1.51 0.0267      0.154    0.0275 </span>
+<span class="co">#&gt; 7     3     1     1.38 0.0525      0.131    0.0390 </span>
+<span class="co">#&gt; 8     3     2     1.54 0.0296      0.0158   0.00653</span>
+<span class="co">#&gt; 9     3     3     1.42 0.0331      0.0485   0.0161</span></pre></div>
 <p>Then the averages from the mean values of entropy and mutual information are calculated.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">smr</span> <span class="op">%&gt;%</span> 
@@ -224,7 +224,7 @@
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.47 0.0320      0.0855    0.0218</span></pre></div>
+<span class="co">#&gt; 1     1.47 0.0310      0.0855    0.0210</span></pre></div>
 <div id="racial-diversity-segregation-classification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#racial-diversity-segregation-classification" class="anchor"></a>Racial diversity-segregation classification</h3>
@@ -328,7 +328,7 @@
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span>
 <span class="co">#&gt;      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1.47 0.0338      0.0819    0.0224</span>
+<span class="co">#&gt; 1     1.48 0.0335      0.0809    0.0214</span>
 
 <span class="co"># calculate bivariate classification</span>
 <span class="va">smr10</span><span class="op">$</span><span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span><span class="op">(</span>
