@@ -38,13 +38,13 @@ Data are organized as zip archives with three directories:
 3. **race** - contains separate grids for seven race/ethnicity groups for each year (27 grids)
 
 These grids have been calculated from the U.S. Census block-level data using dasymetric modeling with land cover as an auxiliary variable.
-Data is available at http://sil.uc.edu/cms/index.php?id=socscape-data. 
+Data is available at http://www.socscape.edu.pl/index.php?id=high-resolution-grids/. 
 
 # A COMPUTATIONAL FRAMEWORK 
 
 A few steps are required to perform analysis based on the SocScape grids:
 
-1. **Download data**: to download data, go to the website http://sil.uc.edu/cms/index.php?id=socscape-data.
+1. **Download data**: to download data, go to the website http://www.socscape.edu.pl/index.php?id=high-resolution-grids/.
 For example, select state: Illinois; select county: Cook.
 The *il_cook.zip* file will be downloaded. 
 

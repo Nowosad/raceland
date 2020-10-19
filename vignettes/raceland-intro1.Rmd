@@ -85,7 +85,7 @@ library(dplyr)
 Racial landscape method is based on high-resolution race-specific raster grids.
 Each cell in race-specific grids contains race subpopulation density. 
 SocScape project provides high-resolution raster grids for 1990, 2000, 2010 years for 365 metropolitan areas and each county in the conterminous US. 
-Data is available at http://sil.uc.edu/cms/index.php?id=socscape-data.
+Data is available at http://www.socscape.edu.pl/index.php?id=high-resolution-grids/.
 
 The calculation can also be performed using a spatial vector file (e.g., shapefile) with attribute table containing race counts for aggregated data. 
 In such case, a spatial vector object is first rasterized using the `zones_to_rasters()` function from the **raceland** package (people of a given race are redistributed to the cells by dividing the number of people by the number of cells belonging to the particular spatial units).
