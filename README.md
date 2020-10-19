@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![R build
-status](https://github.com/Nowosad/racialscape/workflows/pkgdown/badge.svg)](https://github.com/Nowosad/racialscape/actions)
+status](https://github.com/Nowosad/raceland/workflows/pkgdown/badge.svg)](https://github.com/Nowosad/raceland/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
 [![CRAN
@@ -98,24 +98,24 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.613048 3.098844 1.485796 0.1272523
-#> 2           2   1   1 1.632398 3.142268 1.509870 0.1225279
-#> 3           3   1   1 1.647741 3.164575 1.516834 0.1309073
-#> 4           4   1   1 1.642894 3.160951 1.518057 0.1248368
-#> 5           5   1   1 1.627609 3.136853 1.509244 0.1183651
-#> 6           6   1   1 1.630362 3.144456 1.514094 0.1162672
+#> 1           1   1   1 1.641782 3.168828 1.527046 0.1147355
+#> 2           2   1   1 1.638414 3.159920 1.521506 0.1169076
+#> 3           3   1   1 1.635824 3.141920 1.506096 0.1297275
+#> 4           4   1   1 1.633109 3.151669 1.518560 0.1145495
+#> 5           5   1   1 1.629351 3.132725 1.503373 0.1259784
+#> 6           6   1   1 1.630314 3.137547 1.507233 0.1230802
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.611   Min.   :0.09491  
-#>  1st Qu.:1.628   1st Qu.:0.10914  
-#>  Median :1.635   Median :0.11422  
-#>  Mean   :1.634   Mean   :0.11421  
-#>  3rd Qu.:1.639   3rd Qu.:0.12085  
-#>  Max.   :1.650   Max.   :0.13091
+#>  Min.   :1.608   Min.   :0.09049  
+#>  1st Qu.:1.625   1st Qu.:0.10599  
+#>  Median :1.633   Median :0.11340  
+#>  Mean   :1.633   Mean   :0.11268  
+#>  3rd Qu.:1.641   3rd Qu.:0.11902  
+#>  Max.   :1.660   Max.   :0.13287
 ```
 
 ## References
