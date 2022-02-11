@@ -24,6 +24,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -66,8 +68,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Nowosad/raceland/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/Nowosad/raceland/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -83,144 +85,148 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="raceland" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#raceland" class="anchor"></a>raceland</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="raceland">raceland<a class="anchor" aria-label="anchor" href="#raceland"></a>
+</h1></div>
 <!-- badges: start -->
 
 <p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis, and visualization of (ethno)racial topography (Dmowska et al., 2020). It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. A racial landscape, represented by a high-resolution raster grid with each cell containing only inhabitants of a single race, is quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
 <p>Racial landscape method is based on the raster gridded data, and unlike the previous methods, does not depend on the division of specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing calculations at different spatial scales.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of raceland from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"raceland"</span><span class="op">)</span></pre></div>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Nowosad/raceland"</span><span class="op">)</span></pre></div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of raceland from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"raceland"</span><span class="op">)</span></code></pre></div>
+<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Nowosad/raceland"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/raceland/">raceland</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: sp</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># Plot the input data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">race_raster</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span></pre></div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/raceland/" class="external-link">raceland</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: sp</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Plot the input data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">race_raster</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># Construct racial landscape</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Construct racial landscape</span>
 <span class="va">real_raster</span> <span class="op">=</span> <span class="fu"><a href="reference/create_realizations.html">create_realizations</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>,<span class="st">"#F8DF1D"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">real_raster</span>, col <span class="op">=</span> <span class="va">race_colors</span>, maxnl <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></pre></div>
+<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>,<span class="st">"#F8DF1D"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">real_raster</span>, col <span class="op">=</span> <span class="va">race_colors</span>, maxnl <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># Plot racial ladnscape </span>
-<span class="fu"><a href="reference/plot_realization.html">plot_realization</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Plot racial ladnscape </span>
+<span class="fu"><a href="reference/plot_realization.html">plot_realization</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co"># Calculate local subpopulation densities</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Calculate local subpopulation densities</span>
 <span class="va">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="reference/create_densities.html">create_densities</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">dens_raster</span>, maxnl <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dens_raster</span>, maxnl <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="co"># Calculate IT-metrics </span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Calculate IT-metrics </span>
 <span class="va">metr_df</span> <span class="op">=</span> <span class="fu"><a href="reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span>, w <span class="op">=</span> <span class="va">dens_raster</span>,
                             neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
                             size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
 <span class="co">#&gt; 1           1   1   1 1.641782 3.168828 1.527046 0.1147355</span>
 <span class="co">#&gt; 2           2   1   1 1.638414 3.159920 1.521506 0.1169076</span>
 <span class="co">#&gt; 3           3   1   1 1.635824 3.141920 1.506096 0.1297275</span>
 <span class="co">#&gt; 4           4   1   1 1.633109 3.151669 1.518560 0.1145495</span>
 <span class="co">#&gt; 5           5   1   1 1.629351 3.132725 1.503373 0.1259784</span>
-<span class="co">#&gt; 6           6   1   1 1.630314 3.137547 1.507233 0.1230802</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># Summarize IT metrics </span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="co">#&gt; 6           6   1   1 1.630314 3.137547 1.507233 0.1230802</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Summarize IT metrics </span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;       ent            mutinf       </span>
 <span class="co">#&gt;  Min.   :1.608   Min.   :0.09049  </span>
 <span class="co">#&gt;  1st Qu.:1.625   1st Qu.:0.10599  </span>
 <span class="co">#&gt;  Median :1.633   Median :0.11340  </span>
 <span class="co">#&gt;  Mean   :1.633   Mean   :0.11268  </span>
 <span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11902  </span>
-<span class="co">#&gt;  Max.   :1.660   Max.   :0.13287</span></pre></div>
+<span class="co">#&gt;  Max.   :1.660   Max.   :0.13287</span></code></pre></div>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <ul>
-<li>Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a pattern-based, zoneless method for analysis and visualization of racial topography. Applied Geography. 122:1-9, <a href="http://dx.doi.org/10.1016/j.apgeog.2020.102239" class="uri">http://dx.doi.org/10.1016/j.apgeog.2020.102239</a>
+<li>Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a pattern-based, zoneless method for analysis and visualization of racial topography. Applied Geography. 122:1-9, <a href="http://dx.doi.org/10.1016/j.apgeog.2020.102239" class="external-link uri">http://dx.doi.org/10.1016/j.apgeog.2020.102239</a>
 </li>
 </ul>
 </div>
-<div id="contribution" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contribution" class="anchor"></a>Contribution</h2>
-<p>Contributions to this package are welcome. The preferred method of contribution is through a GitHub pull request. Feel free to contact us by creating <a href="https://github.com/Nowosad/raceland/issues">an issue</a>.</p>
+<div class="section level2">
+<h2 id="contribution">Contribution<a class="anchor" aria-label="anchor" href="#contribution"></a>
+</h2>
+<p>Contributions to this package are welcome. The preferred method of contribution is through a GitHub pull request. Feel free to contact us by creating <a href="https://github.com/Nowosad/raceland/issues" class="external-link">an issue</a>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=raceland">https://​cloud.r-project.org/​package=raceland</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/Nowosad/raceland/">https://​github.com/​Nowosad/​raceland/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Nowosad/raceland/issues">https://​github.com/​Nowosad/​raceland/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=raceland" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/Nowosad/raceland/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Nowosad/raceland/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing raceland</a></li>
+<li><a href="authors.html#citation">Citing raceland</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Jakub Nowosad <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1057-3721" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Jakub Nowosad <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1057-3721" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Anna Dmowska <br><small class="roles"> Author </small>  </li>
 <li>Tomasz Stepinski <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/Nowosad/raceland/actions"><img src="https://github.com/Nowosad/raceland/workflows/pkgdown/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/Nowosad/raceland?branch=master"><img src="https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://CRAN.R-project.org/package=raceland"><img src="https://www.r-pkg.org/badges/version/raceland" alt="CRAN status"></a></li>
-<li><a href="https://cran.r-project.org/package=raceland"><img src="http://cranlogs.r-pkg.org/badges/raceland" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://github.com/Nowosad/raceland/actions" class="external-link"><img src="https://github.com/Nowosad/raceland/workflows/pkgdown/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/Nowosad/raceland?branch=master" class="external-link"><img src="https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=raceland" class="external-link"><img src="https://www.r-pkg.org/badges/version/raceland" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=raceland" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/raceland" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jakub Nowosad, Anna Dmowska, Tomasz Stepinski.</p>
+  <p></p>
+<p>Developed by Jakub Nowosad, Anna Dmowska, Tomasz Stepinski.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer>
@@ -228,6 +234,8 @@
 
   
 
+
+  
 
   </body>
 </html>

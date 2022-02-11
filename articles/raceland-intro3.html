@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -61,8 +63,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Nowosad/raceland/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/Nowosad/raceland/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -80,26 +82,26 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>raceland: Describing local pattern of racial landscape using SocScape grids</h1>
-                        <h4 class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
+                        <h4 data-toc-skip class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 class="date">2020-10-19</h4>
+            <h4 data-toc-skip class="date">2022-02-11</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/master/vignettes/raceland-intro3.Rmd"><code>vignettes/raceland-intro3.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/HEAD/vignettes/raceland-intro3.Rmd" class="external-link"><code>vignettes/raceland-intro3.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro3.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>INTRODUCTION</h1>
+<div class="section level2">
+<h2 id="introduction">INTRODUCTION<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology. An overview of the implemented method is presented in the first vignette. Here we demonstrate, how the <strong>raceland</strong> package can be used for describing racial landscape at different spatial scales.</p>
 <p>Here we demonstrate, how to use the implemented method with SocScape race-specific grids to perform analysis for different spatial scales. We use Cook county data as an example.</p>
 </div>
-<div id="input-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#input-data" class="anchor"></a>INPUT DATA</h1>
+<div class="section level2">
+<h2 id="input-data">INPUT DATA<a class="anchor" aria-label="anchor" href="#input-data"></a>
+</h2>
 <p>SocScape project provides a high resolution (30m) grids for each county in the conterminous U.S. and 351 MSA for 1990, 2000 and 2010. Data are organized as zip archives with three directories:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -109,14 +111,14 @@
 <li>
 <strong>race</strong> - contains separate grids for seven race/ethnicity groups for each year (27 grids)</li>
 </ol>
-<p>These grids have been calculated from the U.S. Census block-level data using dasymetric modeling with land cover as an auxiliary variable. Data is available at <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>.</p>
+<p>These grids have been calculated from the U.S. Census block-level data using dasymetric modeling with land cover as an auxiliary variable. Data is available at <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="external-link uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>.</p>
 </div>
-<div id="a-computational-framework" class="section level1">
-<h1 class="hasAnchor">
-<a href="#a-computational-framework" class="anchor"></a>A COMPUTATIONAL FRAMEWORK</h1>
+<div class="section level2">
+<h2 id="a-computational-framework">A COMPUTATIONAL FRAMEWORK<a class="anchor" aria-label="anchor" href="#a-computational-framework"></a>
+</h2>
 <p>A few steps are required to perform analysis based on the SocScape grids:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Download data</strong>: to download data, go to the website <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>. For example, select state: Illinois; select county: Cook. The <em>il_cook.zip</em> file will be downloaded.</p></li>
+<li><p><strong>Download data</strong>: to download data, go to the website <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="external-link uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>. For example, select state: Illinois; select county: Cook. The <em>il_cook.zip</em> file will be downloaded.</p></li>
 <li><p><strong>Unzip the archive</strong> with the high-resolution grids.</p></li>
 <li>
 <p><strong>Use presented below script to fully automate analysis</strong>. The script requires to define a few arguments (see example below):</p>
@@ -130,9 +132,9 @@
 </li>
 </ol>
 </div>
-<div id="results" class="section level1">
-<h1 class="hasAnchor">
-<a href="#results" class="anchor"></a>RESULTS</h1>
+<div class="section level2">
+<h2 id="results">RESULTS<a class="anchor" aria-label="anchor" href="#results"></a>
+</h2>
 <p>Script creates a <em>results</em> directory with four subdirectories:</p>
 <ul>
 <li>
@@ -223,15 +225,15 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 </p>
 </div>
 </div>
-<div id="script-to-calculate-the-it-derived-metrics-for-different-spatial-scales" class="section level1">
-<h1 class="hasAnchor">
-<a href="#script-to-calculate-the-it-derived-metrics-for-different-spatial-scales" class="anchor"></a>SCRIPT TO CALCULATE THE IT-DERIVED METRICS FOR DIFFERENT SPATIAL SCALES</h1>
+<div class="section level2">
+<h2 id="script-to-calculate-the-it-derived-metrics-for-different-spatial-scales">SCRIPT TO CALCULATE THE IT-DERIVED METRICS FOR DIFFERENT SPATIAL SCALES<a class="anchor" aria-label="anchor" href="#script-to-calculate-the-it-derived-metrics-for-different-spatial-scales"></a>
+</h2>
 <p><em>Note: This calculation could take several minutes for larger counties.</em></p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># R script calculates IT-derived metrices for different spatial scales. </span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># R script calculates IT-derived metrices for different spatial scales. </span>
 
 <span class="co"># INSTALL REQUIRED PACKAGES </span>
-<span class="va">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+<span class="va">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
   <span class="st">"raceland"</span>,                
   <span class="st">"comat"</span>,            
   <span class="st">"rgdal"</span>,   
@@ -240,17 +242,17 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
   <span class="st">"dplyr"</span>,
   <span class="st">"RColorBrewer"</span>
 <span class="op">)</span>
-<span class="va">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="va">pkgs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">to_install</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">[</span><span class="va">to_install</span><span class="op">]</span><span class="op">)</span>
+<span class="va">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="va">pkgs</span> <span class="op"><a href="https://rdrr.io/pkg/raster/man/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">to_install</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">[</span><span class="va">to_install</span><span class="op">]</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># REQUIRED R-PACKAGES</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/raceland/">raceland</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/raceland/" class="external-link">raceland</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
 
 <span class="co"># SET WORKING DIRECTORY</span>
 <span class="co">## setwd("")</span>
@@ -279,7 +281,7 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 <span class="co"># 2. c(120,60) - corresponds to the scale of 3.6 km. </span>
 <span class="co"># 3. c(240,120) - corresponds to the scale of 7.2 km. </span>
 <span class="co"># 4. c(480, 240) - corresponds to the scale of 14.4 km. </span>
-<span class="va">list_size_shift</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60</span>,<span class="fl">30</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">240</span>,<span class="fl">120</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">480</span>, <span class="fl">240</span><span class="op">)</span><span class="op">)</span>
+<span class="va">list_size_shift</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>,<span class="fl">30</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">240</span>,<span class="fl">120</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">480</span>, <span class="fl">240</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">####################################################################################################</span>
 
@@ -287,34 +289,34 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 <span class="va">bivariate_classification</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">entropy</span>, <span class="va">mutual_information</span>, <span class="va">n</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="co"># max entropy is calculated as log2 from the number of race categories</span>
-  <span class="va">nent</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+  <span class="va">nent</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
   
   <span class="co"># divide entropy values into 3 categories</span>
-  <span class="va">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span><span class="op">(</span><span class="va">entropy</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, <span class="va">nent</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, 
+  <span class="va">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">entropy</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.66</span>, <span class="fl">1.33</span>, <span class="va">nent</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, 
                 include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="va">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span><span class="op">(</span><span class="va">ent_cat</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">ent_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">ent_cat</span><span class="op">)</span><span class="op">)</span>
   
   <span class="co"># divide mutual information values into 3 categories</span>
-  <span class="va">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html">cut</a></span><span class="op">(</span><span class="va">mutual_information</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>, 
+  <span class="va">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">mutual_information</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>, 
                 include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="va">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span><span class="op">(</span><span class="va">mut_cat</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">mut_cat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">mut_cat</span><span class="op">)</span><span class="op">)</span>
   
   <span class="co"># combine categories of entropy (measure of racial diversity) </span>
   <span class="co"># and mutual information (measure of racial segregation) </span>
   <span class="va">bivar_cls</span> <span class="op">=</span> <span class="va">mut_cat</span> <span class="op">+</span> <span class="va">ent_cat</span>
-  <span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span><span class="op">(</span><span class="va">bivar_cls</span><span class="op">)</span>
+  <span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">bivar_cls</span><span class="op">)</span>
   
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">bivar_cls</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">bivar_cls</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co">####################################################################################################</span>
 
 <span class="co"># COLORS USED FOR VISUALIZATION</span>
 <span class="co">## They corresponds to 5 racial categories: ASIAN, BLACK, HISPANIC, OTHER, WHITE</span>
-<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span>
+<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span>
 
 <span class="co">## Bivariate palette to display the racial segregation/diversity classification</span>
-<span class="va">bivariate_class_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"11"</span> <span class="op">=</span> <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> <span class="op">=</span> <span class="st">"#e4acac"</span>, <span class="st">"13"</span> <span class="op">=</span> <span class="st">"#c85a5a"</span>,
+<span class="va">bivariate_class_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"11"</span> <span class="op">=</span> <span class="st">"#e8e8e8"</span>, <span class="st">"12"</span> <span class="op">=</span> <span class="st">"#e4acac"</span>, <span class="st">"13"</span> <span class="op">=</span> <span class="st">"#c85a5a"</span>,
                            <span class="st">"21"</span> <span class="op">=</span> <span class="st">"#b0d5df"</span>, <span class="st">"22"</span> <span class="op">=</span> <span class="st">"#ad9ea5"</span>, <span class="st">"23"</span> <span class="op">=</span> <span class="st">"#985356"</span>,
                            <span class="st">"31"</span> <span class="op">=</span> <span class="st">"#64acbe"</span>, <span class="st">"32"</span> <span class="op">=</span> <span class="st">"#627f8c"</span>, <span class="st">"33"</span> <span class="op">=</span> <span class="st">"#574249"</span><span class="op">)</span>
 
@@ -322,25 +324,25 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 
 <span class="co">################################## CREATE RESULTS DIRECTORY WITH SUBDIRECTORIES ####################</span>
 <span class="co"># results directory will be created as subdirectory in working directory</span>
-<span class="va">pf</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_metrics"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"final"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"shp"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">pf</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_metrics"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"final"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"shp"</span><span class="op">)</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co">###################################################################################################</span>
 
 <span class="co">################################## PREPROCESS RACE-SPECIFIC DATA ##################################</span>
 <span class="co"># Read data from GeoTIFFs to a RasterStack object</span>
-<span class="va">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">pf_to_data</span>, pattern <span class="op">=</span> <span class="va">sfx</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">list_raster</span><span class="op">)</span>
+<span class="va">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">pf_to_data</span>, pattern <span class="op">=</span> <span class="va">sfx</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html" class="external-link">stack</a></span><span class="op">(</span><span class="va">list_raster</span><span class="op">)</span>
 
 <span class="co"># Rename raster layers</span>
-<span class="va">rnames</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span>, <span class="st">"_"</span><span class="op">)</span>, <span class="va">tail</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="va">rnames</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">rnames</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">rnames</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">sfx</span><span class="op">)</span><span class="op">)</span>
+<span class="va">rnames</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span>, <span class="st">"_"</span><span class="op">)</span>, <span class="va">tail</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">rnames</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">rnames</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nchar</a></span><span class="op">(</span><span class="va">rnames</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nchar</a></span><span class="op">(</span><span class="va">sfx</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">new_names</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span>
+<span class="va">new_names</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html" class="external-link">recode</a></span><span class="op">(</span>
   <span class="va">rnames</span>,
   <span class="st">"hispanic"</span> <span class="op">=</span> <span class="st">"hispanic"</span>,
   <span class="st">"nham"</span> <span class="op">=</span> <span class="st">"am"</span>,
@@ -350,20 +352,20 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
   <span class="st">"nhpi"</span> <span class="op">=</span> <span class="st">"pi"</span>,
   <span class="st">"nhw"</span> <span class="op">=</span> <span class="st">"white"</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span> <span class="op">=</span> <span class="va">new_names</span>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span> <span class="op">=</span> <span class="va">new_names</span>
 
 <span class="co"># Reorder layers in RasterStack</span>
-<span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/subset.html">subset</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"asian"</span>, <span class="st">"am"</span>, <span class="st">"black"</span>, <span class="st">"hispanic"</span>, <span class="st">"other"</span>, <span class="st">"pi"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"asian"</span>, <span class="st">"am"</span>, <span class="st">"black"</span>, <span class="st">"hispanic"</span>, <span class="st">"other"</span>, <span class="st">"pi"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Combine race-specific categories (ASIAN=ASIAN+PI, OTHER=OTHER+AM). </span>
 <span class="co"># Please notice that pi category does not exist for 1990myc dataset.</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">sfx</span> <span class="op">==</span> <span class="st">"1990myc"</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">race_raster</span><span class="op">[[</span><span class="st">"other"</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">race_raster</span><span class="op">[[</span><span class="st">"other"</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">race_raster</span><span class="op">[[</span><span class="st">"am"</span><span class="op">]</span><span class="op">]</span>
-  <span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/addLayer.html">dropLayer</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"am"</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/addLayer.html" class="external-link">dropLayer</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"am"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
   <span class="va">race_raster</span><span class="op">[[</span><span class="st">"other"</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">race_raster</span><span class="op">[[</span><span class="st">"other"</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">race_raster</span><span class="op">[[</span><span class="st">"am"</span><span class="op">]</span><span class="op">]</span>
   <span class="va">race_raster</span><span class="op">[[</span><span class="st">"asian"</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">race_raster</span><span class="op">[[</span><span class="st">"asian"</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">race_raster</span><span class="op">[[</span><span class="st">"pi"</span><span class="op">]</span><span class="op">]</span>
-  <span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/addLayer.html">dropLayer</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"am"</span>, <span class="st">"pi"</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/addLayer.html" class="external-link">dropLayer</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"am"</span>, <span class="st">"pi"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># race raster object contains 5 layers: </span>
@@ -371,7 +373,7 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 <span class="va">race_raster</span>
 
 <span class="co"># save race_raster to a rds file</span>
-<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"race_raster.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">race_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"race_raster.rds"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">###################################################################################################</span>
 
@@ -379,24 +381,24 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 <span class="va">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span><span class="op">(</span><span class="va">race_raster</span>, n <span class="op">=</span> <span class="va">nrealization</span><span class="op">)</span>
 
 <span class="co"># save real_raster object</span>
-<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"real_rast.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"real_rast.rds"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># plot racial landscape</span>
-<span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"racial_landscape.png"</span><span class="op">)</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"racial_landscape.png"</span><span class="op">)</span><span class="op">)</span> 
 <span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
 <span class="co">###################################################################################################</span>
 
 <span class="co">################################## CALCULATE RACE-SPECIFIC DENSTITIES #############################</span>
 <span class="va">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># save dens_raster object</span>
-<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">dens_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"dens_rast.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">dens_raster</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pf</span>, <span class="st">"results"</span>, <span class="st">"out_data"</span>, <span class="st">"dens_rast.rds"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">###################################################################################################</span>
 
 <span class="co">################################## CALCULATE METRICS FOR DIFFERENT SPATIAL SCALES ################</span>
 
-<span class="va">complete_smr_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">complete_smr_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">list_size_shift</span><span class="op">)</span> <span class="op">{</span> <span class="co">#start size loop</span>
   <span class="va">size</span> <span class="op">=</span> <span class="va">i</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
   <span class="va">shift</span> <span class="op">=</span> <span class="va">i</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>
@@ -408,46 +410,46 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
   
   <span class="co"># Summarize metrics</span>
   <span class="co">## Number of motifels at given spatial scale</span>
-  <span class="va">sel</span> <span class="op">=</span> <span class="va">metr_df</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">$</span><span class="va">ent</span><span class="op">)</span>, <span class="op">]</span>
-  <span class="va">nmotif</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sel</span><span class="op">$</span><span class="va">realization</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">sel</span> <span class="op">=</span> <span class="va">metr_df</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">$</span><span class="va">ent</span><span class="op">)</span>, <span class="op">]</span>
+  <span class="va">nmotif</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sel</span><span class="op">$</span><span class="va">realization</span><span class="op">)</span><span class="op">)</span>
   
   <span class="co"># Metrics summary</span>
-  <span class="va">smr</span> <span class="op">=</span> <span class="va">metr_df</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">row</span>, <span class="va">col</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>
-      ent_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-      ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-      mutinf_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-      mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">smr</span> <span class="op">=</span> <span class="va">metr_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">row</span>, <span class="va">col</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>
+      ent_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+      ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+      mutinf_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+      mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
     <span class="op">)</span>
   
-  <span class="va">smr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">smr</span><span class="op">)</span>
+  <span class="va">smr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">smr</span><span class="op">)</span>
 
   <span class="co"># Calculate an ensemble average for entropy and mutual information</span>
-  <span class="va">complete_smr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="va">complete_smr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
     size <span class="op">=</span> <span class="va">size</span>,
     shift <span class="op">=</span> <span class="va">shift</span>,
     n <span class="op">=</span> <span class="va">nmotif</span>,
-    ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">ent_mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-    ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">ent_sd</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-    mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">mutinf_mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-    mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">mutinf_sd</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">ent_mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">ent_sd</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">mutinf_mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+    mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">smr</span><span class="op">$</span><span class="va">mutinf_sd</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   <span class="op">)</span>
-  <span class="va">complete_smr_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">complete_smr_df</span>, <span class="va">complete_smr</span><span class="op">)</span>
+  <span class="va">complete_smr_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">complete_smr_df</span>, <span class="va">complete_smr</span><span class="op">)</span>
   
   <span class="co"># Calculate racial segregation/diversity classification</span>
   <span class="va">smr</span><span class="op">$</span><span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span><span class="op">(</span>entropy <span class="op">=</span> <span class="va">smr</span><span class="op">$</span><span class="va">ent_mean</span>, 
                                            mutual_information <span class="op">=</span> <span class="va">smr</span><span class="op">$</span><span class="va">mutinf_mean</span>,
-                                           n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">)</span>
+                                           n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html" class="external-link">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">)</span>
   
   <span class="co"># Save the metrics to csv</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">metr_df</span>, 
-            <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"out_metrics"</span>,
-                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"metr_df_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".csv"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">metr_df</span>, 
+            <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"out_metrics"</span>,
+                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"metr_df_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".csv"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>,
             row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">smr</span>, 
-            <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"out_metrics"</span>, 
-                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"smr_metr_df_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".csv"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">smr</span>, 
+            <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"out_metrics"</span>, 
+                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"smr_metr_df_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".csv"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>,
             row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
   
   
@@ -457,49 +459,49 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
   <span class="va">grid_sf</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_grid.html">create_grid</a></span><span class="op">(</span><span class="va">real_raster</span>, size <span class="op">=</span> <span class="va">size</span>, shift <span class="op">=</span> <span class="va">shift</span><span class="op">)</span>
   
   <span class="co"># Join metrics to the grid</span>
-  <span class="va">attr_grid</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">grid_sf</span>, <span class="va">smr</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"col"</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">sel_grid</span> <span class="op">=</span> <span class="va">attr_grid</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">attr_grid</span><span class="op">$</span><span class="va">ent_mean</span><span class="op">)</span>,<span class="op">]</span>
+  <span class="va">attr_grid</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">grid_sf</span>, <span class="va">smr</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"col"</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">sel_grid</span> <span class="op">=</span> <span class="va">attr_grid</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">attr_grid</span><span class="op">$</span><span class="va">ent_mean</span><span class="op">)</span>,<span class="op">]</span>
   
   <span class="co"># Save the grid as shapefile</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html">st_write</a></span><span class="op">(</span><span class="va">attr_grid</span>, 
-           <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"shp"</span>, 
-                     <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"metr_stat_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".shp"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html" class="external-link">st_write</a></span><span class="op">(</span><span class="va">attr_grid</span>, 
+           <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"shp"</span>, 
+                     <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"metr_stat_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".shp"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   
   <span class="co">#######################VISUALIZATION#########################################</span>
   
   <span class="co"># Divide entropy values into 10 class</span>
-  <span class="va">ent_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, by <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">ent_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, by <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/nlayers.html" class="external-link">nlayers</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   
   <span class="co"># Divide mutual information into 10 class</span>
-  <span class="va">mut_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
+  <span class="va">mut_breaks</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
   
   <span class="co"># Spatial scale in km</span>
-  <span class="va">scale_km</span> <span class="op">=</span> <span class="op">(</span><span class="va">shift</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/resolution.html">res</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1000</span>
+  <span class="va">scale_km</span> <span class="op">=</span> <span class="op">(</span><span class="va">shift</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/resolution.html" class="external-link">res</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1000</span>
   
   <span class="co"># Mapping racial diversity (save plot to .png)</span>
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"diversity_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">[</span><span class="st">"ent_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">ent_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>,
-       pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ent_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, 
-       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Racial diversity (Entropy) at the scale of "</span>, 
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"diversity_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">[</span><span class="st">"ent_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">ent_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>,
+       pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ent_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, 
+       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Racial diversity (Entropy) at the scale of "</span>, 
                     <span class="va">scale_km</span>, <span class="st">" km"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
   
   <span class="co"># Mapping racial segregation (save plot to .png)</span>
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"segregation_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">[</span><span class="st">"mutinf_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">mut_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>, 
-       pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mut_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, 
-       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Racial segregation (Mutual information) at the scale of "</span>,
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"segregation_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">[</span><span class="st">"mutinf_mean"</span><span class="op">]</span>, breaks <span class="op">=</span> <span class="va">mut_breaks</span>, key.pos <span class="op">=</span> <span class="fl">1</span>, 
+       pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mut_breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, 
+       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Racial segregation (Mutual information) at the scale of "</span>,
                     <span class="va">scale_km</span>, <span class="st">" km"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
   
   <span class="co"># Mapping racial segregation/diversity (save plot to .png)</span>
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"bivar_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>   
-  <span class="va">bcat</span> <span class="op">=</span> <span class="va">bivariate_class_colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span><span class="op">(</span><span class="va">bivariate_class_colors</span><span class="op">)</span><span class="op">%in%</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">$</span><span class="va">bivar_cls</span><span class="op">)</span><span class="op">]</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">[</span><span class="st">"bivar_cls"</span><span class="op">]</span>, 
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"bivar_"</span>, <span class="va">size</span>, <span class="st">"_"</span>, <span class="va">shift</span>, <span class="st">".png"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>   
+  <span class="va">bcat</span> <span class="op">=</span> <span class="va">bivariate_class_colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">bivariate_class_colors</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/pkg/raster/man/match.html" class="external-link">%in%</a></span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">$</span><span class="va">bivar_cls</span><span class="op">)</span><span class="op">]</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sel_grid</span><span class="op">[</span><span class="st">"bivar_cls"</span><span class="op">]</span>, 
        pal <span class="op">=</span> <span class="va">bcat</span>,
-       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Racial diversity/segregation classification at the scale of "</span>,
+       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Racial diversity/segregation classification at the scale of "</span>,
                      <span class="va">scale_km</span>, <span class="st">" km"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> 
 <span class="op">}</span> <span class="co">#stop size loop</span>
 
 
@@ -510,24 +512,24 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 <span class="va">metr</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">dens_raster</span>,
                          neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
                          size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">complete_smr_all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+<span class="va">complete_smr_all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
   size <span class="op">=</span> <span class="st">"ALL"</span>,
   shift <span class="op">=</span> <span class="st">"ALL"</span>,
   n <span class="op">=</span> <span class="fl">1</span>,
-  ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-  ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-  mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-  mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  ent_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  mutinf_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">metr</span><span class="op">$</span><span class="va">mutinf</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">)</span>
-<span class="va">complete_smr_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">complete_smr_df</span>, <span class="va">complete_smr_all</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">complete_smr_df</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"shift"</span>, <span class="st">"n"</span>, <span class="st">"ent"</span>, <span class="st">"ent_sd"</span>, <span class="st">"mutinf"</span>, <span class="st">"mutinf_sd"</span><span class="op">)</span>
+<span class="va">complete_smr_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">complete_smr_df</span>, <span class="va">complete_smr_all</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">complete_smr_df</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"shift"</span>, <span class="st">"n"</span>, <span class="st">"ent"</span>, <span class="st">"ent_sd"</span>, <span class="st">"mutinf"</span>, <span class="st">"mutinf_sd"</span><span class="op">)</span>
 
 <span class="co"># Write table with metrices for different spatial scales and for the whole area. </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">complete_smr_df</span>,
-          <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"complete_smr.csv"</span><span class="op">)</span>,
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">complete_smr_df</span>,
+          <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="st">"final"</span>, <span class="st">"complete_smr.csv"</span><span class="op">)</span>,
           row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="co">###################################################################################################</span></pre></div>
+<span class="co">###################################################################################################</span></code></pre></div>
 </div>
   </div>
 
@@ -542,11 +544,13 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 
 
       <footer><div class="copyright">
-  <p>Developed by Jakub Nowosad, Anna Dmowska, Tomasz Stepinski.</p>
+  <p></p>
+<p>Developed by Jakub Nowosad, Anna Dmowska, Tomasz Stepinski.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer>
@@ -554,6 +558,8 @@ Figure 2: Racial diversity and segregation at different spatial scales (an examp
 
   
 
+
+  
 
   </body>
 </html>
