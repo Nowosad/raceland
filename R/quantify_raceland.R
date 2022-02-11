@@ -37,7 +37,7 @@ quantify_raceland = function(x, n,
                                  fun = fun,
                                  size = size,
                                  threshold = threshold)
-  smr = stats::aggregate(formula = cbind(ent, mutinf) ~ row + col,
+  smr = stats::aggregate(cbind(ent, mutinf) ~ row + col,
                   data = metr_df,
                   FUN = function(x){
                     c(mean = mean(x))
