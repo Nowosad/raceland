@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/Nowosad/raceland/workflows/pkgdown/badge.svg)](https://github.com/Nowosad/raceland/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://codecov.io/gh/Nowosad/raceland?branch=master)
+coverage](https://codecov.io/gh/Nowosad/raceland/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Nowosad/raceland?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/raceland)](https://CRAN.R-project.org/package=raceland)
 [![CRAN RStudio mirror

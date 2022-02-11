@@ -11,7 +11,7 @@ Implements a computational framework for a pattern-based, zoneless analysis, and
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://nowosad.github.io/raceland/}
+  \item \url{https://jakubnowosad.com/raceland/}
   \item Report bugs at \url{https://github.com/Nowosad/raceland/issues}
 }
 
