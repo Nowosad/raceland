@@ -279,11 +279,11 @@
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">exposure_mat</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span>
-<span class="co">#&gt; ASIAN    10.78   13.21    33.80   0.00   56.54</span>
-<span class="co">#&gt; BLACK    13.21 7380.58  3252.64 164.93 1784.08</span>
-<span class="co">#&gt; HISPANIC 33.80 3252.64  8882.08 185.96 3953.89</span>
-<span class="co">#&gt; OTHER     0.00  164.93   185.96  14.90   76.34</span>
-<span class="co">#&gt; WHITE    56.54 1784.08  3953.89  76.34 3399.02</span></code></pre></div>
+<span class="co">#&gt; ASIAN    18.32   31.91    37.60   3.12   28.86</span>
+<span class="co">#&gt; BLACK    31.91 7434.38  3322.36  55.02 1830.88</span>
+<span class="co">#&gt; HISPANIC 37.60 3322.36  9098.49 146.03 3947.83</span>
+<span class="co">#&gt; OTHER     3.12   55.02   146.03  19.91   94.51</span>
+<span class="co">#&gt; WHITE    28.86 1830.88  3947.83  94.51 3100.32</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="information-theory-metrics-it-metrics">Information theory metrics (IT metrics)<a class="anchor" aria-label="anchor" href="#information-theory-metrics-it-metrics"></a>
@@ -311,22 +311,22 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
 <span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.644659 3.169763 1.525104 0.1195554</span>
-<span class="co">#&gt; 2           2   1   1 1.653813 3.191551 1.537738 0.1160754</span>
-<span class="co">#&gt; 3           3   1   1 1.641766 3.162230 1.520464 0.1213013</span>
-<span class="co">#&gt; 4           4   1   1 1.629918 3.153565 1.523647 0.1062706</span>
-<span class="co">#&gt; 5           5   1   1 1.626935 3.139847 1.512912 0.1140226</span>
-<span class="co">#&gt; 6           6   1   1 1.633625 3.158539 1.524914 0.1087112</span></code></pre></div>
+<span class="co">#&gt; 1           1   1   1 1.623873 3.132867 1.508994 0.1148784</span>
+<span class="co">#&gt; 2           2   1   1 1.638662 3.159650 1.520988 0.1176736</span>
+<span class="co">#&gt; 3           3   1   1 1.641208 3.161605 1.520398 0.1208102</span>
+<span class="co">#&gt; 4           4   1   1 1.630472 3.142208 1.511735 0.1187367</span>
+<span class="co">#&gt; 5           5   1   1 1.653821 3.207958 1.554137 0.0996838</span>
+<span class="co">#&gt; 6           6   1   1 1.619215 3.124637 1.505422 0.1137929</span></code></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt;       ent            mutinf      </span>
-<span class="co">#&gt;  Min.   :1.605   Min.   :0.0960  </span>
-<span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.1084  </span>
-<span class="co">#&gt;  Median :1.634   Median :0.1157  </span>
-<span class="co">#&gt;  Mean   :1.635   Mean   :0.1153  </span>
-<span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1220  </span>
-<span class="co">#&gt;  Max.   :1.658   Max.   :0.1350</span></code></pre></div>
+<span class="co">#&gt;       ent            mutinf       </span>
+<span class="co">#&gt;  Min.   :1.611   Min.   :0.09364  </span>
+<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10849  </span>
+<span class="co">#&gt;  Median :1.635   Median :0.11291  </span>
+<span class="co">#&gt;  Mean   :1.635   Mean   :0.11356  </span>
+<span class="co">#&gt;  3rd Qu.:1.642   3rd Qu.:0.11859  </span>
+<span class="co">#&gt;  Max.   :1.655   Max.   :0.13234</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metr_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html" class="external-link">summarise</a></span><span class="op">(</span>mean_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -334,7 +334,7 @@
   mean_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span>,
   sd_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span>
-<span class="co">#&gt; 1 1.634817 0.009860715   0.1153053 0.009556212</span></code></pre></div>
+<span class="co">#&gt; 1 1.634592 0.009882682   0.1135603 0.007740261</span></code></pre></div>
 </div>
 </div>
 </div>
