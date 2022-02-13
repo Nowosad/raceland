@@ -10,6 +10,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -61,8 +62,7 @@ The computational framework requires following packages: **raceland**, **comat**
 pkgs = c(
   "raceland",                
   "comat",            
-  "rgdal",   
-  "raster",
+  "terra",
   "sf",              
   "dplyr"
 )
@@ -75,7 +75,7 @@ if(any(to_install)) {
 ```{r, warning=FALSE, message=FALSE, include=FALSE}
 # attach required packages
 library(raceland)
-library(raster)
+library(terra)
 library(sf)
 library(dplyr)
 ```
@@ -107,7 +107,7 @@ list_raster = list.files(system.file("rast_data", package = "raceland"),
 ```
 
 ```{r}
-race_raster = stack(list_raster)
+race_raster = rast(list_raster)
 race_raster
 ```
 

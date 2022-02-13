@@ -7,12 +7,12 @@
 create_realizations(x, n)
 }
 \arguments{
-\item{x}{RasterStack with race-specific population densities assign to each cell}
+\item{x}{SpatRaster with race-specific population densities assign to each cell}
 
 \item{n}{A number of realizations}
 }
 \value{
-A RasterStack object containing n realizations. Single race label in a racial landscape is assigned based on the order of race-specific grids in RasterStack with input data (For example, the \code{race_raster} object has five layers named: asian, black, hispanic, other, white. The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white).
+A SpatRaster object containing n realizations. Single race label in a racial landscape is assigned based on the order of race-specific grids in SpatRaster with input data (For example, the \code{race_raster} object has five layers named: asian, black, hispanic, other, white. The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white).
 }
 \description{
 It constructs a high-resolution grid (a racial landscape) in which each cell contains only inhabitants of a single race.
@@ -20,7 +20,8 @@ Realization is constructed based on race-specific grids. Racial composition at e
 Thus, the race label of a cell is a random variable. To obtain a stochastic realization of racial landscape, we use the cell's race probabilities and a random number generator to randomly assign specific race label to each cell (Monte Carlo procedure).
 }
 \examples{
-library(raster)
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 real = create_realizations(race_raster, 10)
 plot(real)
 

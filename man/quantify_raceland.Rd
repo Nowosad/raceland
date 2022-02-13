@@ -18,7 +18,7 @@ quantify_raceland(
 )
 }
 \arguments{
-\item{x}{RasterStack with race-specific population densities assign to each cell}
+\item{x}{SpatRaster with race-specific population densities assign to each cell}
 
 \item{n}{A number of realizations}
 
@@ -45,7 +45,8 @@ An sf polygon object with five columns - \code{row} and \code{col} allowing for 
 This function is a wrapper of several steps (functions) implemented in the raceland package: \code{create_realizations()}, \code{create_densities()}, \code{calculate_metrics()}, and \code{create_grid()}.
 }
 \examples{
-library(raster)
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 rl = quantify_raceland(race_raster, n = 10, window_size = 10,
  neighbourhood = 4, fun = "mean", size = 20)
 }

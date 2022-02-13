@@ -1,10 +1,20 @@
 library(raceland)
-library(raster)
+library(terra)
 library(dplyr)
 library(sf)
 
-load("data/race_raster.rda")
+# fixes input data
+# load("data/race_raster.rda")
+# race_raster = terra::rast(race_raster)
+# terra::crs(race_raster) = "ESRI:102003"
+# race_raster = terra::wrap(race_raster)
+# usethis::use_data(race_raster, overwrite = TRUE)
+# writeRaster(race_raster, "inst/data/race_raster.tif", overwrite = TRUE)
 
+# sf::st_crs(pop_vector) = "ESRI:102003"
+# usethis::use_data(pop_vector, overwrite = TRUE)
+
+race_raster = rast(system.file("data/race_raster.tif", package = "raceland"))
 set.seed(22)
 real_raster = create_realizations(race_raster, n = 5)
 

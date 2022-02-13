@@ -3,8 +3,8 @@
 #' Calculates exposure matrix and quantifies it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf).
 #' Entropy is associated with measuring racial diversity and mutual information is associated with measuring racial segregation.
 #'
-#' @param x RasterStack with realizations
-#' @param w RasterStack with local densities
+#' @param x SpatRaster with realizations
+#' @param w SpatRaster with local densities
 #' @param neighbourhood The number of directions in which cell adjacencies are considered as neighbours: `4` (rook's case), `8` (queen's case). The default is `4`.
 #' @param fun Function to calculate values from adjacent cells to contribute to exposure matrix, `"mean"` - calculate average values of local population densities from adjacent cells, `"geometric_mean"` - calculate geometric mean values of local population densities from adjacent cells, or `"focal"` assign value from the focal cell
 #' @param size Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If `size=NULL` calculations are performed for a whole area
@@ -18,7 +18,8 @@
 #' @export
 #'
 #' @examples
-#' library(raster)
+#' library(terra)
+#' race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 #' x = create_realizations(race_raster, n = 5)
 #' w = create_densities(x, race_raster, window_size = 10)
 #'
@@ -35,12 +36,8 @@
 calculate_metrics = function(x, w, neighbourhood = 4, fun, size = NULL, shift = NULL,
                              na_action = "replace", base = "log2", ordered = TRUE,
                              threshold = 0.5){
-  if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
-    stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)
-  }
-  if (!(methods::is(w, "RasterStack") || methods::is(w, "RasterBrick"))){
-    stop("w needs to be either RasterStack or RasterBrick", call. = FALSE)
-  }
+  x = check_input(x)
+  w = check_input(w)
   if (is.null(size)){
     size = 0
   }
@@ -48,14 +45,14 @@ calculate_metrics = function(x, w, neighbourhood = 4, fun, size = NULL, shift = 
     shift = size
   }
   out = if (requireNamespace("pbapply", quietly = TRUE)){
-    pbapply::pbmapply(calculate_metric, raster::as.list(x), raster::as.list(w),
+    pbapply::pbmapply(calculate_metric, terra::as.list(x), terra::as.list(w),
                       neighbourhood = neighbourhood, fun = fun,
                       size = size, shift = shift,
                       na_action = na_action, base = base,
                       ordered = ordered, threshold = threshold,
                       SIMPLIFY = FALSE)
   } else {
-    out = mapply(calculate_metric, raster::as.list(x), raster::as.list(w),
+    out = mapply(calculate_metric, terra::as.list(x), terra::as.list(w),
                  neighbourhood = neighbourhood, fun = fun,
                  size = size, shift = shift,
                  na_action = na_action, base = base,
@@ -78,8 +75,8 @@ calculate_metric = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
   if (is.null(shift)){
     shift = size
   }
-  df_metrics = get_metrics(x = raster::as.matrix(x), w = raster::as.matrix(w),
-              directions = as.matrix(neighbourhood), fun = fun,
+  df_metrics = get_metrics(x = terra::as.matrix(x, wide = TRUE), w = terra::as.matrix(w, wide = TRUE),
+              directions = as.matrix(neighbourhood, wide = TRUE), fun = fun,
               na_action = na_action, base = base,
               ordered = ordered, size = size, shift = shift, na_threshold = threshold)
   as.data.frame(df_metrics)

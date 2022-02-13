@@ -18,9 +18,9 @@ calculate_metrics(
 )
 }
 \arguments{
-\item{x}{RasterStack with realizations}
+\item{x}{SpatRaster with realizations}
 
-\item{w}{RasterStack with local densities}
+\item{w}{SpatRaster with local densities}
 
 \item{neighbourhood}{The number of directions in which cell adjacencies are considered as neighbours: \code{4} (rook's case), \code{8} (queen's case). The default is \code{4}.}
 
@@ -46,7 +46,8 @@ Calculates exposure matrix and quantifies it by calculating four IT-derived matr
 Entropy is associated with measuring racial diversity and mutual information is associated with measuring racial segregation.
 }
 \examples{
-library(raster)
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 x = create_realizations(race_raster, n = 5)
 w = create_densities(x, race_raster, window_size = 10)
 

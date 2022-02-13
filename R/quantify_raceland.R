@@ -2,7 +2,7 @@
 #'
 #' This function is a wrapper of several steps (functions) implemented in the raceland package: `create_realizations()`, `create_densities()`, `calculate_metrics()`, and `create_grid()`.
 #'
-#' @param x RasterStack with race-specific population densities assign to each cell
+#' @param x SpatRaster with race-specific population densities assign to each cell
 #' @param n A number of realizations
 #' @param window_size Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10
 #' @param neighbourhood The number of directions in which cell adjacencies are considered as neighbours: `4` (rook's case), `8` (queen's case). The default is `4`.
@@ -17,7 +17,8 @@
 #' @export
 #'
 #' @examples
-#' library(raster)
+#' library(terra)
+#' race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 #' rl = quantify_raceland(race_raster, n = 10, window_size = 10,
 #'  neighbourhood = 4, fun = "mean", size = 20)
 quantify_raceland = function(x, n,

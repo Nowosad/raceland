@@ -7,21 +7,22 @@
 plot_realization(x, y, hex, ...)
 }
 \arguments{
-\item{x}{A RasterLayer or a RasterStack/RasterBrick with one layer.
+\item{x}{A SpatRaster with one layer.
 Each value should correspond to a layer in \code{y}.}
 
-\item{y}{A RasterStack/RasterBrick with race-specific population densities}
+\item{y}{A SpatRaster with race-specific population densities}
 
 \item{hex}{A character vector with colors specified in hexadecimal format.
 Each color should correspond to a layer in \code{y} and value in \code{x}.}
 
-\item{...}{Additional arguments as for \code{\link[raster:plotRGB]{raster::plotRGB()}}}
+\item{...}{Additional arguments as for \code{\link[terra:plotRGB]{terra::plotRGB()}}}
 }
 \description{
 Displays realization taking into account also subpopulation density.
 }
 \examples{
-library(raster)
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 hex_colors = c("#F16667", "#6EBE44", "#7E69AF", "#C77213","#F8DF1D")
 realization = create_realizations(race_raster, 1)
 plot(race_raster)

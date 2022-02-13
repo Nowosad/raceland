@@ -10,6 +10,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -110,8 +111,7 @@ knitr::include_graphics("div_seg.png")
 pkgs = c(
   "raceland",                
   "comat",            
-  "rgdal",   
-  "raster",
+  "terra",   
   "sf",              
   "dplyr",
   "RColorBrewer"
@@ -123,7 +123,7 @@ if(any(to_install)) {
 
 # REQUIRED R-PACKAGES
 library(raceland)
-library(raster)
+library(terra)
 library(sf)
 library(dplyr)
 library(RColorBrewer)
@@ -210,7 +210,7 @@ dir.create(file.path(pf, "results", "shp"), showWarnings = FALSE)
 ################################## PREPROCESS RACE-SPECIFIC DATA ##################################
 # Read data from GeoTIFFs to a RasterStack object
 list_raster = list.files(pf_to_data, pattern = sfx, full.names = TRUE)
-race_raster = stack(list_raster)
+race_raster = rast(list_raster)
 
 # Rename raster layers
 rnames = sapply(strsplit(names(race_raster), "_"), tail, 1)

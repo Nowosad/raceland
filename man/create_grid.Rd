@@ -7,7 +7,7 @@
 create_grid(x, size, shift = NULL)
 }
 \arguments{
-\item{x}{A RasterLayer/RasterStack/RasterBrick}
+\item{x}{A SpatRaster}
 
 \item{size}{Expressed in the numbers of cells, is a length of the side of a square-shaped block of cells. It defines the extent of a local pattern. If \code{size=NULL} calculations are perfomed for the whole area}
 
@@ -20,6 +20,8 @@ An sf polygon object
 Create a grid of square-shaped windows
 }
 \examples{
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 x = create_realizations(race_raster, 1)
 y = create_grid(x, size = 10)
 y
