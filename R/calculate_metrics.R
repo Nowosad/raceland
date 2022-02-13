@@ -46,17 +46,17 @@ calculate_metrics = function(x, w, neighbourhood = 4, fun, size = NULL, shift = 
   }
   out = if (requireNamespace("pbapply", quietly = TRUE)){
     pbapply::pbmapply(calculate_metric, terra::as.list(x), terra::as.list(w),
-                      neighbourhood = neighbourhood, fun = fun,
-                      size = size, shift = shift,
-                      na_action = na_action, base = base,
-                      ordered = ordered, threshold = threshold,
+                      MoreArgs = list(neighbourhood = neighbourhood, fun = fun,
+                                      size = size, shift = shift,
+                                      na_action = na_action, base = base,
+                                      ordered = ordered, threshold = threshold),
                       SIMPLIFY = FALSE)
   } else {
     out = mapply(calculate_metric, terra::as.list(x), terra::as.list(w),
-                 neighbourhood = neighbourhood, fun = fun,
-                 size = size, shift = shift,
-                 na_action = na_action, base = base,
-                 ordered = ordered, threshold = threshold,
+                 MoreArgs = list(neighbourhood = neighbourhood, fun = fun,
+                                 size = size, shift = shift,
+                                 na_action = na_action, base = base,
+                                 ordered = ordered, threshold = threshold),
                  SIMPLIFY = FALSE)
   }
 
@@ -75,8 +75,9 @@ calculate_metric = function(x, w, neighbourhood, fun, size = NULL, shift = NULL,
   if (is.null(shift)){
     shift = size
   }
+  my_directions = as.matrix(neighbourhood)
   df_metrics = get_metrics(x = terra::as.matrix(x, wide = TRUE), w = terra::as.matrix(w, wide = TRUE),
-              directions = as.matrix(neighbourhood, wide = TRUE), fun = fun,
+              directions = my_directions, fun = fun,
               na_action = na_action, base = base,
               ordered = ordered, size = size, shift = shift, na_threshold = threshold)
   as.data.frame(df_metrics)
