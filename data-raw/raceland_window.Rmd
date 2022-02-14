@@ -11,9 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-A long, long time ago (precisely speaking -- on 17th of June, 2021) I met with Tomek on Skype.
-We discussed various topics, with one being the ability to specify different neighborhoods (types of cell adjacencies) for the IT-metrics calculations in **raceland**.
-Finally, I found some time to look at the code and added this option. 
 This document shows how to use different neighborhoods in **raceland**.^[This feature requires the terra branch of the raceland package to be installed - `remotes::install_github("nowosad/raceland@terra")`.]
 
 ```{r}
