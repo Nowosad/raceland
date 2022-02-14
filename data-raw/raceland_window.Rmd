@@ -150,7 +150,7 @@ plot_realization(realization, race_raster, hex = hex_colors)
 plot(attr_grid20, add = TRUE, col = NA)
 ```
 
-```{r}
+```{r, fig.align="center"}
 g1 = ggplot(subset(attr_grid20_df, name == "ent_mean"),
        aes(x = size, value)) +
   geom_point() +
