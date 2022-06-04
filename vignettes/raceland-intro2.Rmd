@@ -37,8 +37,7 @@ pkgs = c(
   "comat",            
   "terra",   
   "sf",              
-  "dplyr",
-  "RColorBrewer"
+  "dplyr"
 )
 to_install = !pkgs %in% installed.packages()
 if(any(to_install)) {
@@ -108,7 +107,7 @@ knitr::include_graphics("fig3size_shift.png")
 ## Calculate IT metrics from local patterns (1)
 
 The `create_grid()` function creates spatial object with a grid (each 'cell' is defined by size and shift). 
-This function requires the RasterStack object with realizations (racial landscapes) and size parameter. 
+This function requires the SpatRaster object with realizations (racial landscapes) and size parameter. 
 If the shift parameter is not set, it is assumed that `size=shift`. 
 Below such grid is imposed into the racial landscape to show local patterns. 
 
@@ -221,8 +220,7 @@ mut_breaks = seq(0, 1, by = 0.1)
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid["ent_mean"], breaks = ent_breaks, key.pos = 1, 
-     pal = rev(RColorBrewer::brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
-     # pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(hcl.colors(length(ent_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
 
@@ -230,8 +228,7 @@ plot(attr_grid["ent_mean"], breaks = ent_breaks, key.pos = 1,
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid["mutinf_mean"], breaks = mut_breaks, key.pos = 1, 
-     pal = rev(RColorBrewer::brewer.pal(length(mut_breaks) - 1, name = "RdBu")),
-     # pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(hcl.colors(length(mut_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial segregation (Mutual information)")
 ```
 
@@ -297,7 +294,7 @@ attr_grid10 = dplyr::left_join(grid_sf10, smr10, by = c("row", "col"))
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1, 
-     pal = rev(RColorBrewer::brewer.pal(length(ent_breaks) - 1, name = "RdBu")),
+     pal = rev(hcl.colors(length(ent_breaks) - 1, palette = "RdBu")),
      # pal = grDevices::hcl.colors(length(ent_breaks) - 1, palette = "Blue-Red"),
      bty = "n", main = "Racial diversity (Entropy)")
 ```
@@ -306,8 +303,7 @@ plot(attr_grid10["ent_mean"], breaks = ent_breaks, key.pos = 1,
 
 ```{r, warning=FALSE, message=FALSE, fig.align = "center"}
 plot(attr_grid10["mutinf_mean"], breaks = mut_breaks, key.pos = 1,
-     pal = rev(RColorBrewer::brewer.pal(length(mut_breaks) - 1, name = "RdBu")),
-     # pal = grDevices::hcl.colors(length(mut_breaks) - 1, palette = "Blue-Red"),
+     pal = rev(hcl.colors(length(mut_breaks) - 1, palette = "RdBu")),
      bty = "n", main = "Racial segregation (Mutual information)")
 ```
 

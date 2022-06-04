@@ -42,7 +42,7 @@ calculate_metrics(
 a data.frame
 }
 \description{
-Calculates exposure matrix and quantifies it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf).
+Calculates exposure matrix and quantifies it by calculating four IT-derived metrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf).
 Entropy is associated with measuring racial diversity and mutual information is associated with measuring racial segregation.
 }
 \examples{
