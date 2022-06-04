@@ -55,13 +55,13 @@ remotes::install_github("Nowosad/raceland")
 
 ``` r
 library(raceland)
-library(raster)
-#> Loading required package: sp
+library(terra)
+#> terra 1.5.40
 ```
 
 ``` r
 # Plot the input data
-data(race_raster, package = "raceland")
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 plot(race_raster)
 ```
 
@@ -98,29 +98,29 @@ metr_df = calculate_metrics(x = real_raster, w = dens_raster,
                             size = NULL, threshold = 1)
 head(metr_df)
 #>   realization row col      ent  joinent  condent    mutinf
-#> 1           1   1   1 1.641782 3.168828 1.527046 0.1147355
-#> 2           2   1   1 1.638414 3.159920 1.521506 0.1169076
-#> 3           3   1   1 1.635824 3.141920 1.506096 0.1297275
-#> 4           4   1   1 1.633109 3.151669 1.518560 0.1145495
-#> 5           5   1   1 1.629351 3.132725 1.503373 0.1259784
-#> 6           6   1   1 1.630314 3.137547 1.507233 0.1230802
+#> 1           1   1   1 1.634765 3.137711 1.502945 0.1318199
+#> 2           2   1   1 1.633231 3.165357 1.532126 0.1011056
+#> 3           3   1   1 1.639965 3.164693 1.524728 0.1152377
+#> 4           4   1   1 1.649191 3.181056 1.531865 0.1173264
+#> 5           5   1   1 1.640224 3.167782 1.527558 0.1126660
+#> 6           6   1   1 1.634800 3.149787 1.514986 0.1198139
 ```
 
 ``` r
 # Summarize IT metrics 
 summary(metr_df[, c("ent", "mutinf")])
 #>       ent            mutinf       
-#>  Min.   :1.608   Min.   :0.09049  
-#>  1st Qu.:1.625   1st Qu.:0.10599  
-#>  Median :1.633   Median :0.11340  
-#>  Mean   :1.633   Mean   :0.11268  
-#>  3rd Qu.:1.641   3rd Qu.:0.11902  
-#>  Max.   :1.660   Max.   :0.13287
+#>  Min.   :1.608   Min.   :0.09286  
+#>  1st Qu.:1.629   1st Qu.:0.10838  
+#>  Median :1.635   Median :0.11413  
+#>  Mean   :1.635   Mean   :0.11429  
+#>  3rd Qu.:1.640   3rd Qu.:0.11990  
+#>  Max.   :1.656   Max.   :0.13964
 ```
 
 ## References
 
-  - Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a
+-   Dmowska, A., Stepinski T., Nowosad J. Racial landscapes – a
     pattern-based, zoneless method for analysis and visualization of
     racial topography. Applied Geography. 122:1-9,
     <http://dx.doi.org/10.1016/j.apgeog.2020.102239>
