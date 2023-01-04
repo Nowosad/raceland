@@ -21,8 +21,10 @@
 #'
 #' plot_realization(realization, race_raster, hex = hex_colors)
 plot_realization = function(x, y, hex, ...){
-  x = check_input(x)
-  y = check_input(y)
+  is_raster_x = check_is_raster(x)
+  is_raster_y = check_is_raster(y)
+  x = check_input(x, is_raster_x)
+  y = check_input(y, is_raster_y)
 
   if (terra::nlyr(x) != 1){
     stop("x needs have only one layer", call. = FALSE)

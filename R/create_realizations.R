@@ -17,7 +17,8 @@
 #' plot(real)
 #'
 create_realizations = function(x, n){
-  x = check_input(x)
+  is_raster = check_is_raster(x)
+  x = check_input(x, is_raster)
   # scale proportions
   x = x/sum(x)
 
@@ -31,7 +32,7 @@ create_realizations = function(x, n){
     terra::rast(replicate(n, create_realization(x)))
   }
   # parallel::stopCluster(cl)
-  return(out)
+  return(check_output(out, is_raster))
 }
 create_realization = function(x){
   tmp_rst = terra::rast(ncols = terra::ncol(x), nrows = terra::nrow(x),

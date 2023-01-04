@@ -36,8 +36,10 @@
 calculate_metrics = function(x, w, neighbourhood = 4, fun, size = NULL, shift = NULL,
                              na_action = "replace", base = "log2", ordered = TRUE,
                              threshold = 0.5){
-  x = check_input(x)
-  w = check_input(w)
+  is_raster_x = check_is_raster(x)
+  is_raster_w = check_is_raster(w)
+  x = check_input(x, is_raster_x)
+  w = check_input(w, is_raster_w)
   if (is.null(size)){
     size = 0
   }

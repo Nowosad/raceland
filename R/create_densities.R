@@ -19,14 +19,16 @@
 #' plot(dens_raster)
 #'
 create_densities = function(x, y, window_size){
-  x = check_input(x)
-  y = check_input(y)
+  is_raster_x = check_is_raster(x)
+  is_raster_y = check_is_raster(y)
+  x = check_input(x, is_raster_x)
+  y = check_input(y, is_raster_y)
   out = if (requireNamespace("pbapply", quietly = TRUE)){
     terra::rast(pbapply::pblapply(terra::as.list(x), create_density, y = y, window_size = window_size))
   } else {
     terra::rast(lapply(terra::as.list(x), create_density, y = y, window_size = window_size))
   }
-  return(out)
+  return(check_output(out, is_raster_x))
 }
 
 # real_raster = create_realization(perc_raster)

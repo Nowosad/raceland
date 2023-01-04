@@ -15,8 +15,10 @@
 #' d = raceland:::calculate_densities(real_rasters, race_raster, window_size = 10)
 #'
 calculate_densities = function(x, y, window_size){
-  x = check_input(x)
-  y = check_input(y)
+  is_raster_x = check_is_raster(x)
+  is_raster_y = check_is_raster(y)
+  x = check_input(x, is_raster_x)
+  y = check_input(y, is_raster_y)
   out = if (requireNamespace("pbapply", quietly = TRUE)){
       pbapply::pblapply(terra::as.list(x), calculate_density, y = y, window_size = window_size)
   } else {

@@ -14,7 +14,8 @@
 #' y = create_grid(x, size = 10)
 #' y
 create_grid = function(x, size, shift = NULL){
-  x = check_input(x)
+  is_raster_x = check_is_raster(x)
+  x = check_input(x, is_raster_x)
   if (is.null(shift)){
     shift = size
   }
