@@ -1,6 +1,6 @@
 Package: raceland
 Title: Pattern-Based Zoneless Method for Analysis and Visualization of Racial Topography
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: 
     c(person(given = "Jakub", family = "Nowosad", role = c("aut", "cre"), 
     email = "nowosad.jakub@gmail.com", comment = c(ORCID = "0000-0002-1057-3721")),
@@ -16,7 +16,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.5)
 LinkingTo: 
@@ -39,6 +39,6 @@ Suggests:
     covr,
     raster
 VignetteBuilder: knitr
-SystemRequirements: C++11
+SystemRequirements: C++17
 URL: https://jakubnowosad.com/raceland/
 BugReports: https://github.com/Nowosad/raceland/issues
