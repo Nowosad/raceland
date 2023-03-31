@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -66,43 +66,51 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_densities</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">window_size</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_densities</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">window_size</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
-<dd><p>RasterStack with realizations</p></dd>
+<dd><p>SpatRaster with realizations</p></dd>
+
+
 <dt>y</dt>
-<dd><p>RasterStack with shares of subpopulations</p></dd>
+<dd><p>SpatRaster with shares of subpopulations</p></dd>
+
+
 <dt>window_size</dt>
 <dd><p>Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a RasterStack containing n local densities. Local density layer is calculated for each realization</p>
+    
+
+<p>a SpatRaster containing n local densities. Local density layer is calculated for each realization</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">real_rasters</span> <span class="op">=</span> <span class="fu"><a href="create_realizations.html">create_realizations</a></span><span class="op">(</span><span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">real_rasters</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/race_raster.tif"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">real_rasters</span> <span class="op">=</span> <span class="fu"><a href="create_realizations.html">create_realizations</a></span><span class="op">(</span><span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">real_rasters</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="create_densities-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="va">dens_raster</span> <span class="op">=</span> <span class="fu">create_densities</span><span class="op">(</span><span class="va">real_rasters</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dens_raster</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterStack </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 60, 60, 3600, 5  (nrow, ncol, ncell, nlayers)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 30, 30  (x, y)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> names      :     layer.1,     layer.2,     layer.3,     layer.4,     layer.5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min values : 0.004933098, 0.005050553, 0.004707653, 0.004877809, 0.004991135 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max values :    8.938668,    8.352525,   13.390421,    9.990276,    9.841868 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dens_raster</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">dens_raster</span> <span class="op">=</span> <span class="fu">create_densities</span><span class="op">(</span><span class="va">real_rasters</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dens_raster</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions  : 60, 60, 5  (nrow, ncol, nlyr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 30, 30  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : USA_Contiguous_Albers_Equal_Area_Conic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> source(s)   : memory</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       :       lyr.1,       lyr.1,        lyr.1,        lyr.1,       lyr.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : 0.005111403, 0.005358489,  0.005050553,  0.004933098, 0.005423049 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  : 9.263710010, 9.373753802, 11.955071179, 18.651599251, 9.250780584 </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dens_raster</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="create_densities-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -117,7 +125,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
       </footer></div>

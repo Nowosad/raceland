@@ -1,9 +1,9 @@
-pandoc: 2.7.3
-pkgdown: 2.0.2.9000
-pkgdown_sha: ae7363faac9040a473a54fb3d770decdfb8dfec1
+pandoc: 2.19.2
+pkgdown: 2.0.7.9000
+pkgdown_sha: c354aa7e5ea1f9936692494c28c89e5bdd31fc68
 articles:
   raceland-intro1: raceland-intro1.html
   raceland-intro2: raceland-intro2.html
   raceland-intro3: raceland-intro3.html
-last_built: 2022-02-11T10:18Z
+last_built: 2023-03-31T16:23Z
 

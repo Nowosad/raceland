@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raceland</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -78,13 +78,15 @@
 
       
 
-      </header><script src="raceland-intro1_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>raceland: R package for a pattern-based, zoneless method for analysis and visualization of racial topography</h1>
-                        <h4 data-toc-skip class="author">Anna Dmowska, Tomasz Stepinski, Jakub Nowosad</h4>
+      <h1 data-toc-skip>raceland: R package for a pattern-based,
+zoneless method for analysis and visualization of racial topography</h1>
+                        <h4 data-toc-skip class="author">Anna Dmowska,
+Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2022-02-11</h4>
+            <h4 data-toc-skip class="date">2023-03-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/HEAD/vignettes/raceland-intro1.Rmd" class="external-link"><code>vignettes/raceland-intro1.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -96,245 +98,401 @@
 <div class="section level2">
 <h2 id="introduction">INTRODUCTION<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The <strong>raceland</strong> package implements a computational framework for a pattern-based, zoneless analysis and visualization of (ethno)racial topography. It is a reimagined approach for analyzing residential segregation and racial diversity based on the concept of ‘landscape’ used in the domain of landscape ecology.</p>
-<p>The proposed approach adopts a bird’s view perspective - in which visualization and quantification of racial topography (an overall organization of a spatial pattern formed by locations of people of different races) are tightly intertwined by using the same data - a high-resolution raster grid with each cell containing only inhabitants of a single race. Such grids represent <strong><em>a racial landscape (RL).</em></strong> A <em>racial landscape (RL)</em> consists of the mosaic of many large and small patches (racial enclaves) formed by adjacent raster grid cells having the same race categories. The distribution of racial enclaves creates a specific spatial pattern.</p>
-<p>The racial landscape is described by <em>exposure matrix</em> and quantified by two metrics (entropy and mutual information) derived from Information Theory concept (IT). Entropy is the measure of racial diversity and mutual information measures racial segregation.</p>
-<p><strong>Racial landscape method</strong> is based on the raster gridded data, and unlike the previous methods, does not depend on the division for specific zones (census tract, census block, etc.). Calculation of racial diversity (entropy) and racial segregation (mutual information) can be performed for the whole area of interests (i.e., metropolitan area) without introducing any arbitrary divisions. Racial landscape method also allows for performing the calculation at different spatial scales.</p>
+<p>The <strong>raceland</strong> package implements a computational
+framework for a pattern-based, zoneless analysis and visualization of
+(ethno)racial topography. It is a reimagined approach for analyzing
+residential segregation and racial diversity based on the concept of
+‘landscape’ used in the domain of landscape ecology.</p>
+<p>The proposed approach adopts a bird’s view perspective - in which
+visualization and quantification of racial topography (an overall
+organization of a spatial pattern formed by locations of people of
+different races) are tightly intertwined by using the same data - a
+high-resolution raster grid with each cell containing only inhabitants
+of a single race. Such grids represent <strong><em>a racial landscape
+(RL).</em></strong> A <em>racial landscape (RL)</em> consists of the
+mosaic of many large and small patches (racial enclaves) formed by
+adjacent raster grid cells having the same race categories. The
+distribution of racial enclaves creates a specific spatial pattern.</p>
+<p>The racial landscape is described by <em>exposure matrix</em> and
+quantified by two metrics (entropy and mutual information) derived from
+Information Theory concept (IT). Entropy is the measure of racial
+diversity and mutual information measures racial segregation.</p>
+<p><strong>Racial landscape method</strong> is based on the raster
+gridded data, and unlike the previous methods, does not depend on the
+division for specific zones (census tract, census block, etc.).
+Calculation of racial diversity (entropy) and racial segregation (mutual
+information) can be performed for the whole area of interests (i.e.,
+metropolitan area) without introducing any arbitrary divisions. Racial
+landscape method also allows for performing the calculation at different
+spatial scales.</p>
 </div>
 <div class="section level2">
 <h2 id="a-computational-framework">A COMPUTATIONAL FRAMEWORK<a class="anchor" aria-label="anchor" href="#a-computational-framework"></a>
 </h2>
-<p>A computational framework implemented in the <strong>raceland</strong> package allows for:</p>
+<p>A computational framework implemented in the
+<strong>raceland</strong> package allows for:</p>
 <ol style="list-style-type: decimal">
-<li><p>Constructing racial landscape based on race-specific raster grids.</p></li>
-<li><p>Describing the racial pattern of a racial landscape at different scales or/and for the whole area of interests using metrics derived from Information Theory concept (entropy and mutual information).</p></li>
+<li><p>Constructing racial landscape based on race-specific raster
+grids.</p></li>
+<li><p>Describing the racial pattern of a racial landscape at different
+scales or/and for the whole area of interests using metrics derived from
+Information Theory concept (entropy and mutual information).</p></li>
 <li><p>Mapping the racial landscape.</p></li>
-<li><p>Mapping racial diversity and segregation at different scales.</p></li>
+<li><p>Mapping racial diversity and segregation at different
+scales.</p></li>
 </ol>
-<p>The computational framework consists of the four steps (see figure below, the blue font indicates the names of function from the <strong>raceland</strong> package).</p>
+<p>The computational framework consists of the four steps (see figure
+below, the blue font indicates the names of function from the
+<strong>raceland</strong> package).</p>
 <p><img src="fig0framework.png" width="800"></p>
 <div class="section level3">
 <h3 id="required-packages">Required packages<a class="anchor" aria-label="anchor" href="#required-packages"></a>
 </h3>
-<p>The computational framework requires following packages: <strong>raceland</strong>, <strong>comat</strong>, <strong>rgdal</strong>, <strong>raster</strong>, <strong>sf</strong>, and <strong>dplyr</strong>.</p>
+<p>The computational framework requires following packages:
+<strong>raceland</strong>, <strong>comat</strong>,
+<strong>terra</strong>, <strong>sf</strong>, and
+<strong>dplyr</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install required packages </span>
-<span class="va">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  <span class="st">"raceland"</span>,                
-  <span class="st">"comat"</span>,            
-  <span class="st">"rgdal"</span>,   
-  <span class="st">"raster"</span>,
-  <span class="st">"sf"</span>,              
-  <span class="st">"dplyr"</span>
-<span class="op">)</span>
-<span class="va">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="va">pkgs</span> <span class="op"><a href="https://rdrr.io/pkg/raster/man/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">to_install</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">[</span><span class="va">to_install</span><span class="op">]</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install required packages </span></span>
+<span><span class="va">pkgs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"raceland"</span>,                </span>
+<span>  <span class="st">"comat"</span>,            </span>
+<span>  <span class="st">"terra"</span>,</span>
+<span>  <span class="st">"sf"</span>,              </span>
+<span>  <span class="st">"dplyr"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">to_install</span> <span class="op">=</span> <span class="op">!</span><span class="va">pkgs</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">to_install</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">[</span><span class="va">to_install</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="input-data">Input data<a class="anchor" aria-label="anchor" href="#input-data"></a>
 </h3>
-<p>Racial landscape method is based on high-resolution race-specific raster grids. Each cell in race-specific grids contains race subpopulation density. SocScape project provides high-resolution raster grids for 1990, 2000, 2010 years for 365 metropolitan areas and each county in the conterminous US. Data is available at <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="external-link uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>.</p>
-<p>The calculation can also be performed using a spatial vector file (e.g., shapefile) with attribute table containing race counts for aggregated data. In such case, a spatial vector object is first rasterized using the <code>zones_to_rasters()</code> function from the <strong>raceland</strong> package (people of a given race are redistributed to the cells by dividing the number of people by the number of cells belonging to the particular spatial units).</p>
-<p>Please notice that the rasterization time depends on the number of divisions and for large areas (i.e., metropolitan areas) can be time-consuming. It is recommended to use the smallest available divisions.</p>
-<p>Here we demonstrate a computational framework using an example of the area of 60x60 cells. The input data is a high-resolution (30m) raster grids. Race-specific rasters are stored as GeoTIFFs (the directory contains five files for five race-groups: Asians, Blacks, Hispanic, others and Whites).</p>
-<p>The RasterStack with race-specific grids is created based on the GeoTIFF files (files will be sorted and read into RasterStack in alphabetical order; the categories in the racial landscape will depend on the order of layers in input data - see details in the next section).</p>
+<p>Racial landscape method is based on high-resolution race-specific
+raster grids. Each cell in race-specific grids contains race
+subpopulation density. SocScape project provides high-resolution raster
+grids for 1990, 2000, 2010 years for 365 metropolitan areas and each
+county in the conterminous US. Data is available at <a href="http://www.socscape.edu.pl/index.php?id=high-resolution-grids/" class="external-link uri">http://www.socscape.edu.pl/index.php?id=high-resolution-grids/</a>.</p>
+<p>The calculation can also be performed using a spatial vector file
+(e.g., shapefile) with attribute table containing race counts for
+aggregated data. In such case, a spatial vector object is first
+rasterized using the <code>zones_to_rasters()</code> function from the
+<strong>raceland</strong> package (people of a given race are
+redistributed to the cells by dividing the number of people by the
+number of cells belonging to the particular spatial units).</p>
+<p>Please notice that the rasterization time depends on the number of
+divisions and for large areas (i.e., metropolitan areas) can be
+time-consuming. It is recommended to use the smallest available
+divisions.</p>
+<p>Here we demonstrate a computational framework using an example of the
+area of 60x60 cells. The input data is a high-resolution (30m) raster
+grids. Race-specific rasters are stored as GeoTIFFs (the directory
+contains five files for five race-groups: Asians, Blacks, Hispanic,
+others and Whites).</p>
+<p>The SpatRaster with race-specific grids is created based on the
+GeoTIFF files (files will be sorted and read into SpatRaster in
+alphabetical order; the categories in the racial landscape will depend
+on the order of layers in input data - see details in the next
+section).</p>
 <div class="section level4">
 <h4 id="working-with-high-resolution-grids">Working with high resolution grids<a class="anchor" aria-label="anchor" href="#working-with-high-resolution-grids"></a>
 </h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"rast_data"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span>,
-                         full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">list_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"rast_data"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span>,</span>
+<span>                         full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html" class="external-link">stack</a></span><span class="op">(</span><span class="va">list_raster</span><span class="op">)</span>
-<span class="va">race_raster</span>
-<span class="co">#&gt; class      : RasterStack </span>
-<span class="co">#&gt; dimensions : 60, 60, 3600, 5  (nrow, ncol, ncell, nlayers)</span>
-<span class="co">#&gt; resolution : 30, 30  (x, y)</span>
-<span class="co">#&gt; extent     : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span>
-<span class="co">#&gt; crs        : +proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs </span>
-<span class="co">#&gt; names      :      asian,      black,   hispanic,      other,      white </span>
-<span class="co">#&gt; min values :          0,          0,          0,          0,          0 </span>
-<span class="co">#&gt; max values :  1.3333334, 15.3125000,  9.6666670,  0.5714286,  3.7500000</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">race_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">list_raster</span><span class="op">)</span></span>
+<span><span class="va">race_raster</span></span>
+<span><span class="co">#&gt; class       : SpatRaster </span></span>
+<span><span class="co">#&gt; dimensions  : 60, 60, 5  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">#&gt; resolution  : 30, 30  (x, y)</span></span>
+<span><span class="co">#&gt; extent      : 685545, 687345, 2103255, 2105055  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; coord. ref. : +proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </span></span>
+<span><span class="co">#&gt; sources     : asian.tif  </span></span>
+<span><span class="co">#&gt;               black.tif  </span></span>
+<span><span class="co">#&gt;               hispanic.tif  </span></span>
+<span><span class="co">#&gt;               ... and 2 more source(s)</span></span>
+<span><span class="co">#&gt; names       :    asian,   black, hispanic,     other, white </span></span>
+<span><span class="co">#&gt; min values  : 0.000000,  0.0000, 0.000000, 0.0000000,  0.00 </span></span>
+<span><span class="co">#&gt; max values  : 1.333333, 15.3125, 9.666667, 0.5714286,  3.75</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">race_raster</span><span class="op">)</span></span></code></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig1-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="working-with-vector-data">Working with vector data<a class="anchor" aria-label="anchor" href="#working-with-vector-data"></a>
 </h4>
-<p>While using spatial vector data, the file should be read to R using the <code><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read()</a></code> function from the <strong>sf</strong> package. In the next step spatial object is rasterized using <code>zones_to_rasters()</code> from the <strong>raceland</strong> package.</p>
-<p>Function <code>zones_to_rasters()</code> requires three arguments:</p>
+<p>While using spatial vector data, the file should be read to R using
+the <code><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read()</a></code> function from the <strong>sf</strong>
+package. In the next step spatial object is rasterized using
+<code>zones_to_rasters()</code> from the <strong>raceland</strong>
+package.</p>
+<p>Function <code>zones_to_rasters()</code> requires three
+arguments:</p>
 <ul>
 <li>
 <code>v</code> - an sf object with aggregated attribute data</li>
 <li>
-<code>resolution</code> - a resolution of the output raster (below we use <code>resolution=30</code>, which is the same resolution as used in the SocScape grids)</li>
+<code>resolution</code> - a resolution of the output raster (below
+we use <code>resolution=30</code>, which is the same resolution as used
+in the SocScape grids)</li>
 <li>
-<code>variables</code> - a character vector with columns names from <em>v</em>. The values from these columns will be (1) rasterized and (2) recalculated to densities. Each column will be represented as a layer in the output RasterStack.</li>
+<code>variables</code> - a character vector with columns names from
+<em>v</em>. The values from these columns will be (1) rasterized and (2)
+recalculated to densities. Each column will be represented as a layer in
+the output SpatRaster.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pf_to_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"vect_data/block_data.gpkg"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pf_to_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"vect_data/block_data.gpkg"</span>, package <span class="op">=</span> <span class="st">"raceland"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">vect_data</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">pf_to_data</span><span class="op">)</span>
-<span class="co">#&gt; Reading layer `block_data' from data source </span>
-<span class="co">#&gt;   `/home/runner/work/_temp/Library/raceland/vect_data/block_data.gpkg' </span>
-<span class="co">#&gt;   using driver `GPKG'</span>
-<span class="co">#&gt; Simple feature collection with 264 features and 6 fields</span>
-<span class="co">#&gt; Geometry type: POLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 685545 ymin: 496468.7 xmax: 687345 ymax: 498268.7</span>
-<span class="co">#&gt; Projected CRS: unnamed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">vect_data</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">pf_to_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Reading layer `block_data' from data source </span></span>
+<span><span class="co">#&gt;   `/home/runner/work/_temp/Library/raceland/vect_data/block_data.gpkg' </span></span>
+<span><span class="co">#&gt;   using driver `GPKG'</span></span>
+<span><span class="co">#&gt; Simple feature collection with 264 features and 6 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 685545 ymin: 496468.7 xmax: 687345 ymax: 498268.7</span></span>
+<span><span class="co">#&gt; Projected CRS: unnamed</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">vect_data</span><span class="op">)</span>
-<span class="co">#&gt; [1] "GISJOIN"  "ASIAN"    "BLACK"    "HISPANIC" "OTHER"    "WHITE"    "geom"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">vect_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "GISJOIN"  "ASIAN"    "BLACK"    "HISPANIC" "OTHER"    "WHITE"    "geom"</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">race_raster_from_vect</span> <span class="op">=</span> <span class="fu"><a href="../reference/zones_to_raster.html">zones_to_raster</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">vect_data</span>,
-                                        resolution <span class="op">=</span> <span class="fl">30</span>, 
-                                        variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Once vector data is rasterized, there is no difference, whether race_raster object or race_raster_from_vect will be used for further analysis.</p>
+<code class="sourceCode R"><span><span class="va">race_raster_from_vect</span> <span class="op">=</span> <span class="fu"><a href="../reference/zones_to_raster.html">zones_to_raster</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">vect_data</span>,</span>
+<span>                                        resolution <span class="op">=</span> <span class="fl">30</span>, </span>
+<span>                                        variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Once vector data is rasterized, there is no difference, whether
+race_raster object or race_raster_from_vect will be used for further
+analysis.</p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="constructing-racial-landscape">Constructing racial landscape<a class="anchor" aria-label="anchor" href="#constructing-racial-landscape"></a>
 </h3>
-<p>The racial landscape is a high-resolution grid in which each cell contains only inhabitants of a single race.</p>
-<p>The racial landscape is constructed based on race-specific grids. Racial composition at each cell is translated to probabilities of drawing a person of a specific race from a cell. Thus, the race label of a cell is a random variable. To obtain a stochastic realization of racial landscape, we use the cell’s race probabilities and a random number generator to randomly assign specific race label to each cell (Monte Carlo procedure).</p>
-<p>Multiple draws yield to a series of realization with a slightly different pattern (see example below). The pattern uncertainty occurs only at sub-block scale and only if there is significant sub-block racial diversity.</p>
-<p>A single realization-based visualization is sufficiently accurate. For increased accuracy, racial topography is quantified as an ensemble average from multiple realizations. It is recommended to calculate at least 30 realizations.</p>
-<p>Realization is constructed using the <code><a href="../reference/create_realizations.html">create_realizations()</a></code> function with two arguments:</p>
+<p>The racial landscape is a high-resolution grid in which each cell
+contains only inhabitants of a single race.</p>
+<p>The racial landscape is constructed based on race-specific grids.
+Racial composition at each cell is translated to probabilities of
+drawing a person of a specific race from a cell. Thus, the race label of
+a cell is a random variable. To obtain a stochastic realization of
+racial landscape, we use the cell’s race probabilities and a random
+number generator to randomly assign specific race label to each cell
+(Monte Carlo procedure).</p>
+<p>Multiple draws yield to a series of realization with a slightly
+different pattern (see example below). The pattern uncertainty occurs
+only at sub-block scale and only if there is significant sub-block
+racial diversity.</p>
+<p>A single realization-based visualization is sufficiently accurate.
+For increased accuracy, racial topography is quantified as an ensemble
+average from multiple realizations. It is recommended to calculate at
+least 30 realizations.</p>
+<p>Realization is constructed using the
+<code><a href="../reference/create_realizations.html">create_realizations()</a></code> function with two arguments:</p>
 <ul>
 <li>
-<code>x</code> - RasterStack with race-specific population densities assign to each cell</li>
+<code>x</code> - SpatRaster with race-specific population densities
+assign to each cell</li>
 <li>
 <code>n</code> - A number of realizations to generate</li>
 </ul>
-<p>Function returns <em>RasterStack</em> object containing <em>n</em> realizations. Single race label in a racial landscape is assigned based on the order of race-specific grids stored in RasterStack. For example, <em>race_raster</em> object has five layers named: asian, black, hispanic, other, white. The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white.</p>
+<p>Function returns <em>SpatRaster</em> object containing <em>n</em>
+realizations. Single race label in a racial landscape is assigned based
+on the order of race-specific grids stored in SpatRaster. For example,
+<em>race_raster</em> object has five layers named: asian, black,
+hispanic, other, white. The race labels in racial landscape raster will
+be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># generate 100 realizations based on race_raster object</span>
-<span class="va">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># generate 100 realizations based on race_raster object</span></span>
+<span><span class="va">real_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_realizations.html">create_realizations</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">race_raster</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot five first realizations</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># plot five first realizations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig2-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>The racial landscape provides a skewed visualization of the racial pattern because it does not take into consideration the spatial variability of the population densities. To obtain an accurate depiction of racial distribution, the values of RL must be modified to reflect race and subpopulation densities.</p>
-<p>Function <code><a href="../reference/plot_realization.html">plot_realization()</a></code> display realization taking into account also subpopulation density. The function takes three arguments:</p>
+<p>The racial landscape provides a skewed visualization of the racial
+pattern because it does not take into consideration the spatial
+variability of the population densities. To obtain an accurate depiction
+of racial distribution, the values of RL must be modified to reflect
+race and subpopulation densities.</p>
+<p>Function <code><a href="../reference/plot_realization.html">plot_realization()</a></code> display realization taking
+into account also subpopulation density. The function takes three
+arguments:</p>
 <ul>
 <li>
-<code>x</code> - A raster object (RasterLayer, RasterStack, RasterBrick) with one selected realization representing a racial landscape</li>
+<code>x</code> - A raster object (RasterLayer, SpatRaster,
+RasterBrick) with one selected realization representing a racial
+landscape</li>
 <li>
-<code>y</code> - RasterStack with race-specific population densities</li>
+<code>y</code> - SpatRaster with race-specific population
+densities</li>
 <li>
-<code>hex</code> - A character vector with colors specified in hexadecimal format. Colors should correspond to categories in realization (racial landscape)</li>
+<code>hex</code> - A character vector with colors specified in
+hexadecimal format. Colors should correspond to categories in
+realization (racial landscape)</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># In race_colors first color corresponds to asian, second to black,</span>
-<span class="co"># third to hispanics, fourth to other and fifth to white)</span>
-<span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># In race_colors first color corresponds to asian, second to black,</span></span>
+<span><span class="co"># third to hispanics, fourth to other and fifth to white)</span></span>
+<span><span class="va">race_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F16667"</span>, <span class="st">"#6EBE44"</span>, <span class="st">"#7E69AF"</span>, <span class="st">"#C77213"</span>, <span class="st">"#F8DF1D"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_realization.html">plot_realization</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">race_raster</span>, hex <span class="op">=</span> <span class="va">race_colors</span><span class="op">)</span></span></code></pre></div>
 <p><img src="raceland-intro1_files/figure-html/fig3-1.png" width="40%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="describing-racial-patterns-of-racial-landscape">Describing racial patterns of racial landscape<a class="anchor" aria-label="anchor" href="#describing-racial-patterns-of-racial-landscape"></a>
 </h3>
-<p>The exposure matrix describes a racial pattern. In the domain of landscape ecology, landscape pattern can be described by a co-occurrence matrix. The co-occurrence matrix is a tabulation of cells’ adjacencies. Adjacencies between pairs of cells are defined by 4-connectivity rule (There are max. 4 adjacencies: north, east, south, and west cell as is shown in the figure below).</p>
+<p>The exposure matrix describes a racial pattern. In the domain of
+landscape ecology, landscape pattern can be described by a co-occurrence
+matrix. The co-occurrence matrix is a tabulation of cells’ adjacencies.
+Adjacencies between pairs of cells are defined by 4-connectivity rule
+(There are max. 4 adjacencies: north, east, south, and west cell as is
+shown in the figure below).</p>
 <p><img src="fig1adjacencies.png" width="100%"></p>
-<p>The co-occurrence matrix has the size K x K (K - number of categories), is symmetrical and can be calculated for any region regardless of its size or shape.</p>
-<p>Exposure matrix is a modification of co-occurrence matrix. The exposure matrix is calculated in the same way as the co-occurrence matrix, but each adjacency contributes as a location-specific value to the matrix instead of the constant value 1. The contributed value is calculated as the average of local population densities in the two adjacent cells.</p>
-<p>Let consider an example of the racial landscape presented below. The co-occurrence matrix is constructed using only adjacencies from the racial landscape. To obtain an exposure matrix, each cell in the racial landscape has assigned two types of information: single race class and local population density. Considering two green adjacent cells - this pair will contribute 1 to the co-occurrence matrix (one adjacent pair) and the average from 2 and 1 ((2+1)/2)=1.5) to the exposure matrix.</p>
+<p>The co-occurrence matrix has the size K x K (K - number of
+categories), is symmetrical and can be calculated for any region
+regardless of its size or shape.</p>
+<p>Exposure matrix is a modification of co-occurrence matrix. The
+exposure matrix is calculated in the same way as the co-occurrence
+matrix, but each adjacency contributes as a location-specific value to
+the matrix instead of the constant value 1. The contributed value is
+calculated as the average of local population densities in the two
+adjacent cells.</p>
+<p>Let consider an example of the racial landscape presented below. The
+co-occurrence matrix is constructed using only adjacencies from the
+racial landscape. To obtain an exposure matrix, each cell in the racial
+landscape has assigned two types of information: single race class and
+local population density. Considering two green adjacent cells - this
+pair will contribute 1 to the co-occurrence matrix (one adjacent pair)
+and the average from 2 and 1 ((2+1)/2)=1.5) to the exposure matrix.</p>
 <p><img src="fig2matrix.png" width="100%"></p>
 <div class="section level4">
 <h4 id="calculating-local-subpopulation-densities">Calculating local subpopulation densities<a class="anchor" aria-label="anchor" href="#calculating-local-subpopulation-densities"></a>
 </h4>
-<p>Local densities of subpopulations (race-specific local densities) along with racial landscapes are used to construct the exposure matrix. Local densities are calculated using the <code><a href="../reference/create_densities.html">create_densities()</a></code> function, which requires three arguments:</p>
+<p>Local densities of subpopulations (race-specific local densities)
+along with racial landscapes are used to construct the exposure matrix.
+Local densities are calculated using the <code><a href="../reference/create_densities.html">create_densities()</a></code>
+function, which requires three arguments:</p>
 <ul>
 <li>
-<code>x</code> - RasterStack with realizations</li>
+<code>x</code> - SpatRaster with realizations</li>
 <li>
-<code>y</code> - RasterStack with shares of subpopulations (input data RasterStack)</li>
+<code>y</code> - SpatRaster with shares of subpopulations (input
+data SpatRaster)</li>
 <li>
-<code>window_size</code> - the size, expressed in the number of cells, of a square-shaped window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10 (<code>window_size=10</code> means that the local densities will be calculated from the area of 10 x 10 cells).</li>
+<code>window_size</code> - the size, expressed in the number of
+cells, of a square-shaped window for which local densities will be
+calculated; it is recommended to use the small window_size, i.e., 10
+(<code>window_size=10</code> means that the local densities will be
+calculated from the area of 10 x 10 cells).</li>
 </ul>
-<p>The output is a RasterStack with local densities calculated separately for each realization.</p>
+<p>The output is a SpatRaster with local densities calculated separately
+for each realization.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dens_raster</span> <span class="op">=</span> <span class="fu"><a href="../reference/create_densities.html">create_densities</a></span><span class="op">(</span><span class="va">real_raster</span>, <span class="va">race_raster</span>, window_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="exposure-matrix">Exposure matrix<a class="anchor" aria-label="anchor" href="#exposure-matrix"></a>
 </h4>
-<p>Here we show an example, how the exposure matrix is calculated. Please notice, that the calculation of the exposure matrix is build-in into the <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function and there is no need to calculate exposure matrix separately.</p>
-<p>Exposure matrix can be calculated separately using the <code>get_wecoma()</code> function from the <strong>comat</strong> package. Calculation of exposure matrix requires two arguments:</p>
+<p>Here we show an example, how the exposure matrix is calculated.
+Please notice, that the calculation of the exposure matrix is build-in
+into the <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code> function and there is no need
+to calculate exposure matrix separately.</p>
+<p>Exposure matrix can be calculated separately using the
+<code>get_wecoma()</code> function from the <strong>comat</strong>
+package. Calculation of exposure matrix requires two arguments:</p>
 <ul>
 <li>
 <code>x</code> - RasterLayer with one selected realization</li>
 <li>
-<code>y</code> - RasterLayer with local densities corresponding to selected realizations.</li>
+<code>y</code> - RasterLayer with local densities corresponding to
+selected realizations.</li>
 </ul>
-<p>As default, the exposure matrix with 4-directions adjacencies (<code>neighboorhood = 4</code>) is calculated using the average values from 2 adjacent cells (<code>fun = "mean"</code>).</p>
+<p>As default, the exposure matrix with 4-directions adjacencies
+(<code>neighboorhood = 4</code>) is calculated using the average values
+from 2 adjacent cells (<code>fun = "mean"</code>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">exposure_mat</span> <span class="op">=</span> <span class="fu">comat</span><span class="fu">::</span><span class="fu"><a href="https://nowosad.github.io/comat/reference/get_wecoma.html" class="external-link">get_wecoma</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, 
-                                 w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">dens_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">exposure_mat</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span>
-<span class="co">#&gt; ASIAN    18.32   31.91    37.60   3.12   28.86</span>
-<span class="co">#&gt; BLACK    31.91 7434.38  3322.36  55.02 1830.88</span>
-<span class="co">#&gt; HISPANIC 37.60 3322.36  9098.49 146.03 3947.83</span>
-<span class="co">#&gt; OTHER     3.12   55.02   146.03  19.91   94.51</span>
-<span class="co">#&gt; WHITE    28.86 1830.88  3947.83  94.51 3100.32</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">exposure_mat</span> <span class="op">=</span> <span class="fu">comat</span><span class="fu">::</span><span class="fu"><a href="https://nowosad.github.io/comat/reference/get_wecoma.html" class="external-link">get_wecoma</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, wide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<span>                                 w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">dens_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, wide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">exposure_mat</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span></span>
+<span><span class="co">#&gt; ASIAN     2.18   44.58    49.08   4.12   40.11</span></span>
+<span><span class="co">#&gt; BLACK    44.58 7135.18  3303.61 176.71 1896.99</span></span>
+<span><span class="co">#&gt; HISPANIC 49.08 3303.61  8970.27 207.91 3983.71</span></span>
+<span><span class="co">#&gt; OTHER     4.12  176.71   207.91  13.40   79.55</span></span>
+<span><span class="co">#&gt; WHITE    40.11 1896.99  3983.71  79.55 3006.67</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="information-theory-metrics-it-metrics">Information theory metrics (IT metrics)<a class="anchor" aria-label="anchor" href="#information-theory-metrics-it-metrics"></a>
 </h4>
-<p>For lucid quantification of racial topography, further compression of the exposure matrix is required. A racial pattern can be described (in the same way as landscape pattern in the domain of landscape ecology) by using Information Theory metrics - entropy and mutual information. Entropy is associated with measuring racial diversity, and mutual information is associated with measuring racial segregation.</p>
-<p>Information theory metrics are calculated using function <code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code>. This function calculates the exposure matrix and summarizes it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf). The function requires the following arguments:</p>
+<p>For lucid quantification of racial topography, further compression of
+the exposure matrix is required. A racial pattern can be described (in
+the same way as landscape pattern in the domain of landscape ecology) by
+using Information Theory metrics - entropy and mutual information.
+Entropy is associated with measuring racial diversity, and mutual
+information is associated with measuring racial segregation.</p>
+<p>Information theory metrics are calculated using function
+<code><a href="../reference/calculate_metrics.html">calculate_metrics()</a></code>. This function calculates the exposure
+matrix and summarizes it by calculating four IT-derived matrics: entropy
+(ent), joint entropy (joinent), conditional entropy (condent) and mutual
+information (mutinf). The function requires the following arguments:</p>
 <ul>
 <li>
-<code>x</code> - RasterStack with realizations</li>
+<code>x</code> - SpatRaster with realizations</li>
 <li>
-<code>w</code> - RasterStack with local densities</li>
+<code>w</code> - SpatRaster with local densities</li>
 <li>
-<code>neighboorhood</code> - adjacencies between cells can be defined in 4 directions (<code>neighboorhood = 4</code>) or 8 directions (<code>neighboorhood = 8</code>).</li>
+<code>neighboorhood</code> - adjacencies between cells can be
+defined in 4 directions (<code>neighboorhood = 4</code>) or 8 directions
+(<code>neighboorhood = 8</code>).</li>
 <li>
-<code>fun</code> - function to calculate values from adjacent cells to contribute to the exposure matrix, <code>fun = 'mean'</code> calculate average values of population density from two adjacent cells. Other available options are geometric mean (<code>'geometry_mean'</code>) or value from a focal cell (<code>'focal</code>’)</li>
+<code>fun</code> - function to calculate values from adjacent cells
+to contribute to the exposure matrix, <code>fun = 'mean'</code>
+calculate average values of population density from two adjacent cells.
+Other available options are geometric mean
+(<code>'geometry_mean'</code>) or value from a focal cell
+(<code>'focal</code>’)</li>
 <li>
-<code>size = NULL</code> - calculation will be performed for the whole area (see explanation later)</li>
+<code>size = NULL</code> - calculation will be performed for the
+whole area (see explanation later)</li>
 <li>
-<code>threshold</code> - the share of NA cells to allow metrics calculation. <code>threshold = 1</code> - calculation will be performed, even if there are 100% cells with NA values (recommended with <code>size = NULL</code>)</li>
+<code>threshold</code> - the share of NA cells to allow metrics
+calculation. <code>threshold = 1</code> - calculation will be performed,
+even if there are 100% cells with NA values (recommended with
+<code>size = NULL</code>)</li>
 </ul>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metr_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span>, w <span class="op">=</span> <span class="va">dens_raster</span>, 
-                            neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, 
-                            size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metr_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculate_metrics.html">calculate_metrics</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">real_raster</span>, w <span class="op">=</span> <span class="va">dens_raster</span>, </span>
+<span>                            neighbourhood <span class="op">=</span> <span class="fl">4</span>, fun <span class="op">=</span> <span class="st">"mean"</span>, </span>
+<span>                            size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span>
-<span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span>
-<span class="co">#&gt; 1           1   1   1 1.623873 3.132867 1.508994 0.1148784</span>
-<span class="co">#&gt; 2           2   1   1 1.638662 3.159650 1.520988 0.1176736</span>
-<span class="co">#&gt; 3           3   1   1 1.641208 3.161605 1.520398 0.1208102</span>
-<span class="co">#&gt; 4           4   1   1 1.630472 3.142208 1.511735 0.1187367</span>
-<span class="co">#&gt; 5           5   1   1 1.653821 3.207958 1.554137 0.0996838</span>
-<span class="co">#&gt; 6           6   1   1 1.619215 3.124637 1.505422 0.1137929</span></code></pre></div>
-<p>IT metrics are calculated for each realization separately, and in the next step, an average value from all realization is calculated.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></span>
+<span><span class="co">#&gt; 1           1   1   1 1.648788 3.196663 1.547875 0.1009126</span></span>
+<span><span class="co">#&gt; 2           2   1   1 1.643762 3.181526 1.537764 0.1059985</span></span>
+<span><span class="co">#&gt; 3           3   1   1 1.631343 3.162627 1.531284 0.1000591</span></span>
+<span><span class="co">#&gt; 4           4   1   1 1.636589 3.158986 1.522397 0.1141922</span></span>
+<span><span class="co">#&gt; 5           5   1   1 1.643585 3.178916 1.535331 0.1082546</span></span>
+<span><span class="co">#&gt; 6           6   1   1 1.623065 3.135203 1.512138 0.1109276</span></span></code></pre></div>
+<p>IT metrics are calculated for each realization separately, and in the
+next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt;       ent            mutinf       </span>
-<span class="co">#&gt;  Min.   :1.611   Min.   :0.09364  </span>
-<span class="co">#&gt;  1st Qu.:1.628   1st Qu.:0.10849  </span>
-<span class="co">#&gt;  Median :1.635   Median :0.11291  </span>
-<span class="co">#&gt;  Mean   :1.635   Mean   :0.11356  </span>
-<span class="co">#&gt;  3rd Qu.:1.642   3rd Qu.:0.11859  </span>
-<span class="co">#&gt;  Max.   :1.655   Max.   :0.13234</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       ent            mutinf      </span></span>
+<span><span class="co">#&gt;  Min.   :1.612   Min.   :0.0973  </span></span>
+<span><span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.1092  </span></span>
+<span><span class="co">#&gt;  Median :1.635   Median :0.1150  </span></span>
+<span><span class="co">#&gt;  Mean   :1.635   Mean   :0.1147  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1204  </span></span>
+<span><span class="co">#&gt;  Max.   :1.666   Max.   :0.1347</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metr_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html" class="external-link">summarise</a></span><span class="op">(</span>mean_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-  sd_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-  mean_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span>,
-  sd_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span>
-<span class="co">#&gt; 1 1.634592 0.009882682   0.1135603 0.007740261</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metr_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>mean_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  sd_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  mean_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span>,</span>
+<span>  sd_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span></span>
+<span><span class="co">#&gt; 1 1.635245 0.009703725   0.1147237 0.007721915</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -357,7 +515,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
       </footer>
