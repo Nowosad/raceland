@@ -2,15 +2,16 @@
 #'
 #' Calculate local densities of subpopulations (race-specific local densities)
 #'
-#' @param x RasterStack with realizations
-#' @param y RasterStack with shares of subpopulations
+#' @param x SpatRaster with realizations
+#' @param y SpatRaster with shares of subpopulations
 #' @param window_size Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10
 #'
-#' @return a RasterStack containing n local densities. Local density layer is calculated for each realization
+#' @return a SpatRaster containing n local densities. Local density layer is calculated for each realization
 #' @export
 #'
 #' @examples
-#' library(raster)
+#' library(terra)
+#' race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 #' real_rasters = create_realizations(race_raster, n = 5)
 #' plot(real_rasters)
 #' dens_raster = create_densities(real_rasters, race_raster, window_size = 10)
@@ -18,18 +19,16 @@
 #' plot(dens_raster)
 #'
 create_densities = function(x, y, window_size){
-  if (!(methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
-    stop("x needs to be either RasterStack or RasterBrick", call. = FALSE)
-  }
-  if (!(methods::is(y, "RasterStack") || methods::is(y, "RasterBrick"))){
-    stop("y needs to be either RasterStack or RasterBrick", call. = FALSE)
-  }
+  is_raster_x = check_is_raster(x)
+  is_raster_y = check_is_raster(y)
+  x = check_input(x, is_raster_x)
+  y = check_input(y, is_raster_y)
   out = if (requireNamespace("pbapply", quietly = TRUE)){
-    raster::stack(pbapply::pblapply(raster::as.list(x), create_density, y = y, window_size = window_size))
+    terra::rast(pbapply::pblapply(terra::as.list(x), create_density, y = y, window_size = window_size))
   } else {
-    raster::stack(lapply(raster::as.list(x), create_density, y = y, window_size = window_size))
+    terra::rast(lapply(terra::as.list(x), create_density, y = y, window_size = window_size))
   }
-  return(out)
+  return(check_output(out, is_raster_x))
 }
 
 # real_raster = create_realization(perc_raster)
@@ -41,8 +40,8 @@ create_density = function(x, y, window_size){
   # x = real_raster; y = perc_raster; size = 10
   # x = cats; y = s; size = 2;
   w = calculate_density(x, y, window_size = window_size)
-  vals = motifel_to_grid(raster::as.matrix(x[[1]]), w, size = window_size)
+  vals = motifel_to_grid(terra::as.matrix(x[[1]], wide = TRUE), w, size = window_size)
 
-  raster_template = raster::raster(x)
-  raster::setValues(raster_template, values = vals)
+  raster_template = terra::rast(x)
+  terra::setValues(raster_template, values = vals)
 }

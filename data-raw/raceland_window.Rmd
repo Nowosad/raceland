@@ -1,0 +1,164 @@
+---
+title: "Custom neighborhoods in the raceland package"
+author: Jakub Nowosad
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+This document shows how to use different neighborhoods in **raceland**.^[This feature requires the terra branch of the raceland package to be installed - `remotes::install_github("nowosad/raceland@terra")`.]
+
+```{r}
+# remotes::install_github("nowosad/raceland@terra")
+```
+
+For this purpose, we will use example data available in the package.
+
+```{r}
+library(raceland)
+library(terra)
+library(dplyr)
+library(tidyr)
+library(sf)
+library(stringr)
+library(ggplot2)
+theme_set(theme_bw())
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
+list_raster = list.files(system.file("rast_data", package = "raceland"),
+                         full.names = TRUE)
+race_raster = rast(list_raster)
+plot(race_raster)
+```
+
+The first two steps are the same as in the original workflow: 1) Creating realizations; 2) Calculating local subpopulation densities.
+
+```{r}
+set.seed(2022-02-14)
+# constructing racial landscape
+real_raster = create_realizations(x = race_raster, n = 100)
+# calculating local subpopulation densities
+dens_raster = create_densities(real_raster, race_raster, window_size = 10)
+```
+
+Next, in the original workflow, we would calculate IT-derived metrics, based on cell adjacencies in a 4- or 8-neighborhood.
+
+```{r}
+metr_df_20 = calculate_metrics(x = real_raster, w = dens_raster, 
+                               neighbourhood = 4, fun = "mean", 
+                               size = 20, threshold = 0.5)
+```
+
+Now, however, we are able to define any neighborhood.
+This can be done by creating a neighborhood matrix, which should have one cell with value 0 (the focal cell), and at least one cell with value 1 (the adjacent cells).
+Cells with other values (e.g., NA) are ignored.
+
+```{r}
+create_neigh = function(size){
+  r = matrix(nrow = size, ncol = size)
+  cents = c(seq(1, ncol(r), by = 2), seq(ncol(r), 1, by = -2)[-1])
+  inrow = c(seq(ncol(r), 1, by = -2), seq(1, ncol(r), by = 2)[-1])
+  for (i in 1:nrow(r)){
+    r[i, ] = c(rep(NA, (inrow[i] - 1)/2), rep(1, cents[i]), rep(NA, (inrow[i] - 1)/2))
+  }
+  r[ceiling(length(r)/2)] = 0
+  return(r)
+}
+```
+
+For example, see four custom neighborhood matrices below.
+
+```{r, fig.asp=0.25}
+par(mfcol = c(1, 4))
+terra::plot(terra::rast(create_neigh(3), extent = terra::ext(0, 1, 0, 1)), main = 3, mar = c(0,1,2,0), axes = FALSE)
+terra::plot(terra::rast(create_neigh(5), extent = terra::ext(0, 1, 0, 1)), main = 5, mar = c(0,1,2,0), axes = FALSE)
+terra::plot(terra::rast(create_neigh(7), extent = terra::ext(0, 1, 0, 1)), main = 7, mar = c(0,1,2,0), axes = FALSE)
+terra::plot(terra::rast(create_neigh(9), extent = terra::ext(0, 1, 0, 1)), main = 9, mar = c(0,1,2,0), axes = FALSE)
+```
+
+Each of the neighborhood matrices shown above can be used to define the number of directions in which cell adjacencies are considered as neighbors for IT metrics calculations.
+The rest of the document shows the ENT and MUTINF values for different areas (rows/cols) and different neighborhoods.
+
+```{r}
+metr_df_20_3 = calculate_metrics(x = real_raster, w = dens_raster, 
+                               neighbourhood = create_neigh(3), fun = "mean", 
+                               size = 20, threshold = 0.5)
+metr_df_20_5 = calculate_metrics(x = real_raster, w = dens_raster, 
+                               neighbourhood = create_neigh(5), fun = "mean", 
+                               size = 20, threshold = 0.5)
+metr_df_20_7 = calculate_metrics(x = real_raster, w = dens_raster, 
+                               neighbourhood = create_neigh(7), fun = "mean", 
+                               size = 20, threshold = 0.5)
+metr_df_20_9 = calculate_metrics(x = real_raster, w = dens_raster, 
+                               neighbourhood = create_neigh(9), fun = "mean", 
+                               size = 20, threshold = 0.5)
+```
+
+
+```{r, message=FALSE}
+smr_20_3 = metr_df_20_3 %>%
+  group_by(row, col) %>%
+  summarize(ent_mean3 = mean(ent, na.rm = TRUE), mutinf_mean3 = mean(mutinf, na.rm = TRUE))
+smr_20_5 = metr_df_20_5 %>%
+  group_by(row, col) %>%
+  summarize(ent_mean5 = mean(ent, na.rm = TRUE), mutinf_mean5 = mean(mutinf, na.rm = TRUE))
+smr_20_7 = metr_df_20_7 %>%
+  group_by(row, col) %>%
+  summarize(ent_mean7 = mean(ent, na.rm = TRUE), mutinf_mean7 = mean(mutinf, na.rm = TRUE))
+smr_20_9 = metr_df_20_9 %>%
+  group_by(row, col) %>%
+  summarize(ent_mean9 = mean(ent, na.rm = TRUE), mutinf_mean9 = mean(mutinf, na.rm = TRUE))
+```
+
+
+```{r, message=FALSE}
+grid_sf20 = create_grid(real_raster, size = 20)
+# join IT-metrics to the grid
+attr_grid20 = left_join(grid_sf20, smr_20_3, by = c("row", "col")) |> 
+  left_join(smr_20_5) |>
+  left_join(smr_20_7) |>
+  left_join(smr_20_9)
+```
+
+
+```{r}
+attr_grid20_df = attr_grid20 |>
+  st_drop_geometry() |>
+  pivot_longer(cols = c(-row, -col)) |>
+  mutate(size = str_extract(name, "[0-9]")) |>
+  mutate(name = str_remove_all(name, "[0-9]"),
+         rowcol = paste0(row, col))
+```
+
+```{r}
+# ggplot(attr_grid20_df, aes(x = size, value, color = rowcol)) +
+#   geom_point() +
+#   facet_wrap(name~., scales = "free_y")
+```
+
+```{r, out.width="50%", fig.align="center"}
+hex_colors = c("#F16667", "#6EBE44", "#7E69AF", "#C77213","#F8DF1D")
+realization = create_realizations(race_raster, 1)
+plot_realization(realization, race_raster, hex = hex_colors)
+plot(attr_grid20, add = TRUE, col = NA)
+```
+
+```{r, fig.align="center"}
+g1 = ggplot(subset(attr_grid20_df, name == "ent_mean"),
+       aes(x = size, value)) +
+  geom_point() +
+  facet_grid(row~col) +
+  labs(title = "ENT", y = NULL) +
+  theme(aspect.ratio = 1)
+g2 = ggplot(subset(attr_grid20_df, name == "mutinf_mean"),
+       aes(x = size, value)) +
+  geom_point() +
+  facet_grid(row~col) +
+  labs(title = "MUTINF", y = NULL) +
+  theme(aspect.ratio = 1)
+cowplot::plot_grid(g1, g2, nrow = 1)
+```

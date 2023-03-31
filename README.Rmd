@@ -48,12 +48,12 @@ remotes::install_github("Nowosad/raceland")
 
 ```{r}
 library(raceland)
-library(raster)
+library(terra)
 ```
 
 ```{r}
 # Plot the input data
-data(race_raster, package = "raceland")
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 plot(race_raster)
 ```
 

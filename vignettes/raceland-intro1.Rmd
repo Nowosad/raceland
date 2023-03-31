@@ -10,6 +10,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -54,15 +55,14 @@ knitr::include_graphics("fig0framework.png")
 
 ## Required packages
 
-The computational framework requires following packages: **raceland**, **comat**, **rgdal**, **raster**, **sf**, and **dplyr**. 
+The computational framework requires following packages: **raceland**, **comat**, **terra**, **sf**, and **dplyr**. 
 
 ```{r, eval=FALSE}
 # install required packages 
 pkgs = c(
   "raceland",                
   "comat",            
-  "rgdal",   
-  "raster",
+  "terra",
   "sf",              
   "dplyr"
 )
@@ -75,7 +75,7 @@ if(any(to_install)) {
 ```{r, warning=FALSE, message=FALSE, include=FALSE}
 # attach required packages
 library(raceland)
-library(raster)
+library(terra)
 library(sf)
 library(dplyr)
 ```
@@ -97,7 +97,7 @@ Here we demonstrate a computational framework using an example of the area of 60
 The input data is a high-resolution (30m) raster grids. 
 Race-specific rasters are stored as GeoTIFFs (the directory contains five files for five race-groups: Asians, Blacks, Hispanic, others and Whites). 
 
-The RasterStack with race-specific grids is created based on the GeoTIFF files (files will be sorted and read into RasterStack in alphabetical order; the categories in the racial landscape will depend on the order of layers in input data - see details in the next section).
+The SpatRaster with race-specific grids is created based on the GeoTIFF files (files will be sorted and read into SpatRaster in alphabetical order; the categories in the racial landscape will depend on the order of layers in input data - see details in the next section).
 
 ### Working with high resolution grids
 
@@ -107,7 +107,7 @@ list_raster = list.files(system.file("rast_data", package = "raceland"),
 ```
 
 ```{r}
-race_raster = stack(list_raster)
+race_raster = rast(list_raster)
 race_raster
 ```
 
@@ -126,7 +126,7 @@ Function `zones_to_rasters()` requires three arguments:
 - `resolution` - a resolution of the output raster (below we use `resolution=30`, which is the same resolution as used in the SocScape grids)
 - `variables` - a character vector with columns names from *v*. 
 The values from these columns will be (1) rasterized and (2) recalculated to densities.
-Each column will be represented as a layer in the output RasterStack. 
+Each column will be represented as a layer in the output SpatRaster. 
 
 ```{r}
 pf_to_data = system.file("vect_data/block_data.gpkg", package = "raceland")
@@ -166,11 +166,11 @@ It is recommended to calculate at least 30 realizations.
 
 Realization is constructed using the `create_realizations()` function with two arguments:
 
-- `x` - RasterStack with race-specific population densities assign to each cell
+- `x` - SpatRaster with race-specific population densities assign to each cell
 - `n` - A number of realizations to generate
 
-Function returns *RasterStack* object containing *n* realizations.
-Single race label in a racial landscape is assigned based on the order of race-specific grids stored in RasterStack.
+Function returns *SpatRaster* object containing *n* realizations.
+Single race label in a racial landscape is assigned based on the order of race-specific grids stored in SpatRaster.
 For example, *race_raster* object has five layers named: asian, black, hispanic, other, white. 
 The race labels in racial landscape raster will be 1 - asian, 2- black, 3 - hispanic, 4 - other, 5 - white. 
 
@@ -191,8 +191,8 @@ To obtain an accurate depiction of racial distribution, the values of RL must be
 Function `plot_realization()` display realization taking into account also subpopulation density. 
 The function takes three arguments:
 
-- `x` - A raster object (RasterLayer, RasterStack, RasterBrick) with one selected realization representing a racial landscape
-- `y` - RasterStack with race-specific population densities
+- `x` - A raster object (RasterLayer, SpatRaster, RasterBrick) with one selected realization representing a racial landscape
+- `y` - SpatRaster with race-specific population densities
 - `hex` - A character vector with colors specified in hexadecimal format. 
 Colors should correspond to categories in realization (racial landscape)
 
@@ -234,11 +234,11 @@ knitr::include_graphics("fig2matrix.png")
 Local densities of subpopulations (race-specific local densities) along with racial landscapes are used to construct the exposure matrix.
 Local densities are calculated using the `create_densities()` function, which requires three arguments:
 
-- `x` - RasterStack with realizations
-- `y` - RasterStack with shares of subpopulations (input data RasterStack)
+- `x` - SpatRaster with realizations
+- `y` - SpatRaster with shares of subpopulations (input data SpatRaster)
 - `window_size` - the size, expressed in the number of cells, of a square-shaped window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10 (`window_size=10` means that the local densities will be calculated from the area of 10 x 10 cells).
 
-The output is a RasterStack with local densities calculated separately for each realization. 
+The output is a SpatRaster with local densities calculated separately for each realization. 
 
 ```{r}
 dens_raster = create_densities(real_raster, race_raster, window_size = 10)
@@ -258,8 +258,8 @@ Calculation of exposure matrix requires two arguments:
 As default, the exposure matrix with 4-directions adjacencies (`neighboorhood = 4`) is calculated using the average values from 2 adjacent cells (`fun = "mean"`). 
 
 ```{r}
-exposure_mat = comat::get_wecoma(x = as.matrix(real_raster[[1]]), 
-                                 w = as.matrix(dens_raster[[1]]))
+exposure_mat = comat::get_wecoma(x = as.matrix(real_raster[[1]], wide = TRUE), 
+                                 w = as.matrix(dens_raster[[1]], wide = TRUE))
 colnames(exposure_mat) = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE")
 rownames(exposure_mat) = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE")
 round(exposure_mat, 2)
@@ -275,8 +275,8 @@ Information theory metrics are calculated using function `calculate_metrics()`.
 This function calculates the exposure matrix and summarizes it by calculating four IT-derived matrics: entropy (ent), joint entropy (joinent), conditional entropy (condent) and mutual information (mutinf). 
 The function requires the following arguments:
 
-- `x` - RasterStack with realizations
-- `w` - RasterStack with local densities
+- `x` - SpatRaster with realizations
+- `w` - SpatRaster with local densities
 - `neighboorhood` - adjacencies between cells can be defined in 4 directions (`neighboorhood = 4`) or 8 directions (`neighboorhood = 8`).
 - `fun` - function to calculate values from adjacent cells to contribute to the exposure matrix, `fun = 'mean'` calculate average values of population density from two adjacent cells. Other available options are geometric mean (`'geometry_mean'`) or value from a focal cell (`'focal`')
 - `size = NULL` - calculation will be performed for the whole area (see explanation later)

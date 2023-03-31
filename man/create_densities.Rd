@@ -7,20 +7,21 @@
 create_densities(x, y, window_size)
 }
 \arguments{
-\item{x}{RasterStack with realizations}
+\item{x}{SpatRaster with realizations}
 
-\item{y}{RasterStack with shares of subpopulations}
+\item{y}{SpatRaster with shares of subpopulations}
 
 \item{window_size}{Size, expressed in the number of cells, of a square-shaped local window for which local densities will be calculated; it is recommended to use the small window_size, i.e., 10}
 }
 \value{
-a RasterStack containing n local densities. Local density layer is calculated for each realization
+a SpatRaster containing n local densities. Local density layer is calculated for each realization
 }
 \description{
 Calculate local densities of subpopulations (race-specific local densities)
 }
 \examples{
-library(raster)
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
 dens_raster = create_densities(real_rasters, race_raster, window_size = 10)

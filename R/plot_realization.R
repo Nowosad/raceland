@@ -2,17 +2,18 @@
 #'
 #' Displays realization taking into account also subpopulation density.
 #'
-#' @param x A RasterLayer or a RasterStack/RasterBrick with one layer.
+#' @param x A SpatRaster with one layer.
 #'   Each value should correspond to a layer in `y`.
-#' @param y A RasterStack/RasterBrick with race-specific population densities
+#' @param y A SpatRaster with race-specific population densities
 #' @param hex A character vector with colors specified in hexadecimal format.
 #'   Each color should correspond to a layer in `y` and value in `x`.
-#' @param ... Additional arguments as for [raster::plotRGB()]
+#' @param ... Additional arguments as for [terra::plotRGB()]
 #'
 #' @export
 #'
 #' @examples
-#' library(raster)
+#' library(terra)
+#' race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 #' hex_colors = c("#F16667", "#6EBE44", "#7E69AF", "#C77213","#F8DF1D")
 #' realization = create_realizations(race_raster, 1)
 #' plot(race_raster)
@@ -20,16 +21,15 @@
 #'
 #' plot_realization(realization, race_raster, hex = hex_colors)
 plot_realization = function(x, y, hex, ...){
-  if (!(methods::is(x, "RasterLayer") || methods::is(x, "RasterStack") || methods::is(x, "RasterBrick"))){
-    stop("x needs to be either RasterLayer, RasterStack or RasterBrick", call. = FALSE)
-  }
-  if (raster::nlayers(x) != 1){
+  is_raster_x = check_is_raster(x)
+  is_raster_y = check_is_raster(y)
+  x = check_input(x, is_raster_x)
+  y = check_input(y, is_raster_y)
+
+  if (terra::nlyr(x) != 1){
     stop("x needs have only one layer", call. = FALSE)
   }
-  if (!(methods::is(y, "RasterStack") || methods::is(y, "RasterBrick"))){
-    stop("y needs to be either RasterStack or RasterBrick", call. = FALSE)
-  }
-  if (length(hex) != raster::nlayers(y)){
+  if (length(hex) != terra::nlyr(y)){
     stop("Number of colors in hex should correspond to a number of layers in y", call. = FALSE)
   }
   if (!all.equal(dim(x)[c(1, 2)], dim(y)[c(1, 2)])){
@@ -119,11 +119,11 @@ plot_realization = function(x, y, hex, ...){
   # y_mat = dplyr::left_join(df_cols, y_mat, by = "id")
 
   # creates a raster stack
-  rgb_rast = raster::stack(raster::setValues(x, y_mat$R),
-                           raster::setValues(x, y_mat$G),
-                           raster::setValues(x, y_mat$B))
+  rgb_rast = c(terra::setValues(x, y_mat$R),
+                      terra::setValues(x, y_mat$G),
+                      terra::setValues(x, y_mat$B))
 
   # plots
-  raster::plotRGB(rgb_rast, r = 1, g = 2, b = 3, ...)
+  terra::plotRGB(rgb_rast, r = 1, g = 2, b = 3, ...)
 }
 

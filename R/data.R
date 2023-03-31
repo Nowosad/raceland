@@ -1,9 +1,11 @@
-#' A RasterStack
+#' A raster file
 #'
-#' A RasterStack covering an area of 60x60 cells. RasterStack contains 5 layers - a high resolution (30m) race-specific grids with values of subpopulation densities for Asian, Black, Hispanic, other and Whites
+#' A raster file covering an area of 60x60 cells. The raster file contains 5 layers - a high resolution (30m) race-specific grids with values of subpopulation densities for Asian, Black, Hispanic, other and Whites.
+#' `system.file("extdata/race_raster.tif", package = "raceland")`
 #'
-#' @format A RasterLayer
-"race_raster"
+#' @format A raster file
+#' @name race_raster.tif
+NULL
 
 #' An sf object
 #'

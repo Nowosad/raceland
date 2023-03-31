@@ -15,17 +15,17 @@ zones_to_raster(v, resolution, variables, ...)
 The values from these columns will be (1) rasterized and (2) recalculated to densities.
 Each column will be represented as an layer in the output RasterStack}
 
-\item{...}{Additional arguments as for \code{\link[fasterize:fasterize]{fasterize::fasterize()}}}
+\item{...}{Additional arguments as for \code{\link[terra:rasterize]{terra::rasterize()}}}
 }
 \value{
-a RasterStack
+a SpatRaster
 }
 \description{
 Convert zones to rasters
 }
 \examples{
 library(sf)
-library(raster)
+library(terra)
 plot(pop_vector)
 popdens_raster = zones_to_raster(pop_vector, resolution = 30,
                                  variables = c("ASIAN", "BLACK", "HISPANIC", "OTHER", "WHITE"))

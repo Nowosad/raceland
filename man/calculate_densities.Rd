@@ -7,9 +7,9 @@
 calculate_densities(x, y, window_size)
 }
 \arguments{
-\item{x}{RasterStack with realizations}
+\item{x}{SpatRaster with realizations}
 
-\item{y}{RasterStack with shares}
+\item{y}{SpatRaster with shares}
 
 \item{window_size}{size of a local window}
 }
@@ -20,7 +20,8 @@ a list of data.frames
 Calculate Densities
 }
 \examples{
-library(raster)
+library(terra)
+race_raster = rast(system.file("extdata/race_raster.tif", package = "raceland"))
 real_rasters = create_realizations(race_raster, n = 5)
 plot(real_rasters)
 d = raceland:::calculate_densities(real_rasters, race_raster, window_size = 10)
