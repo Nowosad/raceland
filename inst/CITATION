@@ -1,6 +1,6 @@
 citHeader("To cite raceland in publications, please use:")
 
-citEntry(entry = "article",
+bibentry(bibtype = "Article",
   author = c(person("Anna", "Dmowska",),
              person("Tomasz", "Stepinski"),
              person("Jakub", "Nowosad")),
