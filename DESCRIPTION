@@ -39,6 +39,5 @@ Suggests:
     covr,
     raster
 VignetteBuilder: knitr
-SystemRequirements: C++17
 URL: https://jakubnowosad.com/raceland/
 BugReports: https://github.com/Nowosad/raceland/issues
