@@ -86,7 +86,7 @@ zoneless method for analysis and visualization of racial topography</h1>
                         <h4 data-toc-skip class="author">Anna Dmowska,
 Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2023-03-31</h4>
+            <h4 data-toc-skip class="date">2023-04-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/HEAD/vignettes/raceland-intro1.Rmd" class="external-link"><code>vignettes/raceland-intro1.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro1.Rmd</code></div>
@@ -410,17 +410,17 @@ selected realizations.</li>
 (<code>neighboorhood = 4</code>) is calculated using the average values
 from 2 adjacent cells (<code>fun = "mean"</code>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exposure_mat</span> <span class="op">=</span> <span class="fu">comat</span><span class="fu">::</span><span class="fu"><a href="https://nowosad.github.io/comat/reference/get_wecoma.html" class="external-link">get_wecoma</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, wide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<code class="sourceCode R"><span><span class="va">exposure_mat</span> <span class="op">=</span> <span class="fu">comat</span><span class="fu">::</span><span class="fu"><a href="https://jakubnowosad.com/comat/reference/get_wecoma.html" class="external-link">get_wecoma</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">real_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, wide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>                                 w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">dens_raster</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, wide <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">exposure_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASIAN"</span>, <span class="st">"BLACK"</span>, <span class="st">"HISPANIC"</span>, <span class="st">"OTHER"</span>, <span class="st">"WHITE"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">exposure_mat</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          ASIAN   BLACK HISPANIC  OTHER   WHITE</span></span>
-<span><span class="co">#&gt; ASIAN     2.18   44.58    49.08   4.12   40.11</span></span>
-<span><span class="co">#&gt; BLACK    44.58 7135.18  3303.61 176.71 1896.99</span></span>
-<span><span class="co">#&gt; HISPANIC 49.08 3303.61  8970.27 207.91 3983.71</span></span>
-<span><span class="co">#&gt; OTHER     4.12  176.71   207.91  13.40   79.55</span></span>
-<span><span class="co">#&gt; WHITE    40.11 1896.99  3983.71  79.55 3006.67</span></span></code></pre></div>
+<span><span class="co">#&gt; ASIAN     0.00   63.05    46.12   0.00   23.29</span></span>
+<span><span class="co">#&gt; BLACK    63.05 7224.18  3254.95 129.36 1871.77</span></span>
+<span><span class="co">#&gt; HISPANIC 46.12 3254.95  8931.84 179.39 4016.26</span></span>
+<span><span class="co">#&gt; OTHER     0.00  129.36   179.39   3.11   79.93</span></span>
+<span><span class="co">#&gt; WHITE    23.29 1871.77  4016.26  79.93 3198.68</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="information-theory-metrics-it-metrics">Information theory metrics (IT metrics)<a class="anchor" aria-label="anchor" href="#information-theory-metrics-it-metrics"></a>
@@ -467,32 +467,32 @@ even if there are 100% cells with NA values (recommended with
 <span>                            size <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   realization row col      ent  joinent  condent    mutinf</span></span>
-<span><span class="co">#&gt; 1           1   1   1 1.648788 3.196663 1.547875 0.1009126</span></span>
-<span><span class="co">#&gt; 2           2   1   1 1.643762 3.181526 1.537764 0.1059985</span></span>
-<span><span class="co">#&gt; 3           3   1   1 1.631343 3.162627 1.531284 0.1000591</span></span>
-<span><span class="co">#&gt; 4           4   1   1 1.636589 3.158986 1.522397 0.1141922</span></span>
-<span><span class="co">#&gt; 5           5   1   1 1.643585 3.178916 1.535331 0.1082546</span></span>
-<span><span class="co">#&gt; 6           6   1   1 1.623065 3.135203 1.512138 0.1109276</span></span></code></pre></div>
+<span><span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span></span>
+<span><span class="co">#&gt; 1           1   1   1 1.639312 3.171020 1.531707 0.10760506</span></span>
+<span><span class="co">#&gt; 2           2   1   1 1.632730 3.170134 1.537404 0.09532654</span></span>
+<span><span class="co">#&gt; 3           3   1   1 1.630634 3.132103 1.501469 0.12916563</span></span>
+<span><span class="co">#&gt; 4           4   1   1 1.620813 3.129686 1.508874 0.11193883</span></span>
+<span><span class="co">#&gt; 5           5   1   1 1.630718 3.147379 1.516662 0.11405637</span></span>
+<span><span class="co">#&gt; 6           6   1   1 1.633793 3.140440 1.506647 0.12714530</span></span></code></pre></div>
 <p>IT metrics are calculated for each realization separately, and in the
 next step, an average value from all realization is calculated.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">metr_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ent"</span>, <span class="st">"mutinf"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       ent            mutinf      </span></span>
-<span><span class="co">#&gt;  Min.   :1.612   Min.   :0.0973  </span></span>
-<span><span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.1092  </span></span>
-<span><span class="co">#&gt;  Median :1.635   Median :0.1150  </span></span>
-<span><span class="co">#&gt;  Mean   :1.635   Mean   :0.1147  </span></span>
-<span><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.1204  </span></span>
-<span><span class="co">#&gt;  Max.   :1.666   Max.   :0.1347</span></span></code></pre></div>
+<span><span class="co">#&gt;       ent            mutinf       </span></span>
+<span><span class="co">#&gt;  Min.   :1.606   Min.   :0.09198  </span></span>
+<span><span class="co">#&gt;  1st Qu.:1.629   1st Qu.:0.10764  </span></span>
+<span><span class="co">#&gt;  Median :1.634   Median :0.11387  </span></span>
+<span><span class="co">#&gt;  Mean   :1.634   Mean   :0.11308  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:1.641   3rd Qu.:0.11892  </span></span>
+<span><span class="co">#&gt;  Max.   :1.657   Max.   :0.13263</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metr_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>mean_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  sd_ent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">ent</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  mean_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span>,</span>
 <span>  sd_mutinf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">mutinf</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   mean_ent      sd_ent mean_mutinf   sd_mutinf</span></span>
-<span><span class="co">#&gt; 1 1.635245 0.009703725   0.1147237 0.007721915</span></span></code></pre></div>
+<span><span class="co">#&gt;   mean_ent    sd_ent mean_mutinf   sd_mutinf</span></span>
+<span><span class="co">#&gt; 1 1.633976 0.0100289   0.1130803 0.008723389</span></span></code></pre></div>
 </div>
 </div>
 </div>

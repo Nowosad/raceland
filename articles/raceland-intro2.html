@@ -86,7 +86,7 @@ racial landscapes at different spatial scales</h1>
                         <h4 data-toc-skip class="author">Anna Dmowska,
 Tomasz Stepinski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2023-03-31</h4>
+            <h4 data-toc-skip class="date">2023-04-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nowosad/raceland/blob/HEAD/vignettes/raceland-intro2.Rmd" class="external-link"><code>vignettes/raceland-intro2.Rmd</code></a></small>
       <div class="hidden name"><code>raceland-intro2.Rmd</code></div>
@@ -225,15 +225,15 @@ patterns of size 20x20 cells and 100 realizations).</p>
 <span>                               size <span class="op">=</span> <span class="fl">20</span>, threshold <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">metr_df_20</span><span class="op">[</span><span class="va">metr_df_20</span><span class="op">$</span><span class="va">realization</span> <span class="op">==</span> <span class="fl">1</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt;   realization row col      ent  joinent  condent     mutinf</span></span>
-<span><span class="co">#&gt; 1           1   1   1 1.260808 2.507997 1.247189 0.01361910</span></span>
-<span><span class="co">#&gt; 2           1   1   2 1.576268 2.981815 1.405547 0.17072107</span></span>
-<span><span class="co">#&gt; 3           1   1   3 1.419648 2.785447 1.365799 0.05384963</span></span>
-<span><span class="co">#&gt; 4           1   2   1 1.614173 3.040283 1.426110 0.18806367</span></span>
-<span><span class="co">#&gt; 5           1   2   2 1.537358 3.015806 1.478448 0.05891056</span></span>
-<span><span class="co">#&gt; 6           1   2   3 1.546813 2.957515 1.410701 0.13611199</span></span>
-<span><span class="co">#&gt; 7           1   3   1 1.388171 2.632450 1.244279 0.14389245</span></span>
-<span><span class="co">#&gt; 8           1   3   2 1.547600 3.076390 1.528790 0.01880943</span></span>
-<span><span class="co">#&gt; 9           1   3   3 1.431848 2.810793 1.378945 0.05290323</span></span></code></pre></div>
+<span><span class="co">#&gt; 1           1   1   1 1.242714 2.460145 1.217431 0.02528272</span></span>
+<span><span class="co">#&gt; 2           1   1   2 1.604037 2.983945 1.379908 0.22412918</span></span>
+<span><span class="co">#&gt; 3           1   1   3 1.384157 2.710090 1.325933 0.05822412</span></span>
+<span><span class="co">#&gt; 4           1   2   1 1.617792 3.096965 1.479173 0.13861946</span></span>
+<span><span class="co">#&gt; 5           1   2   2 1.438690 2.838910 1.400220 0.03847000</span></span>
+<span><span class="co">#&gt; 6           1   2   3 1.517492 2.843154 1.325661 0.19183098</span></span>
+<span><span class="co">#&gt; 7           1   3   1 1.403505 2.689343 1.285838 0.11766679</span></span>
+<span><span class="co">#&gt; 8           1   3   2 1.584734 3.157436 1.572702 0.01203280</span></span>
+<span><span class="co">#&gt; 9           1   3   3 1.352445 2.668592 1.316147 0.03629842</span></span></code></pre></div>
 <p>Racial topography at the analyzed scale is quantified as an ensemble
 average from multiple realizations. First, for each square window is
 calculated the average value of entropy and mutual information based on
@@ -256,15 +256,15 @@ calculated the average value of entropy and mutual information based on
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   row [3]</span></span></span>
 <span><span class="co">#&gt;     row   col ent_mean ent_sd mutinf_mean mutinf_sd</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1     1.26 0.050<span style="text-decoration: underline;">5</span>      0.020<span style="text-decoration: underline;">0</span>   0.009<span style="text-decoration: underline;">78</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     2     1.59 0.011<span style="text-decoration: underline;">5</span>      0.165    0.026<span style="text-decoration: underline;">0</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     3     1.42 0.033<span style="text-decoration: underline;">4</span>      0.048<span style="text-decoration: underline;">1</span>   0.013<span style="text-decoration: underline;">3</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     2     1     1.61 0.025<span style="text-decoration: underline;">1</span>      0.149    0.035<span style="text-decoration: underline;">3</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     2     2     1.52 0.020<span style="text-decoration: underline;">5</span>      0.035<span style="text-decoration: underline;">9</span>   0.012<span style="text-decoration: underline;">5</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     2     3     1.52 0.028<span style="text-decoration: underline;">2</span>      0.155    0.027<span style="text-decoration: underline;">8</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>     3     1     1.38 0.053<span style="text-decoration: underline;">6</span>      0.133    0.043<span style="text-decoration: underline;">0</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>     3     2     1.54 0.033<span style="text-decoration: underline;">7</span>      0.017<span style="text-decoration: underline;">4</span>   0.007<span style="text-decoration: underline;">26</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>     3     3     1.42 0.027<span style="text-decoration: underline;">5</span>      0.043<span style="text-decoration: underline;">8</span>   0.014<span style="text-decoration: underline;">7</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     1     1.27 0.041<span style="text-decoration: underline;">9</span>      0.020<span style="text-decoration: underline;">0</span>   0.008<span style="text-decoration: underline;">43</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     2     1.59 0.011<span style="text-decoration: underline;">7</span>      0.162    0.029<span style="text-decoration: underline;">3</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     3     1.41 0.028<span style="text-decoration: underline;">7</span>      0.045<span style="text-decoration: underline;">3</span>   0.013<span style="text-decoration: underline;">3</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     2     1     1.61 0.025<span style="text-decoration: underline;">9</span>      0.155    0.038<span style="text-decoration: underline;">0</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     2     2     1.52 0.023<span style="text-decoration: underline;">0</span>      0.035<span style="text-decoration: underline;">7</span>   0.011<span style="text-decoration: underline;">9</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     2     3     1.51 0.028<span style="text-decoration: underline;">9</span>      0.151    0.025<span style="text-decoration: underline;">9</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>     3     1     1.38 0.048<span style="text-decoration: underline;">4</span>      0.142    0.047<span style="text-decoration: underline;">5</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>     3     2     1.54 0.029<span style="text-decoration: underline;">0</span>      0.014<span style="text-decoration: underline;">8</span>   0.006<span style="text-decoration: underline;">75</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>     3     3     1.42 0.036<span style="text-decoration: underline;">0</span>      0.044<span style="text-decoration: underline;">7</span>   0.011<span style="text-decoration: underline;">4</span></span></span></code></pre></div>
 <p>Then the averages from the mean values of entropy and mutual
 information are calculated.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -275,7 +275,7 @@ information are calculated.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span></span>
 <span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1.47 0.031<span style="text-decoration: underline;">6</span>      0.085<span style="text-decoration: underline;">2</span>    0.021<span style="text-decoration: underline;">1</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1.47 0.030<span style="text-decoration: underline;">4</span>      0.085<span style="text-decoration: underline;">6</span>    0.021<span style="text-decoration: underline;">4</span></span></span></code></pre></div>
 <div class="section level4">
 <h4 id="racial-diversity-segregation-classification">Racial diversity-segregation classification<a class="anchor" aria-label="anchor" href="#racial-diversity-segregation-classification"></a>
 </h4>
@@ -401,7 +401,7 @@ function requires additional argument - <code>shift</code>.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   ent_mean ent_sd mutinf_mean mutinf_sd</span></span>
 <span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1.48 0.033<span style="text-decoration: underline;">7</span>      0.081<span style="text-decoration: underline;">6</span>    0.022<span style="text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1.48 0.033<span style="text-decoration: underline;">5</span>      0.081<span style="text-decoration: underline;">5</span>    0.022<span style="text-decoration: underline;">4</span></span></span>
 <span></span>
 <span><span class="co"># calculate bivariate classification</span></span>
 <span><span class="va">smr10</span><span class="op">$</span><span class="va">bivar_cls</span> <span class="op">=</span> <span class="fu">bivariate_classification</span><span class="op">(</span></span>
