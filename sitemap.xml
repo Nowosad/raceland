@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/raceland-intro1.html</loc>
-  </url>
-  <url>
-    <loc>/articles/raceland-intro2.html</loc>
-  </url>
-  <url>
-    <loc>/articles/raceland-intro3.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/calculate_densities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/calculate_metrics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_densities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_realizations.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_realization.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pop_vector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/quantify_raceland.html</loc>
-  </url>
-  <url>
-    <loc>/reference/race_raster.tif.html</loc>
-  </url>
-  <url>
-    <loc>/reference/raceland-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/zones_to_raster.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/raceland-intro1.html</loc></url>
+<url><loc>/articles/raceland-intro2.html</loc></url>
+<url><loc>/articles/raceland-intro3.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/calculate_densities.html</loc></url>
+<url><loc>/reference/calculate_metrics.html</loc></url>
+<url><loc>/reference/create_densities.html</loc></url>
+<url><loc>/reference/create_grid.html</loc></url>
+<url><loc>/reference/create_realizations.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/plot_realization.html</loc></url>
+<url><loc>/reference/pop_vector.html</loc></url>
+<url><loc>/reference/quantify_raceland.html</loc></url>
+<url><loc>/reference/race_raster.tif.html</loc></url>
+<url><loc>/reference/raceland-package.html</loc></url>
+<url><loc>/reference/zones_to_raster.html</loc></url>
 </urlset>
+
